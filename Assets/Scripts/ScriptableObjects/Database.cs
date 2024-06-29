@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Arkademy
@@ -15,7 +14,7 @@ namespace Arkademy
         {
             public string name;
             public Sprite uiIcon;
-            public AnimatorController characterUIAnimatorController;
+            public RuntimeAnimatorController characterUIAnimatorController;
             public bool unlocked;
         }
 
