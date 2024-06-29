@@ -17,9 +17,7 @@ namespace Arkademy.UI.Title
         }
         public void NewGame()
         {
-            SaveData.current.numOfGamesPlayed++;
-            SaveData.current.Save();
-            SceneManager.LoadScene("Game");
+            
         }
 
        

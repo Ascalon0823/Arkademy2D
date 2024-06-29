@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9d30df6072c7e4f9513251cfb1651e, type: 3}
+  m_Name: Database
+  m_EditorClassIdentifier: 
+  playableCharacterData:
+  - name: Arka
+    uiIcon: {fileID: -119339738, guid: 26a14f0b7ffbd634b9fc3482cc696bb3, type: 3}
+    characterUIAnimatorController: {fileID: 9100000, guid: ca2dda3e2a277114c83a3a7364c68036, type: 2}
+    unlocked: 1
+  - name: Demi
+    uiIcon: {fileID: -1443887464, guid: d77ff825db9f77a46abd01b5b1236d14, type: 3}
+    characterUIAnimatorController: {fileID: 9100000, guid: fe952a245dfe8124a8bde10224a2b07f, type: 2}
+    unlocked: 1
