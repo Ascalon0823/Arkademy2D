@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 26171329}
   - component: {fileID: 26171333}
   - component: {fileID: 26171332}
+  - component: {fileID: 26171334}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -185,7 +186,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 13.895833
+  orthographic size: 12.291667
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -235,10 +236,10 @@ MonoBehaviour:
   cam: {fileID: 26171330}
   camRect:
     serializedVersion: 2
-    x: -7.8125
-    y: -13.895833
-    width: 15.625
-    height: 27.791666
+    x: -6.9166665
+    y: -12.291667
+    width: 13.833333
+    height: 24.583334
 --- !u!114 &26171333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +284,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &26171334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26171328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310c93c541a4739488b5ff50c8c165e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ppcam: {fileID: 26171332}
+  offsetPercentage: {x: 0, y: -0.1}
+  followTarget: {fileID: 0}
 --- !u!1 &69528899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1039,7 @@ GameObject:
   - component: {fileID: 1616522217}
   - component: {fileID: 1616522219}
   - component: {fileID: 1616522218}
+  - component: {fileID: 1616522220}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1170,6 +1187,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1616522220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616522216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01323b00a0aa4a45823a3d2404c80a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCharacter: {fileID: 0}
+  joystick: {fileID: 69528904}
+  playerCamera: {fileID: 26171334}
 --- !u!1 &1775309341
 GameObject:
   m_ObjectHideFlags: 0

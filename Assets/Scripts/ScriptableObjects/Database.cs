@@ -16,6 +16,7 @@ namespace Arkademy
             public Sprite uiIcon;
             public RuntimeAnimatorController characterUIAnimatorController;
             public bool unlocked;
+            public CharacterBehaviour characterPrefab;
         }
 
         public List<PlayableCharacterData> playableCharacterData = new List<PlayableCharacterData>();

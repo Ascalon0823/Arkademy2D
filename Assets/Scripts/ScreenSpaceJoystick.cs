@@ -34,6 +34,8 @@ namespace Arkademy
             {
                 onUI = false;
                 hasTouch = false;
+                normalizedDelta = Vector2.zero;
+                pixelDelta = Vector2.zero;
             }
 
             stickBase.gameObject.SetActive(hasTouch);

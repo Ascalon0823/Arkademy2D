@@ -17,7 +17,9 @@ MonoBehaviour:
     uiIcon: {fileID: -119339738, guid: 26a14f0b7ffbd634b9fc3482cc696bb3, type: 3}
     characterUIAnimatorController: {fileID: 9100000, guid: ca2dda3e2a277114c83a3a7364c68036, type: 2}
     unlocked: 1
+    characterPrefab: {fileID: 532951616818843277, guid: 84d86c4047966ea4881c2a7b0c64bb73, type: 3}
   - name: Demi
     uiIcon: {fileID: -1443887464, guid: d77ff825db9f77a46abd01b5b1236d14, type: 3}
-    characterUIAnimatorController: {fileID: 9100000, guid: fe952a245dfe8124a8bde10224a2b07f, type: 2}
+    characterUIAnimatorController: {fileID: 22100000, guid: 466bcce02f85be54bb886cb820384a29, type: 2}
     unlocked: 1
+    characterPrefab: {fileID: 5202132973947693925, guid: 1fc4a38f779e3284bbc0666f4eea3e1e, type: 3}

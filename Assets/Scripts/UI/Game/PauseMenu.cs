@@ -13,10 +13,15 @@ namespace Arkademy.UI.Game
         {
             SceneManager.LoadScene("Title");
         }
-        
+
         public void Toggle(bool active)
         {
+            if (active != menuPanel.activeSelf)
+            {
+                PlayerBehaviour.Player.pauseCount += active ? 1 : -1;
+            }
             menuPanel.SetActive(active);
+            
         }
 
         public void Toggle()

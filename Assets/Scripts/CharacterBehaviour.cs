@@ -1,0 +1,44 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Arkademy
+{
+    public class CharacterBehaviour : MonoBehaviour
+    {
+        public bool isDead;
+        public bool isHit;
+        public Rigidbody2D rb;
+        public Vector2 wantToMove;
+        public float moveSpeed;
+        public Vector2 velocity;
+        public Animator animator;
+        public SpriteRenderer sprite;
+        public bool leftFacing;
+        private static readonly int Walking = Animator.StringToHash("walking");
+        private static readonly int Dead = Animator.StringToHash("dead");
+        private static readonly int Hit = Animator.StringToHash("hit");
+
+        private void Update()
+        {
+            animator.SetBool(Dead, isDead);
+           
+            
+            if (isDead) return;
+            if (isHit)
+            {
+                animator.SetTrigger(Hit);
+                isHit = false;
+            }
+            velocity = moveSpeed * Time.deltaTime * wantToMove;
+            rb.MovePosition(rb.position + velocity);
+            animator.SetBool(Walking, velocity.magnitude > 0f);
+            if (velocity.magnitude > 0f)
+            {
+                var facing = Vector2.Dot(velocity, Vector2.left);
+                sprite.flipX = leftFacing ? facing < 0f : facing > 0f;
+            }
+        }
+    }
+}

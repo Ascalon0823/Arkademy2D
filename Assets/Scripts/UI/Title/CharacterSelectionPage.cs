@@ -36,8 +36,6 @@ namespace Arkademy.UI.Title
                 item.characterNameText.text = $"{playableChar.name} [{playedCount}]";
                 item.characterIcon.sprite = playableChar.uiIcon;
                 item.iconAnimator.runtimeAnimatorController = playableChar.characterUIAnimatorController;
-
-
                 item.characterSelectButton.onClick.AddListener(() => { SelectCharacterItem(index); });
                 generatedItems.Add(item);
                 item.Select(false);
@@ -60,6 +58,7 @@ namespace Arkademy.UI.Title
         public void Play()
         {
             SaveData.current.AddCharacterPlayRecordAndSave(currentSelectionIdx);
+            PlayerBehaviour.UsingCharacterDBIdx = currentSelectionIdx;
             SceneManager.LoadScene("Game");
         }
     }

@@ -15,12 +15,5 @@ namespace Arkademy.UI.Title
         {
             playCount.text = $"You have played {SaveData.current.numOfGamesPlayed} times";
         }
-        public void NewGame()
-        {
-            
-        }
-
-       
-
     }
 }
