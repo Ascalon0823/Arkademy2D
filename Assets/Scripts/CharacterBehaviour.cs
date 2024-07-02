@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Arkademy.UI.Game;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Arkademy
 {
@@ -20,11 +22,11 @@ namespace Arkademy
         private static readonly int Dead = Animator.StringToHash("dead");
         private static readonly int Hit = Animator.StringToHash("hit");
 
+        public int life;
+
         private void Update()
         {
             animator.SetBool(Dead, isDead);
-           
-            
             if (isDead) return;
             if (isHit)
             {
@@ -39,6 +41,19 @@ namespace Arkademy
                 var facing = Vector2.Dot(velocity, Vector2.left);
                 sprite.flipX = leftFacing ? facing < 0f : facing > 0f;
             }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            life -= damage;
+            DamageTextCanvas.AddTextTo(transform,damage);
+            if (life <= 0)
+            {
+                isDead = true;
+                return;
+            }
+            isHit = true;
+            
         }
     }
 }

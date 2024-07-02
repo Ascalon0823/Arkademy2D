@@ -247,6 +247,7 @@ MonoBehaviour:
   animator: {fileID: 2465990155948080981}
   sprite: {fileID: 8575172845642777584}
   leftFacing: 1
+  life: 100
 --- !u!50 &8272750361078888825
 Rigidbody2D:
   serializedVersion: 4

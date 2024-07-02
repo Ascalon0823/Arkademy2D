@@ -34,8 +34,8 @@ namespace Arkademy
             {
                 var charaPrefab = Database.GetDatabase().playableCharacterData[UsingCharacterDBIdx].characterPrefab;
                 playerCharacter = Instantiate(charaPrefab);
+                playerCharacter.gameObject.SetLayerRecursive(LayerMask.NameToLayer("Player"));
             }
-
             playerCamera.followTarget = playerCharacter.transform;
         }
 
