@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4404063451863240063, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404063451863240063, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 4504067737233769318, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
       propertyPath: m_Name
       value: Enemy
