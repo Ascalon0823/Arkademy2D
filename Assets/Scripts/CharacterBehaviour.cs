@@ -14,6 +14,7 @@ namespace Arkademy
         public bool isDead;
         public bool isHit;
         public Rigidbody2D rb;
+        public Collider2D collider2d;
         public Vector2 wantToMove;
         public float moveSpeed;
         public Vector2 velocity;

@@ -81,6 +81,11 @@ PrefabInstance:
       insertIndex: 1
       addedObject: {fileID: 6265626824212212464}
   m_SourcePrefab: {fileID: 100100000, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
+--- !u!58 &317296385059810142 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4404063451863240063, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
+  m_PrefabInstance: {fileID: 4141379822240114209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &574361509502281031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4504067737233769318, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
@@ -101,6 +106,7 @@ MonoBehaviour:
   isDead: 0
   isHit: 0
   rb: {fileID: 5455993983631155032}
+  collider2d: {fileID: 317296385059810142}
   wantToMove: {x: 0, y: 0}
   moveSpeed: 1
   velocity: {x: 0, y: 0}
