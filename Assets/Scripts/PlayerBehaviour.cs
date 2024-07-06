@@ -10,6 +10,8 @@ namespace Arkademy
     {
         public static int UsingCharacterDBIdx;
         public static PlayerBehaviour Player;
+        public static PixelPerfectCamera PlayerCam;
+        public static CharacterBehaviour PlayerChar;
 
         public int pauseCount;
 
@@ -37,6 +39,8 @@ namespace Arkademy
                 playerCharacter.gameObject.SetLayerRecursive(LayerMask.NameToLayer("Player"));
             }
             playerCamera.followTarget = playerCharacter.transform;
+            PlayerChar = playerCharacter;
+            PlayerCam = playerCamera.ppcam;
         }
 
         private void Update()

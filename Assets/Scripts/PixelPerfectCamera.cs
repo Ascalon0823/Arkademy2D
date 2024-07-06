@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Arkademy
 {
@@ -10,8 +11,10 @@ namespace Arkademy
         [Header("Camera")] [Range(1, 16)] public int pixelScale = 2;
         public bool useReferedScale = true;
         public Vector2 referenceResolution = new Vector2(270, 480);
+
         public int referedScale => Mathf.Min(Mathf.CeilToInt(Screen.width / referenceResolution.x),
             Mathf.CeilToInt(Screen.height / referenceResolution.y));
+
         public int pixelPerUnit = 16;
         public Camera cam;
         public float camOrthoSize => Screen.height / (pixelScale * pixelPerUnit * 2.0f);
@@ -38,6 +41,13 @@ namespace Arkademy
         public Vector2 GetWorldPos(Vector2 screenPos)
         {
             return cam.ScreenToWorldPoint(screenPos);
+        }
+
+        public Vector2 GetRandomPositionOutSideScreen(float maxDistanceMultiplier = 2f)
+        {
+            return (Vector2)transform.position + Random.insideUnitCircle.normalized * (camRect.size.magnitude/2f *
+                Random.Range(1f,
+                    Mathf.Min(1f, maxDistanceMultiplier)));
         }
 
         protected virtual void Update()

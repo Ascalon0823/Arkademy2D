@@ -21,7 +21,7 @@ namespace Arkademy.UI.Game
 
         public void Toggle()
         {
-            menuPanel.SetActive(!menuPanel.activeSelf);
+            Toggle(!menuPanel.activeSelf);
         }
     }
 

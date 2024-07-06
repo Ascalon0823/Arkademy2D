@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Arkademy.UI.Game
 {
@@ -13,27 +14,33 @@ namespace Arkademy.UI.Game
         [SerializeField] private Vector3 basePosition;
         [SerializeField] private float yPos;
         [SerializeField] private float flyUpSpeed;
-        public float lifeTime;
+        public float remainingTime;
         public int childLimit;
+        public Vector2 spawnOffset;
+        public float totalLifeTime;
 
         public void AddText(int text)
         {
             var spawn = Instantiate(textPrefab, transform);
-            lifeTime = Mathf.Max(lifeTime, spawn.lifeTime);
+            remainingTime = Mathf.Max(remainingTime, spawn.lifeTime);
             spawn.text.text = text.ToString();
             spawnedText.Add(spawn);
         }
+
         private void LateUpdate()
         {
-            lifeTime -= Time.deltaTime;
-            if (lifeTime <= 0f)
+            remainingTime -= Time.deltaTime;
+            totalLifeTime += Time.deltaTime;
+            if (remainingTime <= 0f)
             {
                 Destroy(gameObject);
             }
 
             if (followTarget)
             {
-                basePosition = PlayerBehaviour.Player.playerCamera.ppcam.cam.WorldToScreenPoint(followTarget.position);
+                basePosition =
+                    PlayerBehaviour.PlayerCam.cam.WorldToScreenPoint(followTarget.position +
+                        (Vector3)spawnOffset);
             }
 
             yPos += flyUpSpeed * Time.deltaTime;

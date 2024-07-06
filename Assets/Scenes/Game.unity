@@ -618,6 +618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 603340072}
   - component: {fileID: 603340071}
+  - component: {fileID: 603340073}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -654,6 +655,24 @@ Transform:
   - {fileID: 307535001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &603340073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603340070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7cb7ceeee340b08bb99f195ae438d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsPlayed: 0
+  enemyCap: 10
+  spawnedEnemies: []
+  enemyPrefab: {fileID: 176418616341485331, guid: 3932e37c084304c4bb8d3105ad4ba4df, type: 3}
+  enemySpawnInterval: 0.25
+  lastEnemySpawn: 0
 --- !u!1 &943588303
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +789,7 @@ TilemapRenderer:
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
-  m_Mode: 0
+  m_Mode: 1
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
 --- !u!1839735485 &943588307

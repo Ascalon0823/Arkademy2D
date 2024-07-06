@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Arkademy.UI.Game;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Arkademy
@@ -24,7 +26,9 @@ namespace Arkademy
 
         public int life;
 
-        private void Update()
+        public UnityEvent<CharacterBehaviour> onDeath;
+
+        protected virtual void Update()
         {
             animator.SetBool(Dead, isDead);
             if (isDead) return;
@@ -33,6 +37,7 @@ namespace Arkademy
                 animator.SetTrigger(Hit);
                 isHit = false;
             }
+
             velocity = moveSpeed * Time.deltaTime * wantToMove;
             rb.MovePosition(rb.position + velocity);
             animator.SetBool(Walking, velocity.magnitude > 0f);
@@ -46,14 +51,15 @@ namespace Arkademy
         public void TakeDamage(int damage)
         {
             life -= damage;
-            DamageTextCanvas.AddTextTo(transform,damage);
+            DamageTextCanvas.AddTextTo(transform, damage);
             if (life <= 0)
             {
                 isDead = true;
+                onDeath?.Invoke(this);
                 return;
             }
+
             isHit = true;
-            
         }
     }
 }

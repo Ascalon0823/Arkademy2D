@@ -95,6 +95,8 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   basePosition: {x: 0, y: 0, z: 0}
   yPos: 0
-  flyUpSpeed: 16
-  lifeTime: 1
-  childLimit: 6
+  flyUpSpeed: 32
+  remainingTime: 0
+  childLimit: 5
+  spawnOffset: {x: 0, y: 1}
+  totalLifeTime: 0

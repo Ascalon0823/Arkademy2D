@@ -16,10 +16,10 @@ namespace Arkademy.UI.Game
 
         private void Update()
         {
-            if (!PlayerBehaviour.Player) return;
-            if (!PlayerBehaviour.Player.playerCharacter) return;
+            if (!PlayerBehaviour.PlayerChar) return;
             if (PlayerBehaviour.Player.playerCharacter.isDead == menu.activeSelf) return;
             menu.SetActive(PlayerBehaviour.Player.playerCharacter.isDead);
+            PlayerBehaviour.Player.pauseCount += 1;
         }
     }
 }

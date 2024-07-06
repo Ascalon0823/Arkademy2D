@@ -31,7 +31,8 @@ namespace Arkademy.UI.Game
         private void InternalAddTextTo(Transform t, int text)
         {
             if (!_spawnedGroups.TryGetValue(t, out var group)
-                || !group || group.spawnedText.Count >= group.childLimit)
+                || !group || group.spawnedText.Count >= group.childLimit
+                || group.totalLifeTime > 2f)
             {
                 group = Instantiate(groupPrefab, transform);
                 group.followTarget = t;
