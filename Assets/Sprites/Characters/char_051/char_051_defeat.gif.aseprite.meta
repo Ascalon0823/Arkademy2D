@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: 3d9d7db48bd675048bcfcac450bfaa6c
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:AnimationClip
+      assembly: UnityEngine.AnimationModule
+      name: char_051_defeat.gif_Clip
+    second: {fileID: 7400000, guid: 5364a8209b6660449a2200ba0299abaa, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -97,7 +102,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638559578902470956
+  platformSettingsDirtyTick: 638559600331830147
   textureAssetName: 
   singleSpriteImportData:
   - name: 
