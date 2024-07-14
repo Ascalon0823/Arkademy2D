@@ -27,6 +27,8 @@ namespace Arkademy
 
         public int life;
 
+        public bool showDamageNumber;
+
         public UnityEvent<CharacterBehaviour> onDeath;
 
         protected virtual void Update()
@@ -49,10 +51,11 @@ namespace Arkademy
             }
         }
 
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage)
         {
             life -= damage;
-            DamageTextCanvas.AddTextTo(transform, damage);
+            if(showDamageNumber)
+                DamageTextCanvas.AddTextTo(transform, damage);
             if (life <= 0)
             {
                 isDead = true;

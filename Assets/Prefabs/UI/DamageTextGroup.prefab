@@ -98,5 +98,5 @@ MonoBehaviour:
   flyUpSpeed: 32
   remainingTime: 0
   childLimit: 5
-  spawnOffset: {x: 0, y: 1}
+  spawnOffset: {x: 0, y: 0.25}
   totalLifeTime: 0

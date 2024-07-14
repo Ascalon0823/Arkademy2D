@@ -13,6 +13,7 @@ namespace Arkademy.UI.Title
 
         public void Select(bool selected)
         {
+            iconAnimator.Rebind();
             iconAnimator.Update(0);
             iconAnimator.enabled = selected;
         }

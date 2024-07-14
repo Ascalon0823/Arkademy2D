@@ -14,6 +14,7 @@ namespace Arkademy
         public static CharacterBehaviour PlayerChar;
 
         public int pauseCount;
+        public bool paused => pauseCount > 0;
 
         private void Awake()
         {

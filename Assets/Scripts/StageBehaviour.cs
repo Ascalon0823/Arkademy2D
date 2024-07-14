@@ -6,12 +6,24 @@ namespace Arkademy
 {
     public class StageBehaviour : MonoBehaviour
     {
+        public static StageBehaviour Current;
         public float secondsPlayed;
         public int enemyCap;
         public List<EnemyBehaviour> spawnedEnemies = new();
         public EnemyBehaviour enemyPrefab;
         public float enemySpawnInterval;
         public float lastEnemySpawn;
+
+
+        private void Awake()
+        {
+            if (Current && Current != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Current =this;
+        }
 
         private void Update()
         {

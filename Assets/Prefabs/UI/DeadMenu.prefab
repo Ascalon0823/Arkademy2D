@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 7399133043144002472}
+  deadMessage: {fileID: 8096557621958230332}
 --- !u!1 &6824852345540994880
 GameObject:
   m_ObjectHideFlags: 0

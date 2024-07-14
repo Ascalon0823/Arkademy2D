@@ -88,6 +88,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4504067737233769318, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
       insertIndex: 1
       addedObject: {fileID: 6265626824212212464}
+    - targetCorrespondingSourceObject: {fileID: 4504067737233769318, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5221250433586046966}
   m_SourcePrefab: {fileID: 100100000, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
 --- !u!58 &317296385059810142 stripped
 CircleCollider2D:
@@ -122,10 +125,27 @@ MonoBehaviour:
   sprite: {fileID: 5654270726829155793}
   leftFacing: 1
   life: 10
+  showDamageNumber: 1
   onDeath:
     m_PersistentCalls:
       m_Calls: []
   destroyTimer: 3
+--- !u!114 &5221250433586046966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574361509502281031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e5807944914647933ac5cca96d87ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c: {fileID: 317296385059810142}
+  interval: 1
+  damage: 1
+  dealDamageOnBegin: 1
 --- !u!95 &1964088385017649524 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2465990155948080981, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
