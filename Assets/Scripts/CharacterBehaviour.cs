@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Arkademy.UI.Game;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,7 @@ namespace Arkademy
 {
     public class CharacterBehaviour : MonoBehaviour
     {
+        public Database.CharacterData charaData;
         public bool isDead;
         public bool isHit;
         public Rigidbody2D rb;
@@ -30,6 +32,29 @@ namespace Arkademy
         public bool showDamageNumber;
 
         public UnityEvent<CharacterBehaviour> onDeath;
+
+        public List<Ability> currentAbilities = new();
+
+        private void Start()
+        {
+            if (StageBehaviour.Current)
+            {
+                StageBehaviour.Current.spawnedCharacters.Add(this);
+            }
+
+            if (charaData?.beginningAbilityIdx?.Length > 0)
+            {
+                var db = Database.GetDatabase();
+                foreach (var idx in charaData.beginningAbilityIdx)
+                {
+                    var ability = Instantiate(db.abilityData[idx].prefab,transform);
+                    ability.gameObject.SetLayerRecursive(gameObject.layer);
+                    currentAbilities.Add(ability);
+                    ability.user = this;
+                    ability.level = 1;
+                }
+            }
+        }
 
         protected virtual void Update()
         {
@@ -54,16 +79,31 @@ namespace Arkademy
         public virtual void TakeDamage(int damage)
         {
             life -= damage;
-            if(showDamageNumber)
+            if (showDamageNumber)
                 DamageTextCanvas.AddTextTo(transform, damage);
             if (life <= 0)
             {
                 isDead = true;
+                if (StageBehaviour.Current
+                    && StageBehaviour.Current.spawnedCharacters.Contains(this))
+                    StageBehaviour.Current.spawnedCharacters.Remove(this);
+                foreach (var ability in currentAbilities)
+                {
+                    ability.enabled = false;
+                }
                 onDeath?.Invoke(this);
                 return;
             }
 
             isHit = true;
+        }
+
+        public CharacterBehaviour GetNearestEnemy()
+        {
+            return StageBehaviour.Current.spawnedCharacters
+                .Where(x => x.gameObject.layer != gameObject.layer)
+                .OrderBy(x => Vector2.Distance(
+                    x.transform.position, transform.position)).FirstOrDefault();
         }
     }
 }

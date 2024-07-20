@@ -10,6 +10,7 @@ namespace Arkademy
         public float secondsPlayed;
         public int enemyCap;
         public List<EnemyBehaviour> spawnedEnemies = new();
+        public List<CharacterBehaviour> spawnedCharacters = new List<CharacterBehaviour>();
         public EnemyBehaviour enemyPrefab;
         public float enemySpawnInterval;
         public float lastEnemySpawn;

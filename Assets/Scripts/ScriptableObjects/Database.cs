@@ -10,16 +10,29 @@ namespace Arkademy
     public class Database : ScriptableObject
     {
         [Serializable]
-        public class PlayableCharacterData
+        public class CharacterData
         {
             public string name;
             public Sprite uiIcon;
             public RuntimeAnimatorController characterUIAnimatorController;
-            public bool unlocked;
             public CharacterBehaviour characterPrefab;
+            public int[] beginningAbilityIdx;
+        }
+        [Serializable]
+        public class PlayableCharacterData : CharacterData
+        {
+            public bool unlocked;
+        }
+
+        [Serializable]
+        public class AbilityData
+        {
+            public string name;
+            public Ability prefab;
         }
 
         public List<PlayableCharacterData> playableCharacterData = new List<PlayableCharacterData>();
+        public List<AbilityData> abilityData = new List<AbilityData>();
 
         public static Database GetDatabase()
         {

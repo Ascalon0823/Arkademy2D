@@ -158,7 +158,7 @@ MonoBehaviour:
   pixelPerUnit: 16
   pixelScale: 4
   useReferedScale: 1
-  referenceResolution: {x: 270, y: 270}
+  referenceResolution: {x: 240, y: 240}
 --- !u!114 &9799546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 3
+  m_ScaleFactor: 4
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -301,7 +301,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12.40625
+  orthographic size: 10.421875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -344,17 +344,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5884b15baf5cbc94ca20fbf822afb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelScale: 3
+  pixelScale: 4
   useReferedScale: 1
-  referenceResolution: {x: 270, y: 270}
+  referenceResolution: {x: 240, y: 240}
   pixelPerUnit: 16
   cam: {fileID: 26171330}
   camRect:
     serializedVersion: 2
-    x: -7.5729165
-    y: -12.40625
-    width: 15.145833
-    height: 24.8125
+    x: -5.859375
+    y: -10.421875
+    width: 11.71875
+    height: 20.84375
 --- !u!114 &26171333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,6 +670,7 @@ MonoBehaviour:
   secondsPlayed: 0
   enemyCap: 10
   spawnedEnemies: []
+  spawnedCharacters: []
   enemyPrefab: {fileID: 176418616341485331, guid: 3932e37c084304c4bb8d3105ad4ba4df, type: 3}
   enemySpawnInterval: 0.25
   lastEnemySpawn: 0
@@ -1231,7 +1232,7 @@ MonoBehaviour:
   pixelPerUnit: 16
   pixelScale: 4
   useReferedScale: 1
-  referenceResolution: {x: 270, y: 270}
+  referenceResolution: {x: 240, y: 240}
 --- !u!114 &2038097609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,7 +1264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 3
+  m_ScaleFactor: 4
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0

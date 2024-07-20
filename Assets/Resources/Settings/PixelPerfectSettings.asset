@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PixelPerfectSettings
   m_EditorClassIdentifier: 
   pixelPerUnit: 16
-  referenceResolution: {x: 270, y: 270}
+  referenceResolution: {x: 240, y: 240}
   useReferredScale: 1
   pixelScale: 4
