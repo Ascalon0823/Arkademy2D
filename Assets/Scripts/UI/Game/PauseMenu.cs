@@ -9,6 +9,12 @@ namespace Arkademy.UI.Game
     public class PauseMenu : MonoBehaviour
     {
         [SerializeField] private GameObject menuPanel;
+
+        private void Start()
+        {
+            menuPanel.SetActive(false);
+        }
+
         public void Toggle(bool active)
         {
             if (active != menuPanel.activeSelf)

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Arkademy
@@ -12,6 +13,7 @@ namespace Arkademy
         public static PlayerBehaviour Player;
         public static PixelPerfectCamera PlayerCam;
         public static CharacterBehaviour PlayerChar;
+        public UnityEvent<CharacterBehaviour> onPlayerCharLevelUp;
 
         public int pauseCount;
         public bool paused => pauseCount > 0;
@@ -41,6 +43,10 @@ namespace Arkademy
                 playerCharacter.gameObject.SetLayerRecursive(LayerMask.NameToLayer("Player"));
                 playerCharacter.charaData = charaData;
             }
+            playerCharacter.onLevelUp.AddListener(chara =>
+            {
+                onPlayerCharLevelUp?.Invoke(chara);
+            });
             playerCamera.followTarget = playerCharacter.transform;
             PlayerChar = playerCharacter;
             PlayerCam = playerCamera.ppcam;

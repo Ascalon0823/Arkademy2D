@@ -32,9 +32,12 @@ namespace Arkademy
         public bool showDamageNumber;
 
         public UnityEvent<CharacterBehaviour> onDeath;
+        public UnityEvent<CharacterBehaviour> onLevelUp;
 
         public List<Ability> currentAbilities = new();
 
+        public int nextXp;
+        public int nextLevelUpXp;
         public int XP;
 
         public float pickupRange;
@@ -53,11 +56,16 @@ namespace Arkademy
                 {
                     var ability = Instantiate(db.abilityData[idx].prefab,transform);
                     ability.gameObject.SetLayerRecursive(gameObject.layer);
+                    ability.abilityName = db.abilityData[idx].name;
                     currentAbilities.Add(ability);
                     ability.user = this;
                     ability.level = 1;
                 }
             }
+
+            XP = 0;
+            nextXp = 15;
+            nextLevelUpXp = nextXp;
         }
 
         protected virtual void Pickup()
@@ -125,6 +133,15 @@ namespace Arkademy
         public void GainXP(int xp)
         {
             XP += xp;
+            ResolveLevelUp();
+        }
+
+        public void ResolveLevelUp()
+        {
+            if (XP < nextLevelUpXp) return;
+            nextLevelUpXp += nextXp;
+            nextXp += 5;
+            onLevelUp?.Invoke(this);
         }
     }
 }

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickUpBy: {fileID: 0}
   speed: 0
-  accel: 5
+  accel: 10
   xp: 1
 --- !u!58 &704735700249499006
 CircleCollider2D:

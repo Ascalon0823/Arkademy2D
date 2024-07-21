@@ -6,6 +6,7 @@ namespace Arkademy
     public class Ability : MonoBehaviour
     {
         public CharacterBehaviour user;
+        public string abilityName;
         public Sprite uiIcon;
         public int level;
         public float cooldown;
