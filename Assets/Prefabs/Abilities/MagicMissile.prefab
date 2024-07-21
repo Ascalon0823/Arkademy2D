@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
+  uiIcon: {fileID: 0}
   level: 0
-  cooldown: 3
+  cooldown: 1
   remainingCooldown: 0
   missilePrefab: {fileID: 8037830939041348818, guid: 63009d82d9acc4dbcb7ac98801651e0d, type: 3}
   spawnInterval: 0.1

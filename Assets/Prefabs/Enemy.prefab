@@ -114,6 +114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b928d854d6e1493998ba50b1fd47f436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charaData:
+    name: 
+    uiIcon: {fileID: 0}
+    characterUIAnimatorController: {fileID: 0}
+    characterPrefab: {fileID: 0}
+    beginningAbilityIdx: 
   isDead: 0
   isHit: 0
   rb: {fileID: 5455993983631155032}
@@ -129,7 +135,12 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  currentAbilities: []
+  XP: 0
+  pickupRange: 0
   destroyTimer: 3
+  xpDrop: 0
+  xpPickupPrefab: {fileID: 2768236391976810833, guid: ca3e163c9ecdb42faa8efb575e29585c, type: 3}
 --- !u!114 &5221250433586046966
 MonoBehaviour:
   m_ObjectHideFlags: 0

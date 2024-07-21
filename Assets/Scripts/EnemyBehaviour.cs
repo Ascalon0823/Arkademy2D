@@ -7,6 +7,23 @@ namespace Arkademy
     public class EnemyBehaviour : CharacterBehaviour
     {
         public float destroyTimer;
+        public int xpDrop;
+        public XPPickup xpPickupPrefab;
+
+        protected override void Start()
+        {
+            base.Start();
+            onDeath.AddListener(chara =>
+            {
+                Drop();
+            });
+        }
+
+        protected virtual void Drop()
+        {
+            var pickup = Instantiate(xpPickupPrefab, transform.position, Quaternion.identity);
+            pickup.xp = xpDrop;
+        }
 
         protected override void Update()
         {

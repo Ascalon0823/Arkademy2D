@@ -35,7 +35,11 @@ namespace Arkademy
 
         public List<Ability> currentAbilities = new();
 
-        private void Start()
+        public int XP;
+
+        public float pickupRange;
+
+        protected virtual void Start()
         {
             if (StageBehaviour.Current)
             {
@@ -56,6 +60,18 @@ namespace Arkademy
             }
         }
 
+        protected virtual void Pickup()
+        {
+            if (PlayerBehaviour.PlayerChar != this) return;
+            var colliders = Physics2D.OverlapCircleAll(transform.position, pickupRange, LayerMask.GetMask("Pickup"));
+            foreach (var c in colliders)
+            {
+                var pickup = c.GetComponent<Pickup>();
+                if(!pickup)continue;
+                if (pickup.pickUpBy) continue;
+                pickup.pickUpBy = this;
+            }
+        }
         protected virtual void Update()
         {
             animator.SetBool(Dead, isDead);
@@ -65,7 +81,7 @@ namespace Arkademy
                 animator.SetTrigger(Hit);
                 isHit = false;
             }
-
+            Pickup();
             velocity = moveSpeed * Time.deltaTime * wantToMove;
             rb.MovePosition(rb.position + velocity);
             animator.SetBool(Walking, velocity.magnitude > 0f);
@@ -104,6 +120,11 @@ namespace Arkademy
                 .Where(x => x.gameObject.layer != gameObject.layer)
                 .OrderBy(x => Vector2.Distance(
                     x.transform.position, transform.position)).FirstOrDefault();
+        }
+
+        public void GainXP(int xp)
+        {
+            XP += xp;
         }
     }
 }

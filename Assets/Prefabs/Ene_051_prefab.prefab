@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6265626824212212464, guid: 88169779b31b6c5439f27b45b9f37336, type: 3}
+      propertyPath: xpDrop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
