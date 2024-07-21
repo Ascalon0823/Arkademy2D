@@ -54,12 +54,7 @@ namespace Arkademy
                 var db = Database.GetDatabase();
                 foreach (var idx in charaData.beginningAbilityIdx)
                 {
-                    var ability = Instantiate(db.abilityData[idx].prefab,transform);
-                    ability.gameObject.SetLayerRecursive(gameObject.layer);
-                    ability.abilityName = db.abilityData[idx].name;
-                    currentAbilities.Add(ability);
-                    ability.user = this;
-                    ability.level = 1;
+                    AddAbility(db.abilityData[idx]);
                 }
             }
 
@@ -142,6 +137,16 @@ namespace Arkademy
             nextLevelUpXp += nextXp;
             nextXp += 5;
             onLevelUp?.Invoke(this);
+        }
+
+        public void AddAbility(Database.AbilityData abilityData)
+        {
+            var ability = Instantiate(abilityData.prefab, transform);
+            ability.gameObject.SetLayerRecursive(gameObject.layer);
+            ability.abilityName = abilityData.name;
+            currentAbilities.Add(ability);
+            ability.user = this;
+            ability.level = 1;
         }
     }
 }

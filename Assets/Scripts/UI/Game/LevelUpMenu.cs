@@ -75,13 +75,7 @@ namespace Arkademy.UI.Game
                 charaAbi.level += 1;
                 return;
             }
-
-            var ability = Instantiate(abilityData.prefab, transform);
-            ability.gameObject.SetLayerRecursive(character.gameObject.layer);
-            ability.abilityName = ability.name;
-            character.currentAbilities.Add(ability);
-            ability.user = character;
-            ability.level = 1;
+            character.AddAbility(abilityData);
         }
     }
 }
