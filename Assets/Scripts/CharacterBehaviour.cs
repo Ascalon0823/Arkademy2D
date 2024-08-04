@@ -39,6 +39,7 @@ namespace Arkademy
         public int nextXp;
         public int nextLevelUpXp;
         public int XP;
+        [SerializeField] private int prevXp;
 
         public float pickupRange;
 
@@ -61,6 +62,7 @@ namespace Arkademy
             XP = 0;
             nextXp = 15;
             nextLevelUpXp = nextXp;
+            prevXp = 0;
         }
 
         protected virtual void Pickup()
@@ -134,6 +136,7 @@ namespace Arkademy
         public void ResolveLevelUp()
         {
             if (XP < nextLevelUpXp) return;
+            prevXp = nextLevelUpXp;
             nextLevelUpXp += nextXp;
             nextXp += 5;
             onLevelUp?.Invoke(this);
@@ -144,9 +147,20 @@ namespace Arkademy
             var ability = Instantiate(abilityData.prefab, transform);
             ability.gameObject.SetLayerRecursive(gameObject.layer);
             ability.abilityName = abilityData.name;
+            ability.uiIcon = abilityData.uiIcon;
             currentAbilities.Add(ability);
             ability.user = this;
             ability.level = 1;
+        }
+
+        public float GetLifePercent()
+        {
+            return life*1.0f / charaData.life;
+        }
+
+        public float GetXpPercent()
+        {
+            return(XP - prevXp) * 1.0f / (nextLevelUpXp - prevXp);
         }
     }
 }

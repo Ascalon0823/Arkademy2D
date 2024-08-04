@@ -42,11 +42,13 @@ namespace Arkademy
                 playerCharacter = Instantiate(charaPrefab);
                 playerCharacter.gameObject.SetLayerRecursive(LayerMask.NameToLayer("Player"));
                 playerCharacter.charaData = charaData;
+                playerCharacter.life = charaData.life;
             }
             playerCharacter.onLevelUp.AddListener(chara =>
             {
                 onPlayerCharLevelUp?.Invoke(chara);
             });
+            
             playerCamera.followTarget = playerCharacter.transform;
             PlayerChar = playerCharacter;
             PlayerCam = playerCamera.ppcam;

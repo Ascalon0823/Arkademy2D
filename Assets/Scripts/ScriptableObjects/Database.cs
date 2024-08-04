@@ -17,6 +17,7 @@ namespace Arkademy
             public RuntimeAnimatorController characterUIAnimatorController;
             public CharacterBehaviour characterPrefab;
             public int[] beginningAbilityIdx;
+            public int life;
         }
         [Serializable]
         public class PlayableCharacterData : CharacterData
@@ -29,6 +30,7 @@ namespace Arkademy
         {
             public string name;
             public Ability prefab;
+            public Sprite uiIcon;
         }
 
         public List<PlayableCharacterData> playableCharacterData = new List<PlayableCharacterData>();

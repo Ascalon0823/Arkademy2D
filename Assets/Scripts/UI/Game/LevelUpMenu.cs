@@ -51,6 +51,7 @@ namespace Arkademy.UI.Game
                 option.abilityName.text = data.name;
                 option.data = data;
                 option.menu = this;
+                option.icon.sprite = data.uiIcon;
                 _spawnedItems.Add(option);
             }
         }
