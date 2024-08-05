@@ -10,6 +10,13 @@ using Random = UnityEngine.Random;
 
 namespace Arkademy
 {
+    [Serializable]
+    public struct DamageEvent
+    {
+        public int dealerInstance;
+        public int batch;
+        public int amount;
+    }
     public class CharacterBehaviour : MonoBehaviour
     {
         public Database.CharacterData charaData;
@@ -97,11 +104,11 @@ namespace Arkademy
             }
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(DamageEvent de)
         {
-            life -= damage;
+            life -= de.amount;
             if (showDamageNumber)
-                DamageTextCanvas.AddTextTo(transform, damage);
+                DamageTextCanvas.AddTextTo(transform, de);
             if (life <= 0)
             {
                 isDead = true;
@@ -125,6 +132,14 @@ namespace Arkademy
                 .Where(x => x.gameObject.layer != gameObject.layer)
                 .OrderBy(x => Vector2.Distance(
                     x.transform.position, transform.position)).FirstOrDefault();
+        }
+        
+        public CharacterBehaviour[] GetNearestEnemies(int amount)
+        {
+            return StageBehaviour.Current.spawnedCharacters
+                .Where(x => x.gameObject.layer != gameObject.layer)
+                .OrderBy(x => Vector2.Distance(
+                    x.transform.position, transform.position)).Take(amount).ToArray();
         }
 
         public void GainXP(int xp)

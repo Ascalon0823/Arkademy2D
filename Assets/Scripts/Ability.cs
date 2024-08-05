@@ -11,6 +11,13 @@ namespace Arkademy
         public int level;
         public float cooldown;
         public float remainingCooldown;
+        public int instanceId;
+        public int useCount;
+
+        private void Start()
+        {
+            instanceId = GetInstanceID();
+        }
 
         protected virtual void Update()
         {
@@ -23,6 +30,7 @@ namespace Arkademy
         protected virtual void Use()
         {
             remainingCooldown = cooldown;
+            useCount++;
         }
     }
 }

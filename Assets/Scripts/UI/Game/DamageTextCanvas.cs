@@ -23,23 +23,23 @@ namespace Arkademy.UI.Game
             Canvas = this;
         }
 
-        public static void AddTextTo(Transform t, int text)
+        public static void AddTextTo(Transform t, DamageEvent de)
         {
-            Canvas.InternalAddTextTo(t, text);
+            Canvas.InternalAddTextTo(t, de);
         }
 
-        private void InternalAddTextTo(Transform t, int text)
+        private void InternalAddTextTo(Transform t, DamageEvent de)
         {
             if (!_spawnedGroups.TryGetValue(t, out var group)
-                || !group || group.spawnedText.Count >= group.childLimit
-                || group.totalLifeTime > 2f)
+                || !group || group.dealerInstance != de.dealerInstance
+                || group.batch != de.batch)
             {
                 group = Instantiate(groupPrefab, transform);
                 group.followTarget = t;
                 _spawnedGroups[t] = group;
             }
 
-            group.AddText(text);
+            group.AddText(de);
         }
     }
 }

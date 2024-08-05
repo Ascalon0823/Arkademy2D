@@ -19,11 +19,16 @@ namespace Arkademy.UI.Game
         public Vector2 spawnOffset;
         public float totalLifeTime;
 
-        public void AddText(int text)
+        public int dealerInstance;
+        public int batch;
+
+        public void AddText(DamageEvent de)
         {
             var spawn = Instantiate(textPrefab, transform);
             remainingTime = Mathf.Max(remainingTime, spawn.lifeTime);
-            spawn.text.text = text.ToString();
+            dealerInstance = de.dealerInstance;
+            batch = de.batch;
+            spawn.text.text = de.amount.ToString();
             spawnedText.Add(spawn);
         }
 

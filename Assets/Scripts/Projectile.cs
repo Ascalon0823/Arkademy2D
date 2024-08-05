@@ -6,16 +6,28 @@ namespace Arkademy
     public class Projectile : MonoBehaviour
     {
         public float moveSpeed;
-        public int damage;
+        public DamageEvent damage;
         public float remainingLife;
+         
 
         protected virtual void Update()
+        {
+            UpdateLife();
+            UpdatePosition();
+        }
+
+        protected virtual void UpdateLife()
         {
             if (remainingLife <= 0f)
             {
                 Destroy(gameObject);
             }
+
             remainingLife -= Time.deltaTime;
+        }
+
+        protected virtual void UpdatePosition()
+        {
             transform.position += moveSpeed * Time.deltaTime * transform.up;
         }
 

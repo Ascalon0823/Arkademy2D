@@ -23,9 +23,16 @@ namespace Arkademy
             }
         }
 
+        private int _damageCount;
         protected virtual void DealDamage(CharacterBehaviour other)
         {
-            other.TakeDamage(damage);
+            _damageCount++;
+            other.TakeDamage(new DamageEvent
+            {
+                dealerInstance = GetInstanceID(),
+                batch = _damageCount,
+                amount = damage
+            });
             _damageRecord[other] = Time.fixedTime;
         }
     }

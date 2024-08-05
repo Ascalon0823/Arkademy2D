@@ -9,12 +9,19 @@ namespace Arkademy
         public bool triggered;
         public int damageAmount;
 
+        [SerializeField] private int triggerCount;
         public void DealDamage(Collider2D other)
         {
             var chara = other.GetComponent<CharacterBehaviour>();
             if (chara.gameObject.layer != gameObject.layer)
             {
-                chara.TakeDamage(damageAmount);
+                triggerCount++;
+                chara.TakeDamage(new DamageEvent
+                {
+                    dealerInstance = GetInstanceID(),
+                    batch = triggerCount,
+                    amount = damageAmount
+                });
             }
         }
     }
