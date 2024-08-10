@@ -33,8 +33,18 @@ namespace Arkademy
             public Sprite uiIcon;
         }
 
+        [Serializable]
+        public class SpellData
+        {
+            public string name;
+            public string spellKey;
+            public Spell prefab;
+            public Sprite uiIcon;
+        }
+
         public List<PlayableCharacterData> playableCharacterData = new List<PlayableCharacterData>();
         public List<AbilityData> abilityData = new List<AbilityData>();
+        public List<SpellData> spellData = new List<SpellData>();
 
         public static Database GetDatabase()
         {

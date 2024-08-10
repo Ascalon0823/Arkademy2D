@@ -50,6 +50,8 @@ namespace Arkademy
 
         public float pickupRange;
 
+        public float source;
+        public bool canLevelUp;
         protected virtual void Start()
         {
             if (StageBehaviour.Current)
@@ -145,6 +147,7 @@ namespace Arkademy
         public void GainXP(int xp)
         {
             XP += xp;
+            
             ResolveLevelUp();
         }
 

@@ -31,3 +31,8 @@ MonoBehaviour:
   - name: MagicMissile
     prefab: {fileID: 4316593105434915813, guid: b29605e71acd54edeae3843deafcec6d, type: 3}
     uiIcon: {fileID: 332399191, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
+  spellData:
+  - name: MagicMissileBarrage
+    spellKey: 0
+    prefab: {fileID: 2020254457037024911, guid: ee73b5b04c569a34a8e044c22a4f7f4d, type: 3}
+    uiIcon: {fileID: 770677676, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}

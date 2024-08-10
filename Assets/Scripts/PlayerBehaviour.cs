@@ -15,6 +15,7 @@ namespace Arkademy
         public static CharacterBehaviour PlayerChar;
         public UnityEvent<CharacterBehaviour> onPlayerCharLevelUp;
 
+        
         public int pauseCount;
         public bool paused => pauseCount > 0;
 
