@@ -17,20 +17,23 @@ MonoBehaviour:
     uiIcon: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
     characterUIAnimatorController: {fileID: 9100000, guid: ca2dda3e2a277114c83a3a7364c68036, type: 2}
     characterPrefab: {fileID: 532951616818843277, guid: 84d86c4047966ea4881c2a7b0c64bb73, type: 3}
-    beginningAbilityIdx: 00000000
+    beginningAbilityIdx: 01000000
     life: 80
     unlocked: 1
   - name: Demi
     uiIcon: {fileID: -34538813354388608, guid: 743114c57df1f9c489c503cc1ace029e, type: 3}
     characterUIAnimatorController: {fileID: 22100000, guid: 466bcce02f85be54bb886cb820384a29, type: 2}
     characterPrefab: {fileID: 5202132973947693925, guid: 1fc4a38f779e3284bbc0666f4eea3e1e, type: 3}
-    beginningAbilityIdx: 
+    beginningAbilityIdx: 01000000
     life: 70
     unlocked: 1
   abilityData:
   - name: MagicMissile
     prefab: {fileID: 4316593105434915813, guid: b29605e71acd54edeae3843deafcec6d, type: 3}
     uiIcon: {fileID: 332399191, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
+  - name: WindCutter
+    prefab: {fileID: 4765620300451605668, guid: 69b34429c84b944809289316f20bf67e, type: 3}
+    uiIcon: {fileID: -1268718024, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   spellData:
   - name: MagicMissileBarrage
     spellKey: 0

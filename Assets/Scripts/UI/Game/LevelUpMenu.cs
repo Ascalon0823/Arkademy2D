@@ -42,7 +42,8 @@ namespace Arkademy.UI.Game
 
             _spawnedItems.Clear();
             var abilityData = Database.GetDatabase().abilityData.ToList();
-            for (var i = 0; i < Mathf.Min(abilityData.Count, 3); i++)
+            var repeat = Mathf.Min(abilityData.Count, 3);
+            for (var i = 0; i < repeat; i++)
             {
                 var idx = Random.Range(0, abilityData.Count);
                 var data = abilityData[idx];

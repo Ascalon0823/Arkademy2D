@@ -13,7 +13,8 @@ namespace Arkademy
         public void DealDamage(Collider2D other)
         {
             var chara = other.GetComponent<CharacterBehaviour>();
-            if (chara.gameObject.layer != gameObject.layer)
+            
+            if (chara && chara.gameObject.layer != gameObject.layer)
             {
                 triggerCount++;
                 chara.TakeDamage(new DamageEvent
