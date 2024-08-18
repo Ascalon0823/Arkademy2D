@@ -9,12 +9,13 @@ namespace Arkademy
 {
     public class PlayerBehaviour : MonoBehaviour
     {
-        public static int UsingCharacterDBIdx;
+        public static int? UsingCharacterDBIdx;
         public static PlayerBehaviour Player;
         public static PixelPerfectCamera PlayerCam;
         public static CharacterBehaviour PlayerChar;
         public UnityEvent<CharacterBehaviour> onPlayerCharLevelUp;
 
+        [SerializeField] private int editorCharaDBIdx;
         
         public int pauseCount;
         public bool paused => pauseCount > 0;
@@ -28,6 +29,10 @@ namespace Arkademy
             }
 
             Player = this;
+            if (Application.isEditor && !UsingCharacterDBIdx.HasValue)
+            {
+                UsingCharacterDBIdx = editorCharaDBIdx;
+            }
         }
 
         public CharacterBehaviour playerCharacter;
@@ -38,7 +43,7 @@ namespace Arkademy
         {
             if (!playerCharacter)
             {
-                var charaData = Database.GetDatabase().playableCharacterData[UsingCharacterDBIdx];
+                var charaData = Database.GetDatabase().playableCharacterData[UsingCharacterDBIdx??0];
                 var charaPrefab = charaData.characterPrefab;
                 playerCharacter = Instantiate(charaPrefab);
                 playerCharacter.gameObject.SetLayerRecursive(LayerMask.NameToLayer("Player"));

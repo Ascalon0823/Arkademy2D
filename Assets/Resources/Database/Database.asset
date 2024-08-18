@@ -17,7 +17,7 @@ MonoBehaviour:
     uiIcon: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
     characterUIAnimatorController: {fileID: 9100000, guid: ca2dda3e2a277114c83a3a7364c68036, type: 2}
     characterPrefab: {fileID: 532951616818843277, guid: 84d86c4047966ea4881c2a7b0c64bb73, type: 3}
-    beginningAbilityIdx: 01000000
+    beginningAbilityIdx: 00000000
     life: 80
     unlocked: 1
   - name: Demi
