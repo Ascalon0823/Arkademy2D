@@ -10,7 +10,7 @@ namespace Arkademy
 
         protected override void UpdatePosition()
         {
-            if (!target)
+            if (!target || target.isDead)
             {
                 base.UpdatePosition();
                 return;

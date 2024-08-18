@@ -1110,6 +1110,7 @@ MonoBehaviour:
   onPlayerCharLevelUp:
     m_PersistentCalls:
       m_Calls: []
+  editorCharaDBIdx: 0
   pauseCount: 0
   playerCharacter: {fileID: 0}
   joystick: {fileID: 69528904}
