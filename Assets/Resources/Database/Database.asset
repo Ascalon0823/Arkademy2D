@@ -39,3 +39,63 @@ MonoBehaviour:
     spellKey: 0
     prefab: {fileID: 2020254457037024911, guid: ee73b5b04c569a34a8e044c22a4f7f4d, type: 3}
     uiIcon: {fileID: 770677676, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
+  enemyData:
+  - name: Slime
+    prefab: {fileID: 0}
+    uiIcon: {fileID: -2064422764693090554, guid: 3588ea48dde1b774385a9edccf39694e, type: 3}
+    health: 1
+    power: 5
+    speed: 140
+    xp: 1
+  - name: Zombie
+    prefab: {fileID: 0}
+    uiIcon: {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
+    health: 10
+    power: 10
+    speed: 100
+    xp: 1
+  - name: Skeleton
+    prefab: {fileID: 0}
+    uiIcon: {fileID: -7183934019497120523, guid: 9afc3fc143f02c349aeea6b67f347046, type: 3}
+    health: 15
+    power: 10
+    speed: 100
+    xp: 1
+  - name: Snake
+    prefab: {fileID: 0}
+    uiIcon: {fileID: 7247195774373374635, guid: b4dfd72d0494bee49b8af3c6e5962825, type: 3}
+    health: 10
+    power: 5
+    speed: 200
+    xp: 2
+  - name: Golem
+    prefab: {fileID: 0}
+    uiIcon: {fileID: 7161550781369535908, guid: 5adebf4178d1d6a4e9f0ceb43c2bf029, type: 3}
+    health: 70
+    power: 10
+    speed: 100
+    xp: 3
+  - name: Dragon
+    prefab: {fileID: 0}
+    uiIcon: {fileID: 2365310194220965431, guid: 0dc15e90ef857c14b977845905bdbe28, type: 3}
+    health: 180
+    power: 14
+    speed: 130
+    xp: 2
+  stageData:
+  - stageName: Forest
+    waveData:
+    - minimumEnemy: 15
+      spawnableEnemy: 00000000
+    - minimumEnemy: 30
+      spawnableEnemy: 0000000001000000
+    - minimumEnemy: 50
+      spawnableEnemy: 0000000001000000
+    - minimumEnemy: 40
+      spawnableEnemy: 02000000
+    - minimumEnemy: 30
+      spawnableEnemy: 0200000003000000
+    - minimumEnemy: 10
+      spawnableEnemy: 04000000
+    - minimumEnemy: 20
+      spawnableEnemy: 0100000004000000
