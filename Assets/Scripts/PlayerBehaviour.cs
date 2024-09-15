@@ -10,6 +10,7 @@ namespace Arkademy
     public class PlayerBehaviour : MonoBehaviour
     {
         public static int? UsingCharacterDBIdx;
+        public static int? UsingStageDBIdx;
         public static PlayerBehaviour Player;
         public static PixelPerfectCamera PlayerCam;
         public static CharacterBehaviour PlayerChar;

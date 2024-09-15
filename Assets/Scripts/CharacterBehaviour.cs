@@ -46,6 +46,7 @@ namespace Arkademy
         public int nextXp;
         public int nextLevelUpXp;
         public int XP;
+        public int level;
         [SerializeField] private int prevXp;
 
         public float pickupRange;
@@ -70,7 +71,7 @@ namespace Arkademy
 
             XP = 0;
             nextXp = 15;
-            nextLevelUpXp = nextXp;
+            nextLevelUpXp = 5;
             prevXp = 0;
         }
 
@@ -156,7 +157,8 @@ namespace Arkademy
             if (XP < nextLevelUpXp) return;
             prevXp = nextLevelUpXp;
             nextLevelUpXp += nextXp;
-            nextXp += 5;
+            nextXp += level > 40 ? 16 : level > 20 ? 13 : 10;
+            level++;
             onLevelUp?.Invoke(this);
         }
 

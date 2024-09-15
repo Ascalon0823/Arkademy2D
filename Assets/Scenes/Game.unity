@@ -669,13 +669,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7cb7ceeee340b08bb99f195ae438d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStageData:
+    stageName: 
+    waveData: []
+  currWaveData:
+    minimumEnemy: 0
+    spawnableEnemy: 
   secondsPlayed: 0
-  enemyCap: 50
-  spawnedEnemies: []
   spawnedCharacters: []
-  enemyPrefab: {fileID: 176418616341485331, guid: 3932e37c084304c4bb8d3105ad4ba4df, type: 3}
   enemySpawnInterval: 0.5
   lastEnemySpawn: 0
+  currWave: 0
+  speedMultiplier: 1
 --- !u!1 &943588303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,7 +1754,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2994969954788869700, guid: e7e442c9da29b0747b7552c06fd4a505, type: 3}
+    - {fileID: 192257636601262645, guid: e7e442c9da29b0747b7552c06fd4a505, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7e442c9da29b0747b7552c06fd4a505, type: 3}

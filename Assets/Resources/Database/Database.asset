@@ -41,7 +41,7 @@ MonoBehaviour:
     uiIcon: {fileID: 770677676, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   enemyData:
   - name: Slime
-    prefab: {fileID: 0}
+    prefab: {fileID: 176418616341485331, guid: 3932e37c084304c4bb8d3105ad4ba4df, type: 3}
     uiIcon: {fileID: -2064422764693090554, guid: 3588ea48dde1b774385a9edccf39694e, type: 3}
     health: 1
     power: 5
