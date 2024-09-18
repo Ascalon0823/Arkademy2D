@@ -18,7 +18,7 @@ namespace Arkademy.UI.Game
 
         public void Start()
         {
-            PlayerBehaviour.Player.onPlayerCharLevelUp.AddListener(chara =>
+            Player.Curr.onPlayerCharLevelUp.AddListener(chara =>
             {
                 character = chara;
                 Toggle(true);
@@ -30,7 +30,7 @@ namespace Arkademy.UI.Game
         {
             if (active != menuPanel.activeSelf)
             {
-                PlayerBehaviour.Player.pauseCount += active ? 1 : -1;
+                Player.Curr.pauseCount += active ? 1 : -1;
             }
 
             menuPanel.SetActive(active);
@@ -71,13 +71,7 @@ namespace Arkademy.UI.Game
 
         public void LevelUp(Database.AbilityData abilityData)
         {
-            var charaAbi = character.currentAbilities.FirstOrDefault(x => x.abilityName == abilityData.name);
-            if (charaAbi)
-            {
-                charaAbi.level += 1;
-                return;
-            }
-            character.AddAbility(abilityData);
+           character.AddOrLevelUpAbility(abilityData);
         }
     }
 }

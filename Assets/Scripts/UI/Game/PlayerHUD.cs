@@ -11,9 +11,9 @@ namespace Arkademy.UI.Game
         [SerializeField] private Fillbar xpBar;
         private void LateUpdate()
         {
-            if (!PlayerBehaviour.PlayerChar) return;
-            healthBar.fillAmount = PlayerBehaviour.PlayerChar.GetLifePercent();
-            xpBar.fillAmount = PlayerBehaviour.PlayerChar.GetXpPercent();
+            if (!Player.Chara) return;
+            healthBar.fillAmount = Player.Chara.GetLifePercent();
+            xpBar.fillAmount = Player.Chara.GetXpPercent();
         }
     }
 }

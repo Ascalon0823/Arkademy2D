@@ -31,7 +31,7 @@ namespace Arkademy
 
         protected virtual void FixedUpdate()
         {
-            if (PlayerBehaviour.Player.paused) return;
+            if (Player.Curr.paused) return;
             var keys = _contactTime.Keys.ToList();
             foreach (var contact in keys)
             {

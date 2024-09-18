@@ -38,9 +38,9 @@ namespace Arkademy
             else
             {
                 wantToMove = Vector2.zero;
-                if (PlayerBehaviour.PlayerChar && !PlayerBehaviour.PlayerChar.isDead)
+                if (Player.Chara && !Player.Chara.isDead)
                 {
-                    wantToMove = (PlayerBehaviour.PlayerChar.transform.position - transform.position).normalized;
+                    wantToMove = (Player.Chara.transform.position - transform.position).normalized;
                 }
             }
 

@@ -10,7 +10,9 @@ namespace Arkademy
         public static StageBehaviour Current;
         public Database.StageData currentStageData;
         public Database.WaveData currWaveData;
+
         public float secondsPlayed;
+
         //public List<EnemyBehaviour> spawnedEnemies = new();
         public Dictionary<int, List<EnemyBehaviour>> spawnedEnemies = new();
         public List<CharacterBehaviour> spawnedCharacters = new List<CharacterBehaviour>();
@@ -19,7 +21,6 @@ namespace Arkademy
         public int currWave;
         public float speedMultiplier;
 
-
         private void Awake()
         {
             if (Current && Current != this)
@@ -27,18 +28,19 @@ namespace Arkademy
                 Destroy(gameObject);
                 return;
             }
-            Current =this;
-            currentStageData = Database.GetDatabase().stageData[PlayerBehaviour.UsingStageDBIdx??0];
+
+            Current = this;
+            currentStageData = Database.GetDatabase().stageData[Player.UsingStageDBIdx ?? 0];
         }
 
         private void Update()
         {
-            secondsPlayed += Time.deltaTime * speedMultiplier;
+            secondsPlayed = Time.timeSinceLevelLoad;
             var wave = Mathf.FloorToInt(1 + secondsPlayed / 60);
             currWave = wave;
-            currWaveData = currentStageData.waveData[currWave-1];
-            
-            if (!spawnedEnemies.TryGetValue(currWave,out var list) || list.Count<currWaveData.minimumEnemy)
+            currWaveData = currentStageData.waveData[currWave - 1];
+
+            if (!spawnedEnemies.TryGetValue(currWave, out var list) || list.Count < currWaveData.minimumEnemy)
             {
                 SpawnEnemy();
             }
@@ -47,13 +49,13 @@ namespace Arkademy
         public void SpawnEnemy()
         {
             if (secondsPlayed - lastEnemySpawn < enemySpawnInterval) return;
-            
+
             if (!spawnedEnemies.TryGetValue(currWave, out var list))
             {
                 list = new List<EnemyBehaviour>();
             }
 
-            var enemyPrefabIdx = currWaveData.spawnableEnemy[Random.Range(0, currWaveData.spawnableEnemy.Length)]; 
+            var enemyPrefabIdx = currWaveData.spawnableEnemy[Random.Range(0, currWaveData.spawnableEnemy.Length)];
             var enemyDb = Database.GetDatabase().enemyData;
             var enemyData = enemyDb[enemyPrefabIdx];
             var enemy = Instantiate(enemyData.prefab);
@@ -62,11 +64,8 @@ namespace Arkademy
             enemy.xpDrop = enemyData.xp;
             enemy.moveSpeed = enemyData.speed / 100f;
             list.Add(enemy);
-            enemy.transform.position = PlayerBehaviour.PlayerCam.GetRandomPositionOutSideScreen(1f);
-            enemy.onDeath.AddListener(e =>
-            {
-                list.Remove(e as EnemyBehaviour);
-            });
+            enemy.transform.position = Player.Cam.GetRandomPositionOutSideScreen(1f);
+            enemy.onDeath.AddListener(e => { list.Remove(e as EnemyBehaviour); });
             lastEnemySpawn = secondsPlayed;
         }
     }

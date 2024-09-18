@@ -24,10 +24,10 @@ namespace Arkademy.UI.Game
                 return;
             }
 
-            currentSpell = Instantiate(spellData.prefab, PlayerBehaviour.PlayerChar.transform.position,
+            currentSpell = Instantiate(spellData.prefab, Player.Chara.transform.position,
                 Quaternion.identity);
-            currentSpell.gameObject.SetLayerRecursive(PlayerBehaviour.PlayerChar.gameObject.layer);
-            currentSpell.user = PlayerBehaviour.PlayerChar;
+            currentSpell.gameObject.SetLayerRecursive(Player.Chara.gameObject.layer);
+            currentSpell.user = Player.Chara;
             var canUse = currentSpell.OnUse(new Spell.SpellUsage { Phase = Spell.Phase.Begin, Direction = delta });
             if (!canUse) ToggleMenu(false);
         }
@@ -55,13 +55,13 @@ namespace Arkademy.UI.Game
         {
             if (active)
             {
-                if (!PlayerBehaviour.PlayerChar) return;
+                if (!Player.Chara) return;
                 
             }
-            PlayerBehaviour.PlayerChar.canLevelUp = !active;
+            Player.Chara.canLevelUp = !active;
             if (!active)
             {
-                PlayerBehaviour.PlayerChar.ResolveLevelUp();
+                Player.Chara.ResolveLevelUp();
             }
             panel.SetActive(active);
             button.SetActive(active);

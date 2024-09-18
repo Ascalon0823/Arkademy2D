@@ -44,7 +44,7 @@ namespace Arkademy.UI.Game
             if (followTarget)
             {
                 basePosition =
-                    PlayerBehaviour.PlayerCam.cam.WorldToScreenPoint(followTarget.position +
+                    Player.Cam.cam.WorldToScreenPoint(followTarget.position +
                         (Vector3)spawnOffset);
             }
 

@@ -7,13 +7,14 @@ using UnityEngine.SceneManagement;
 
 namespace Arkademy
 {
-    public class PlayerBehaviour : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         public static int? UsingCharacterDBIdx;
         public static int? UsingStageDBIdx;
-        public static PlayerBehaviour Player;
-        public static PixelPerfectCamera PlayerCam;
-        public static CharacterBehaviour PlayerChar;
+        public static bool Paused => Curr.paused;
+        public static Player Curr;
+        public static PixelPerfectCamera Cam;
+        public static CharacterBehaviour Chara;
         public UnityEvent<CharacterBehaviour> onPlayerCharLevelUp;
 
         [SerializeField] private int editorCharaDBIdx;
@@ -23,13 +24,13 @@ namespace Arkademy
 
         private void Awake()
         {
-            if (Player && Player != this)
+            if (Curr && Curr != this)
             {
                 Destroy(gameObject);
                 return;
             }
 
-            Player = this;
+            Curr = this;
             if (Application.isEditor && !UsingCharacterDBIdx.HasValue)
             {
                 UsingCharacterDBIdx = editorCharaDBIdx;
@@ -57,8 +58,8 @@ namespace Arkademy
             });
             
             playerCamera.followTarget = playerCharacter.transform;
-            PlayerChar = playerCharacter;
-            PlayerCam = playerCamera.ppcam;
+            Chara = playerCharacter;
+            Cam = playerCamera.ppcam;
         }
 
         private void Update()

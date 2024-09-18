@@ -58,7 +58,7 @@ namespace Arkademy.UI.Title
         public void Play()
         {
             SaveData.current.AddCharacterPlayRecordAndSave(currentSelectionIdx);
-            PlayerBehaviour.UsingCharacterDBIdx = currentSelectionIdx;
+            Player.UsingCharacterDBIdx = currentSelectionIdx;
             SceneManager.LoadScene("Game");
         }
     }

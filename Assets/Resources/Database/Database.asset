@@ -34,6 +34,9 @@ MonoBehaviour:
   - name: WindCutter
     prefab: {fileID: 4765620300451605668, guid: 69b34429c84b944809289316f20bf67e, type: 3}
     uiIcon: {fileID: -1268718024, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
+  - name: FireAura
+    prefab: {fileID: 6894441290335082, guid: 102726469b54a334da79e033c4def413, type: 3}
+    uiIcon: {fileID: 683217014, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   spellData:
   - name: MagicMissileBarrage
     spellKey: 0
@@ -48,14 +51,14 @@ MonoBehaviour:
     speed: 140
     xp: 1
   - name: Zombie
-    prefab: {fileID: 0}
+    prefab: {fileID: 5927858469722622072, guid: e4cedff8e78504945916b78aed4e14e3, type: 3}
     uiIcon: {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
     health: 10
     power: 10
     speed: 100
     xp: 1
   - name: Skeleton
-    prefab: {fileID: 0}
+    prefab: {fileID: 469388229182154286, guid: 6c3f87b17f1f04947a1ece7ec338e8d2, type: 3}
     uiIcon: {fileID: -7183934019497120523, guid: 9afc3fc143f02c349aeea6b67f347046, type: 3}
     health: 15
     power: 10

@@ -21,12 +21,17 @@ namespace Arkademy
 
         protected virtual void Update()
         {
-            if (PlayerBehaviour.Player.paused) return;
+            if (Player.Paused) return;
+            if (cooldown.Equals(0f) && useCount > 0) return; //Use only once
             remainingCooldown -= Time.deltaTime;
             if (remainingCooldown > 0f) return;
             Use();
         }
 
+        public virtual void OnLevelUp()
+        {
+            
+        }
         protected virtual void Use()
         {
             remainingCooldown = cooldown;

@@ -18,9 +18,9 @@ namespace Arkademy.UI.Game
 
         private void Update()
         {
-            if (!PlayerBehaviour.PlayerChar) return;
-            if (PlayerBehaviour.Player.playerCharacter.isDead == menu.activeSelf) return;
-            menu.SetActive(PlayerBehaviour.Player.playerCharacter.isDead);
+            if (!Player.Chara) return;
+            if (Player.Curr.playerCharacter.isDead == menu.activeSelf) return;
+            menu.SetActive(Player.Curr.playerCharacter.isDead);
             //PlayerBehaviour.Player.pauseCount += 1;
             deadMessage.text = $"You have survived for {StageBehaviour.Current.secondsPlayed:N0} seconds";
         }

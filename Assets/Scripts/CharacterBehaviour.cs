@@ -77,7 +77,7 @@ namespace Arkademy
 
         protected virtual void Pickup()
         {
-            if (PlayerBehaviour.PlayerChar != this) return;
+            if (Player.Chara != this) return;
             var colliders = Physics2D.OverlapCircleAll(transform.position, pickupRange, LayerMask.GetMask("Pickup"));
             foreach (var c in colliders)
             {
@@ -181,6 +181,18 @@ namespace Arkademy
         public float GetXpPercent()
         {
             return(XP - prevXp) * 1.0f / (nextLevelUpXp - prevXp);
+        }
+
+        public void AddOrLevelUpAbility(Database.AbilityData abilityData)
+        {
+            var charaAbi = currentAbilities.FirstOrDefault(x => x.abilityName == abilityData.name);
+            if (charaAbi)
+            {
+                charaAbi.level += 1;
+                charaAbi.OnLevelUp();
+                return;
+            }
+            AddAbility(abilityData);
         }
     }
 }

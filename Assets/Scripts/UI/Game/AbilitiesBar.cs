@@ -14,11 +14,11 @@ namespace Arkademy.UI.Game
 
         private void LateUpdate()
         {
-            if (!PlayerBehaviour.PlayerChar) return;
-            if (PlayerBehaviour.PlayerChar.currentAbilities.Count == spawnedAbilities.Count) return;
-            var destroy = spawnedAbilities.Where(x => !PlayerBehaviour.PlayerChar.currentAbilities.Contains(x.ability))
+            if (!Player.Chara) return;
+            if (Player.Chara.currentAbilities.Count == spawnedAbilities.Count) return;
+            var destroy = spawnedAbilities.Where(x => !Player.Chara.currentAbilities.Contains(x.ability))
                 .ToList();
-            var add = PlayerBehaviour.PlayerChar.currentAbilities
+            var add = Player.Chara.currentAbilities
                 .Where(x => !spawnedAbilities.Select(xx => xx.ability).Contains(x)).ToList();
             foreach (var abilityDisplay in destroy)
             {

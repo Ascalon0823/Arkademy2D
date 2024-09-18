@@ -19,7 +19,7 @@ namespace Arkademy.UI.Game
         {
             if (active != menuPanel.activeSelf)
             {
-                PlayerBehaviour.Player.pauseCount += active ? 1 : -1;
+                Player.Curr.pauseCount += active ? 1 : -1;
             }
             menuPanel.SetActive(active);
             

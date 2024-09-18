@@ -120,6 +120,7 @@ MonoBehaviour:
     characterUIAnimatorController: {fileID: 0}
     characterPrefab: {fileID: 0}
     beginningAbilityIdx: 
+    life: 0
   isDead: 0
   isHit: 0
   rb: {fileID: 5455993983631155032}
@@ -135,12 +136,22 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  onLevelUp:
+    m_PersistentCalls:
+      m_Calls: []
   currentAbilities: []
+  nextXp: 0
+  nextLevelUpXp: 0
   XP: 0
+  level: 0
+  prevXp: 0
   pickupRange: 0
+  source: 0
+  canLevelUp: 0
   destroyTimer: 3
   xpDrop: 0
   xpPickupPrefab: {fileID: 2768236391976810833, guid: ca3e163c9ecdb42faa8efb575e29585c, type: 3}
+  indestructible: 0
 --- !u!114 &5221250433586046966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c: {fileID: 317296385059810142}
-  interval: 1
+  interval: 0.25
   damage: 1
   dealDamageOnBegin: 1
 --- !u!95 &1964088385017649524 stripped
