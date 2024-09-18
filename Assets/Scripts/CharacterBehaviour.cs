@@ -17,6 +17,7 @@ namespace Arkademy
         public int batch;
         public int amount;
     }
+
     public class CharacterBehaviour : MonoBehaviour
     {
         public Database.CharacterData charaData;
@@ -53,6 +54,7 @@ namespace Arkademy
 
         public float source;
         public bool canLevelUp;
+
         protected virtual void Start()
         {
             if (StageBehaviour.Current)
@@ -82,20 +84,27 @@ namespace Arkademy
             foreach (var c in colliders)
             {
                 var pickup = c.GetComponent<Pickup>();
-                if(!pickup)continue;
+                if (!pickup) continue;
                 if (pickup.pickUpBy) continue;
                 pickup.pickUpBy = this;
             }
         }
+
         protected virtual void Update()
         {
             animator.SetBool(Dead, isDead);
-            if (isDead) return;
+            animator.updateMode = isDead ? AnimatorUpdateMode.UnscaledTime : AnimatorUpdateMode.Normal;
+            if (isDead)
+            {
+                return;
+            }
+
             if (isHit)
             {
                 animator.SetTrigger(Hit);
                 isHit = false;
             }
+
             Pickup();
             velocity = moveSpeed * Time.deltaTime * wantToMove;
             rb.MovePosition(rb.position + velocity);
@@ -122,6 +131,7 @@ namespace Arkademy
                 {
                     ability.enabled = false;
                 }
+
                 onDeath?.Invoke(this);
                 return;
             }
@@ -136,7 +146,7 @@ namespace Arkademy
                 .OrderBy(x => Vector2.Distance(
                     x.transform.position, transform.position)).FirstOrDefault();
         }
-        
+
         public CharacterBehaviour[] GetNearestEnemies(int amount)
         {
             return StageBehaviour.Current.spawnedCharacters
@@ -148,7 +158,7 @@ namespace Arkademy
         public void GainXP(int xp)
         {
             XP += xp;
-            
+
             ResolveLevelUp();
         }
 
@@ -175,12 +185,12 @@ namespace Arkademy
 
         public float GetLifePercent()
         {
-            return life*1.0f / charaData.life;
+            return life * 1.0f / charaData.life;
         }
 
         public float GetXpPercent()
         {
-            return(XP - prevXp) * 1.0f / (nextLevelUpXp - prevXp);
+            return (XP - prevXp) * 1.0f / (nextLevelUpXp - prevXp);
         }
 
         public void AddOrLevelUpAbility(Database.AbilityData abilityData)
@@ -192,6 +202,7 @@ namespace Arkademy
                 charaAbi.OnLevelUp();
                 return;
             }
+
             AddAbility(abilityData);
         }
     }

@@ -22,7 +22,7 @@ namespace Arkademy.Abilities
         {
             base.Use();
             useCount++;
-            spawned =  Instantiate(triggerPrefab, user.transform);
+            spawned =  Instantiate(triggerPrefab, transform);
             spawned.gameObject.SetLayerRecursive(gameObject.layer);
             spawned.cooldown = interval;
             spawned.onEnter = true;

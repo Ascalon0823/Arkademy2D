@@ -21,6 +21,7 @@ namespace Arkademy
         public int currWave;
         public float speedMultiplier;
 
+        public float enemyDamageNegation = 0;
         private void Awake()
         {
             if (Current && Current != this)
@@ -35,7 +36,7 @@ namespace Arkademy
 
         private void Update()
         {
-            secondsPlayed = Time.timeSinceLevelLoad;
+            secondsPlayed += Time.deltaTime * speedMultiplier;
             var wave = Mathf.FloorToInt(1 + secondsPlayed / 60);
             currWave = wave;
             currWaveData = currentStageData.waveData[currWave - 1];
@@ -63,6 +64,7 @@ namespace Arkademy
             enemy.gameObject.name = enemyData.name;
             enemy.xpDrop = enemyData.xp;
             enemy.moveSpeed = enemyData.speed / 100f;
+            enemy.contactDamage.damage = enemyData.power;
             list.Add(enemy);
             enemy.transform.position = Player.Cam.GetRandomPositionOutSideScreen(1f);
             enemy.onDeath.AddListener(e => { list.Remove(e as EnemyBehaviour); });

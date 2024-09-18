@@ -152,6 +152,7 @@ MonoBehaviour:
   xpDrop: 0
   xpPickupPrefab: {fileID: 2768236391976810833, guid: ca3e163c9ecdb42faa8efb575e29585c, type: 3}
   indestructible: 0
+  contactDamage: {fileID: 5221250433586046966}
 --- !u!114 &5221250433586046966
 MonoBehaviour:
   m_ObjectHideFlags: 0

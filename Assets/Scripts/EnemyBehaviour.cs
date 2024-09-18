@@ -10,6 +10,7 @@ namespace Arkademy
         public int xpDrop;
         public XPPickup xpPickupPrefab;
         public bool indestructible;
+        public ContactDamage contactDamage;
 
         protected override void Start()
         {
@@ -49,6 +50,7 @@ namespace Arkademy
 
         public override void TakeDamage(DamageEvent de)
         {
+            de.amount = Mathf.CeilToInt(de.amount * (1 - StageBehaviour.Current.enemyDamageNegation));
             if (indestructible)
             {
                 if (showDamageNumber)

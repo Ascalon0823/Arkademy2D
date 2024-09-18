@@ -54,5 +54,5 @@ MonoBehaviour:
   useCount: 0
   triggerPrefab: {fileID: 4407387946472097867, guid: 3b5bfae3c0626a44aaf0f7a13711fd75, type: 3}
   baseDamage: 2
-  interval: 0.5
+  interval: 1.3
   spawned: {fileID: 0}

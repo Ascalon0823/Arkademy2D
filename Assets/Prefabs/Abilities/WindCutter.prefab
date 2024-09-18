@@ -54,7 +54,7 @@ MonoBehaviour:
   useCount: 0
   projectilePrefab: {fileID: 3699092589667784400, guid: 68ced11f6715c47cd94314bfa513f846, type: 3}
   angleSpread: 30
-  baseDamage: 2
+  baseDamage: 5
   projectileLife: 10
   pierceAmount: 1
   projectileSpeed: 20

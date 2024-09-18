@@ -20,7 +20,7 @@ namespace Arkademy.Abilities
 
         protected virtual IEnumerator SpawnProjectiles()
         {
-            var projectileCount = 2 + level / 2;
+            var projectileCount = 1 + level / 2;
             var targets = user.GetNearestEnemies(projectileCount);
 
             for (var i = 0; i < projectileCount; i++)
@@ -34,7 +34,7 @@ namespace Arkademy.Abilities
                 {
                     dealerInstance = instanceId,
                     batch = useCount,
-                    amount = level * baseDamage
+                    amount = baseDamage * (1 + level / 4)
                 };
                 projectile.remainingLife = projectileLife;
                 projectile.gameObject.SetLayerRecursive(gameObject.layer);
