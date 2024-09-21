@@ -69,12 +69,12 @@ namespace Arkademy.Abilities
                 missile.transform.up = target ? (target.transform.position - transform.position)
                     : user.wantToMove.sqrMagnitude > 0.001f ? user.wantToMove : Vector2.up;
                 missile.moveSpeed = projectileSpeed;
-                missile.damage = new DamageEvent()
-                {
-                    dealerInstance = instanceId,
-                    batch = useCount,
-                    amount = damage
-                };
+                // missile.damage = new DamageEvent()
+                // {
+                //     dealerInstance = instanceId,
+                //     batch = useCount,
+                //     amount = damage
+                // };
                 missile.remainingLife = projectileLife;
                 missile.gameObject.SetLayerRecursive(gameObject.layer);
                 missile.target = target;

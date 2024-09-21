@@ -26,6 +26,7 @@ namespace Arkademy
         public Rigidbody2D rb;
         public Collider2D collider2d;
         public Vector2 wantToMove;
+        public Vector2? velocityOverride;
         public float moveSpeed;
         public Vector2 velocity;
         public Animator animator;
@@ -54,6 +55,8 @@ namespace Arkademy
 
         public float source;
         public bool canLevelUp;
+
+        public List<Effect.Effect> Effects = new List<Effect.Effect>();
 
         protected virtual void Start()
         {
@@ -94,6 +97,7 @@ namespace Arkademy
         {
             animator.SetBool(Dead, isDead);
             animator.updateMode = isDead ? AnimatorUpdateMode.UnscaledTime : AnimatorUpdateMode.Normal;
+            UpdateEffects();
             if (isDead)
             {
                 return;
@@ -105,8 +109,10 @@ namespace Arkademy
                 isHit = false;
             }
 
+            
             Pickup();
             velocity = moveSpeed * Time.deltaTime * wantToMove;
+            velocity = velocityOverride ?? velocity;
             rb.MovePosition(rb.position + velocity);
             animator.SetBool(Walking, velocity.magnitude > 0f);
             if (velocity.magnitude > 0f)
@@ -204,6 +210,29 @@ namespace Arkademy
             }
 
             AddAbility(abilityData);
+        }
+
+        public void ApplyEffect(Effect.Effect effect)
+        {
+            if (!effect.CanApplyTo(this)) return;
+            effect.target = this;
+            if (effect.duration == 0 || effect.updateImmediate)
+            {
+                effect.Update();
+            }
+
+            if (effect.duration > 0)
+            {
+                Effects.Add(effect);
+            }
+        }
+
+        public void UpdateEffects()
+        {
+            foreach (var effect in Effects)
+            {
+                effect?.Update();
+            }
         }
     }
 }

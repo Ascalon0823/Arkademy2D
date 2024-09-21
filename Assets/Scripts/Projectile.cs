@@ -1,14 +1,14 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Arkademy
 {
     public class Projectile : MonoBehaviour
     {
         public float moveSpeed;
-        public DamageEvent damage;
         public float remainingLife;
-         
+        public UnityEvent<CharacterBehaviour> OnHitCharacter;
 
         protected virtual void Update()
         {
@@ -35,7 +35,10 @@ namespace Arkademy
         {
             if (other.gameObject.layer == gameObject.layer) return;
             var chara = other.GetComponent<CharacterBehaviour>();
-            if (chara) chara.TakeDamage(damage);
+            if (chara)
+            {
+                OnHitCharacter?.Invoke(chara);
+            }
             Destroy(gameObject);
         }
     }

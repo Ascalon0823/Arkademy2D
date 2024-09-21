@@ -190,7 +190,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: char_025_hit.gif_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -199,7 +199,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: f60a1dbf02fc9624ba16ee8792b48b83
-    - name: char_025_hit.gif_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -208,7 +208,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 3abe5b92f2e27b749a13da31a7bf680a
-    - name: char_025_hit.gif_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:

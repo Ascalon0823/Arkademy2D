@@ -210,7 +210,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: char_051_attack.gif_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -219,7 +219,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 3a861c1b78057654eab60ed19a5d6310
-    - name: char_051_attack.gif_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -228,7 +228,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 10f8969905259ac4590eacd53d5aa31c
-    - name: char_051_attack.gif_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -237,7 +237,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: ee0826dacf8f9fd4f8c4ac86f2bbd30f
-    - name: char_051_attack.gif_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:

@@ -30,12 +30,15 @@ namespace Arkademy.Abilities
                 projectile.transform.up = target ? (target.transform.position - transform.position)
                     : user.wantToMove.sqrMagnitude > 0.001f ? user.wantToMove : Vector2.up;
                 projectile.moveSpeed = projectileSpeed;
-                projectile.damage = new DamageEvent()
+                projectile.OnHitCharacter.AddListener(c =>
                 {
-                    dealerInstance = instanceId,
-                    batch = useCount,
-                    amount = baseDamage * (1 + level / 4)
-                };
+                    c.TakeDamage(new DamageEvent
+                    {
+                        dealerInstance = GetInstanceID(),
+                        amount = baseDamage * (1 + level / 3),
+                        batch = useCount
+                    });
+                });
                 projectile.remainingLife = projectileLife;
                 projectile.gameObject.SetLayerRecursive(gameObject.layer);
                 projectile.target = target;

@@ -59,3 +59,11 @@ MonoBehaviour:
   pierceAmount: 1
   projectileSpeed: 20
   interval: 0.1
+  knockBack:
+    target: {fileID: 0}
+    giver: {fileID: 0}
+    duration: 0.25
+    updated: 0
+    updateImmediate: 0
+    velocity: {x: 0, y: 0}
+    power: 2

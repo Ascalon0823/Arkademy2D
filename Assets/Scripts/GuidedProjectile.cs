@@ -16,12 +16,13 @@ namespace Arkademy
                 return;
             }
 
-         
+
             var displacement = target.transform.position - transform.position;
             if (rotateUp)
             {
                 transform.up = displacement.normalized;
             }
+
             transform.position +=
                 Mathf.Min(moveSpeed * Time.deltaTime, displacement.magnitude) * displacement.normalized;
         }
@@ -34,10 +35,11 @@ namespace Arkademy
                 base.OnTriggerEnter2D(other);
                 return;
             }
+
             if (other.gameObject.layer == gameObject.layer) return;
             var chara = other.GetComponent<CharacterBehaviour>();
             if (chara != target || !chara || !target) return;
-            chara.TakeDamage(damage);
+            OnHitCharacter?.Invoke(chara);
             Destroy(gameObject);
         }
     }

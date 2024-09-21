@@ -11,7 +11,7 @@ namespace Arkademy
             var chara = other.GetComponent<CharacterBehaviour>();
             if (chara)
             {
-                chara.TakeDamage(damage);
+                OnHitCharacter?.Invoke(chara);
                 pierceAmount--;
             }
 

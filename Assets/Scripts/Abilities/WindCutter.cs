@@ -1,4 +1,5 @@
 using System.Collections;
+using Arkademy.Effect;
 using UnityEngine;
 
 namespace Arkademy.Abilities
@@ -12,6 +13,7 @@ namespace Arkademy.Abilities
         public int pierceAmount;
         public float projectileSpeed;
         public float interval;
+        public KnockBack knockBack;
 
         protected override void Use()
         {
@@ -30,12 +32,18 @@ namespace Arkademy.Abilities
                 projectile.transform.eulerAngles =
                     new Vector3(0, 0, fromAngle - angleSpread * (i / 2) - (i % 2 == 1 ? 180f : 0f));
                 projectile.moveSpeed = projectileSpeed;
-                projectile.damage = new DamageEvent
+                projectile.OnHitCharacter.AddListener(c =>
                 {
-                    dealerInstance = GetInstanceID(),
-                    amount = baseDamage * (1 + level / 3),
-                    batch = useCount
-                };
+                    c.TakeDamage(new DamageEvent
+                    {
+                        dealerInstance = GetInstanceID(),
+                        amount = baseDamage * (1 + level / 3),
+                        batch = useCount
+                    });
+                    knockBack.giver = user.gameObject;
+                    c.ApplyEffect(knockBack.Dup());
+                });
+
                 projectile.remainingLife = projectileLife;
                 projectile.gameObject.SetLayerRecursive(gameObject.layer);
                 projectile.pierceAmount = pierceAmount + level / 3;

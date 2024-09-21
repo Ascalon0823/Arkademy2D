@@ -215,7 +215,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: char_002_defeat.gif_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -224,7 +224,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: a8ad039a6aa8ca645aaf58c443dbda66
-    - name: char_002_defeat.gif_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -233,7 +233,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 689463c8b4e926d4180992bd4157b9ad
-    - name: char_002_defeat.gif_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -242,7 +242,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 4a739cf24a6acb548bbb713801c2908e
-    - name: char_002_defeat.gif_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
