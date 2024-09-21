@@ -29,6 +29,7 @@ namespace Arkademy
             if (isDead)
             {
                 //rb.simulated = false;
+                wantToMove = Vector2.zero;
                 collider2d.enabled = false;
                 destroyTimer -= Time.deltaTime;
                 if (destroyTimer < 0)

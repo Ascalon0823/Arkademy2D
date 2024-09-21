@@ -98,6 +98,9 @@ namespace Arkademy
             animator.SetBool(Dead, isDead);
             animator.updateMode = isDead ? AnimatorUpdateMode.UnscaledTime : AnimatorUpdateMode.Normal;
             UpdateEffects();
+            velocity = moveSpeed * Time.deltaTime * wantToMove;
+            velocity = velocityOverride ?? velocity;
+            rb.MovePosition(rb.position + velocity);
             if (isDead)
             {
                 return;
@@ -111,9 +114,6 @@ namespace Arkademy
 
             
             Pickup();
-            velocity = moveSpeed * Time.deltaTime * wantToMove;
-            velocity = velocityOverride ?? velocity;
-            rb.MovePosition(rb.position + velocity);
             animator.SetBool(Walking, velocity.magnitude > 0f);
             if (velocity.magnitude > 0f)
             {
@@ -229,9 +229,9 @@ namespace Arkademy
 
         public void UpdateEffects()
         {
-            foreach (var effect in Effects)
+            for(var i = 0;i<Effects.Count;i++) 
             {
-                effect?.Update();
+                Effects[i]?.Update();
             }
         }
     }
