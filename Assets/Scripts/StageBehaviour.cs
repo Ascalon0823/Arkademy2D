@@ -10,7 +10,7 @@ namespace Arkademy
         public static StageBehaviour Current;
         public Database.StageData currentStageData;
         public Database.WaveData currWaveData;
-
+        public int startingWave;
         public float secondsPlayed;
 
         //public List<EnemyBehaviour> spawnedEnemies = new();
@@ -22,6 +22,7 @@ namespace Arkademy
         public float speedMultiplier;
 
         public float enemyDamageNegation = 0;
+
         private void Awake()
         {
             if (Current && Current != this)
@@ -38,7 +39,7 @@ namespace Arkademy
         {
             secondsPlayed += Time.deltaTime * speedMultiplier;
             var wave = Mathf.FloorToInt(1 + secondsPlayed / 60);
-            currWave = wave;
+            currWave = startingWave + wave;
             currWaveData = currentStageData.waveData[currWave - 1];
 
             if (!spawnedEnemies.TryGetValue(currWave, out var list) || list.Count < currWaveData.minimumEnemy)

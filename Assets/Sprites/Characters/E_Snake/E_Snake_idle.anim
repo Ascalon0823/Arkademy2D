@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: E_Zombie_idle
+  m_Name: E_Snake_idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
-    - time: 1
-      value: {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
+      value: {fileID: -2984816317192573426, guid: a13b1a6e767603946a2162979d7e4294, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,14 +44,13 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
-    - {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
+    - {fileID: -2984816317192573426, guid: a13b1a6e767603946a2162979d7e4294, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.125
+    m_StopTime: 0.125
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

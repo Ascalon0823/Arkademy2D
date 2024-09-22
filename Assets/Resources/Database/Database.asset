@@ -65,21 +65,21 @@ MonoBehaviour:
     speed: 100
     xp: 1
   - name: Snake
-    prefab: {fileID: 0}
+    prefab: {fileID: 6873661599979334308, guid: f80134a28ff4b1a4c84721992db08681, type: 3}
     uiIcon: {fileID: 7247195774373374635, guid: b4dfd72d0494bee49b8af3c6e5962825, type: 3}
     health: 10
     power: 5
     speed: 200
     xp: 2
   - name: Golem
-    prefab: {fileID: 0}
+    prefab: {fileID: 1053392962772554685, guid: eb1de982d10430643b37e9bf8fd67739, type: 3}
     uiIcon: {fileID: 7161550781369535908, guid: 5adebf4178d1d6a4e9f0ceb43c2bf029, type: 3}
     health: 70
     power: 10
     speed: 100
     xp: 3
   - name: Dragon
-    prefab: {fileID: 0}
+    prefab: {fileID: 4919237951570180455, guid: fe719510df6dd1244aa587ce99277fc5, type: 3}
     uiIcon: {fileID: 2365310194220965431, guid: 0dc15e90ef857c14b977845905bdbe28, type: 3}
     health: 180
     power: 14
@@ -101,4 +101,4 @@ MonoBehaviour:
     - minimumEnemy: 10
       spawnableEnemy: 04000000
     - minimumEnemy: 20
-      spawnableEnemy: 0100000004000000
+      spawnableEnemy: 0100000005000000

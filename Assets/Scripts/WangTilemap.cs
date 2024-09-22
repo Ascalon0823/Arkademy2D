@@ -14,7 +14,7 @@ namespace Arkademy
 
         [SerializeField] private Tilemap renderMap;
         public Vector2 offset;
-        public Transform cameraPos;
+        public PixelPerfectCamera cam;
         public int gridSize = 10;
         public Vector2Int gridPos;
 
@@ -31,8 +31,9 @@ namespace Arkademy
 
         public void UpdateMap(bool force = false)
         {
-            var newGridPos = new Vector2Int(Mathf.RoundToInt(cameraPos.position.x / gridSize),
-                Mathf.RoundToInt(cameraPos.position.y / gridSize));
+            gridSize = Mathf.CeilToInt(cam.camOrthoSize * 2);
+            var newGridPos = new Vector2Int(Mathf.RoundToInt(cam.transform.position.x / gridSize),
+                Mathf.RoundToInt(cam.transform.position.y / gridSize));
             if (newGridPos == gridPos && !force) return;
             gridPos = newGridPos;
             var size = gridSize * 3;
