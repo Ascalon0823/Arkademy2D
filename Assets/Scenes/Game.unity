@@ -506,6 +506,7 @@ MonoBehaviour:
   lastEnemySpawn: 0
   currWave: 0
   speedMultiplier: 1
+  enemyDamageNegation: 0
 --- !u!1 &943588303
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,6 +919,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa69e086ccb38ae49a94d48e446f29b5, type: 2}
   - {fileID: 11400000, guid: 7aef9631fb2891c4aa552c4c14b4ed7a, type: 2}
   renderMap: {fileID: 1568930878}
+  offset: {x: 0, y: 0}
+  cameraPos: {fileID: 26171331}
+  gridSize: 10
+  gridPos: {x: 0, y: 0}
 --- !u!1 &1616522216
 GameObject:
   m_ObjectHideFlags: 0
