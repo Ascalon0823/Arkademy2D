@@ -85,27 +85,59 @@ MonoBehaviour:
     power: 14
     speed: 130
     xp: 2
+  bossData:
+  - name: GiantSlime
+    controller: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
+    uiIcon: {fileID: -2064422764693090554, guid: 3588ea48dde1b774385a9edccf39694e, type: 3}
+    health: 50
+    power: 10
+    speed: 140
+    xp: 30
+    scale: 3
+    scaleHpWithPlayer: 1
+  - name: GiantGolem
+    controller: {fileID: 22100000, guid: 44fefb5467c627d489684d5cdbd3b576, type: 2}
+    uiIcon: {fileID: 7161550781369535908, guid: 5adebf4178d1d6a4e9f0ceb43c2bf029, type: 3}
+    health: 150
+    power: 20
+    speed: 160
+    xp: 50
+    scale: 3
+    scaleHpWithPlayer: 1
   stageData:
   - stageName: Forest
     waveData:
     - minimumEnemy: 15
       spawnInterval: 1
       spawnableEnemy: 00000000
+      bossEvents: []
     - minimumEnemy: 30
       spawnInterval: 1
       spawnableEnemy: 0000000001000000
+      bossEvents:
+      - timing: 0
+        bossIdx: 0
     - minimumEnemy: 50
       spawnInterval: 0.5
       spawnableEnemy: 0000000001000000
+      bossEvents: []
     - minimumEnemy: 40
       spawnInterval: 0.25
       spawnableEnemy: 02000000
+      bossEvents:
+      - timing: 0
+        bossIdx: 0
     - minimumEnemy: 30
       spawnInterval: 1
       spawnableEnemy: 0200000003000000
+      bossEvents: []
     - minimumEnemy: 10
       spawnInterval: 1
       spawnableEnemy: 04000000
+      bossEvents: []
     - minimumEnemy: 20
       spawnInterval: 0.5
       spawnableEnemy: 0100000005000000
+      bossEvents:
+      - timing: 0
+        bossIdx: 1

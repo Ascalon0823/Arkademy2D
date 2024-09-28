@@ -78,6 +78,7 @@ namespace Arkademy
             nextXp = 15;
             nextLevelUpXp = 5;
             prevXp = 0;
+            level = 1;
         }
 
         protected virtual void Pickup()

@@ -31,7 +31,7 @@ namespace Arkademy
             {
                 dealerInstance = GetInstanceID(),
                 batch = _damageCount,
-                amount = Mathf.FloorToInt(damage * interval)
+                amount = Mathf.CeilToInt(damage * interval)
             });
             _damageRecord[other] = Time.fixedTime;
         }

@@ -19,11 +19,14 @@ namespace Arkademy
         public float enemySpawnInterval;
         public float lastEnemySpawn;
         public int currWave;
+        private int _prevWave;
         public float speedMultiplier;
 
         public float enemyDamageNegation = 0;
 
         public EnemyBehaviour enemyPrefab;
+        public bool bossSpawned;
+
         private void Awake()
         {
             if (Current && Current != this)
@@ -36,17 +39,55 @@ namespace Arkademy
             currentStageData = Database.GetDatabase().stageData[Player.UsingStageDBIdx ?? 0];
         }
 
+
         private void Update()
         {
             secondsPlayed += Time.deltaTime * speedMultiplier;
             var wave = Mathf.FloorToInt(1 + secondsPlayed / 60);
             currWave = startingWave + wave;
+            if (currWave != _prevWave)
+                bossSpawned = false;
+            _prevWave = currWave;
             currWaveData = currentStageData.waveData[currWave - 1];
             enemySpawnInterval = currWaveData.spawnInterval;
             if (!spawnedEnemies.TryGetValue(currWave, out var list) || list.Count < currWaveData.minimumEnemy)
             {
                 SpawnEnemy();
             }
+            
+            var bossEvents = currWaveData.bossEvents;
+            if (bossEvents != null && !bossSpawned)
+            {
+                foreach (var bossEvent in bossEvents)
+                {
+                    SpawnBoss(bossEvent);
+                }
+
+                bossSpawned = true;
+            }
+        }
+
+        public void SpawnBoss(Database.BossEvent bossEvent)
+        {
+            if (!spawnedEnemies.TryGetValue(currWave, out var list))
+            {
+                list = new List<EnemyBehaviour>();
+            }
+
+            var bossIdx = bossEvent.bossIdx;
+            var bossData = Database.GetDatabase().bossData[bossIdx];
+            var enemy = Instantiate(enemyPrefab);
+            enemy.animator.runtimeAnimatorController = bossData.controller;
+            enemy.life = bossData.health;
+            enemy.gameObject.name = bossData.name;
+            enemy.xpDrop = bossData.xp;
+            enemy.moveSpeed = bossData.speed / 100f;
+            enemy.contactDamage.damage = bossData.power;
+            list.Add(enemy);
+            enemy.transform.position = Player.Cam.GetRandomPositionOutSideScreen(1f);
+            enemy.onDeath.AddListener(e => { list.Remove(e as EnemyBehaviour); });
+            enemy.transform.localScale = Vector3.one * bossData.scale;
+            enemy.life *= bossData.scaleHpWithPlayer ? Mathf.Max(1, Player.Chara.level) : 1;
         }
 
         public void SpawnEnemy()

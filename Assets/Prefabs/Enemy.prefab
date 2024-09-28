@@ -118,7 +118,7 @@ MonoBehaviour:
     name: 
     uiIcon: {fileID: 0}
     characterUIAnimatorController: {fileID: 0}
-    characterPrefab: {fileID: 0}
+    animatorController: {fileID: 0}
     beginningAbilityIdx: 
     life: 0
   isDead: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c: {fileID: 317296385059810142}
-  interval: 0.25
+  interval: 0.1
   damage: 1
   dealDamageOnBegin: 1
 --- !u!95 &1964088385017649524 stripped

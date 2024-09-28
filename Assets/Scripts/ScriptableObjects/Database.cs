@@ -55,6 +55,13 @@ namespace Arkademy
         }
 
         [Serializable]
+        public class BossData : EnemyData
+        {
+            public float scale;
+            public bool scaleHpWithPlayer;
+        }
+
+        [Serializable]
         public class StageData
         {
             public string stageName;
@@ -67,23 +74,34 @@ namespace Arkademy
             public int minimumEnemy;
             public float spawnInterval;
             public int[] spawnableEnemy;
+            public BossEvent[] bossEvents;
         }
 
         [Serializable]
-        public class BossData
+        public class SwarmData
         {
+            public enum SwarmType
+            {
+                Swarm,
+                Wall
+            }
+
+            public SwarmType type;
             public float timing;
+            public int enemyIdx;
         }
         [Serializable]
-        public class EventData
+        public class BossEvent
         {
-            
+            public float timing;
+            public int bossIdx;
         }
 
         public List<PlayableCharacterData> playableCharacterData = new List<PlayableCharacterData>();
         public List<AbilityData> abilityData = new List<AbilityData>();
         public List<SpellData> spellData = new List<SpellData>();
         public List<EnemyData> enemyData = new List<EnemyData>();
+        public List<BossData> bossData = new List<BossData>();
         public List<StageData> stageData = new List<StageData>();
 
         public static Database GetDatabase()
