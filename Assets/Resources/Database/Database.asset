@@ -16,14 +16,14 @@ MonoBehaviour:
   - name: Arka
     uiIcon: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
     characterUIAnimatorController: {fileID: 9100000, guid: ca2dda3e2a277114c83a3a7364c68036, type: 2}
-    characterPrefab: {fileID: 532951616818843277, guid: 84d86c4047966ea4881c2a7b0c64bb73, type: 3}
+    animatorController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
     beginningAbilityIdx: 00000000
     life: 80
     unlocked: 1
   - name: Demi
     uiIcon: {fileID: -34538813354388608, guid: 743114c57df1f9c489c503cc1ace029e, type: 3}
     characterUIAnimatorController: {fileID: 22100000, guid: 466bcce02f85be54bb886cb820384a29, type: 2}
-    characterPrefab: {fileID: 5202132973947693925, guid: 1fc4a38f779e3284bbc0666f4eea3e1e, type: 3}
+    animatorController: {fileID: 22100000, guid: 6f4be11623c6d1f45a8293c4465b3887, type: 2}
     beginningAbilityIdx: 01000000
     life: 70
     unlocked: 1
@@ -44,42 +44,42 @@ MonoBehaviour:
     uiIcon: {fileID: 770677676, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   enemyData:
   - name: Slime
-    prefab: {fileID: 176418616341485331, guid: 3932e37c084304c4bb8d3105ad4ba4df, type: 3}
+    controller: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
     uiIcon: {fileID: -2064422764693090554, guid: 3588ea48dde1b774385a9edccf39694e, type: 3}
-    health: 1
+    health: 5
     power: 5
     speed: 140
     xp: 1
   - name: Zombie
-    prefab: {fileID: 5927858469722622072, guid: e4cedff8e78504945916b78aed4e14e3, type: 3}
+    controller: {fileID: 22100000, guid: 2faf1d9e5e4aae1418d765bdd2d2bdb0, type: 2}
     uiIcon: {fileID: 406284413602149666, guid: 911a9df4c049c564e802cfa97a5959ea, type: 3}
     health: 10
     power: 10
     speed: 100
     xp: 1
   - name: Skeleton
-    prefab: {fileID: 469388229182154286, guid: 6c3f87b17f1f04947a1ece7ec338e8d2, type: 3}
+    controller: {fileID: 22100000, guid: c565da6e52a1f1741aafd197e526611b, type: 2}
     uiIcon: {fileID: -7183934019497120523, guid: 9afc3fc143f02c349aeea6b67f347046, type: 3}
     health: 15
     power: 10
     speed: 100
     xp: 1
   - name: Snake
-    prefab: {fileID: 6873661599979334308, guid: f80134a28ff4b1a4c84721992db08681, type: 3}
+    controller: {fileID: 22100000, guid: 679a90673b12bd54f8cc138656d15558, type: 2}
     uiIcon: {fileID: 7247195774373374635, guid: b4dfd72d0494bee49b8af3c6e5962825, type: 3}
     health: 10
     power: 5
     speed: 200
     xp: 2
   - name: Golem
-    prefab: {fileID: 1053392962772554685, guid: eb1de982d10430643b37e9bf8fd67739, type: 3}
+    controller: {fileID: 22100000, guid: 44fefb5467c627d489684d5cdbd3b576, type: 2}
     uiIcon: {fileID: 7161550781369535908, guid: 5adebf4178d1d6a4e9f0ceb43c2bf029, type: 3}
     health: 70
     power: 10
     speed: 100
     xp: 3
   - name: Dragon
-    prefab: {fileID: 4919237951570180455, guid: fe719510df6dd1244aa587ce99277fc5, type: 3}
+    controller: {fileID: 22100000, guid: e77a410fc6523c14b807b60e82c77abe, type: 2}
     uiIcon: {fileID: 2365310194220965431, guid: 0dc15e90ef857c14b977845905bdbe28, type: 3}
     health: 180
     power: 14
@@ -89,16 +89,23 @@ MonoBehaviour:
   - stageName: Forest
     waveData:
     - minimumEnemy: 15
+      spawnInterval: 1
       spawnableEnemy: 00000000
     - minimumEnemy: 30
+      spawnInterval: 1
       spawnableEnemy: 0000000001000000
     - minimumEnemy: 50
+      spawnInterval: 0.5
       spawnableEnemy: 0000000001000000
     - minimumEnemy: 40
+      spawnInterval: 0.25
       spawnableEnemy: 02000000
     - minimumEnemy: 30
+      spawnInterval: 1
       spawnableEnemy: 0200000003000000
     - minimumEnemy: 10
+      spawnInterval: 1
       spawnableEnemy: 04000000
     - minimumEnemy: 20
+      spawnInterval: 0.5
       spawnableEnemy: 0100000005000000

@@ -15,7 +15,7 @@ namespace Arkademy
             public string name;
             public Sprite uiIcon;
             public RuntimeAnimatorController characterUIAnimatorController;
-            public CharacterBehaviour characterPrefab;
+            public RuntimeAnimatorController animatorController;
             public int[] beginningAbilityIdx;
             public int life;
         }
@@ -46,7 +46,7 @@ namespace Arkademy
         public class EnemyData
         {
             public string name;
-            public EnemyBehaviour prefab;
+            public RuntimeAnimatorController controller;
             public Sprite uiIcon;
             public int health;
             public int power;
@@ -65,7 +65,19 @@ namespace Arkademy
         public class WaveData
         {
             public int minimumEnemy;
+            public float spawnInterval;
             public int[] spawnableEnemy;
+        }
+
+        [Serializable]
+        public class BossData
+        {
+            public float timing;
+        }
+        [Serializable]
+        public class EventData
+        {
+            
         }
 
         public List<PlayableCharacterData> playableCharacterData = new List<PlayableCharacterData>();

@@ -18,7 +18,7 @@ namespace Arkademy
         public UnityEvent<CharacterBehaviour> onPlayerCharLevelUp;
 
         [SerializeField] private int editorCharaDBIdx;
-        
+
         public int pauseCount;
         public bool paused => pauseCount > 0;
 
@@ -40,23 +40,22 @@ namespace Arkademy
         public CharacterBehaviour playerCharacter;
         public ScreenSpaceJoystick joystick;
         public FollowCamera playerCamera;
+        public CharacterBehaviour playerCharacterPrefab;
 
         private void Start()
         {
             if (!playerCharacter)
             {
-                var charaData = Database.GetDatabase().playableCharacterData[UsingCharacterDBIdx??0];
-                var charaPrefab = charaData.characterPrefab;
-                playerCharacter = Instantiate(charaPrefab);
+                var charaData = Database.GetDatabase().playableCharacterData[UsingCharacterDBIdx ?? 0];
+                playerCharacter = Instantiate(playerCharacterPrefab);
+                playerCharacter.animator.runtimeAnimatorController = charaData.animatorController;
                 playerCharacter.gameObject.SetLayerRecursive(LayerMask.NameToLayer("Player"));
                 playerCharacter.charaData = charaData;
                 playerCharacter.life = charaData.life;
             }
-            playerCharacter.onLevelUp.AddListener(chara =>
-            {
-                onPlayerCharLevelUp?.Invoke(chara);
-            });
-            
+
+            playerCharacter.onLevelUp.AddListener(chara => { onPlayerCharLevelUp?.Invoke(chara); });
+
             playerCamera.followTarget = playerCharacter.transform;
             Chara = playerCharacter;
             Cam = playerCamera.ppcam;

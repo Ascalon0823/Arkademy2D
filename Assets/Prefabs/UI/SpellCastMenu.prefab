@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5202327935720985456}
   - component: {fileID: 4762172630275935217}
+  - component: {fileID: 1414378916080505783}
   m_Layer: 5
   m_Name: SpellCastMenu
   m_TagString: Untagged
@@ -55,6 +56,18 @@ MonoBehaviour:
   button: {fileID: 5852684703643086796}
   spellKey: 0
   currentSpell: {fileID: 0}
+--- !u!225 &1414378916080505783
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180325972158664781}
+  m_Enabled: 1
+  m_Alpha: 0.5
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5852684703643086796
 GameObject:
   m_ObjectHideFlags: 0

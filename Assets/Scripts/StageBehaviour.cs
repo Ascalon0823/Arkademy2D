@@ -23,6 +23,7 @@ namespace Arkademy
 
         public float enemyDamageNegation = 0;
 
+        public EnemyBehaviour enemyPrefab;
         private void Awake()
         {
             if (Current && Current != this)
@@ -41,7 +42,7 @@ namespace Arkademy
             var wave = Mathf.FloorToInt(1 + secondsPlayed / 60);
             currWave = startingWave + wave;
             currWaveData = currentStageData.waveData[currWave - 1];
-
+            enemySpawnInterval = currWaveData.spawnInterval;
             if (!spawnedEnemies.TryGetValue(currWave, out var list) || list.Count < currWaveData.minimumEnemy)
             {
                 SpawnEnemy();
@@ -60,7 +61,8 @@ namespace Arkademy
             var enemyPrefabIdx = currWaveData.spawnableEnemy[Random.Range(0, currWaveData.spawnableEnemy.Length)];
             var enemyDb = Database.GetDatabase().enemyData;
             var enemyData = enemyDb[enemyPrefabIdx];
-            var enemy = Instantiate(enemyData.prefab);
+            var enemy = Instantiate(enemyPrefab);
+            enemy.animator.runtimeAnimatorController = enemyData.controller;
             enemy.life = enemyData.health;
             enemy.gameObject.name = enemyData.name;
             enemy.xpDrop = enemyData.xp;
