@@ -103,7 +103,7 @@ namespace Arkademy
         public List<EnemyData> enemyData = new List<EnemyData>();
         public List<BossData> bossData = new List<BossData>();
         public List<StageData> stageData = new List<StageData>();
-
+        public List<EquipmentBase> equipmentBases = new List<EquipmentBase>();
         public static Database GetDatabase()
         {
             return Resources.LoadAll<Database>("Database").FirstOrDefault();
