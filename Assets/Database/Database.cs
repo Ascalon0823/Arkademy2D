@@ -19,6 +19,7 @@ namespace Arkademy
             public int[] beginningAbilityIdx;
             public int life;
         }
+
         [Serializable]
         public class PlayableCharacterData : CharacterData
         {
@@ -90,6 +91,7 @@ namespace Arkademy
             public float timing;
             public int enemyIdx;
         }
+
         [Serializable]
         public class BossEvent
         {
@@ -103,11 +105,11 @@ namespace Arkademy
         public List<EnemyData> enemyData = new List<EnemyData>();
         public List<BossData> bossData = new List<BossData>();
         public List<StageData> stageData = new List<StageData>();
-        public List<EquipmentBase> equipmentBases = new List<EquipmentBase>();
+        public List<Data.EquipmentBase> equipmentBases = new();
+
         public static Database GetDatabase()
         {
             return Resources.LoadAll<Database>("Database").FirstOrDefault();
         }
-
     }
 }

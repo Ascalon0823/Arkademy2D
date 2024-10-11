@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffdb124c4234f389474a9faa3dd5960, type: 3}
+  m_Name: Eq_W_SteelSword
+  m_EditorClassIdentifier: 
+  baseData:
+    dataObjectName: 
+    name: Steel Sword
+    description: 
+    type: 0
+    rarity: 0
+    attributes:
+    - category: 0
+      value: 1000
+    requirements:
+      levelMin: 0
+      attrReqs:
+      - category: 6
+        minValue: 4
+      - category: 8
+        minValue: 4
+    capacity: 0
+    affixes: []
+  icon: {fileID: 0}
+  extraAffixBases: []

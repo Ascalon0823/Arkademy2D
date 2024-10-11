@@ -14,7 +14,7 @@ namespace Arkademy
         public int pixelScale;
         public static PixelPerfectSettings GetSettings()
         {
-            return Resources.LoadAll<PixelPerfectSettings>("Settings").FirstOrDefault();
+            return Resources.LoadAll<PixelPerfectSettings>("PixelPerfectSettings").FirstOrDefault();
         }
     }
 
