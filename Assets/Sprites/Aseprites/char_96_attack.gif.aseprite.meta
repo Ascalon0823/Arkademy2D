@@ -105,6 +105,7 @@ ScriptedImporter:
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -126,6 +127,7 @@ ScriptedImporter:
     pivot: {x: 0.53333336, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -146,6 +148,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 15
@@ -166,6 +169,7 @@ ScriptedImporter:
     pivot: {x: 0.4666667, y: 0.53333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -186,6 +190,7 @@ ScriptedImporter:
     pivot: {x: 0.53333336, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 15
@@ -210,7 +215,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: char_96_attack.gif_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -219,7 +224,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: f0e1bd15bf85dd3439121ec4abd02d5d
-    - name: char_96_attack.gif_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -228,7 +233,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: d6773d94f90e9884184be0b72c613c61
-    - name: char_96_attack.gif_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
@@ -237,7 +242,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 9b20ae0f7a3349447b90795b0fc862f5
-    - name: char_96_attack.gif_Frame_3
+    - name: Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:

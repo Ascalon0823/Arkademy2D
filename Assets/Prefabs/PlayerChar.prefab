@@ -562,7 +562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4504067737233769318, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
       propertyPath: m_Name
-      value: Char_001_prefab
+      value: PlayerChar
       objectReference: {fileID: 0}
     - target: {fileID: 8575172845642777584, guid: 769b5084500e9fe40b2f9dc7a41fd58d, type: 3}
       propertyPath: m_Sprite

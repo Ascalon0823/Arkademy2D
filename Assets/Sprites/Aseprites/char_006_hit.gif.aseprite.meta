@@ -105,6 +105,7 @@ ScriptedImporter:
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -126,6 +127,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -146,6 +148,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: 0.53333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -166,6 +169,7 @@ ScriptedImporter:
     pivot: {x: 0.4666667, y: 0.53333336}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 16
@@ -190,7 +194,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: char_006_hit.gif_Frame_0
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -199,7 +203,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: 0bc842c0a0c53d6419d0ae98877b8a05
-    - name: char_006_hit.gif_Frame_1
+    - name: Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
@@ -208,7 +212,7 @@ ScriptedImporter:
         width: 16
         height: 16
       spriteId: bcf9e05b5a5b98742bee3cbf730b7171
-    - name: char_006_hit.gif_Frame_2
+    - name: Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
