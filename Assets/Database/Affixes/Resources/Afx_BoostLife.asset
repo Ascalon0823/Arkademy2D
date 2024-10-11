@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: Afx_BoostLife
   m_EditorClassIdentifier: 
   description: 
-  attrCategory: 1
   cost: 0
   configs:
-  - category: 0
+  - type: 0
     rarityConfigs:
     - rarity: 1
       minValue: 3
       maxValue: 5
+    - rarity: 2
+      minValue: 5
+      maxValue: 10
+    - rarity: 3
+      minValue: 10
+      maxValue: 15
+  attrCategory: 1

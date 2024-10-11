@@ -32,6 +32,7 @@ namespace Arkademy.Data
             var affixCount = EquipmentRollConfig.Get().GetAffixCount(rarityRoll, out var rarity);
             ret.dataObjectName = name;
             ret.rarity = rarity;
+            ret.capacity = affixCount;
             var affixes = new List<AffixData>();
             var candidates = AffixBase.GetAffixCandidatesFor(ret);
             if (extraAffixBases != null)
@@ -48,9 +49,10 @@ namespace Arkademy.Data
                 }
             }
 
-            if (affixes.Count < affixCount && candidates.Length>0)
+            var remainingAffixes = affixCount - affixes.Count;
+            if (affixes.Count < affixCount && candidates.Length > 0)
             {
-                for (var i = 0; i < affixCount - affixes.Count; i++)
+                for (var i = 0; i < remainingAffixes; i++)
                 {
                     if (candidates[Random.Range(0, candidates.Length)].TryGetAffixFor(ret, out var affix))
                     {
