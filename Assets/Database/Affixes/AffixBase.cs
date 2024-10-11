@@ -64,11 +64,17 @@ namespace Arkademy.Data
     [Serializable]
     public struct AffixData
     {
-        [Serializable]
-        public struct TargetCategories
+        public enum Category
         {
-            public Enum category;
-            public Enum[] subCategories;
+            CharacterAttrBoost,
+            MasteryBoost,
+            EquipmentAttrBoost
+        }
+        [Serializable]
+        public class TargetCategories
+        {
+            public Category category;
+            public int categoryValue;
         }
         
         public TargetCategories targetCategories;

@@ -12,7 +12,8 @@ namespace Arkademy.Data
         {
             return new AffixData.TargetCategories
             {
-                category = attrCategory
+                category = AffixData.Category.EquipmentAttrBoost,
+                categoryValue = (int)attrCategory
             };
         }
     }

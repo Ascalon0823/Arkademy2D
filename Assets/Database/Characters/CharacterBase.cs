@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Arkademy.Data;
 using Newtonsoft.Json;
@@ -11,6 +12,7 @@ namespace Arkademy
     [CreateAssetMenu(fileName = "New Character Base", menuName = "Data/Add Character Base", order = 0)]
     public class CharacterBase : ScriptableObject
     {
+        public CharacterData baseData;
     }
 
     [Serializable]
@@ -74,6 +76,31 @@ namespace Arkademy
                     {
                         ret += affix.value;
                     }
+                }
+            }
+            return ret;
+        }
+
+        public Dictionary<Enum, int> GetAllActiveAttributes()
+        {
+            var ret = new Dictionary<Enum, int>();
+            foreach (var attr in attributes)
+            {
+                ret[attr.category] += attr.value;
+            }
+
+            foreach (var mastery in masteries)
+            {
+                ret[mastery.equipType] += mastery.value;
+            }
+
+            foreach (var equipmentSlot in equipmentSlots)
+            {
+                var eq = equipmentSlot.equipment;
+                if(eq.type==0 || eq.affixes==null)continue;
+                foreach (var affix in eq.affixes)
+                {
+                    ret[affix.targetCategories.category] = affix.value;
                 }
             }
             return ret;
