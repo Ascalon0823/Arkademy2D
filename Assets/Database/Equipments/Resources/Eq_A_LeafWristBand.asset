@@ -10,23 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ffdb124c4234f389474a9faa3dd5960, type: 3}
-  m_Name: Eq_W_WoodenStick
+  m_Name: Eq_A_LeafWristBand
   m_EditorClassIdentifier: 
   baseData:
     dataObjectName: 
-    name: Wooden Stick
-    description: Every adventurer`s first weapon.
-    type: 0
+    name: Leaf Wrist Band
+    description: 
+    type: 1024
     rarity: 0
     attributes: []
     requirements:
       levelMin: 0
       attrReqs: []
     capacity: 0
-    affixes:
-    - value: 0
-      cost: 0
+    affixes: []
   icon: {fileID: 0}
-  extraAffixBases:
-  - affixBase: {fileID: 11400000, guid: 54dd17b7063991b49be84994aed2a483, type: 2}
-    fixedValue: 0
+  extraAffixBases: []

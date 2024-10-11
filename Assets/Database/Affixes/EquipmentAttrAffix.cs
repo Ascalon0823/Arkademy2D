@@ -7,9 +7,13 @@ namespace Arkademy.Data
     public class EquipmentAttrAffix : AffixBase
     {
         public EquipmentData.Attr.Category attrCategory;
-        protected override Enum GetCategory()
+
+        protected override AffixData.TargetCategories GetCategories()
         {
-            return attrCategory;
+            return new AffixData.TargetCategories
+            {
+                category = attrCategory
+            };
         }
     }
 }

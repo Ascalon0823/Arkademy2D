@@ -38,7 +38,7 @@ namespace Arkademy.Data
         {
             rarityConfig = default;
             if (configs == null || configs.Length == 0) return false;
-            var validConfigs = configs.Where(x => x.type == data.type).ToList();
+            var validConfigs = configs.Where(x => (x.type & data.type) == data.type).ToList();
             if (validConfigs.Count <= 0) return false;
             var config = validConfigs[0];
             var rarities = config.rarityConfigs.Where(x => x.rarity == data.rarity).ToList();
@@ -48,22 +48,30 @@ namespace Arkademy.Data
 
         }
 
-        protected abstract Enum GetCategory();
+        protected abstract AffixData.TargetCategories GetCategories();
         public bool TryGetAffixFor(EquipmentData data, out AffixData affix)
         {
             affix = default;
             if (!ValidFor(data, out var rarityConfig)) return false;
-            affix.category = GetCategory();
+            affix.targetCategories = GetCategories();
             affix.value = Random.Range(rarityConfig.minValue, rarityConfig.maxValue + 1);
             affix.cost = cost;
             return true;
         }
     }
 
+   
     [Serializable]
     public struct AffixData
     {
-        public Enum category;
+        [Serializable]
+        public struct TargetCategories
+        {
+            public Enum category;
+            public Enum[] subCategories;
+        }
+        
+        public TargetCategories targetCategories;
         public int value;
         public int cost;
     }

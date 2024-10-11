@@ -13,7 +13,8 @@ namespace Editor
             base.OnInspectorGUI();
             if (GUILayout.Button("Test Roll"))
             {
-                Debug.Log(JsonConvert.SerializeObject((target as EquipmentBase).Generate(), new Newtonsoft.Json.Converters.StringEnumConverter()));
+                Debug.Log(JsonConvert.SerializeObject((target as EquipmentBase).Generate(), Formatting.Indented,
+                    new Newtonsoft.Json.Converters.StringEnumConverter()));
             }
         }
     }

@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Arkademy.Data.Config;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Arkademy.Data
@@ -35,6 +32,7 @@ namespace Arkademy.Data
             ret.capacity = affixCount;
             var affixes = new List<AffixData>();
             var candidates = AffixBase.GetAffixCandidatesFor(ret);
+            Debug.Log(JsonConvert.SerializeObject(candidates,Formatting.Indented));
             if (extraAffixBases != null)
             {
                 foreach (var extra in extraAffixBases)
@@ -94,19 +92,20 @@ namespace Arkademy.Data
     [Serializable]
     public struct EquipmentData
     {
+        [Flags]
         public enum Type
         {
-            OneHandWeapon,
-            TwoHandWeapon,
-            OffHandWeapon,
-            Shield,
-            Helmet,
-            Cloak,
-            BodyArmor,
-            Glove,
-            Shoe,
-            Mask,
-            Accessory
+            OneHandWeapon = 1 << 0,
+            TwoHandWeapon = 1 << 1,
+            OffHandWeapon = 1 << 2,
+            Shield = 1 << 3,
+            Helmet = 1 << 4,
+            Cloak = 1 << 5,
+            BodyArmor = 1 << 6,
+            Glove = 1 << 7,
+            Shoe = 1 << 8,
+            Mask = 1 << 9,
+            Accessory = 1 << 10
         }
 
         public enum Rarity

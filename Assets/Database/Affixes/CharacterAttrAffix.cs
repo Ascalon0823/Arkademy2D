@@ -7,10 +7,13 @@ namespace Arkademy.Data
     public class CharacterAttrAffix : AffixBase
     {
         public CharacterData.Attr.Category attrCategory;
-
-        protected override Enum GetCategory()
+        
+        protected override AffixData.TargetCategories GetCategories()
         {
-            return attrCategory;
+            return new AffixData.TargetCategories
+            {
+                category = attrCategory
+            };
         }
     }
 }

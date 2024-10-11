@@ -15,7 +15,7 @@ MonoBehaviour:
   description: 
   cost: 0
   configs:
-  - type: 0
+  - type: -1
     rarityConfigs:
     - rarity: 1
       minValue: 3
