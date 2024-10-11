@@ -31,29 +31,16 @@ namespace Editor
 
         private void OnEditorUpdate()
         {
+            EditorApplication.update -= OnEditorUpdate;
             Selection.activeObject = target;
         }
-        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+
+        public VisualElement GetChildElement(SerializedProperty categoryValue, AffixData.Category actualCategory,
+            SerializedProperty property)
         {
-            var category = property.FindPropertyRelative("category");
-            var categoryValue = property.FindPropertyRelative("categoryValue");
-            var container = new VisualElement();
-            var actualCategory = category.GetEnumValue<AffixData.Category>();
-            var enumField = new EnumField("Affix Category", actualCategory);
-            container.Add(enumField);
-            enumField.RegisterValueChangedCallback(e =>
-            {
-                category.SetEnumValue((AffixData.Category)e.newValue);
-                property.serializedObject.ApplyModifiedProperties();
-                target = Selection.activeObject;
-                EditorApplication.delayCall += new EditorApplication.CallbackFunction(() =>
-                {
-                    Selection.activeObject = target;
-                });
-                Selection.activeObject = null;
-            });
-            var actualValue = categoryValue.intValue;
             EnumField childEnumField = null;
+            var actualValue = categoryValue.intValue;
+
             switch (actualCategory)
             {
                 case AffixData.Category.CharacterAttrBoost:
@@ -69,12 +56,31 @@ namespace Editor
                     throw new ArgumentOutOfRangeException();
             }
 
-            container.Add(childEnumField);
+
             childEnumField.RegisterValueChangedCallback(e =>
             {
                 categoryValue.SetInline(Convert.ToInt32(e.newValue));
                 property.serializedObject.ApplyModifiedProperties();
             });
+            return childEnumField;
+        }
+
+        public override VisualElement CreatePropertyGUI(SerializedProperty property)
+        {
+            var category = property.FindPropertyRelative("category");
+            var categoryValue = property.FindPropertyRelative("categoryValue");
+            var container = new VisualElement();
+            var actualCategory = category.GetEnumValue<AffixData.Category>();
+            var enumField = new EnumField("Affix Category", actualCategory);
+            container.Add(enumField);
+            enumField.RegisterValueChangedCallback(e =>
+            {
+                category.SetEnumValue((AffixData.Category)e.newValue);
+                property.serializedObject.ApplyModifiedProperties();
+                container.RemoveAt(1);
+                container.Add(GetChildElement(categoryValue, (AffixData.Category)e.newValue, property));
+            });
+            container.Add(GetChildElement(categoryValue, actualCategory, property));
             return container;
         }
     }
