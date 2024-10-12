@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Arkademy.Data.Config;
+using Arkademy.Data.Deprecate.Config;
 using Newtonsoft.Json;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Arkademy.Data
+namespace Arkademy.Data.Deprecate
 {
     [CreateAssetMenu(fileName = "New Equipment Base", menuName = "Data/Add Equipment Base", order = 0)]
     public class EquipmentBase : ScriptableObject

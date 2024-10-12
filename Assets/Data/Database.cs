@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using Arkademy.Data.Deprecate;
 namespace Arkademy
 {
     [CreateAssetMenu(fileName = "Database", menuName = "Database/CreateNewDatabase", order = 1)]
@@ -105,7 +105,7 @@ namespace Arkademy
         public List<EnemyData> enemyData = new List<EnemyData>();
         public List<BossData> bossData = new List<BossData>();
         public List<StageData> stageData = new List<StageData>();
-        public List<Data.EquipmentBase> equipmentBases = new();
+        public List<Data.Deprecate.EquipmentBase> equipmentBases = new();
 
         public static Database GetDatabase()
         {

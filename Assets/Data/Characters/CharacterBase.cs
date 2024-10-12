@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Arkademy
+namespace Arkademy.Data.Deprecate
 {
     [CreateAssetMenu(fileName = "New Character Base", menuName = "Data/Add Character Base", order = 0)]
     public class CharacterBase : ScriptableObject

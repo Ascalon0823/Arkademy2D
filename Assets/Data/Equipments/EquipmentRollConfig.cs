@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Arkademy.Data.Config
+namespace Arkademy.Data.Deprecate.Config
 {
     [CreateAssetMenu(fileName = "New Equipment Roll Config", menuName = "Data/Config/Equipment Roll Config", order = 0)]
     public class EquipmentRollConfig : ScriptableObject

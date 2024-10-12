@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Arkademy.Data
+namespace Arkademy.Data.Deprecate
 {
     [CreateAssetMenu(fileName = "New Chara Attr Affix Base", menuName = "Data/Affix/Character Attr", order = 0)]
     public class CharacterAttrAffix : AffixBase

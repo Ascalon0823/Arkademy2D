@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace Arkademy.Data
+namespace Arkademy.Data.Deprecate
 {
     public abstract class AffixBase : ScriptableObject {
         [SerializeField] protected string description;

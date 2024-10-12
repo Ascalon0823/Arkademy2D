@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using Arkademy.Data.Deprecate;
 namespace Editor
 {
     [CustomEditor(typeof(EquipmentBase))]
