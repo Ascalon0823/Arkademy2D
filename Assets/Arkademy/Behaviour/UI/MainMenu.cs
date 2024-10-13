@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace Arkademy.Behaviour.UI
@@ -31,6 +32,23 @@ namespace Arkademy.Behaviour.UI
             characterList.gameObject.SetActive(false);
         }
 
+        public static void PlayerStarted()
+        {
+            if (!TryGetLatestPlayerRecord(out var record))
+            {
+                _instance.playerRecordCreation.Activate(_instance.CheckLandingPageShouldBeActive,
+                    newRecord =>
+                    {
+                        AddPlayerRecord(newRecord);
+                        AddSelectedPlayerRecord(newRecord);
+                        _instance.ActivateCharacterList(newRecord);
+                    });
+                return;
+            }
+            AddSelectedPlayerRecord(record);
+            _instance.ActivateCharacterList(record);
+        }
+
         public static void AddPlayerRecord(PlayerRecord record)
         {
             _instance.playerRecords.Add(record);
@@ -45,23 +63,34 @@ namespace Arkademy.Behaviour.UI
             return true;
         }
 
-
         public static void AddSelectedPlayerRecord(PlayerRecord playerRecord)
         {
             _instance.selectedPlayerRecords.Add(playerRecord);
         }
 
-        public void LandingPagePressed()
+
+        private void ActivateCharacterList(PlayerRecord record)
         {
-            if (!TryGetLatestPlayerRecord(out var record))
+            characterList.Activate(record.characterRecords, CheckLandingPageShouldBeActive,
+                characterRecord =>
+                {
+                    var session = new Game.Session();
+                    session.playerSetups = new List<Game.Session.PlayerSetup>();
+                    session.playerSetups.Add(new Game.Session.PlayerSetup
+                    {
+                        characterRecord = characterRecord,
+                        playerRecord = record
+                    });
+                    Game.StartGame(session);
+                });
+        }
+
+        private void CheckLandingPageShouldBeActive()
+        {
+            if (!characterList.gameObject.activeInHierarchy && !playerRecordCreation.gameObject.activeInHierarchy)
             {
-                playerRecordCreation.gameObject.SetActive(true);
-                return;
+                landingPage.gameObject.SetActive(true);
             }
-            AddSelectedPlayerRecord(record);
-            playerRecordCreation.gameObject.SetActive(false);
-            characterList.gameObject.SetActive(true);
-            characterList.SetCharacters(record.characterRecords);
         }
 
         private void SaveAllRecords()

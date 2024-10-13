@@ -9,6 +9,7 @@ namespace Arkademy.Behaviour.UI
     {
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Button confirmButton;
+        [SerializeField] private Button cancelButton;
 
         private void Awake()
         {
@@ -17,17 +18,29 @@ namespace Arkademy.Behaviour.UI
             gameObject.SetActive(false);
         }
 
-        public void Confirm()
+        public void Activate(Action onCancel = null, Action<PlayerRecord> onComplete = null)
         {
-            var newRecord = new PlayerRecord
+            gameObject.SetActive(true);
+
+            confirmButton.onClick.RemoveAllListeners();
+            cancelButton.onClick.RemoveAllListeners();
+
+            confirmButton.onClick.AddListener(() =>
             {
-                playerName = inputField.text,
-                CreationTime = DateTime.UtcNow,
-                LastPlayed = DateTime.UtcNow
-            };
-            MainMenu.AddPlayerRecord(newRecord);
-            MainMenu.AddSelectedPlayerRecord(newRecord);
-            gameObject.SetActive(false);
+                gameObject.SetActive(false);
+                onComplete?.Invoke(new PlayerRecord
+                {
+                    playerName = inputField.text,
+                    CreationTime = DateTime.UtcNow,
+                    LastPlayed = DateTime.UtcNow
+                });
+            });
+
+            cancelButton.onClick?.AddListener(() =>
+            {
+                gameObject.SetActive(false);
+                onCancel?.Invoke();
+            });
         }
     }
 }

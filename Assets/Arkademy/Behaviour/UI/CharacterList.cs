@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Arkademy.Behaviour.UI
 {
@@ -11,6 +12,10 @@ namespace Arkademy.Behaviour.UI
         [SerializeField] private CharacterListItem currentSelection;
         private List<CharacterListItem> _spawnedListItems = new List<CharacterListItem>();
 
+        [SerializeField] private Button cancel;
+        [SerializeField] private Button confirm;
+
+
         public void SelectItem(CharacterListItem child)
         {
             if (currentSelection)
@@ -18,16 +23,42 @@ namespace Arkademy.Behaviour.UI
                 currentSelection.Select(false);
             }
 
+            if (!child || child.record == null) return;
+            confirm.interactable = true;
             currentSelection = child;
             currentSelection.Select(true);
         }
 
-        public void SetCharacters(List<CharacterRecord> records)
+        public void Activate(List<CharacterRecord> records, Action onCancel = null,
+            Action<CharacterRecord> onConfirm = null)
+        {
+            gameObject.SetActive(true);
+            cancel.onClick.RemoveAllListeners();
+            confirm.onClick.RemoveAllListeners();
+            confirm.interactable = false;
+            SetCharacters(records);
+
+            cancel.onClick.AddListener(() =>
+            {
+                gameObject.SetActive(false);
+                onCancel?.Invoke();
+            });
+
+            confirm.onClick.AddListener(() =>
+            {
+                gameObject.SetActive(false);
+                onConfirm?.Invoke(currentSelection.record);
+            });
+        }
+
+        private void SetCharacters(List<CharacterRecord> records)
         {
             foreach (var old in _spawnedListItems)
             {
                 Destroy(old.gameObject);
             }
+
+            _spawnedListItems.Clear();
 
             currentSelection = null;
 
