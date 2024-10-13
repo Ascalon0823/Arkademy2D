@@ -16,7 +16,7 @@ MonoBehaviour:
     dataObjectName: 
     name: Steel Sword
     description: 
-    type: 0
+    type: 1
     rarity: 0
     attributes:
     - category: 0

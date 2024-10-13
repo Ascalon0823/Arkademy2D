@@ -16,7 +16,7 @@ MonoBehaviour:
     dataObjectName: 
     name: Wooden Stick
     description: Every adventurer`s first weapon.
-    type: 0
+    type: 1
     rarity: 0
     attributes: []
     requirements:
@@ -24,7 +24,10 @@ MonoBehaviour:
       attrReqs: []
     capacity: 0
     affixes:
-    - value: 0
+    - targetCategories:
+        category: 0
+        categoryValue: 0
+      value: 0
       cost: 0
   icon: {fileID: 0}
   extraAffixBases:

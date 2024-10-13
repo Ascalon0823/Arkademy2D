@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Arkademy.Data;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -16,6 +17,19 @@ namespace Arkademy
         {
             public int characterDBIdx;
             public int numOfGamePlayed;
+        }
+
+        [Serializable]
+        public class CharacterRecord
+        {
+            public Character character;
+            public DateTime CreationDate;
+            public DateTime LastPlayed;
+        }
+        [Serializable]
+        public class PlayerRecord
+        {
+            public List<CharacterRecord> characters;
         }
         public static SaveData current
         {

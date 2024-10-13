@@ -22,7 +22,7 @@ namespace Arkademy.Data.Deprecate
                 public int maxValue;
             }
 
-            [FormerlySerializedAs("category")] public EquipmentData.Type type;
+             public EquipmentData.Type type;
             public RarityConfig[] rarityConfigs;
         }
 
