@@ -47,6 +47,10 @@ namespace Arkademy.Behaviour
 
             foreach (var setup in UseSession.playerSetups)
             {
+                var player = Instantiate(playerPrefab);
+                players.Add(player);
+                player.playerRecord = setup.playerRecord;
+                player.local = true;
             }
         }
 
@@ -66,6 +70,12 @@ namespace Arkademy.Behaviour
         public static void StartGame(Session session)
         {
             UseSession = session;
+            foreach (var playerSetup in session.playerSetups)
+            {
+                playerSetup.playerRecord.LastPlayed = DateTime.UtcNow;
+                playerSetup.characterRecord.LastPlayed = DateTime.UtcNow;
+                playerSetup.playerRecord.Save();
+            }
             SceneManager.LoadScene("Arkademy/Scenes/Game");
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
@@ -63,6 +64,13 @@ namespace Arkademy.Behaviour.UI
             return true;
         }
 
+        public static void AddCharacterRecord(CharacterRecord record, PlayerRecord player)
+        {
+            player.characterRecords ??= new List<CharacterRecord>();
+            player.characterRecords.Add(record);
+            player.Save();
+        }
+
         public static void AddSelectedPlayerRecord(PlayerRecord playerRecord)
         {
             _instance.selectedPlayerRecords.Add(playerRecord);
@@ -71,7 +79,7 @@ namespace Arkademy.Behaviour.UI
 
         private void ActivateCharacterList(PlayerRecord record)
         {
-            characterList.Activate(record.characterRecords, CheckLandingPageShouldBeActive,
+            characterList.Activate(record.characterRecords,record, CheckLandingPageShouldBeActive,
                 characterRecord =>
                 {
                     var session = new Game.Session();

@@ -12,6 +12,10 @@ namespace Arkademy.Data
         public List<Attribute> attributes;
         public List<EquipmentSlot> slots;
 
+        public Character()
+        {
+            
+        }
         public Character(Character baseChar)
         {
             name = baseChar.name;

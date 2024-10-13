@@ -7,9 +7,11 @@ namespace Arkademy.Behaviour.UI
 {
     public class CharacterList : MonoBehaviour
     {
+        [SerializeField] private PlayerRecord currentPlayerRecord;
         [SerializeField] private RectTransform container;
         [SerializeField] private CharacterListItem itemPrefab;
         [SerializeField] private CharacterListItem currentSelection;
+        [SerializeField] private CharacterCreation characterCreation;
         private List<CharacterListItem> _spawnedListItems = new List<CharacterListItem>();
 
         [SerializeField] private Button cancel;
@@ -29,9 +31,24 @@ namespace Arkademy.Behaviour.UI
             currentSelection.Select(true);
         }
 
-        public void Activate(List<CharacterRecord> records, Action onCancel = null,
+        public void BeginCharacterCreation()
+        {
+            characterCreation.Activate(c =>
+            {
+                MainMenu.AddCharacterRecord(new CharacterRecord
+                {
+                    characterData = c,
+                    CreationTime = DateTime.UtcNow,
+                    LastPlayed = DateTime.UtcNow
+                }, currentPlayerRecord);
+                SetCharacters(currentPlayerRecord.characterRecords);
+            });
+        }
+
+        public void Activate(List<CharacterRecord> records, PlayerRecord playerRecord, Action onCancel = null,
             Action<CharacterRecord> onConfirm = null)
         {
+            currentPlayerRecord = playerRecord;
             gameObject.SetActive(true);
             cancel.onClick.RemoveAllListeners();
             confirm.onClick.RemoveAllListeners();

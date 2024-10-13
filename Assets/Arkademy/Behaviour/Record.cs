@@ -10,7 +10,7 @@ namespace Arkademy.Behaviour
     [Serializable]
     public class PlayerRecord
     {
-        public static readonly string SaveRoot = Path.Combine(Application.persistentDataPath, "Players");
+        public static string saveRoot => Path.Combine(Application.persistentDataPath, "Players");
         public string playerName;
         public DateTime CreationTime;
         public DateTime LastPlayed;
@@ -18,7 +18,7 @@ namespace Arkademy.Behaviour
 
         public void Save()
         {
-            var playerRoot = Path.Combine(SaveRoot, playerName);
+            var playerRoot = Path.Combine(saveRoot, playerName);
             if (!Directory.Exists(playerRoot)) Directory.CreateDirectory(playerRoot);
             var path = Path.Combine(playerRoot, "record.json");
             File.WriteAllText(path, JsonConvert.SerializeObject(this));
@@ -34,8 +34,8 @@ namespace Arkademy.Behaviour
 
         public static List<PlayerRecord> LoadAll()
         {
-            Debug.Log($"Attempt to load all save from {SaveRoot}");
-            var directories = new DirectoryInfo(SaveRoot);
+            Debug.Log($"Attempt to load all save from {saveRoot}");
+            var directories = new DirectoryInfo(saveRoot);
             var ret = new List<PlayerRecord>();
             if (!directories.Exists) directories.Create();
             foreach (var directory in directories.GetDirectories())
@@ -54,7 +54,8 @@ namespace Arkademy.Behaviour
             if (!characterRootPath.Exists) return record;
             foreach (var file in characterRootPath.GetFiles())
             {
-                record.characterRecords.Add(JsonConvert.DeserializeObject<CharacterRecord>(file.FullName));
+                record.characterRecords.Add(
+                    JsonConvert.DeserializeObject<CharacterRecord>(File.ReadAllText(file.FullName)));
             }
 
             record.characterRecords = record.characterRecords.OrderByDescending(x => x.LastPlayed).ToList();
