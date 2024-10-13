@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Arkademy.Configs.ScriptableObjects;
 using Arkademy.Templates.ScriptableObjects;
 using Newtonsoft.Json;
 using TMPro;
@@ -24,6 +25,11 @@ namespace Arkademy.Behaviour.UI
         [SerializeField] private TextMeshProUGUI templateName;
 
         [SerializeField] private Data.Character currCharacter;
+
+        [SerializeField] private AttributeDisplay freeAPDisplay;
+        [SerializeField] private AttributeDisplay attributeDisplayPrefab;
+        [SerializeField] private RectTransform attributeDisplayContainer;
+        private List<AttributeDisplay> _createdDisplays = new List<AttributeDisplay>();
 
         private void Awake()
         {
@@ -71,8 +77,56 @@ namespace Arkademy.Behaviour.UI
             var template = _characterTemplates[selectedTemplateIdx];
             templateDisplayAnimator.runtimeAnimatorController = template.animationController;
             templateName.text = template.name;
-            description.text = JsonConvert.SerializeObject(template.templateData);
             currCharacter = template.GetNewCharacter();
+            SetupAttributeAllocation();
+        }
+
+        private void SetupAttributeAllocation()
+        {
+            foreach (var ad in _createdDisplays)
+            {
+                Destroy(ad.gameObject);
+            }
+
+            _createdDisplays.Clear();
+            var config = Resources.Load<AttributePointsAllocationConfig>("AP Allocation Config");
+            if (!config) return;
+            if (!currCharacter.TryGetAttribute(config.freeAPKey, out var ap, out _)) return;
+            freeAPDisplay.Setup(config.freeAPKey, ap.value, 0);
+            if (config.allocatableAttributes == null) return;
+            foreach (var key in config.allocatableAttributes)
+            {
+                if (!currCharacter.TryGetAttribute(key, out var attr, out var allocation)) continue;
+                var ad = Instantiate(attributeDisplayPrefab, attributeDisplayContainer);
+                ad.Setup(attr.key, attr.value, allocation.value, ap.value > 0, allocation.value > 0, diff =>
+                {
+                    if (!currCharacter.TryGetAttribute(key, out attr, out allocation)) return;
+                    if (!currCharacter.TryGetAttribute(config.freeAPKey, out ap, out _)) return;
+                    if (ap.value <= 0 && diff > 0) return;
+                    ap.value -= diff;
+                    allocation.value += diff;
+                    if (!currCharacter.TryUpdateAttribute(ap.key, ap.value)) return;
+                    if (!currCharacter.TryUpdateAllocation(attr.key, allocation.value)) return;
+                    freeAPDisplay.UpdateValue(ap.value, 0);
+                    ad.UpdateValue(attr.value, allocation.value, ap.value > 0, allocation.value > 0);
+                    foreach (var attrDisplay in _createdDisplays)
+                    {
+                        if (!attrDisplay.allowAllocation) continue;
+                        attrDisplay.UpdateValue(attrDisplay.value, attrDisplay.allocatedValue,
+                            ap.value > 0, attrDisplay.allocatedValue > 0
+                        );
+                    }
+                });
+                _createdDisplays.Add(ad);
+            }
+
+            foreach (var attr in currCharacter.attributes)
+            {
+                if (config.freeAPKey == attr.key || config.allocatableAttributes.Contains(attr.key)) continue;
+                var ad = Instantiate(attributeDisplayPrefab, attributeDisplayContainer);
+                ad.Setup(attr.key, attr.value);
+                _createdDisplays.Add(ad);
+            }
         }
     }
 }
