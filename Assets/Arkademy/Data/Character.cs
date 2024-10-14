@@ -43,7 +43,7 @@ namespace Arkademy.Data
             else apAllocation[idx] = new Attribute { key = key, value = value };
             return true;
         }
-
+        
         public Character()
         {
         }

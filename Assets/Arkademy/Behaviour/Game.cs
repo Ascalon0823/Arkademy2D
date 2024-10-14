@@ -49,8 +49,7 @@ namespace Arkademy.Behaviour
             {
                 var player = Instantiate(playerPrefab);
                 players.Add(player);
-                player.playerRecord = setup.playerRecord;
-                player.local = true;
+                player.Setup(setup);
             }
         }
 
@@ -76,6 +75,7 @@ namespace Arkademy.Behaviour
                 playerSetup.characterRecord.LastPlayed = DateTime.UtcNow;
                 playerSetup.playerRecord.Save();
             }
+
             SceneManager.LoadScene("Arkademy/Scenes/Game");
         }
     }

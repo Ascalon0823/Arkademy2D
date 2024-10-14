@@ -14,6 +14,7 @@ namespace Arkademy.Templates.ScriptableObjects
         [Header("Graphics")]
         public Sprite characterSprite;
         public RuntimeAnimatorController animationController;
+        public bool facingLeft;
         private void OnEnable()
         {
             templateData.templateName = name;
