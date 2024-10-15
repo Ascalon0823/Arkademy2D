@@ -26,8 +26,9 @@ namespace Arkademy.Data
     [Serializable]
     public class Equipment
     {
-        [HideInInspector]public string templateName;
+        public string templateName;
         public string name;
+        public EquipmentSlot.Category slotCategory;
         public List<Attribute> attributes;
         public List<Requirement> requirements;
         public List<Affix> affixes;
@@ -40,6 +41,7 @@ namespace Arkademy.Data
         {
             name = baseEquipment.name;
             templateName = baseEquipment.templateName;
+            slotCategory = baseEquipment.slotCategory;
             attributes = new List<Attribute>();
             attributes.AddRange(baseEquipment.attributes);
             requirements = new List<Requirement>();
