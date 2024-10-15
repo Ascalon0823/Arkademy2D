@@ -18,16 +18,26 @@ namespace Arkademy
         public int gridSize = 10;
         public Vector2Int gridPos;
 
+        [SerializeField] private Tilemap useReferenceMap;
+        [SerializeField] private Sprite base0;
+        [SerializeField] private Sprite base1;
+
         private void Start()
         {
             offset = Random.insideUnitCircle * Random.Range(1000, 5000);
             UpdateMap(true);
+            if (useReferenceMap)
+            {
+                var refRenderer = useReferenceMap.gameObject.GetComponent<TilemapRenderer>();
+                if (refRenderer) refRenderer.enabled = false;
+            }
         }
 
         private void Update()
         {
             UpdateMap();
         }
+
 
         public void UpdateMap(bool force = false)
         {
@@ -43,6 +53,22 @@ namespace Arkademy
             for (var y = 0; y <= size; y++)
             for (var x = 0; x <= size; x++)
             {
+                if (useReferenceMap)
+                {
+                    var pos = new Vector3Int(origin.x + x, origin.y + y, 0);
+                    var colliderMapData = useReferenceMap.GetTile(pos);
+                    if (!colliderMapData)
+                    {
+                        data[x, y] = 1;
+                        continue;
+                    }
+
+                    var tileData = new TileData();
+                    colliderMapData.GetTileData(pos, useReferenceMap, ref tileData);
+                    data[x, y] = tileData.sprite == base1 ? 1 : 0;
+                    continue;
+                }
+
                 data[x, y] =
                     Mathf.PerlinNoise((origin.x + x) * 8.0f / (size + 1) + offset.x,
                         (origin.y + y) * 8.0f / (size + 1) + offset.y) > 0.5
@@ -58,6 +84,8 @@ namespace Arkademy
             for (var y = 0; y < data.GetLength(1) - 1; y++)
             for (var x = 0; x < data.GetLength(0) - 1; x++)
             {
+                if (data[x, y] == -1 || data[x + 1, y] == -1 || data[x, y + 1] == -1 ||
+                    data[x + 1, y + 1] == -1) continue;
                 var key = 0;
                 key += data[x, y] << 0;
                 key += data[x + 1, y] << 1;
