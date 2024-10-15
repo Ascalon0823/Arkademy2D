@@ -1,5 +1,5 @@
 ﻿using System;
-using Arkademy.Templates.ScriptableObjects;
+using Arkademy.Templates;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

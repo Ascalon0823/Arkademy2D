@@ -53,6 +53,17 @@ namespace Arkademy.Behaviour
             }
         }
 
+        private void Update()
+        {
+            if (Application.isEditor && Input.GetKeyUp(KeyCode.F8))
+            {
+                foreach (var player in players)
+                {
+                    player.playerRecord.Save();
+                }
+            }
+        }
+
         private static Session GetLastSession()
         {
             var playerRecord = PlayerRecord.LoadAll().First();

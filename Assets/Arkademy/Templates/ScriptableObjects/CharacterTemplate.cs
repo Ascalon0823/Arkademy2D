@@ -4,7 +4,7 @@ using System.Linq;
 using Arkademy.Data;
 using UnityEngine;
 
-namespace Arkademy.Templates.ScriptableObjects
+namespace Arkademy.Templates
 {
     [CreateAssetMenu(fileName = "New Character Template", menuName = "Template/Character", order = 0)]
     public class CharacterTemplate : ScriptableObject

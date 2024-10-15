@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Arkademy.Configs.ScriptableObjects;
-using Arkademy.Templates.ScriptableObjects;
+using Arkademy.Templates;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;

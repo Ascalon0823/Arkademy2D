@@ -39,6 +39,7 @@ namespace Arkademy.Behaviour
                 desireMovDir += Input.GetKey(KeyCode.D) ? Vector2.right : Vector2.zero;
             }
             controllingCharacter.MoveDir(desireMovDir);
+            if (desireUse) controllingCharacter.Use();
         }
     }
 }

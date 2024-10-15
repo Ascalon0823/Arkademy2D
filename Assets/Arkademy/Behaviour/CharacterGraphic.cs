@@ -20,7 +20,7 @@ namespace Arkademy.Behaviour
         {
             if (facing.sqrMagnitude > 0f)
             {
-                spriteRenderer.flipX = Vector2.Dot(facing, Vector2.left) > 0 ? !facingLeft : facingLeft;
+                spriteRenderer.flipX = Vector2.Dot(facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
             }
 
             animator.SetFloat("walkSpeed", walkSpeed);
