@@ -46,15 +46,21 @@ MonoBehaviour:
     slots:
     - category: 0
       equipment:
-        templateName: 
-        name: 
-        attributes: []
+        templateName: Wood Stick
+        name: Beginner`s Wood Stick
+        slotCategory: 0
+        attributes:
+        - key: Physical Attack
+          value: 300
+        - key: Base Speed
+          value: 100
         requirements: []
         affixes: []
     - category: 1
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -62,6 +68,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -69,6 +76,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -76,6 +84,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -83,6 +92,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -90,6 +100,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -97,6 +108,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -104,6 +116,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -111,6 +124,7 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
@@ -118,9 +132,11 @@ MonoBehaviour:
       equipment:
         templateName: 
         name: 
+        slotCategory: 0
         attributes: []
         requirements: []
         affixes: []
   usingPrefab: {fileID: 0}
   characterSprite: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
   animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
+  facingLeft: 0
