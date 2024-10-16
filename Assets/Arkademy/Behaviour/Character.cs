@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Arkademy.Templates;
+using Arkademy.UI.Game;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -163,9 +164,9 @@ namespace Arkademy.Behaviour
             {
                 graphic.SetHit();
             }
-
+            DamageTextCanvas.AddTextTo(transform,damage);
             if (!data.TryGetAttribute("Life", out var life, out var allocated)) return;
-            data.TryUpdateAttribute("Life", life.value - damage.damage);
+            data.TryUpdateAttribute("Life", life.value - damage.damages.Sum());
             DestructibleAddOrUpdateComponent();
         }
 

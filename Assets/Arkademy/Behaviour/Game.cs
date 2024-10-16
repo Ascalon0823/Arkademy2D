@@ -26,6 +26,7 @@ namespace Arkademy.Behaviour
         [SerializeField] private Player playerPrefab;
         public List<Player> players = new List<Player>();
 
+        public static List<Player> localPlayers => _current.players;
 
         private void Awake()
         {

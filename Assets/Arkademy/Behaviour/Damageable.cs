@@ -12,7 +12,10 @@ namespace Arkademy.Behaviour
 
         public void TakeDamage(Data.DamageEvent damage)
         {
-            damage.damage = Mathf.CeilToInt(damage.damage * (damageEffectiveness / 10000f));
+            for (var i = 0; i < damage.damages.Length; i++)
+            {
+                damage.damages[i] = Mathf.CeilToInt(damage.damages[i] * (damageEffectiveness / 10000f));
+            }
             OnDamageEvent?.Invoke(damage);
         }
 
