@@ -27,6 +27,8 @@ namespace Arkademy.Behaviour
                 graphic.animator.runtimeAnimatorController = template.animationController;
                 graphic.facingLeft = !template.facingLeft;
                 graphic.walkSpeed = 1;
+                graphic.walkAnimationDistance =
+                    template.walkAnimationDistance.Equals(0) ? 1 : template.walkAnimationDistance;
                 graphic.attackSpeed = 1;
             }
 

@@ -14,6 +14,7 @@ namespace Arkademy.Templates
         [Header("Graphics")]
         public Sprite characterSprite;
         public RuntimeAnimatorController animationController;
+        public float walkAnimationDistance;
         public bool facingLeft;
         private void OnEnable()
         {

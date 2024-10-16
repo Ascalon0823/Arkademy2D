@@ -11,6 +11,7 @@ namespace Arkademy.Behaviour
         public GameObject shadow;
         public Vector2 facing;
         public Vector2 moveDir;
+        public float walkAnimationDistance;
         public float walkSpeed;
         public float attackSpeed;
         private static readonly int Walking = Animator.StringToHash("walking");
@@ -23,7 +24,7 @@ namespace Arkademy.Behaviour
                 spriteRenderer.flipX = Vector2.Dot(facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
             }
 
-            animator.SetFloat("walkSpeed", walkSpeed);
+            animator.SetFloat("walkSpeed", walkSpeed/walkAnimationDistance);
             animator.SetFloat("attackSpeed", attackSpeed);
             animator.SetBool(Walking, moveDir.sqrMagnitude > 0f);
         }

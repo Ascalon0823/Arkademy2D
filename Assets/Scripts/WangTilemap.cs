@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Arkademy
 {
+    [ExecuteInEditMode]
     [RequireComponent(typeof(Tilemap))]
     public class WangTilemap : MonoBehaviour
     {
@@ -22,24 +23,75 @@ namespace Arkademy
         [SerializeField] private Sprite base0;
         [SerializeField] private Sprite base1;
 
+        private void OnEnable()
+        {
+            if (useReferenceMap && Application.isEditor)
+            {
+                Tilemap.tilemapTileChanged += UpdateTileMapBasedOnReferenceMap;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (useReferenceMap && Application.isEditor)
+            {
+                Tilemap.tilemapTileChanged -= UpdateTileMapBasedOnReferenceMap;
+            }
+        }
+
         private void Start()
         {
             offset = Random.insideUnitCircle * Random.Range(1000, 5000);
-            UpdateMap(true);
+            if (!Application.isEditor && cam) UpdateMapUsingCamPos(true);
             if (useReferenceMap)
             {
                 var refRenderer = useReferenceMap.gameObject.GetComponent<TilemapRenderer>();
-                if (refRenderer) refRenderer.enabled = false;
+                if (refRenderer && !Application.isEditor) refRenderer.enabled = false;
+            }
+        }
+
+        private void UpdateTileMapBasedOnReferenceMap(Tilemap map, Tilemap.SyncTile[] syncTiles)
+        {
+            if (map != useReferenceMap) return;
+            foreach (var tile in syncTiles)
+            {
+                var toBeUpdated = new[]
+                {
+                    tile.position, tile.position - new Vector3Int(1, 0), tile.position - new Vector3Int(0, 1),
+                    tile.position - new Vector3Int(1, 1)
+                };
+                foreach (var pos in toBeUpdated)
+                {
+                    var corners = new[]
+                        { pos, pos + new Vector3Int(1, 0), pos + new Vector3Int(0, 1), pos + new Vector3Int(1, 1) };
+                    var key = 0;
+                    for (var i = 0; i < 4; i++)
+                    {
+                        var refTile = useReferenceMap.GetTile(corners[i]);
+                        var value = 0;
+                        if (refTile)
+                        {
+                            var data = new TileData();
+                            refTile.GetTileData(corners[i], useReferenceMap, ref data);
+                            value = data.sprite == base0 ? 1 : 0;
+                        }
+
+                        key += value << i;
+                    }
+
+                    renderMap.SetTile(pos, palette[key]);
+                }
             }
         }
 
         private void Update()
         {
-            UpdateMap();
+            if (cam)
+                UpdateMapUsingCamPos();
         }
 
 
-        public void UpdateMap(bool force = false)
+        public void UpdateMapUsingCamPos(bool force = false)
         {
             gridSize = Mathf.CeilToInt(cam.camOrthoSize * 2);
             var newGridPos = new Vector2Int(Mathf.RoundToInt(cam.transform.position.x / gridSize),
