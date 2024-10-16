@@ -46,6 +46,8 @@ MonoBehaviour:
       value: 50
     - key: DamageEffectiveness
       value: 10000
+    - key: MC
+      value: 4
     apAllocation: []
     slots:
     - category: 0
@@ -144,4 +146,5 @@ MonoBehaviour:
   characterSprite: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
   animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
   walkAnimationDistance: 4
-  facingLeft: 0
+  facingRight: 0
+  useForCharaCreation: 0

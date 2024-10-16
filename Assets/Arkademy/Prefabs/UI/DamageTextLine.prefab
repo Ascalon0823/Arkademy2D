@@ -168,6 +168,7 @@ MonoBehaviour:
   life: 1
   maxLife: 1
   speed: 0.5
+  color: {r: 1, g: 1, b: 1, a: 1}
   beginningWorldPos: {x: 0, y: 0, z: 0}
   cam: {fileID: 0}
   text: {fileID: 7371063405376262517}

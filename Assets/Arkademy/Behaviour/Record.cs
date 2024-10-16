@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Arkademy.Templates;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -54,11 +55,21 @@ namespace Arkademy.Behaviour
             if (!characterRootPath.Exists) return record;
             foreach (var file in characterRootPath.GetFiles())
             {
-                record.characterRecords.Add(
-                    JsonConvert.DeserializeObject<CharacterRecord>(File.ReadAllText(file.FullName)));
+                var charaRecord = JsonConvert.DeserializeObject<CharacterRecord>(File.ReadAllText(file.FullName));
+                var templateName = charaRecord.characterData.templateName;
+                var template = Resources.Load<CharacterTemplate>(templateName);
+                foreach (var attr in template.templateData.attributes)
+                {
+                    if (charaRecord.characterData.attributes.All(x => x.key != attr.key))
+                    {
+                        charaRecord.characterData.attributes.Add(attr);
+                    }
+                }
+                record.characterRecords.Add(charaRecord);
             }
 
             record.characterRecords = record.characterRecords.OrderByDescending(x => x.LastPlayed).ToList();
+            record.Save();
             return record;
         }
     }

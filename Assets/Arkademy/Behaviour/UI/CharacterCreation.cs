@@ -49,7 +49,7 @@ namespace Arkademy.Behaviour.UI
 
         public void Activate(Action<Data.Character> onConfirm)
         {
-            _characterTemplates = Resources.LoadAll<CharacterTemplate>("").ToList();
+            _characterTemplates = Resources.LoadAll<CharacterTemplate>("").Where(x=>x.useForCharaCreation).ToList();
             prevTemplate.interactable = _characterTemplates.Count > 1;
             nextTemplate.interactable = _characterTemplates.Count > 1;
             UpdateTemplateDisplay();
