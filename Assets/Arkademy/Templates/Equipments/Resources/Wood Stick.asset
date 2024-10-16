@@ -28,3 +28,4 @@ MonoBehaviour:
   equipmentAnimation: {fileID: 0}
   equippedGraphicPrefab: {fileID: 1571215621446629128, guid: 7ed9d4b82d6fce04886acba4244ef9df, type: 3}
   equipmentUISprite: {fileID: -414272318, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+  provideUsable: {fileID: 7850978344127179132, guid: 5e1b0ba36b688c541a4bc4f67ca5dfe4, type: 3}

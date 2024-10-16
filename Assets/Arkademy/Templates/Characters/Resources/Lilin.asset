@@ -44,6 +44,8 @@ MonoBehaviour:
       value: 100
     - key: Size
       value: 50
+    - key: DamageEffectiveness
+      value: 10000
     apAllocation: []
     slots:
     - category: 0

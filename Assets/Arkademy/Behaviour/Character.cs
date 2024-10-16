@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Arkademy.Templates;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Arkademy.Behaviour
 {
     public class Character : MonoBehaviour
     {
+        public int faction;
         public Data.Character data;
         public CharacterGraphic graphic;
         public PhysicsMotor motor;
@@ -16,18 +18,23 @@ namespace Arkademy.Behaviour
         public bool setupCompleted;
         public float remainUseTime;
         public CircleCollider2D body;
+        public Damageable damageable;
+        public Destructible destructible;
+        public Usable usable;
 
-        public void Setup(Data.Character newData)
+        public void Setup(Data.Character newData, int newFaction)
         {
             data = newData;
             name = data.name;
             var template = Resources.Load<CharacterTemplate>(newData.templateName);
+            faction = newFaction;
             if (template.animationController != null)
             {
-                graphic = Instantiate(Resources.Load<CharacterGraphic>("CharacterGraphic"), transform);
+                if (!graphic)
+                    graphic = Instantiate(Resources.Load<CharacterGraphic>("CharacterGraphic"), transform);
                 graphic.transform.localPosition = Vector3.zero;
                 graphic.animator.runtimeAnimatorController = template.animationController;
-                graphic.facingLeft = !template.facingLeft;
+                graphic.facingLeft = !template.facingRight;
                 graphic.walkSpeed = 1;
                 graphic.walkAnimationDistance =
                     template.walkAnimationDistance.Equals(0) ? 1 : template.walkAnimationDistance;
@@ -44,10 +51,16 @@ namespace Arkademy.Behaviour
                 }
             }
 
-            MotorAddOrUpdateComponent();
-            BodyAddOrUpdateComponent();
-
+            UpdateComponentsData();
             setupCompleted = true;
+        }
+
+        private void Start()
+        {
+            if (!setupCompleted)
+            {
+                Setup(data, gameObject.CompareTag("Player") ? 1 : 0);
+            }
         }
 
         public void MoveDir(Vector2 dir)
@@ -71,24 +84,15 @@ namespace Arkademy.Behaviour
 
         public bool Use()
         {
-            if (equipmentSlots == null) return false;
-            if (remainUseTime > 0) return false;
-            var idx = equipmentSlots.FindIndex(x => x.data.category == Data.EquipmentSlot.Category.MainHand);
-            if (idx == -1) return false;
-            var mainHand = equipmentSlots[idx];
-            if (!mainHand || !mainHand.equipment || mainHand.equipment.data == null) return false;
-            var equipmentData = mainHand.equipment.data;
-            if (equipmentData.attributes == null) return false;
-            var speedIdx = equipmentData.attributes.FindIndex(x => x.key == "Base Speed");
-            var speed = speedIdx == -1 ? 100 : equipmentData.attributes[speedIdx].value;
-            remainUseTime = Mathf.Max(Time.fixedDeltaTime, 1f / (speed / 100f));
-            if (graphic)
+            if (!usable) return false;
+
+            if (graphic && usable.Use())
             {
-                graphic.attackSpeed = 1f / remainUseTime;
+                graphic.attackSpeed = 1f / usable.nextUseTime;
                 graphic.SetAttack();
             }
 
-            return true;
+            return false;
         }
 
         private void Update()
@@ -129,18 +133,83 @@ namespace Arkademy.Behaviour
             }
         }
 
+        private void DamageableAddOrUpdateComponent()
+        {
+            if (!data.TryGetAttribute("DamageEffectiveness", out var damage, out var allocated)) return;
+            if (!damageable)
+            {
+                damageable = new GameObject("DamageReceiverTrigger").AddComponent<Damageable>();
+                var damageReceiverTrigger = damageable.AddComponent<CircleCollider2D>();
+                damageReceiverTrigger.gameObject.layer = LayerMask.NameToLayer("Hitbox");
+                damageReceiverTrigger.isTrigger = true;
+                damageable.transform.SetParent(transform, false);
+                damageable.trigger = damageReceiverTrigger;
+                damageable.faction = faction;
+                damageable.OnDamageEvent += OnDamageTaken;
+            }
+
+            if (damageable)
+            {
+                damageable.damageEffectiveness = damage.value;
+                var radius = body ? body.radius : 0.5f;
+                damageable.trigger.radius = radius * (damageable.faction == 1 ? 0.8f : 1.25f);
+            }
+        }
+
+        private void OnDamageTaken(Data.DamageEvent damage)
+        {
+            Debug.Log("Hit");
+            if (graphic)
+            {
+                graphic.SetHit();
+            }
+
+            if (!data.TryGetAttribute("Life", out var life, out var allocated)) return;
+            data.TryUpdateAttribute("Life", life.value - damage.damage);
+            DestructibleAddOrUpdateComponent();
+        }
+
+        private void OnDurabilityUpdated(long prev, long curr)
+        {
+            if (curr <= 0)
+            {
+                Debug.Log("Dead");
+                if (graphic)
+                {
+                    graphic.SetDead();
+                }
+            }
+        }
+
+        private void DestructibleAddOrUpdateComponent()
+        {
+            if (!data.TryGetAttribute("Life", out var life, out var allocated)) return;
+            if (!destructible)
+            {
+                destructible = gameObject.AddComponent<Destructible>();
+                destructible.durability = life.value;
+                destructible.OnDurabilityUpdated += OnDurabilityUpdated;
+            }
+
+            if (destructible)
+            {
+                destructible.SetDurability(life.value);
+            }
+        }
+
         private void UpdateComponentsData()
         {
             MotorAddOrUpdateComponent();
             BodyAddOrUpdateComponent();
-
-            for (var i = 0; i < equipmentSlots.Count; i++)
-            {
-                var slotData = data.slots[i];
-                var slot = equipmentSlots[i];
-                slotData.equipment = slot.equipment ? equipmentSlots[i].equipment.data : null;
-                data.slots[i] = slotData;
-            }
+            DamageableAddOrUpdateComponent();
+            DestructibleAddOrUpdateComponent();
+            // for (var i = 0; i < equipmentSlots.Count; i++)
+            // {
+            //     var slotData = data.slots[i];
+            //     var slot = equipmentSlots[i];
+            //     slotData.equipment = slot.equipment ? equipmentSlots[i].equipment.data : null;
+            //     data.slots[i] = slotData;
+            // }
         }
     }
 }

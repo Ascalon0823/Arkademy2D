@@ -1,5 +1,6 @@
-using Arkademy.Data;
+using Arkademy.Behaviour;
 using UnityEngine;
+using Equipment = Arkademy.Data.Equipment;
 
 namespace Arkademy.Templates
 {
@@ -12,6 +13,7 @@ namespace Arkademy.Templates
         public RuntimeAnimatorController equipmentAnimation;
         public Behaviour.EquipmentGraphic equippedGraphicPrefab;
         public Sprite equipmentUISprite;
+        public Usable provideUsable;
         
         
         private void OnEnable()

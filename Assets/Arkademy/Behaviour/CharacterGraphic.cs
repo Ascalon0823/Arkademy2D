@@ -24,7 +24,7 @@ namespace Arkademy.Behaviour
                 spriteRenderer.flipX = Vector2.Dot(facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
             }
 
-            animator.SetFloat("walkSpeed", walkSpeed/walkAnimationDistance);
+            animator.SetFloat("walkSpeed", walkSpeed / walkAnimationDistance);
             animator.SetFloat("attackSpeed", attackSpeed);
             animator.SetBool(Walking, moveDir.sqrMagnitude > 0f);
         }
@@ -32,6 +32,16 @@ namespace Arkademy.Behaviour
         public void SetAttack()
         {
             animator.SetTrigger(Attack);
+        }
+
+        public void SetDead()
+        {
+            animator.SetTrigger("dead");
+        }
+
+        public void SetHit()
+        {
+            animator.SetTrigger("hit");
         }
     }
 }

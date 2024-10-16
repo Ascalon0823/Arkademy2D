@@ -23,7 +23,8 @@ namespace Arkademy.Behaviour
             playerRecord = setup.playerRecord;
             controllingCharacter = Instantiate(playerCharacterPrefab);
             characterCamera = Instantiate(playerCameraPrefab);
-            controllingCharacter.Setup(setup.characterRecord.characterData);
+            controllingCharacter.Setup(setup.characterRecord.characterData,1);
+            controllingCharacter.tag = "Player";
             characterCamera.followTarget = controllingCharacter.transform;
         }
 

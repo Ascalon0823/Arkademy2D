@@ -1,3 +1,4 @@
+using Arkademy.Behaviour.Usables;
 using Arkademy.Data;
 using Arkademy.Templates;
 using UnityEngine;
@@ -27,6 +28,17 @@ namespace Arkademy.Behaviour
             equipment = Instantiate(template.equippedPrefab, transform);
             equipment.Setup(newEquipment);
             data.equipment = newEquipment;
+            if (template.provideUsable)
+            {
+                var usable = Instantiate(template.provideUsable, transform) as WeaponSwing;
+                Debug.Log(usable);
+                if (usable)
+                {
+                    user.usable = usable;
+                    usable.user = user;
+                    usable.equipment = equipment;
+                }
+            }
             return true;
         }
     }
