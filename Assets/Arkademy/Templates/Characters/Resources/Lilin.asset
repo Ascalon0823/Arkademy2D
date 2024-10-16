@@ -42,6 +42,8 @@ MonoBehaviour:
       value: 10
     - key: Luck
       value: 100
+    - key: Size
+      value: 50
     apAllocation: []
     slots:
     - category: 0

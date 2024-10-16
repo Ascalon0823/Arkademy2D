@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Arkademy.Templates;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Arkademy.Behaviour
         public List<EquipmentSlot> equipmentSlots = new();
         public bool setupCompleted;
         public float remainUseTime;
+        public CircleCollider2D body;
 
         public void Setup(Data.Character newData)
         {
@@ -32,16 +34,6 @@ namespace Arkademy.Behaviour
                 graphic.attackSpeed = 1;
             }
 
-            if (data.TryGetAttribute("MoveSpeed", out var speed, out var allocatedSpeed))
-            {
-                var rb = gameObject.AddComponent<Rigidbody2D>();
-                rb.freezeRotation = true;
-                rb.gravityScale = 0f;
-                motor = gameObject.AddComponent<PhysicsMotor>();
-                motor.rb = rb;
-                motor.speed = (speed.value + allocatedSpeed.value) / 100.0f;
-            }
-
             if (data.slots != null)
             {
                 foreach (var slotData in data.slots)
@@ -51,6 +43,9 @@ namespace Arkademy.Behaviour
                     equipmentSlots.Add(slot);
                 }
             }
+
+            MotorAddOrUpdateComponent();
+            BodyAddOrUpdateComponent();
 
             setupCompleted = true;
         }
@@ -81,7 +76,7 @@ namespace Arkademy.Behaviour
             var idx = equipmentSlots.FindIndex(x => x.data.category == Data.EquipmentSlot.Category.MainHand);
             if (idx == -1) return false;
             var mainHand = equipmentSlots[idx];
-            if (!mainHand || !mainHand.equipment || mainHand.equipment.data==null) return false;
+            if (!mainHand || !mainHand.equipment || mainHand.equipment.data == null) return false;
             var equipmentData = mainHand.equipment.data;
             if (equipmentData.attributes == null) return false;
             var speedIdx = equipmentData.attributes.FindIndex(x => x.key == "Base Speed");
@@ -89,9 +84,10 @@ namespace Arkademy.Behaviour
             remainUseTime = Mathf.Max(Time.fixedDeltaTime, 1f / (speed / 100f));
             if (graphic)
             {
-                graphic.attackSpeed = 1f/remainUseTime;
+                graphic.attackSpeed = 1f / remainUseTime;
                 graphic.SetAttack();
             }
+
             return true;
         }
 
@@ -101,12 +97,42 @@ namespace Arkademy.Behaviour
             UpdateComponentsData();
         }
 
-        private void UpdateComponentsData()
+        private void BodyAddOrUpdateComponent()
         {
-            if (motor && data.TryGetAttribute("MoveSpeed", out var speed, out var allocatedSpeed))
+            if (!data.TryGetAttribute("Size", out var size, out _)) return;
+            if (!body)
+            {
+                body = gameObject.AddComponent<CircleCollider2D>();
+            }
+
+            if (body)
+            {
+                body.radius = body.radius = size.value / 200f;
+            }
+        }
+
+        private void MotorAddOrUpdateComponent()
+        {
+            if (!data.TryGetAttribute("MoveSpeed", out var speed, out var allocatedSpeed)) return;
+            if (!motor)
+            {
+                var rb = gameObject.AddComponent<Rigidbody2D>();
+                rb.freezeRotation = true;
+                rb.gravityScale = 0f;
+                motor = gameObject.AddComponent<PhysicsMotor>();
+                motor.rb = rb;
+            }
+
+            if (motor)
             {
                 motor.speed = (speed.value + allocatedSpeed.value) / 100.0f;
             }
+        }
+
+        private void UpdateComponentsData()
+        {
+            MotorAddOrUpdateComponent();
+            BodyAddOrUpdateComponent();
 
             for (var i = 0; i < equipmentSlots.Count; i++)
             {
