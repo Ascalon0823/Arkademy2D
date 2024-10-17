@@ -50,18 +50,7 @@ namespace Arkademy.Behaviour
             {
                 var player = Instantiate(playerPrefab);
                 players.Add(player);
-                player.Setup(setup);
-            }
-        }
-
-        private void Update()
-        {
-            if (Application.isEditor && Input.GetKeyUp(KeyCode.F8))
-            {
-                foreach (var player in players)
-                {
-                    player.playerRecord.Save();
-                }
+                player.Setup(setup,true);
             }
         }
 

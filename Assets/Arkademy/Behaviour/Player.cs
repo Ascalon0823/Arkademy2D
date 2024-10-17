@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Arkademy.Behaviour.UI;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 namespace Arkademy.Behaviour
 {
@@ -18,7 +22,9 @@ namespace Arkademy.Behaviour
         [SerializeField] private Character playerCharacterPrefab;
         [SerializeField] private FollowCamera playerCameraPrefab;
 
-        public void Setup(Game.Session.PlayerSetup setup)
+        public PlayerInputHandler playerInput;
+        public PlayerMenu playerMenu;
+        public void Setup(Game.Session.PlayerSetup setup, bool isLocal)
         {
             playerRecord = setup.playerRecord;
             controllingCharacter = Instantiate(playerCharacterPrefab);
@@ -26,21 +32,25 @@ namespace Arkademy.Behaviour
             controllingCharacter.Setup(setup.characterRecord.characterData,1);
             controllingCharacter.tag = "Player";
             characterCamera.followTarget = controllingCharacter.transform;
+            local = isLocal;
+            if (!local)
+            {
+                Destroy(playerInput.gameObject);
+                Destroy(playerMenu.gameObject);
+                return;
+            }
+            playerInput.SetupForPlayer(this);
         }
 
         private void Update()
         {
-            if (Application.isEditor)
-            {
-                desireUse = Input.GetMouseButton(0);
-                desireMovDir = Vector2.zero;
-                desireMovDir += Input.GetKey(KeyCode.W) ? Vector2.up : Vector2.zero;
-                desireMovDir += Input.GetKey(KeyCode.S) ? Vector2.down : Vector2.zero;
-                desireMovDir += Input.GetKey(KeyCode.A) ? Vector2.left : Vector2.zero;
-                desireMovDir += Input.GetKey(KeyCode.D) ? Vector2.right : Vector2.zero;
-            }
+            if (!local) return;
+            desireMovDir = playerInput.move;
+            desireUse = playerInput.fire;
             controllingCharacter.MoveDir(desireMovDir);
             if (desireUse) controllingCharacter.Use();
         }
+
+      
     }
 }
