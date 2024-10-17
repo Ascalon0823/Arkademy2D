@@ -147,4 +147,4 @@ MonoBehaviour:
   animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
   walkAnimationDistance: 4
   facingRight: 0
-  useForCharaCreation: 0
+  useForCharaCreation: 1
