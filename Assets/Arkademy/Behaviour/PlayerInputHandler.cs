@@ -35,6 +35,7 @@ namespace Arkademy.Behaviour
 
         public void OnFire(InputValue value)
         {
+            if (EventSystem.current.IsPointerOverGameObject() && !fire) return;
             fire = value.isPressed;
         }
 
