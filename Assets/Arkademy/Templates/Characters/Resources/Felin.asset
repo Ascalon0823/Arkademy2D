@@ -15,40 +15,30 @@ MonoBehaviour:
   templateData:
     templateName: Felin
     name: 
-    attributes:
-    - key: Level
-      value: 1
-    - key: Xp
-      value: 0
-    - key: AP
-      value: 3
-    - key: Life
-      value: 10000
-    - key: Stamina
-      value: 10000
-    - key: Source
-      value: 10000
-    - key: MoveSpeed
-      value: 400
-    - key: Strength
-      value: 10
-    - key: Constitution
-      value: 10
-    - key: Dexterity
-      value: 10
-    - key: Wisdom
-      value: 10
-    - key: Charisma
-      value: 10
-    - key: Luck
-      value: 100
-    - key: Size
-      value: 50
-    - key: DamageEffectiveness
-      value: 10000
-    - key: MC
-      value: 4
-    apAllocation: []
+    progression:
+      fields:
+      - key: Level
+        value: 1
+      - key: XP
+        value: 0
+      - key: AP
+        value: 3
+    growth:
+      fields: []
+      origin:
+        fields:
+        - key: Strength
+          value: 10
+        - key: Constitution
+          value: 11
+        - key: Dexterity
+          value: 12
+        - key: Wisdom
+          value: 8
+        - key: Faith
+          value: 10
+        - key: Charisma
+          value: 10
     slots:
     - category: 0
       equipment:
@@ -142,6 +132,40 @@ MonoBehaviour:
         attributes: []
         requirements: []
         affixes: []
+    attributes:
+    - key: Level
+      value: 1
+    - key: Xp
+      value: 0
+    - key: AP
+      value: 3
+    - key: Life
+      value: 10000
+    - key: Stamina
+      value: 10000
+    - key: Source
+      value: 10000
+    - key: MoveSpeed
+      value: 400
+    - key: Strength
+      value: 10
+    - key: Constitution
+      value: 10
+    - key: Dexterity
+      value: 10
+    - key: Wisdom
+      value: 10
+    - key: Charisma
+      value: 10
+    - key: Luck
+      value: 100
+    - key: Size
+      value: 50
+    - key: DamageEffectiveness
+      value: 10000
+    - key: MC
+      value: 4
+    apAllocation: []
   usingPrefab: {fileID: 0}
   characterSprite: {fileID: -34538813354388608, guid: 743114c57df1f9c489c503cc1ace029e, type: 3}
   animationController: {fileID: 22100000, guid: 6f4be11623c6d1f45a8293c4465b3887, type: 2}
