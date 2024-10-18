@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Title.unity
+    path: Assets/Deprecate/Scenes/Title.unity
     guid: 305035cda8a63405a88958e05567f23d
   - enabled: 0
-    path: Assets/Scenes/Game.unity
+    path: Assets/Deprecate/Scenes/Game.unity
     guid: 0dcfb471c36564b848b04ed679071e72
   - enabled: 1
     path: Assets/Arkademy/Scenes/MainMenu.unity

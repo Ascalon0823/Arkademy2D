@@ -25,16 +25,18 @@ namespace Arkademy.Behaviour
         public Action<Vector2> OnDeltaUpdated;
         public Action<bool> OnFireUpdated;
 
-        private void Start()
+        private void Awake()
         {
-            EnhancedTouchSupport.Enable();
-            TouchSimulation.Enable();
             maxMagnitude = Mathf.FloorToInt(stickBase.sizeDelta.x / 2 - stickHandle.sizeDelta.x / 2);
         }
 
-        private void OnDestroy()
+        private void OnEnable()
         {
-            TouchSimulation.Disable();
+            EnhancedTouchSupport.Enable();
+        }
+
+        private void OnDisable()
+        {
             EnhancedTouchSupport.Disable();
         }
 
