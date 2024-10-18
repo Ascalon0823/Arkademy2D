@@ -40,7 +40,7 @@ namespace Arkademy.Behaviour.Usables
                 for (var i = 0; i < damagePercentages.Length; i++)
                 {
                     damageEvent.damages[i] =
-                        Mathf.FloorToInt(Random.Range(90, 101) / 100f * damage.value * damagePercentages[i] / 100f);
+                        Mathf.FloorToInt(Random.Range(90f, 100f) / 100f * damage.value * damagePercentages[i] / 100f);
                 }
 
                 damageable.TakeDamage(damageEvent);

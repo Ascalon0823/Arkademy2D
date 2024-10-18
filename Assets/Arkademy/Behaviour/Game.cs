@@ -26,6 +26,8 @@ namespace Arkademy.Behaviour
         [SerializeField] private Player playerPrefab;
         public List<Player> players = new List<Player>();
 
+        public static bool Paused => _current.pauseCount > 0;
+        public int pauseCount;
         public static List<Player> localPlayers => _current.players;
 
         private void Awake()
@@ -54,6 +56,11 @@ namespace Arkademy.Behaviour
             }
         }
 
+        private void Update()
+        {
+            Time.timeScale = Paused ? 0 : 1f;
+        }
+
         private static Session GetLastSession()
         {
             var playerRecord = PlayerRecord.LoadAll().First();
@@ -66,7 +73,11 @@ namespace Arkademy.Behaviour
             };
         }
 
-
+        public static void RequirePause(bool pause)
+        {
+            _current.pauseCount += pause ? 1 : -1;
+            _current.pauseCount = Mathf.Max(0, _current.pauseCount);
+        }
         public static void StartGame(Session session)
         {
             UseSession = session;
