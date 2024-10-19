@@ -21,20 +21,6 @@ namespace Arkademy.Templates
         private void OnEnable()
         {
             templateData.templateName = name;
-            var chara = GetNewCharacter();
-            if (chara.progression.TryGet("Level", out var value))
-            {
-                value.Value = 2;
-            }
-
-            if (chara.growth.TryGet("Strength", out var str))
-            {
-                str.Value = 1;
-            }
-
-            var s = JsonConvert.SerializeObject(chara);
-            Debug.Log(s);
-            Debug.Log(JsonConvert.SerializeObject(JsonConvert.DeserializeObject<Character>(s)));
         }
         public Character GetNewCharacter()
         {

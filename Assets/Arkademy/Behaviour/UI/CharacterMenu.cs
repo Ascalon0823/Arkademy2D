@@ -13,7 +13,7 @@ namespace Arkademy.Behaviour.UI
         public FillBar lifeFillBar;
         public FillBar resourceBar;
         public Player player;
-        public CharacterDetails details;
+        public NamedPages details;
         private void Start()
         {
             player = GetComponentInParent<Player>();

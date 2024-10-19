@@ -499,8 +499,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8180220315301258824}
-        m_TargetAssemblyTypeName: Arkademy.Behaviour.UI.CharacterDetails, Assembly-CSharp
+      - m_Target: {fileID: 5720476639976336405}
+        m_TargetAssemblyTypeName: Arkademy.Behaviour.UI.NamedPages, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 6
         m_Arguments:
@@ -531,6 +531,143 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &3674017242219731389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7442160635933694135}
+  - component: {fileID: 5886887638586937122}
+  - component: {fileID: 4754830667259938497}
+  m_Layer: 5
+  m_Name: Equipments
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7442160635933694135
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674017242219731389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2886022917002538629}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &5886887638586937122
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674017242219731389}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &4754830667259938497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674017242219731389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ec35f606ea4ffd838812cb2e4adb75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: equipments
+  displayName: Equipments
+  cg: {fileID: 5886887638586937122}
+--- !u!1 &3700602184053595672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6620773067599687638}
+  - component: {fileID: 4179639883036505426}
+  - component: {fileID: 7507740760488967572}
+  - component: {fileID: 5896977354290867538}
+  m_Layer: 5
+  m_Name: CharacterStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6620773067599687638
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700602184053595672}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2886022917002538629}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4179639883036505426
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700602184053595672}
+  m_CullTransparentMesh: 1
+--- !u!225 &7507740760488967572
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700602184053595672}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5896977354290867538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3700602184053595672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fadb736a2a964ca0a347ad24541de479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: status
+  displayName: Status
+  cg: {fileID: 7507740760488967572}
 --- !u!1 &4632206880185191055
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,7 +870,7 @@ MonoBehaviour:
   lifeFillBar: {fileID: 2746097660853096124}
   resourceBar: {fileID: 6718564711244143707}
   player: {fileID: 0}
-  details: {fileID: 8180220315301258824}
+  details: {fileID: 5720476639976336405}
 --- !u!225 &5493870413601780763
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -746,6 +883,52 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &5925700000690145817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2886022917002538629}
+  - component: {fileID: 7861111964237919190}
+  m_Layer: 5
+  m_Name: Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2886022917002538629
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925700000690145817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6620773067599687638}
+  - {fileID: 7442160635933694135}
+  m_Father: {fileID: 441386541472624294}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 16}
+  m_SizeDelta: {x: 0, y: -32}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7861111964237919190
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925700000690145817}
+  m_CullTransparentMesh: 1
 --- !u!1 &7318818987158335947
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,8 +1051,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8180220315301258824}
-        m_TargetAssemblyTypeName: Arkademy.Behaviour.UI.CharacterDetails, Assembly-CSharp
+      - m_Target: {fileID: 5720476639976336405}
+        m_TargetAssemblyTypeName: Arkademy.Behaviour.UI.NamedPages, Assembly-CSharp
         m_MethodName: UpdatePage
         m_Mode: 3
         m_Arguments:
@@ -912,9 +1095,9 @@ GameObject:
   - component: {fileID: 3631019791394783013}
   - component: {fileID: 2318422026821358129}
   - component: {fileID: 8076182686208097424}
-  - component: {fileID: 8180220315301258824}
+  - component: {fileID: 5720476639976336405}
   m_Layer: 5
-  m_Name: CharacterDetails
+  m_Name: Pages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,6 +1116,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8440847776167259395}
+  - {fileID: 2886022917002538629}
   m_Father: {fileID: 8098151599926430103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -991,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!114 &8180220315301258824
+--- !u!114 &5720476639976336405
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1003,6 +1187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9e82ff5baa4389bb88166e2399f467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pages:
+  - {fileID: 5896977354290867538}
+  - {fileID: 4754830667259938497}
+  currIdx: 0
 --- !u!1 &7884052416110606236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,8 +1313,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8180220315301258824}
-        m_TargetAssemblyTypeName: Arkademy.Behaviour.UI.CharacterDetails, Assembly-CSharp
+      - m_Target: {fileID: 5720476639976336405}
+        m_TargetAssemblyTypeName: Arkademy.Behaviour.UI.NamedPages, Assembly-CSharp
         m_MethodName: UpdatePage
         m_Mode: 3
         m_Arguments:
