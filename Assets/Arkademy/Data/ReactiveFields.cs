@@ -14,7 +14,7 @@ namespace Arkademy.Data
         {
             public string key;
 
-            [JsonIgnore][SerializeField]protected long value;
+            [JsonIgnore] [SerializeField] protected long value;
 
             public long Value
             {
@@ -40,9 +40,9 @@ namespace Arkademy.Data
         }
 
         [JsonIgnore] protected Dictionary<string, Field> _valueCache = new();
-        [JsonIgnore] [SerializeField]protected List<Field> fields = new();
+        [JsonIgnore] [SerializeField] protected List<Field> fields = new();
 
-        public List<Field> Fields
+        public virtual List<Field> Fields
         {
             get => fields;
             set
@@ -55,10 +55,20 @@ namespace Arkademy.Data
                 }
             }
         }
+
         public virtual bool TryGet(string key, out Field field)
         {
+            if (!_valueCache.Any())
+            {
+                foreach (var f in fields)
+                {
+                    _valueCache[f.key] = f;
+                }
+            }
+
             return _valueCache.TryGetValue(key, out field);
         }
+
         public ReactiveFields Copy()
         {
             return new ReactiveFields

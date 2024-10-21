@@ -18,7 +18,8 @@ namespace Arkademy.Behaviour.UI
         {
             Game.RequirePause(active);
             gameObject.SetActive(active);
-            UpdatePage(0);
+            if(active)
+                UpdatePage(0);
         }
 
         public void UpdatePage(int diff)

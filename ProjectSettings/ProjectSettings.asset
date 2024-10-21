@@ -163,6 +163,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   androidMinAspectRatio: 1
   applicationIdentifier:
+    Standalone: com.ArkademyStudio.ArkademyMidterm
     iPhone: com.ArkademyStudio.ArkademyMidterm
   buildNumber:
     Standalone: 0
@@ -801,7 +802,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: ArkademyMidterm
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -809,7 +810,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: ArkademyMidterm
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: ArkademyMidterm
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

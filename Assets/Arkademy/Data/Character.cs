@@ -60,14 +60,25 @@ namespace Arkademy.Data
                 }
             }
 
+
+            public override bool TryGet(string key, out Field field)
+            {
+                field = default;
+                if (!Origin.TryGet(key, out var origin)) return false;
+                if (!_valueCache.TryGetValue(key, out field)) AddField(origin);
+                return _valueCache.TryGetValue(key, out field);
+            }
+
             private void AddField(Field field)
             {
-                if (TryGet(field.key, out _)) return;
+                if (!Origin.TryGet(field.key, out _)) return;
+                if (_valueCache.TryGetValue(field.key, out _)) return;
                 field = field.Copy();
                 field.Value = 0;
                 Fields.Add(field);
                 _valueCache[field.key] = field;
             }
+
             public new Growth Copy()
             {
                 return new Growth
