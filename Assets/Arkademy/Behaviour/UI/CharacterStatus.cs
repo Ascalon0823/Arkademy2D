@@ -5,11 +5,12 @@ namespace Arkademy.Behaviour.UI
 {
     public class CharacterStatus : NamedPage
     {
-        public Character character;
+        public Data.Character character;
         public FieldDisplay charaName;
         public FieldDisplay level;
         public FieldDisplay xP;
         public FieldDisplay aP;
+        public bool allowDecreasePoints;
 
         [SerializeField] private RectTransform contentRoot;
         [SerializeField] private FieldDisplay fieldDisplayPrefab;
@@ -18,25 +19,26 @@ namespace Arkademy.Behaviour.UI
         public override void OnActivated(bool activated)
         {
             base.OnActivated(activated);
-            Setup(Game.localPlayers[0].controllingCharacter);
+            if (Game.localPlayers != null && Game.localPlayers.Count > 0 && Game.localPlayers[0].controllingCharacter)
+                Setup(Game.localPlayers[0].controllingCharacter.data);
         }
 
-        public void Setup(Character newCharacter)
+        public void Setup(Data.Character newCharacter)
         {
             if (character == newCharacter) return;
             character = newCharacter;
             charaName.valueText.text = character.name;
-            if (character.data.progression.TryGet(Data.Character.Lv, out var lv))
+            if (character.progression.TryGet(Data.Character.Lv, out var lv))
             {
                 level.Bind(lv);
             }
 
-            if (character.data.progression.TryGet(Data.Character.XP, out var xp))
+            if (character.progression.TryGet(Data.Character.XP, out var xp))
             {
                 xP.Bind(xp);
             }
 
-            if (character.data.progression.TryGet(Data.Character.AP, out var ap))
+            if (character.progression.TryGet(Data.Character.AP, out var ap))
             {
                 aP.Bind(ap);
             }
@@ -51,18 +53,21 @@ namespace Arkademy.Behaviour.UI
             }
 
             fieldDisplayList.Clear();
-            foreach (var allocatable in character.data.growth.Origin.Fields)
+            foreach (var allocatable in character.growth.Origin.Fields)
             {
-                if (!character.data.growth.TryGet(allocatable.key, out var growth)) continue;
+                if (!character.growth.TryGet(allocatable.key, out var growth)) continue;
                 var fd = Instantiate(fieldDisplayPrefab, contentRoot);
                 fieldDisplayList.Add(fd);
-                fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0);
-                fd.Bind(growth, true, true, (diff) =>
+                fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
+                fd.Bind(growth, allowDecreasePoints, true, (diff) =>
                 {
                     ap.Value -= diff;
-                    fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0);
+                    fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
                 }, f => { return $"{allocatable.Value} + {f.Value}"; });
-                ap.OnValueChange += (l, l2) => { fd.SetButtonInteractable(l2 > 0, growth.Value > 0); };
+                ap.OnValueChange += (l, l2) =>
+                {
+                    fd.SetButtonInteractable(l2 > 0, growth.Value > 0 && allowDecreasePoints);
+                };
             }
         }
     }
