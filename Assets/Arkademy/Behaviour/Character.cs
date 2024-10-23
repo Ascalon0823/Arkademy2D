@@ -53,7 +53,7 @@ namespace Arkademy.Behaviour
                 _handles.Add(size.Subscribe((prev, curr) => { body.radius = curr / 200f; }));
             }
 
-            if (data.defensive.TryGet(Data.Character.DEfc, out var damageEffe))
+            if (data.defensive.TryGet(Data.Character.DmgEfc, out var damageEffe))
             {
                 damageable ??= new GameObject("DamageReceiverTrigger").AddComponent<Damageable>();
                 var damageReceiverTrigger = damageable.GetOrAddComponent<CircleCollider2D>();

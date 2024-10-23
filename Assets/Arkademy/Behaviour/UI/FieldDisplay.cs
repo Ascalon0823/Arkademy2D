@@ -26,13 +26,13 @@ namespace Arkademy.Behaviour.UI
         public void Bind(ReactiveFields.Field newField, bool allowDecrease = false,
             bool allowIncrease = false,
             Action<int> onValueChanged = null,
-            Func<ReactiveFields.Field, string> toString = null)
+            Func<ReactiveFields.Field, string> toString = null, string keyText = null)
         {
             handle?.Dispose();
             field = newField;
             var binding =new Action<long,long>((prev, curr) =>
             {
-                Setup(field.key, toString == null ? field.Value.ToString() : toString.Invoke(field),
+                Setup(keyText??field.key, toString == null ? field.Value.ToString() : toString.Invoke(field),
                     allowDecrease, allowIncrease, diff =>
                     {
                         field.Value = field.Value + diff;

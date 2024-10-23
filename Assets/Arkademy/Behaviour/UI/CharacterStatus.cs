@@ -68,10 +68,11 @@ namespace Arkademy.Behaviour.UI
                 fieldDisplayList.Add(fd);
                 fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
                 fd.Bind(growth, allowDecreasePoints, true, (diff) =>
-                {
-                    ap.Value -= diff;
-                    fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
-                }, f => { return $"{allocatable.Value} + {f.Value}"; });
+                    {
+                        ap.Value -= diff;
+                        fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
+                    }, f => { return $"{allocatable.Value} + {f.Value}"; },
+                    Data.Character.GetAbbreviation(allocatable.key));
                 handles.Add(ap.Subscribe((l, l2) =>
                 {
                     fd.SetButtonInteractable(l2 > 0, growth.Value > 0 && allowDecreasePoints);
