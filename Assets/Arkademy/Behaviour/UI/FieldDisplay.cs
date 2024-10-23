@@ -14,7 +14,7 @@ namespace Arkademy.Behaviour.UI
         public Button increaseButton;
         public Button decreaseButton;
 
-        private Action<long, long> binding;
+        private ReactiveFields.Field.Handle handle;
         private ReactiveFields.Field field;
 
         public void SetButtonInteractable(bool increaseButtonInteractable, bool decreaseButtonInteractable)
@@ -28,14 +28,9 @@ namespace Arkademy.Behaviour.UI
             Action<int> onValueChanged = null,
             Func<ReactiveFields.Field, string> toString = null)
         {
-            if (binding != null && field.OnValueChange.GetInvocationList().Contains(binding))
-            {
-                field.OnValueChange -= binding;
-                binding = null;
-            }
-
+            handle?.Dispose();
             field = newField;
-            binding = (prev, curr) =>
+            var binding =new Action<long,long>((prev, curr) =>
             {
                 Setup(field.key, toString == null ? field.Value.ToString() : toString.Invoke(field),
                     allowDecrease, allowIncrease, diff =>
@@ -43,10 +38,9 @@ namespace Arkademy.Behaviour.UI
                         field.Value = field.Value + diff;
                         onValueChanged?.Invoke(diff);
                     });
-            };
+            });
 
-            field.OnValueChange += binding;
-            binding?.Invoke(field.Value,field.Value);
+            handle = field.Subscribe(binding);
         }
 
         public void Setup(string key, string value, bool allowDecrease, bool allowIncrease, Action<int> onValueChanged)
@@ -63,10 +57,7 @@ namespace Arkademy.Behaviour.UI
 
         private void OnDestroy()
         {
-            if (binding != null && field!=null)
-            {
-                field.OnValueChange -= binding;
-            }
+            handle?.Dispose();
         }
     }
 }

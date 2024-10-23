@@ -58,13 +58,7 @@ namespace Arkademy.Behaviour
                 var charaRecord = JsonConvert.DeserializeObject<CharacterRecord>(File.ReadAllText(file.FullName));
                 var templateName = charaRecord.characterData.templateName;
                 var template = Resources.Load<CharacterTemplate>(templateName);
-                foreach (var attr in template.templateData.attributes)
-                {
-                    if (charaRecord.characterData.attributes.All(x => x.key != attr.key))
-                    {
-                        charaRecord.characterData.attributes.Add(attr);
-                    }
-                }
+                charaRecord.characterData.UpdateFieldsBy(template.templateData);
                 record.characterRecords.Add(charaRecord);
             }
 

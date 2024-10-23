@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Arkademy.Data;
 using Arkademy.Templates;
 using Arkademy.UI.Game;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Arkademy.Behaviour
@@ -17,11 +17,13 @@ namespace Arkademy.Behaviour
         public PhysicsMotor motor;
         public List<EquipmentSlot> equipmentSlots = new();
         public bool setupCompleted;
-        public float remainUseTime;
         public CircleCollider2D body;
         public Damageable damageable;
         public Destructible destructible;
         public Usable usable;
+
+        private List<ReactiveFields.Field.Handle> _handles = new List<ReactiveFields.Field.Handle>();
+
 
         public void Setup(Data.Character newData, int newFaction)
         {
@@ -29,6 +31,55 @@ namespace Arkademy.Behaviour
             name = data.name;
             var template = Resources.Load<CharacterTemplate>(newData.templateName);
             faction = newFaction;
+
+            foreach (var handle in _handles)
+            {
+                handle.Dispose();
+            }
+
+            if (data.locomotion.TryGet(Data.Character.MSpd, out var speed))
+            {
+                var rb = gameObject.GetOrAddComponent<Rigidbody2D>();
+                rb.freezeRotation = true;
+                rb.gravityScale = 0f;
+                motor = gameObject.GetOrAddComponent<PhysicsMotor>();
+                motor.rb = rb;
+                _handles.Add(speed.Subscribe((prev, curr) => { motor.speed = curr / 100f; }));
+            }
+
+            if (data.locomotion.TryGet("Size", out var size))
+            {
+                body = gameObject.GetOrAddComponent<CircleCollider2D>();
+                _handles.Add(size.Subscribe((prev, curr) => { body.radius = curr / 200f; }));
+            }
+
+            if (data.defensive.TryGet(Data.Character.DEfc, out var damageEffe))
+            {
+                damageable ??= new GameObject("DamageReceiverTrigger").AddComponent<Damageable>();
+                var damageReceiverTrigger = damageable.GetOrAddComponent<CircleCollider2D>();
+                damageReceiverTrigger.gameObject.layer = LayerMask.NameToLayer("Hitbox");
+                damageReceiverTrigger.isTrigger = true;
+                damageable.transform.SetParent(transform, false);
+                damageable.trigger = damageReceiverTrigger;
+                damageable.faction = faction;
+                damageable.OnDamageEvent = null;
+                damageable.OnDamageEvent += OnDamageTaken;
+                _handles.Add(damageEffe.Subscribe((prev, curr) =>
+                {
+                    damageable.damageEffectiveness = damageEffe.Value;
+                    var radius = body ? body.radius : 0.5f;
+                    damageable.trigger.radius = radius * (damageable.faction == 1 ? 0.8f : 1.25f);
+                }));
+            }
+
+            if (data.resources.TryGet(Data.Character.Life, out var life))
+            {
+                destructible = gameObject.GetOrAddComponent<Destructible>();
+                destructible.durability = life.Value;
+                destructible.OnDurabilityUpdated += OnDurabilityUpdated;
+                life.Subscribe((_, curr) => { destructible.SetDurability(curr); });
+            }
+
             if (template.animationController != null)
             {
                 if (!graphic)
@@ -52,7 +103,6 @@ namespace Arkademy.Behaviour
                 }
             }
 
-            UpdateComponentsData();
             setupCompleted = true;
         }
 
@@ -61,6 +111,14 @@ namespace Arkademy.Behaviour
             if (!setupCompleted)
             {
                 Setup(data, gameObject.CompareTag("Player") ? 1 : 0);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var handle in _handles)
+            {
+                handle.Dispose();
             }
         }
 
@@ -96,64 +154,15 @@ namespace Arkademy.Behaviour
             return false;
         }
 
+
         private void Update()
         {
-            if (remainUseTime > 0) remainUseTime -= Time.deltaTime;
-            UpdateComponentsData();
-        }
-
-        private void BodyAddOrUpdateComponent()
-        {
-            if (!data.TryGetAttribute("Size", out var size, out _)) return;
-            if (!body)
+            if (Application.isEditor)
             {
-                body = gameObject.AddComponent<CircleCollider2D>();
-            }
-
-            if (body)
-            {
-                body.radius = body.radius = size.value / 200f;
-            }
-        }
-
-        private void MotorAddOrUpdateComponent()
-        {
-            if (!data.TryGetAttribute("MoveSpeed", out var speed, out var allocatedSpeed)) return;
-            if (!motor)
-            {
-                var rb = gameObject.AddComponent<Rigidbody2D>();
-                rb.freezeRotation = true;
-                rb.gravityScale = 0f;
-                motor = gameObject.AddComponent<PhysicsMotor>();
-                motor.rb = rb;
-            }
-
-            if (motor)
-            {
-                motor.speed = (speed.value + allocatedSpeed.value) / 100.0f;
-            }
-        }
-
-        private void DamageableAddOrUpdateComponent()
-        {
-            if (!data.TryGetAttribute("DamageEffectiveness", out var damage, out var allocated)) return;
-            if (!damageable)
-            {
-                damageable = new GameObject("DamageReceiverTrigger").AddComponent<Damageable>();
-                var damageReceiverTrigger = damageable.AddComponent<CircleCollider2D>();
-                damageReceiverTrigger.gameObject.layer = LayerMask.NameToLayer("Hitbox");
-                damageReceiverTrigger.isTrigger = true;
-                damageable.transform.SetParent(transform, false);
-                damageable.trigger = damageReceiverTrigger;
-                damageable.faction = faction;
-                damageable.OnDamageEvent += OnDamageTaken;
-            }
-
-            if (damageable)
-            {
-                damageable.damageEffectiveness = damage.value;
-                var radius = body ? body.radius : 0.5f;
-                damageable.trigger.radius = radius * (damageable.faction == 1 ? 0.8f : 1.25f);
+                foreach (var handle in _handles)
+                {
+                    handle.ForceTrigger();
+                }
             }
         }
 
@@ -164,10 +173,10 @@ namespace Arkademy.Behaviour
             {
                 graphic.SetHit();
             }
-            DamageTextCanvas.AddTextTo(transform,damage);
-            if (!data.TryGetAttribute("Life", out var life, out var allocated)) return;
-            data.TryUpdateAttribute("Life", life.value - damage.damages.Sum());
-            DestructibleAddOrUpdateComponent();
+
+            DamageTextCanvas.AddTextTo(transform, damage);
+            if (!data.resources.TryGet(Data.Character.Life, out var life)) return;
+            life.Value = life.Value - damage.damages.Sum();
         }
 
         private void OnDurabilityUpdated(long prev, long curr)
@@ -180,37 +189,6 @@ namespace Arkademy.Behaviour
                     graphic.SetDead();
                 }
             }
-        }
-
-        private void DestructibleAddOrUpdateComponent()
-        {
-            if (!data.TryGetAttribute("Life", out var life, out var allocated)) return;
-            if (!destructible)
-            {
-                destructible = gameObject.AddComponent<Destructible>();
-                destructible.durability = life.value;
-                destructible.OnDurabilityUpdated += OnDurabilityUpdated;
-            }
-
-            if (destructible)
-            {
-                destructible.SetDurability(life.value);
-            }
-        }
-
-        private void UpdateComponentsData()
-        {
-            MotorAddOrUpdateComponent();
-            BodyAddOrUpdateComponent();
-            DamageableAddOrUpdateComponent();
-            DestructibleAddOrUpdateComponent();
-            // for (var i = 0; i < equipmentSlots.Count; i++)
-            // {
-            //     var slotData = data.slots[i];
-            //     var slot = equipmentSlots[i];
-            //     slotData.equipment = slot.equipment ? equipmentSlots[i].equipment.data : null;
-            //     data.slots[i] = slotData;
-            // }
         }
     }
 }

@@ -15,15 +15,38 @@ MonoBehaviour:
   templateData:
     templateName: Dummy
     name: 
-    attributes:
-    - key: Size
-      value: 50
-    - key: DamageEffectiveness
-      value: 10000
-    apAllocation: []
+    progression:
+      fields: []
+    growth:
+      fields: []
+      origin:
+        fields: []
+    resources:
+      fields: []
+      maximum:
+        fields: []
+    locomotion:
+      fields: []
+    offensive:
+      fields: []
+    defensive:
+      fields:
+      - key: Evade
+        value: 500
+      - key: Stance
+        value: 100
+      - key: Damage Effectiveness
+        value: 10000
+      - key: Physical Resistance
+        value: 0
+    casting:
+      fields: []
+    common:
+      fields: []
     slots: []
   usingPrefab: {fileID: 0}
   characterSprite: {fileID: -2064422764693090554, guid: 3588ea48dde1b774385a9edccf39694e, type: 3}
   animationController: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
   walkAnimationDistance: 4
   facingRight: 0
+  useForCharaCreation: 0

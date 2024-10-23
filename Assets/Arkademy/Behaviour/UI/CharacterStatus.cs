@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Arkademy.Data;
 using UnityEngine;
 
 namespace Arkademy.Behaviour.UI
@@ -15,6 +16,7 @@ namespace Arkademy.Behaviour.UI
         [SerializeField] private RectTransform contentRoot;
         [SerializeField] private FieldDisplay fieldDisplayPrefab;
         [SerializeField] private List<FieldDisplay> fieldDisplayList = new();
+        private List<ReactiveFields.Field.Handle> handles = new List<ReactiveFields.Field.Handle>();
 
         public override void OnActivated(bool activated)
         {
@@ -52,6 +54,12 @@ namespace Arkademy.Behaviour.UI
                 Destroy(fd.gameObject);
             }
 
+            foreach (var handle in handles)
+            {
+                handle?.Dispose();
+            }
+
+            handles.Clear();
             fieldDisplayList.Clear();
             foreach (var allocatable in character.growth.Origin.Fields)
             {
@@ -64,10 +72,10 @@ namespace Arkademy.Behaviour.UI
                     ap.Value -= diff;
                     fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
                 }, f => { return $"{allocatable.Value} + {f.Value}"; });
-                ap.OnValueChange += (l, l2) =>
+                handles.Add(ap.Subscribe((l, l2) =>
                 {
                     fd.SetButtonInteractable(l2 > 0, growth.Value > 0 && allowDecreasePoints);
-                };
+                }));
             }
         }
     }

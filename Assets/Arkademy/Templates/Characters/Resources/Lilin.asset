@@ -30,15 +30,65 @@ MonoBehaviour:
         - key: Strength
           value: 10
         - key: Constitution
-          value: 11
+          value: 10
         - key: Dexterity
-          value: 12
+          value: 10
         - key: Wisdom
-          value: 8
+          value: 10
         - key: Faith
           value: 10
         - key: Charisma
           value: 10
+    resources:
+      fields: []
+      maximum:
+        fields:
+        - key: Life
+          value: 10000
+        - key: Source
+          value: 10000
+    locomotion:
+      fields:
+      - key: Move Speed
+        value: 300
+      - key: Size
+        value: 50
+    offensive:
+      fields:
+      - key: Physical Attack
+        value: 100
+      - key: Accuracy
+        value: 10000
+      - key: Attack Speed
+        value: 100
+      - key: Knockback
+        value: 100
+      - key: Critical Chance
+        value: 500
+      - key: Critical Damage
+        value: 5000
+    defensive:
+      fields:
+      - key: Evade
+        value: 0
+      - key: Stance
+        value: 100
+      - key: Damage Effectiveness
+        value: 10000
+      - key: Physical Resistance
+        value: 0
+    casting:
+      fields:
+      - key: Cast Speed
+        value: 100
+      - key: Source Effectiveness
+        value: 10000
+      - key: Cast Range
+        value: 10000
+    common:
+      fields:
+      - key: Luck
+        value: 100
     slots:
     - category: 0
       equipment:
@@ -132,40 +182,6 @@ MonoBehaviour:
         attributes: []
         requirements: []
         affixes: []
-    attributes:
-    - key: Level
-      value: 1
-    - key: Xp
-      value: 0
-    - key: AP
-      value: 3
-    - key: Life
-      value: 10000
-    - key: Stamina
-      value: 10000
-    - key: Source
-      value: 10000
-    - key: MoveSpeed
-      value: 400
-    - key: Strength
-      value: 10
-    - key: Constitution
-      value: 10
-    - key: Dexterity
-      value: 10
-    - key: Wisdom
-      value: 10
-    - key: Charisma
-      value: 10
-    - key: Luck
-      value: 100
-    - key: Size
-      value: 50
-    - key: DamageEffectiveness
-      value: 10000
-    - key: MC
-      value: 4
-    apAllocation: []
   usingPrefab: {fileID: 0}
   characterSprite: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
   animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}

@@ -13,8 +13,35 @@ namespace Arkademy.Data
         public string name;
         public Progression progression;
         public Growth growth;
+        public Resources resources;
+        public ReactiveFields locomotion;
+        public ReactiveFields offensive;
+        public ReactiveFields defensive;
+        public ReactiveFields casting;
+        public ReactiveFields common;
         public List<EquipmentSlot> slots;
 
+
+        public void UpdateFieldsBy(Character other)
+        {
+            if (string.IsNullOrEmpty(templateName)) templateName = other.templateName;
+            progression ??= other.progression.Copy();
+            progression.UpdateFieldsBy(other.progression);
+            growth ??= other.growth.Copy();
+            growth.Origin.UpdateFieldsBy(other.growth.Origin);
+            resources ??= other.resources.Copy();
+            resources.Max.UpdateFieldsBy(other.resources.Max);
+            locomotion ??= other.locomotion.Copy();
+            locomotion.UpdateFieldsBy(other.locomotion);
+            offensive ??= other.offensive.Copy();
+            offensive.UpdateFieldsBy(other.offensive);
+            defensive ??= other.defensive.Copy();
+            defensive.UpdateFieldsBy(other.defensive);
+            casting ??= other.casting.Copy();
+            casting.UpdateFieldsBy(other.casting);
+            common ??= other.common.Copy();
+            common.UpdateFieldsBy(other.common);
+        }
 
         public Character Copy()
         {
@@ -24,106 +51,14 @@ namespace Arkademy.Data
                 name = name,
                 progression = progression.Copy(),
                 growth = growth.Copy(),
-                attributes = attributes.ToList(),
-                apAllocation = apAllocation.ToList(),
+                resources = resources.Copy(),
+                locomotion = locomotion.Copy(),
+                offensive = offensive.Copy(),
+                defensive = defensive.Copy(),
+                casting = casting.Copy(),
+                common = common.Copy(),
                 slots = slots.ToList()
             };
         }
-
-        [Serializable]
-        public class Progression : ReactiveFields
-        {
-            public new Progression Copy()
-            {
-                return new Progression
-                {
-                    Fields = Fields.Select(x => x.Copy()).ToList()
-                };
-            }
-        }
-
-        [Serializable]
-        public class Growth : ReactiveFields
-        {
-            [SerializeField] private ReactiveFields origin = new();
-
-            public ReactiveFields Origin
-            {
-                get => origin;
-                set
-                {
-                    origin = value;
-                    foreach (var f in origin.Fields)
-                    {
-                        AddField(f);
-                    }
-                }
-            }
-
-
-            public override bool TryGet(string key, out Field field)
-            {
-                field = default;
-                if (!Origin.TryGet(key, out var origin)) return false;
-                if (!_valueCache.TryGetValue(key, out field)) AddField(origin);
-                return _valueCache.TryGetValue(key, out field);
-            }
-
-            private void AddField(Field field)
-            {
-                if (!Origin.TryGet(field.key, out _)) return;
-                if (_valueCache.TryGetValue(field.key, out _)) return;
-                field = field.Copy();
-                field.Value = 0;
-                Fields.Add(field);
-                _valueCache[field.key] = field;
-            }
-
-            public new Growth Copy()
-            {
-                return new Growth
-                {
-                    Origin = Origin.Copy()
-                };
-            }
-        }
-
-        #region Deprecate
-
-        public List<Attribute> attributes;
-        public List<Attribute> apAllocation;
-
-        public bool TryGetAttribute(string key, out Attribute attr, out Attribute allocated)
-        {
-            attr = default;
-            allocated = default;
-            if (attributes == null) return false;
-            attr = attributes.FirstOrDefault(x => x.key == key);
-            if (apAllocation != null)
-            {
-                allocated = apAllocation.FirstOrDefault(x => x.key == key);
-            }
-
-            return !string.IsNullOrEmpty(attr.key);
-        }
-
-        public bool TryUpdateAttribute(string key, int value)
-        {
-            if (!attributes.Any(x => x.key == key)) return false;
-            var idx = attributes.FindIndex(x => x.key == key);
-            attributes[idx] = new Attribute { key = key, value = value };
-            return true;
-        }
-
-        public bool TryUpdateAllocation(string key, int value)
-        {
-            if (!attributes.Any(x => x.key == key)) return false;
-            var idx = apAllocation.FindIndex(x => x.key == key);
-            if (idx == -1) apAllocation.Add(new Attribute { key = key, value = value });
-            else apAllocation[idx] = new Attribute { key = key, value = value };
-            return true;
-        }
-
-        #endregion
     }
 }

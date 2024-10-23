@@ -7,7 +7,7 @@ namespace Arkademy.Behaviour
     {
         public int faction;
         public CircleCollider2D trigger;
-        public float damageEffectiveness;
+        public long damageEffectiveness;
         public Action<Data.DamageEvent> OnDamageEvent;
 
         public void TakeDamage(Data.DamageEvent damage)
