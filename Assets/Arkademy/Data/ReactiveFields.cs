@@ -69,7 +69,7 @@ namespace Arkademy.Data
         [JsonIgnore] protected Dictionary<string, Field> _valueCache = new();
         [JsonIgnore] [SerializeField] protected List<Field> fields = new();
 
-        protected void BuildCache()
+        public void BuildCache()
         {
             foreach (var f in fields)
             {

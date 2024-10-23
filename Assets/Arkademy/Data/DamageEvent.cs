@@ -1,4 +1,5 @@
 using System;
+using Arkademy.Behaviour;
 
 namespace Arkademy.Data
 {
@@ -7,4 +8,5 @@ namespace Arkademy.Data
     {
         public long[] damages;
     }
+    
 }

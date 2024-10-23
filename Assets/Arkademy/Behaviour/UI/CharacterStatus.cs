@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Arkademy.Data;
 using UnityEngine;
 
@@ -23,6 +24,17 @@ namespace Arkademy.Behaviour.UI
             base.OnActivated(activated);
             if (Game.localPlayers != null && Game.localPlayers.Count > 0 && Game.localPlayers[0].controllingCharacter)
                 Setup(Game.localPlayers[0].controllingCharacter.data);
+        }
+
+        private void Update()
+        {
+            if (Application.isEditor)
+            {
+                foreach (var handle in handles)
+                {
+                    handle.ForceTrigger();
+                }
+            }
         }
 
         public void Setup(Data.Character newCharacter)

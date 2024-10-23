@@ -21,6 +21,7 @@ namespace Arkademy.Behaviour
         public Damageable damageable;
         public Destructible destructible;
         public Usable usable;
+        [SerializeField] private FieldModifiers modifiers = new();
 
         private List<ReactiveFields.Field.Handle> _handles = new List<ReactiveFields.Field.Handle>();
 
@@ -44,7 +45,12 @@ namespace Arkademy.Behaviour
                 rb.gravityScale = 0f;
                 motor = gameObject.GetOrAddComponent<PhysicsMotor>();
                 motor.rb = rb;
-                _handles.Add(speed.Subscribe((prev, curr) => { motor.speed = curr / 100f; }));
+                _handles.AddRange(
+                    modifiers.Subscribe(speed,
+                        (ori, flat, percent) =>
+                        {
+                            motor.speed = (ori + flat) * ((100 + percent) / 100f) / 100f;
+                        }));
             }
 
             if (data.locomotion.TryGet("Size", out var size))
