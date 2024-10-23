@@ -5,6 +5,6 @@ namespace Arkademy.Data
     [Serializable]
     public struct DamageEvent
     {
-        public int[] damages;
+        public long[] damages;
     }
 }

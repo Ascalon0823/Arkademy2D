@@ -38,7 +38,7 @@ namespace Arkademy.Behaviour.Usables
             var damage = equipment.data.attributes.FirstOrDefault(x => x.key == "Physical Attack");
             var damageEventBase = new Data.DamageEvent
             {
-                damages = new int [damagePercentages.Length]
+                damages = new long [damagePercentages.Length]
             };
             for (var i = 0; i < damagePercentages.Length; i++)
             {

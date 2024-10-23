@@ -8,7 +8,7 @@ namespace Arkademy.Behaviour.UI
 {
     public class DamageText : MonoBehaviour
     {
-        public int number;
+        public long number;
         public float life;
         public float maxLife;
         public float speed;
