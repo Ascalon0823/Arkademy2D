@@ -87,11 +87,7 @@ namespace Arkademy.Behaviour.UI
                         growth.Value += diff;
                         ap.Value -= diff;
                         fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
-                    }, f =>
-                    {
-                        var v = allocatable.GetValue();
-                        return $"{v}";
-                    },
+                    }, newKetText:
                     Data.Character.GetAbbreviation(allocatable.key));
                 handles.Add(ap.Subscribe((curr) =>
                 {

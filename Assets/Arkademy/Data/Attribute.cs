@@ -61,9 +61,14 @@ namespace Arkademy.Data
             Trigger();
         }
 
+        public override ISubscription Subscribe(Action<long> onValueChanged, bool doOnSubscribe = true)
+        {
+            return base.Subscribe((v)=>{onValueChanged?.Invoke(GetValue());}, doOnSubscribe);
+        }
+
         private void Trigger()
         {
-            OnValueChanged?.Invoke(GetValue());
+            Value = Value;
         }
 
         private Dictionary<Modifier.Type, long> GetModifierValues()
@@ -110,7 +115,12 @@ namespace Arkademy.Data
                                     ((10000 + percentMulti) / 10000.0) * (percentNegate / 10000.0));
         };
 
-        public long GetValue(Func<long, Dictionary<Modifier.Type, long>, long> calculation = null)
+        public override long GetValue()
+        {
+            return GetValueWith();
+        }
+
+        public long GetValueWith(Func<long, Dictionary<Modifier.Type, long>, long> calculation = null)
         {
             calculation ??= Calculator ?? _baseCalculation;
             return calculation?.Invoke(Value, GetModifierValues()) ?? 0;

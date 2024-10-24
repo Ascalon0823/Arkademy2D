@@ -111,41 +111,26 @@ MonoBehaviour:
     attributes:
     - key: Level
       value: 1
-      type: 1
-      format: 0
       persistentModifiers: []
       runtimeModifiers: []
     - key: XP
       value: 0
-      type: 1
-      format: 0
       persistentModifiers: []
       runtimeModifiers: []
     - key: AP
       value: 3
-      type: 1
-      format: 0
       persistentModifiers: []
       runtimeModifiers: []
     - key: Move Speed
       value: 400
-      type: 0
-      format: 0
       persistentModifiers: []
       runtimeModifiers: []
     - key: Size
       value: 50
-      type: 0
-      format: 0
-      persistentModifiers:
-      - key: AP Allocation
-        value: 0
-        type: 0
+      persistentModifiers: []
       runtimeModifiers: []
     - key: Strength
       value: 10
-      type: 3
-      format: 0
       persistentModifiers:
       - key: AP Allocation
         value: 0
@@ -153,8 +138,6 @@ MonoBehaviour:
       runtimeModifiers: []
     - key: Dexterity
       value: 10
-      type: 0
-      format: 0
       persistentModifiers:
       - key: AP Allocation
         value: 0
@@ -162,8 +145,6 @@ MonoBehaviour:
       runtimeModifiers: []
     - key: Constitution
       value: 10
-      type: 0
-      format: 0
       persistentModifiers:
       - key: AP Allocation
         value: 0
@@ -171,8 +152,6 @@ MonoBehaviour:
       runtimeModifiers: []
     - key: Wisdom
       value: 10
-      type: 0
-      format: 0
       persistentModifiers:
       - key: AP Allocation
         value: 0
@@ -180,8 +159,6 @@ MonoBehaviour:
       runtimeModifiers: []
     - key: Faith
       value: 10
-      type: 0
-      format: 0
       persistentModifiers:
       - key: AP Allocation
         value: 0
@@ -189,8 +166,6 @@ MonoBehaviour:
       runtimeModifiers: []
     - key: Charisma
       value: 10
-      type: 0
-      format: 0
       persistentModifiers:
       - key: AP Allocation
         value: 0
@@ -198,14 +173,10 @@ MonoBehaviour:
       runtimeModifiers: []
     - key: Life
       value: 10000
-      type: 0
-      format: 0
       persistentModifiers: []
       runtimeModifiers: []
     - key: Source
       value: 10000
-      type: 0
-      format: 0
       persistentModifiers: []
       runtimeModifiers: []
   usingPrefab: {fileID: 0}

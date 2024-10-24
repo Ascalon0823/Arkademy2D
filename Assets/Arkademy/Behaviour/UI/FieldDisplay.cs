@@ -32,11 +32,11 @@ namespace Arkademy.Behaviour.UI
             field = newField;
             var binding =new Action<long>((curr) =>
             {
-                Setup(newKetText??field.key, toString == null ? field.Value.ToString() : toString.Invoke(field),
+                Setup(newKetText??field.key, toString == null ? field.GetValue().ToString() : toString.Invoke(field),
                     allowDecrease, allowIncrease, (c) =>
                     {
                         onValueChanged?.Invoke(c);
-                        valueText.text = toString == null ? field.Value.ToString() : toString.Invoke(field);
+                        valueText.text = toString == null ? field.GetValue().ToString() : toString.Invoke(field);
                     });
             });
 

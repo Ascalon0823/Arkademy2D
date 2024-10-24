@@ -23,10 +23,14 @@ namespace Arkademy.Data
             set
             {
                 this.value = value;
-                OnValueChanged?.Invoke(value);
+                OnValueChanged?.Invoke(GetValue());
             }
         }
 
+        public virtual long GetValue()
+        {
+            return value;
+        }
         public Field(string key, long value)
         {
             this.key = key;
@@ -35,7 +39,7 @@ namespace Arkademy.Data
 
         public virtual ISubscription Subscribe(Action<long> onValueChanged, bool doOnSubscribe = true)
         {
-            return new Handle(this, onValueChanged);
+            return new Handle(this, onValueChanged, doOnSubscribe);
         }
 
         public virtual Field Copy()

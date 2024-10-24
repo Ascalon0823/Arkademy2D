@@ -158,13 +158,13 @@ namespace Arkademy.Behaviour
 
         private void Update()
         {
-            // if (Application.isEditor)
-            // {
-            //     foreach (var handle in _handles)
-            //     {
-            //         handle.Trigger();
-            //     }
-            // }
+            if (Application.isEditor)
+            {
+                foreach (var handle in _handles)
+                {
+                    handle.Trigger();
+                }
+            }
         }
 
         private void OnDamageTaken(Data.DamageEvent damage)
