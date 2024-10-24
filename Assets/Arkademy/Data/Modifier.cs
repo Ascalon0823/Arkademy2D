@@ -37,10 +37,8 @@ namespace Arkademy.Data
             {
                 case Modifier.Type.Flat:
                     return values.Sum();
-                    break;
                 case Modifier.Type.AdditivePercent:
                     return values.Sum();
-                    break;
                 case Modifier.Type.Chance:
                     ret = 1f;
                     foreach (var value in values)
@@ -51,14 +49,12 @@ namespace Arkademy.Data
                     }
 
                     return Mathf.FloorToInt((1 - ret) * 10000);
-                    break;
                 case Modifier.Type.MutiplicativePercent:
                     ret = 1f;
                     foreach (var value in values)
                     {
                         ret *= (1 + value / 10000f);
                     }
-
                     return Mathf.FloorToInt((ret - 1) * 10000);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

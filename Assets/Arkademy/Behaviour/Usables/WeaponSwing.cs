@@ -27,28 +27,37 @@ namespace Arkademy.Behaviour.Usables
         {
             if (!base.Use()) return false;
             dealer.faction = user.faction;
-            var cd = equipment.data.attributes.FirstOrDefault(x => x.key == "Base Speed");
-            nextUseTime = 1f / (cd.value / 100f);
+            nextUseTime = useTime;
+            if (equipment.data.TryGetAttr("Base Speed", out var spd))
+            {
+                nextUseTime = 1f / (spd.GetValue() / 100f);
+            }
             StartCoroutine(InternalUse());
             return true;
         }
 
         public void CalculateDamageEvent(DamageDealer.BeforeDamageEvent d)
         {
-            var damage = equipment.data.attributes.FirstOrDefault(x => x.key == "Physical Attack");
+            if (!equipment.data.TryGetAttr(Data.Character.PhyAtk, out var patk))
+            {
+                return;
+            }
+
             var damageEventBase = new Data.DamageEvent
             {
                 damages = new long [damagePercentages.Length]
             };
-            var strBoost = user.data.TryGetAttr(Data.Character.Str, out var str) ? str.Value : 0;
+            var strBoost = user.data.TryGetAttr(Data.Character.Str, out var str) ? str.GetValue() : 0;
             for (var i = 0; i < damagePercentages.Length; i++)
             {
                 damageEventBase.damages[i] =
-                    Mathf.FloorToInt(Random.Range(90f, 100f) / 100f * damage.value * damagePercentages[i] / 100f * (1+strBoost/100f));
+                    Mathf.FloorToInt(Random.Range(90f, 100f) / 100f * patk.GetValue() * damagePercentages[i] / 100f *
+                                     (1 + strBoost / 100f));
             }
 
             d.dealer.damageEventBase = damageEventBase;
         }
+
         IEnumerator InternalUse()
         {
             yield return new WaitForSeconds(delayPercentage * nextUseTime);

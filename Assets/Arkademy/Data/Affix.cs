@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Arkademy.Data
 {
     [Serializable]
-    public struct Affix
+    public class Affix
     {
         public List<Effect> effects;
     }

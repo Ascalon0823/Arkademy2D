@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Arkademy.Data
@@ -24,26 +25,31 @@ namespace Arkademy.Data
     }
     
     [Serializable]
-    public class Equipment
+    public class Equipment : Item
     {
-        [Serializable]
-        public struct Attribute
-        {
-            public static Attribute strength => new() { key = "Strength", value = 10 };
-            public string key;
-            public int value;
-        }
-        public string templateName;
-        public string name;
         public EquipmentSlot.Category slotCategory;
         public List<Attribute> attributes;
-        public List<Requirement> requirements;
-        public List<Affix> affixes;
+        public List<Affix> affixesWhenEquip;
+        private Dictionary<string, Attribute> _attrCache = new Dictionary<string, Attribute>();
 
+        private void BuildAttrCache()
+        {
+            foreach (var attr in attributes)
+            {
+                _attrCache[attr.key] = attr;
+            }
+        }
+
+        public bool TryGetAttr(string attrName, out Attribute attribute)
+        {
+            if (!_attrCache.Any()) BuildAttrCache();
+            return _attrCache.TryGetValue(attrName, out attribute);
+        }
         public Equipment()
         {
             
         }
+        
         public Equipment(Equipment baseEquipment)
         {
             name = baseEquipment.name;
@@ -53,8 +59,9 @@ namespace Arkademy.Data
             attributes.AddRange(baseEquipment.attributes);
             requirements = new List<Requirement>();
             requirements.AddRange(baseEquipment.requirements);
-            affixes = new List<Affix>();
-            affixes.AddRange(baseEquipment.affixes);
+            affixesWhenEquip = new List<Affix>();
+            affixesWhenEquip.AddRange(baseEquipment.affixesWhenEquip);
+            BuildAttrCache();
         }
     }
 }

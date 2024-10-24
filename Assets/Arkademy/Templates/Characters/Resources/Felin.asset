@@ -109,24 +109,74 @@ MonoBehaviour:
         requirements: []
         affixes: []
     attributes:
-    - key: 
-      value: 0
-      allocatable: 0
+    - key: Level
+      value: 1
       persistentModifiers: []
       runtimeModifiers: []
-    - key: 
+    - key: XP
       value: 0
-      allocatable: 0
       persistentModifiers: []
       runtimeModifiers: []
-    - key: 
-      value: 0
-      allocatable: 0
+    - key: AP
+      value: 3
       persistentModifiers: []
       runtimeModifiers: []
-    - key: 
-      value: 0
-      allocatable: 0
+    - key: Move Speed
+      value: 400
+      persistentModifiers: []
+      runtimeModifiers: []
+    - key: Size
+      value: 50
+      persistentModifiers: []
+      runtimeModifiers: []
+    - key: Strength
+      value: 10
+      persistentModifiers:
+      - key: AP Allocation
+        value: 0
+        type: 0
+      runtimeModifiers: []
+    - key: Dexterity
+      value: 10
+      persistentModifiers:
+      - key: AP Allocation
+        value: 0
+        type: 0
+      runtimeModifiers: []
+    - key: Constitution
+      value: 10
+      persistentModifiers:
+      - key: AP Allocation
+        value: 0
+        type: 0
+      runtimeModifiers: []
+    - key: Wisdom
+      value: 10
+      persistentModifiers:
+      - key: AP Allocation
+        value: 0
+        type: 0
+      runtimeModifiers: []
+    - key: Faith
+      value: 10
+      persistentModifiers:
+      - key: AP Allocation
+        value: 0
+        type: 0
+      runtimeModifiers: []
+    - key: Charisma
+      value: 10
+      persistentModifiers:
+      - key: AP Allocation
+        value: 0
+        type: 0
+      runtimeModifiers: []
+    - key: Life
+      value: 10000
+      persistentModifiers: []
+      runtimeModifiers: []
+    - key: Source
+      value: 10000
       persistentModifiers: []
       runtimeModifiers: []
   usingPrefab: {fileID: 0}

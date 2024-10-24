@@ -177,7 +177,7 @@ namespace Arkademy.Behaviour
 
             DamageTextCanvas.AddTextTo(transform, damage);
             if (!data.TryGetAttr(Data.Character.Life, out var life)) return;
-            life.Value = life.Value - damage.damages.Sum();
+            life.Value -= damage.damages.Sum();
         }
 
         private void OnDurabilityUpdated(long prev, long curr)

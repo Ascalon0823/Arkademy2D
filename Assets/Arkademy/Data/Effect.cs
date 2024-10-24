@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Arkademy.Data
 {
     [Serializable]
-    public struct Effect
+    public class Effect
     {
+        public List<Modifier> modifiers = new List<Modifier>();
     }
 }
