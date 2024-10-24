@@ -163,7 +163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4363143396808520623, guid: dcd1b963bc9db0b4087a54b35137af3a, type: 3}
       propertyPath: data.attributes.Array.data[1].key
-      value: DamageEffectiveness
+      value: Damage Effectiveness
       objectReference: {fileID: 0}
     - target: {fileID: 4363143396808520623, guid: dcd1b963bc9db0b4087a54b35137af3a, type: 3}
       propertyPath: data.attributes.Array.data[0].value

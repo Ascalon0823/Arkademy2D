@@ -14,7 +14,7 @@ namespace Arkademy.Data
     public class Field
     {
         public string key;
-        [SerializeField] private long value;
+        [SerializeField] protected long value;
         protected Action<long> OnValueChanged;
 
         public long Value

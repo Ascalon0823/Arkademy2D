@@ -69,7 +69,7 @@ namespace Arkademy.Behaviour
                     damageable.damageEffectiveness = curr;
                     var radius = body ? body.radius : 0.5f;
                     damageable.trigger.radius = radius * (damageable.faction == 1 ? 0.8f : 1.25f);
-                }));
+                },true));
             }
 
             if (data.TryGetAttr(Data.Character.Life, out var life))

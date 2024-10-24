@@ -12,7 +12,7 @@ namespace Arkademy.Data
         
         public List<Modifier> persistentModifiers = new List<Modifier>();
         [JsonIgnore] [SerializeField] private List<Modifier> runtimeModifiers = new List<Modifier>();
-        [JsonIgnore] public Func<long, Dictionary<Modifier.Type, long>, long> Calculator;
+        [JsonIgnore] public Func<long, Dictionary<Modifier.Type, long>, long> Calculator = null;
         private readonly Dictionary<Modifier, ISubscription> _subscriptions = new Dictionary<Modifier, ISubscription>();
 
         public Attribute(string key, long value) : base(key, value)
@@ -21,7 +21,7 @@ namespace Arkademy.Data
 
         public new Attribute Copy()
         {
-            var attr = new Attribute(key, Value);
+            var attr = new Attribute(key, value);
             attr.persistentModifiers = persistentModifiers.Select(x => x.Copy()).ToList();
             attr.runtimeModifiers = runtimeModifiers.Select(x => x.Copy()).ToList();
             attr.UpdateSubscriptions();
@@ -105,7 +105,7 @@ namespace Arkademy.Data
             return ret;
         }
 
-        private Func<long, Dictionary<Modifier.Type, long>, long> _baseCalculation = (attrBase, modifiers) =>
+        private static readonly Func<long, Dictionary<Modifier.Type, long>, long> _baseCalculation = (attrBase, modifiers) =>
         {
             var flat = modifiers.GetValueOrDefault(Modifier.Type.Flat, 0);
             var percent = modifiers.GetValueOrDefault(Modifier.Type.AdditivePercent, 0);
@@ -117,13 +117,14 @@ namespace Arkademy.Data
 
         public override long GetValue()
         {
+            var v = GetValueWith();
             return GetValueWith();
         }
 
         public long GetValueWith(Func<long, Dictionary<Modifier.Type, long>, long> calculation = null)
         {
             calculation ??= Calculator ?? _baseCalculation;
-            return calculation?.Invoke(Value, GetModifierValues()) ?? 0;
+            return calculation?.Invoke(value, GetModifierValues()) ?? value;
         }
     }
 }
