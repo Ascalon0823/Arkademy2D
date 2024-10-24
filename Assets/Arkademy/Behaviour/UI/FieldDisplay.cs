@@ -14,8 +14,8 @@ namespace Arkademy.Behaviour.UI
         public Button increaseButton;
         public Button decreaseButton;
 
-        private ReactiveFields.Field.Handle handle;
-        private ReactiveFields.Field field;
+        private ISubscription handle;
+        private Field field;
 
         public void SetButtonInteractable(bool increaseButtonInteractable, bool decreaseButtonInteractable)
         {
@@ -23,20 +23,20 @@ namespace Arkademy.Behaviour.UI
             decreaseButton.interactable = decreaseButtonInteractable;
         }
 
-        public void Bind(ReactiveFields.Field newField, bool allowDecrease = false,
+        public void Bind(Field newField, bool allowDecrease = false,
             bool allowIncrease = false,
             Action<int> onValueChanged = null,
-            Func<ReactiveFields.Field, string> toString = null, string keyText = null)
+            Func<Field, string> toString = null, string newKetText = null)
         {
             handle?.Dispose();
             field = newField;
-            var binding =new Action<long,long>((prev, curr) =>
+            var binding =new Action<long>((curr) =>
             {
-                Setup(keyText??field.key, toString == null ? field.Value.ToString() : toString.Invoke(field),
-                    allowDecrease, allowIncrease, diff =>
+                Setup(newKetText??field.key, toString == null ? field.Value.ToString() : toString.Invoke(field),
+                    allowDecrease, allowIncrease, (c) =>
                     {
-                        field.Value = field.Value + diff;
-                        onValueChanged?.Invoke(diff);
+                        onValueChanged?.Invoke(c);
+                        valueText.text = toString == null ? field.Value.ToString() : toString.Invoke(field);
                     });
             });
 

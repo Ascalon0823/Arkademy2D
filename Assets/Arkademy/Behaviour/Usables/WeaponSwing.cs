@@ -40,7 +40,7 @@ namespace Arkademy.Behaviour.Usables
             {
                 damages = new long [damagePercentages.Length]
             };
-            var strBoost = user.data.growth.TryGet(Data.Character.Str, out var str) ? str.Value : 0;
+            var strBoost = user.data.TryGetAttr(Data.Character.Str, out var str) ? str.Value : 0;
             for (var i = 0; i < damagePercentages.Length; i++)
             {
                 damageEventBase.damages[i] =

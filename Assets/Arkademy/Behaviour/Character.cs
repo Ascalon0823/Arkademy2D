@@ -21,10 +21,8 @@ namespace Arkademy.Behaviour
         public Damageable damageable;
         public Destructible destructible;
         public Usable usable;
-        [SerializeField] private FieldModifiers modifiers = new();
 
-        private List<ReactiveFields.Field.Handle> _handles = new List<ReactiveFields.Field.Handle>();
-
+        private List<ISubscription> _handles = new List<ISubscription>();
 
         public void Setup(Data.Character newData, int newFaction)
         {
@@ -38,28 +36,24 @@ namespace Arkademy.Behaviour
                 handle.Dispose();
             }
 
-            if (data.locomotion.TryGet(Data.Character.MSpd, out var speed))
+            if (data.TryGetAttr(Data.Character.MSpd, out var speed))
             {
                 var rb = gameObject.GetOrAddComponent<Rigidbody2D>();
                 rb.freezeRotation = true;
                 rb.gravityScale = 0f;
                 motor = gameObject.GetOrAddComponent<PhysicsMotor>();
                 motor.rb = rb;
-                _handles.AddRange(
-                    modifiers.Subscribe(speed,
-                        (ori, flat, percent) =>
-                        {
-                            motor.speed = (ori + flat) * ((100 + percent) / 100f) / 100f;
-                        }));
+                _handles.Add(
+                    speed.Subscribe(values => { motor.speed = values / 100f; }));
             }
 
-            if (data.locomotion.TryGet("Size", out var size))
+            if (data.TryGetAttr("Size", out var size))
             {
                 body = gameObject.GetOrAddComponent<CircleCollider2D>();
-                _handles.Add(size.Subscribe((prev, curr) => { body.radius = curr / 200f; }));
+                _handles.Add(size.Subscribe(curr => { body.radius = curr / 200f; }));
             }
 
-            if (data.defensive.TryGet(Data.Character.DmgEfc, out var damageEffe))
+            if (data.TryGetAttr(Data.Character.DmgEfc, out var damageEffe))
             {
                 damageable ??= new GameObject("DamageReceiverTrigger").AddComponent<Damageable>();
                 var damageReceiverTrigger = damageable.GetOrAddComponent<CircleCollider2D>();
@@ -70,20 +64,20 @@ namespace Arkademy.Behaviour
                 damageable.faction = faction;
                 damageable.OnDamageEvent = null;
                 damageable.OnDamageEvent += OnDamageTaken;
-                _handles.Add(damageEffe.Subscribe((prev, curr) =>
+                _handles.Add(damageEffe.Subscribe(curr =>
                 {
-                    damageable.damageEffectiveness = damageEffe.Value;
+                    damageable.damageEffectiveness = curr;
                     var radius = body ? body.radius : 0.5f;
                     damageable.trigger.radius = radius * (damageable.faction == 1 ? 0.8f : 1.25f);
                 }));
             }
 
-            if (data.resources.TryGet(Data.Character.Life, out var life))
+            if (data.TryGetAttr(Data.Character.Life, out var life))
             {
                 destructible = gameObject.GetOrAddComponent<Destructible>();
-                destructible.durability = life.Value;
+                destructible.durability = life.GetValue();
                 destructible.OnDurabilityUpdated += OnDurabilityUpdated;
-                life.Subscribe((_, curr) => { destructible.SetDurability(curr); });
+                life.Subscribe((curr) => { destructible.SetDurability(curr); });
             }
 
             if (template.animationController != null)
@@ -111,6 +105,7 @@ namespace Arkademy.Behaviour
 
             setupCompleted = true;
         }
+
 
         private void Start()
         {
@@ -163,13 +158,13 @@ namespace Arkademy.Behaviour
 
         private void Update()
         {
-            if (Application.isEditor)
-            {
-                foreach (var handle in _handles)
-                {
-                    handle.ForceTrigger();
-                }
-            }
+            // if (Application.isEditor)
+            // {
+            //     foreach (var handle in _handles)
+            //     {
+            //         handle.Trigger();
+            //     }
+            // }
         }
 
         private void OnDamageTaken(Data.DamageEvent damage)
@@ -181,7 +176,7 @@ namespace Arkademy.Behaviour
             }
 
             DamageTextCanvas.AddTextTo(transform, damage);
-            if (!data.resources.TryGet(Data.Character.Life, out var life)) return;
+            if (!data.TryGetAttr(Data.Character.Life, out var life)) return;
             life.Value = life.Value - damage.damages.Sum();
         }
 

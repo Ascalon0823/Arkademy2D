@@ -11,36 +11,32 @@ namespace Arkademy.Data
     {
         [HideInInspector] public string templateName;
         public string name;
-        public Progression progression;
-        public Growth growth;
-        public Resources resources;
-        public ReactiveFields locomotion;
-        public ReactiveFields offensive;
-        public ReactiveFields defensive;
-        public ReactiveFields casting;
-        public ReactiveFields common;
         public List<EquipmentSlot> slots;
 
+        public List<Attribute> attributes;
+
+        private Dictionary<string, Attribute> _attrCache = new Dictionary<string, Attribute>();
+
+        private void BuildAttrCache()
+        {
+            foreach (var attr in attributes)
+            {
+                _attrCache[attr.key] = attr;
+            }
+        }
+
+        public bool TryGetAttr(string attrName, out Attribute attribute)
+        {
+            if (!_attrCache.Any()) BuildAttrCache();
+            return _attrCache.TryGetValue(attrName, out attribute);
+        }
 
         public void UpdateFieldsBy(Character other)
         {
             if (string.IsNullOrEmpty(templateName)) templateName = other.templateName;
-            progression ??= other.progression.Copy();
-            progression.UpdateFieldsBy(other.progression);
-            growth ??= other.growth.Copy();
-            growth.Origin.UpdateFieldsBy(other.growth.Origin);
-            resources ??= other.resources.Copy();
-            resources.Max.UpdateFieldsBy(other.resources.Max);
-            locomotion ??= other.locomotion.Copy();
-            locomotion.UpdateFieldsBy(other.locomotion);
-            offensive ??= other.offensive.Copy();
-            offensive.UpdateFieldsBy(other.offensive);
-            defensive ??= other.defensive.Copy();
-            defensive.UpdateFieldsBy(other.defensive);
-            casting ??= other.casting.Copy();
-            casting.UpdateFieldsBy(other.casting);
-            common ??= other.common.Copy();
-            common.UpdateFieldsBy(other.common);
+            attributes ??= new List<Attribute>();
+            var hash = attributes.Select(x => x.key).ToHashSet();
+            attributes.AddRange(other.attributes.Where(x => !hash.Contains(x.key)).Select(x => x.Copy()));
         }
 
         public Character Copy()
@@ -49,15 +45,8 @@ namespace Arkademy.Data
             {
                 templateName = templateName,
                 name = name,
-                progression = progression.Copy(),
-                growth = growth.Copy(),
-                resources = resources.Copy(),
-                locomotion = locomotion.Copy(),
-                offensive = offensive.Copy(),
-                defensive = defensive.Copy(),
-                casting = casting.Copy(),
-                common = common.Copy(),
-                slots = slots.ToList()
+                slots = slots.ToList(),
+                attributes = attributes.Select(x => x.Copy()).ToList(),
             };
         }
     }

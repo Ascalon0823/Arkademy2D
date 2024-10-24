@@ -26,6 +26,13 @@ namespace Arkademy.Data
     [Serializable]
     public class Equipment
     {
+        [Serializable]
+        public struct Attribute
+        {
+            public static Attribute strength => new() { key = "Strength", value = 10 };
+            public string key;
+            public int value;
+        }
         public string templateName;
         public string name;
         public EquipmentSlot.Category slotCategory;

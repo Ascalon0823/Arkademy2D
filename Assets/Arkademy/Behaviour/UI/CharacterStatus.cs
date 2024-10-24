@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Arkademy.Data;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace Arkademy.Behaviour.UI
         [SerializeField] private RectTransform contentRoot;
         [SerializeField] private FieldDisplay fieldDisplayPrefab;
         [SerializeField] private List<FieldDisplay> fieldDisplayList = new();
-        private List<ReactiveFields.Field.Handle> handles = new List<ReactiveFields.Field.Handle>();
+        private List<Data.ISubscription> handles = new List<Data.ISubscription>();
 
         public override void OnActivated(bool activated)
         {
@@ -28,13 +29,13 @@ namespace Arkademy.Behaviour.UI
 
         private void Update()
         {
-            if (Application.isEditor)
-            {
-                foreach (var handle in handles)
-                {
-                    handle.ForceTrigger();
-                }
-            }
+            // if (Application.isEditor)
+            // {
+            //     foreach (var handle in handles)
+            //     {
+            //         handle.Trigger();
+            //     }
+            // }
         }
 
         public void Setup(Data.Character newCharacter)
@@ -42,17 +43,17 @@ namespace Arkademy.Behaviour.UI
             if (character == newCharacter) return;
             character = newCharacter;
             charaName.valueText.text = character.name;
-            if (character.progression.TryGet(Data.Character.Lv, out var lv))
+            if (character.TryGetAttr(Data.Character.Lv, out var lv))
             {
                 level.Bind(lv);
             }
 
-            if (character.progression.TryGet(Data.Character.XP, out var xp))
+            if (character.TryGetAttr(Data.Character.XP, out var xp))
             {
                 xP.Bind(xp);
             }
 
-            if (character.progression.TryGet(Data.Character.AP, out var ap))
+            if (character.TryGetAttr(Data.Character.AP, out var ap))
             {
                 aP.Bind(ap);
             }
@@ -73,21 +74,28 @@ namespace Arkademy.Behaviour.UI
 
             handles.Clear();
             fieldDisplayList.Clear();
-            foreach (var allocatable in character.growth.Origin.Fields)
+            foreach (var allocatable in character.attributes.Where(x =>
+                         x.persistentModifiers.Any(xx => xx.key == "AP Allocation")))
             {
-                if (!character.growth.TryGet(allocatable.key, out var growth)) continue;
                 var fd = Instantiate(fieldDisplayPrefab, contentRoot);
                 fieldDisplayList.Add(fd);
+                var growthIdx = allocatable.persistentModifiers.FindIndex(x => x.key == "AP Allocation");
+                var growth = allocatable.persistentModifiers[growthIdx];
                 fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
-                fd.Bind(growth, allowDecreasePoints, true, (diff) =>
+                fd.Bind(allocatable, allowDecreasePoints, true, (diff) =>
                     {
+                        growth.Value += diff;
                         ap.Value -= diff;
                         fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
-                    }, f => { return $"{allocatable.Value} + {f.Value}"; },
+                    }, f =>
+                    {
+                        var v = allocatable.GetValue();
+                        return $"{v}";
+                    },
                     Data.Character.GetAbbreviation(allocatable.key));
-                handles.Add(ap.Subscribe((l, l2) =>
+                handles.Add(ap.Subscribe((curr) =>
                 {
-                    fd.SetButtonInteractable(l2 > 0, growth.Value > 0 && allowDecreasePoints);
+                    fd.SetButtonInteractable(curr > 0, growth.Value > 0 && allowDecreasePoints);
                 }));
             }
         }
