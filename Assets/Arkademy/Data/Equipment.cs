@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Arkademy.Data
 {
     [Serializable]
-    public struct EquipmentSlot
+    public class EquipmentSlot
     {
         public enum Category
         {
@@ -20,10 +20,17 @@ namespace Arkademy.Data
             Face,
             Accessory
         }
+
         public Category category;
         public Equipment equipment;
+        public Action<Equipment, Equipment> OnEquipmentChanged;
+
+        public bool HasEquipment()
+        {
+            return equipment != null && !string.IsNullOrEmpty(equipment.templateName);
+        }
     }
-    
+
     [Serializable]
     public class Equipment : Item
     {
@@ -45,23 +52,27 @@ namespace Arkademy.Data
             if (!_attrCache.Any()) BuildAttrCache();
             return _attrCache.TryGetValue(attrName, out attribute);
         }
+
         public Equipment()
         {
-            
         }
-        
-        public Equipment(Equipment baseEquipment)
+
+        public Equipment Copy()
         {
-            name = baseEquipment.name;
-            templateName = baseEquipment.templateName;
-            slotCategory = baseEquipment.slotCategory;
-            attributes = new List<Attribute>();
-            attributes.AddRange(baseEquipment.attributes);
-            requirements = new List<Requirement>();
-            requirements.AddRange(baseEquipment.requirements);
-            affixesWhenEquip = new List<Affix>();
-            affixesWhenEquip.AddRange(baseEquipment.affixesWhenEquip);
-            BuildAttrCache();
+            var newEquip = new Equipment
+            {
+                name = name,
+                templateName = templateName,
+                slotCategory = slotCategory,
+                rarity = rarity,
+                stackLimit = stackLimit,
+                attributes = new List<Attribute>(),
+                affixesWhenEquip = new List<Affix>()
+            };
+            attributes.AddRange(attributes);
+            affixesWhenEquip.AddRange(affixesWhenEquip);
+            newEquip.BuildAttrCache();
+            return newEquip;
         }
     }
 }

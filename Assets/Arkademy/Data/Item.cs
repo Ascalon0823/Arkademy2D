@@ -8,8 +8,8 @@ namespace Arkademy.Data
     {
         public string templateName;
         public string name;
+        public int rarity;
         public int stackLimit;
-        public List<Affix> inventoryAffix;
-        public List<Requirement> requirements;
+        public int stack;
     }
 }

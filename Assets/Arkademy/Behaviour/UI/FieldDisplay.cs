@@ -23,7 +23,7 @@ namespace Arkademy.Behaviour.UI
             decreaseButton.interactable = decreaseButtonInteractable;
         }
 
-        public void Bind(Field newField, bool allowDecrease = false,
+        public ISubscription Bind(Field newField, bool allowDecrease = false,
             bool allowIncrease = false,
             Action<int> onValueChanged = null,
             Func<Field, string> toString = null, string newKetText = null)
@@ -41,6 +41,8 @@ namespace Arkademy.Behaviour.UI
             });
 
             handle = field.Subscribe(binding);
+
+            return handle;
         }
 
         public void Setup(string key, string value, bool allowDecrease, bool allowIncrease, Action<int> onValueChanged)

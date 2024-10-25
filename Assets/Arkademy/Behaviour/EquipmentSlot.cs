@@ -27,6 +27,7 @@ namespace Arkademy.Behaviour
             var template = Resources.Load<EquipmentTemplate>(newEquipment.templateName);
             equipment = Instantiate(template.equippedPrefab, transform);
             equipment.Setup(newEquipment);
+            data.OnEquipmentChanged?.Invoke(data.equipment,newEquipment);
             data.equipment = newEquipment;
             if (template.provideUsable)
             {

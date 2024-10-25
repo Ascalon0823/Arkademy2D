@@ -29,13 +29,13 @@ namespace Arkademy.Behaviour.UI
 
         private void Update()
         {
-            // if (Application.isEditor)
-            // {
-            //     foreach (var handle in handles)
-            //     {
-            //         handle.Trigger();
-            //     }
-            // }
+            if (Application.isEditor)
+            {
+                foreach (var handle in handles)
+                {
+                    handle.Trigger();
+                }
+            }
         }
 
         public void Setup(Data.Character newCharacter)
@@ -82,13 +82,13 @@ namespace Arkademy.Behaviour.UI
                 var growthIdx = allocatable.persistentModifiers.FindIndex(x => x.key == "AP Allocation");
                 var growth = allocatable.persistentModifiers[growthIdx];
                 fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
-                fd.Bind(allocatable, allowDecreasePoints, true, (diff) =>
+                handles.Add(fd.Bind(allocatable, allowDecreasePoints, true, (diff) =>
                     {
                         growth.Value += diff;
                         ap.Value -= diff;
                         fd.SetButtonInteractable(ap.Value > 0, growth.Value > 0 && allowDecreasePoints);
                     }, newKetText:
-                    Data.Character.GetAbbreviation(allocatable.key));
+                    Data.Character.GetAbbreviation(allocatable.key)));
                 handles.Add(ap.Subscribe((curr) =>
                 {
                     fd.SetButtonInteractable(curr > 0, growth.Value > 0 && allowDecreasePoints);
