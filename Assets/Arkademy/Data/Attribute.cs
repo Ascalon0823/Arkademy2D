@@ -52,8 +52,7 @@ namespace Arkademy.Data
         public void RemoveModifier(Modifier modifier, bool persistent = false)
         {
             var targetModifiers = persistent ? this.persistentModifiers : this.runtimeModifiers;
-            targetModifiers.Remove(modifier);
-            if (_subscriptions.Remove(modifier, out var subscription))
+            if (targetModifiers.Remove(modifier) && _subscriptions.Remove(modifier, out var subscription))
             {
                 subscription.Dispose();
             }

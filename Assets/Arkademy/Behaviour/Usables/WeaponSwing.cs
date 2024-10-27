@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using Arkademy.Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -50,9 +51,13 @@ namespace Arkademy.Behaviour.Usables
             var strBoost = user.data.TryGetAttr(Data.Character.Str, out var str) ? str.GetValue() : 0;
             for (var i = 0; i < damagePercentages.Length; i++)
             {
-                damageEventBase.damages[i] =
-                    Mathf.FloorToInt(Random.Range(90f, 100f) / 100f * patk.GetValue() * damagePercentages[i] / 100f *
-                                     (1 + strBoost / 100f));
+                var offensive = new Formula.OffensiveData();
+                var defensive = new Formula.DefensiveData();
+                offensive.atk = patk.GetValue();
+                offensive.statScaling = strBoost;
+                offensive.ability = damagePercentages[i];
+                offensive.mastery = 100;
+                damageEventBase.damages[i] = Formula.CalculateDamage(offensive, defensive);
             }
 
             d.dealer.damageEventBase = damageEventBase;

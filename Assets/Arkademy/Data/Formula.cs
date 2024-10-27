@@ -41,8 +41,8 @@ namespace Arkademy.Data
         }
         public static long CalculateDamage(OffensiveData offensive, DefensiveData defensive)
         {
-            var dealt = offensive.atk * (offensive.mastery / 10000f)
-                                      * (offensive.ability / 10000f) * (1 + offensive.statScaling / 100f)
+            var dealt = offensive.atk * (offensive.mastery / 100f)
+                                      * (offensive.ability / 100f) * (1 + offensive.statScaling / 100f)
                                       * (1 + offensive.damageBuff / 10000f) * (1 + offensive.criticalDamage / 10000f);
             var received = dealt *
                            (1 - defensive.damageResistance / 10000f * (1 - offensive.resistancePenetration / 10000f));

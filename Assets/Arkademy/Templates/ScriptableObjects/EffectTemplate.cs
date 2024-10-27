@@ -1,14 +1,17 @@
+using System;
 using UnityEngine;
 
-namespace Arkademy.Templates{
-    [CreateAssetMenu(fileName = "New Effect Template", menuName = "Template/Effect", order = 0)]
-    public class EffectTemplate : ScriptableObject{
-        public string effectName;
-        public string description;
+namespace Arkademy.Templates
+{
+    public abstract class EffectTemplate<T> : ScriptableObject where T : Data.Effect
+    {
+        public T effect;
         public Sprite icon;
-        public float duration;
-        public float cooldown;
-        public float damage;
-        
+
+        private void OnEnable()
+        {
+            if (effect != null)
+                effect.templateName = name;
+        }
     }
 }
