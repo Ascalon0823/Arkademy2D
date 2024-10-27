@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Arkademy.Data
@@ -8,22 +9,24 @@ namespace Arkademy.Data
     [Serializable]
     public class EquipmentSlot
     {
+        [Flags]
         public enum Category
         {
-            MainHand,
-            OffHand,
-            Head,
-            Shoulder,
-            Body,
-            Hand,
-            Feet,
-            Face,
-            Accessory
+            MainHand=1<<0,
+            OffHand=1<<1,
+            Head=1<<2,
+            Shoulder=1<<3,
+            Body=1<<4,
+            Hand=1<<5,
+            Feet=1<<6,
+            Face=1<<7,
+            Accessory=1<<8,
+            Utility=1<<9,
         }
 
         public Category category;
         public Equipment equipment;
-        public Action<Equipment, Equipment> OnEquipmentChanged;
+        [JsonIgnore]public Action<Equipment, Equipment> OnEquipmentChanged;
 
         public bool HasEquipment()
         {

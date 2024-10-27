@@ -8,7 +8,7 @@ namespace Arkademy.Data
     [Serializable]
     public abstract class Effect
     {
-        [Header("Runtime")] public string templateName;
+        [Header("Runtime")]
         public float duration;
         public Character target;
         public Character dealer;
@@ -28,13 +28,13 @@ namespace Arkademy.Data
         {
         }
 
-        protected virtual bool AppliedTo(Character character)
+        public virtual bool AppliedTo(Character character)
         {
             target = character;
             return true;
         }
 
-        protected abstract void Removed();
+        public abstract void Removed();
     }
 
     [Serializable]
@@ -64,7 +64,7 @@ namespace Arkademy.Data
             };
         }
 
-        protected override bool AppliedTo(Character character)
+        public override bool AppliedTo(Character character)
         {
             base.AppliedTo(character);
             if (!character.TryGetAttr(targetAttribute, out var attr)) return false;
@@ -78,7 +78,7 @@ namespace Arkademy.Data
             return true;
         }
 
-        protected override void Removed()
+        public override void Removed()
         {
             if (!target.TryGetAttr(targetAttribute, out var attr)) return;
             foreach (var mod in created)

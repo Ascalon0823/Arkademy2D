@@ -7,13 +7,13 @@ namespace Arkademy.Behaviour.UI
     {
         public Data.EquipmentSlot slot;
         public Data.EquipmentSlot.Category category;
+
         public void SetupSlot(Data.EquipmentSlot newSlot)
         {
             slot = newSlot;
-            if (!string.IsNullOrEmpty(slot.equipment.templateName))
-            {
-                Setup(slot.equipment);
-            }
+
+            Setup(slot.equipment);
+
             slot.OnEquipmentChanged += SetupEquipment;
         }
 

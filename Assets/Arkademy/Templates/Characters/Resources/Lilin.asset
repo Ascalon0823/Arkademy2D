@@ -20,94 +20,122 @@ MonoBehaviour:
       equipment:
         templateName: Wood Stick
         name: Beginner`s Wood Stick
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes:
         - key: Physical Attack
           value: 300
+          persistentModifiers: []
+          runtimeModifiers: []
         - key: Base Speed
           value: 100
-        requirements: []
-        affixes: []
+          persistentModifiers: []
+          runtimeModifiers: []
+        affixesWhenEquip:
+        - templateName: FlatStr
+          value: 0.5
     - category: 1
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 2
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 3
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 4
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 5
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 6
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 7
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 8
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 8
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     - category: 8
       equipment:
         templateName: 
         name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
         slotCategory: 0
         attributes: []
-        requirements: []
-        affixes: []
+        affixesWhenEquip: []
     attributes:
     - key: Level
       value: 1

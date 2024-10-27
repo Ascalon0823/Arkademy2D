@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc715293df64c72ab54ffaa42ec8759, type: 3}
   m_Name: Affix Config
   m_EditorClassIdentifier: 
-  affixConfigs:
-  - affix:
-      effects: []
-      value: 0
-    category: 0
-    ranges:
-    - min: -169
-      max: 0
+  affixes:
+  - {fileID: 11400000, guid: d9f5d75d7b1191344bfcb9ff6711617f, type: 2}
+  - {fileID: 11400000, guid: 3b8b02098b692ff489ba9aa37032abcd, type: 2}

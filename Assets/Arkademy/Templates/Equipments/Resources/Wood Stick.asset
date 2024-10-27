@@ -19,8 +19,18 @@ MonoBehaviour:
     stackLimit: 0
     stack: 0
     slotCategory: 0
-    attributes: []
-    affixesWhenEquip: []
+    attributes:
+    - key: Physical Damage
+      value: 300
+      persistentModifiers: []
+      runtimeModifiers: []
+    - key: Base Speed
+      value: 100
+      persistentModifiers: []
+      runtimeModifiers: []
+    affixesWhenEquip:
+    - templateName: FlatStr
+      value: 0.5
   uiSprite: {fileID: -414272318, guid: aff037da44459934d8265dbcba2fa859, type: 3}
   equippedPrefab: {fileID: 3229429608200534242, guid: 6b6db5b3b635ec24ab284e0b2f50c4aa, type: 3}
   equipmentSprite: {fileID: -414272318, guid: aff037da44459934d8265dbcba2fa859, type: 3}

@@ -9,11 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23843dac827146c1b361e31eda6ae798, type: 3}
-  m_Name: StrengthModifierEffect
+  m_Script: {fileID: 11500000, guid: 2f090a396387474fb16b0b30320ea193, type: 3}
+  m_Name: FlatStr
   m_EditorClassIdentifier: 
+  affixData:
+    templateName: FlatStr
+    value: 0
+  config:
+  - categories: -1
+    rarities:
+    - rarity: 0
+      minValue: 5
+      maxValue: 10
   effect:
-    templateName: StrengthModifierEffect
     duration: 0
     target:
       templateName: 
@@ -25,11 +33,10 @@ MonoBehaviour:
       name: 
       slots: []
       attributes: []
-    targetAttribute: 
-    modifierSourceString: 
+    targetAttribute: Strength
+    modifierSourceString: Affix
     modifiers:
-    - key: 
-      value: 0
+    - key: Affix
+      value: 5
       type: 0
     created: []
-  icon: {fileID: 23125448, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}

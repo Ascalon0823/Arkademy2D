@@ -27,8 +27,16 @@ namespace Arkademy.Behaviour
             var template = Resources.Load<EquipmentTemplate>(newEquipment.templateName);
             equipment = Instantiate(template.equippedPrefab, transform);
             equipment.Setup(newEquipment);
-            data.OnEquipmentChanged?.Invoke(data.equipment,newEquipment);
+            data.OnEquipmentChanged?.Invoke(data.equipment, newEquipment);
             data.equipment = newEquipment;
+            if (newEquipment.affixesWhenEquip != null)
+            {
+                foreach (var affix in newEquipment.affixesWhenEquip)
+                {
+                    affix.OnEquippedTo(user.data, newEquipment);
+                }
+            }
+
             if (template.provideUsable)
             {
                 var usable = Instantiate(template.provideUsable, transform) as WeaponSwing;
@@ -40,6 +48,7 @@ namespace Arkademy.Behaviour
                     usable.equipment = equipment;
                 }
             }
+
             return true;
         }
     }

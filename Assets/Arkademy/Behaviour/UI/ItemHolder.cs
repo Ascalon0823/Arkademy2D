@@ -17,7 +17,7 @@ namespace Arkademy.Behaviour.UI
         public virtual void Setup<T>(T newItem) where T : Item
         {
             item = newItem;
-            if (item == null)
+            if (item == null || string.IsNullOrEmpty(item.templateName))
             {
                 rarityColor.color =RarityConfig.Instance.TryGetConfig(0, out var defaultConfig)
                     ? defaultConfig.color
