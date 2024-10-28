@@ -311,6 +311,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6406628995347590549, guid: 8c4558a62407bad4aa833629c51eba3a, type: 3}
   m_PrefabInstance: {fileID: 1327023860}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &704213498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 704213499}
+  - component: {fileID: 704213500}
+  m_Layer: 0
+  m_Name: CharacterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &704213499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704213498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.03, y: -3.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2069644096}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &704213500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704213498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 279854b31f31f4c4eac0ae1a46f16996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4363143396808520623, guid: dcd1b963bc9db0b4087a54b35137af3a, type: 3}
+  template: {fileID: 11400000, guid: 2e2e6cecb3155ce43884278f6e6caf0b, type: 2}
+  spawnOnStart: 1
+  lastSpawnedCharacter: {fileID: 0}
+  faction: 0
 --- !u!1 &1280832323
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +424,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa69e086ccb38ae49a94d48e446f29b5, type: 2}
   - {fileID: 11400000, guid: 7aef9631fb2891c4aa552c4c14b4ed7a, type: 2}
   renderMap: {fileID: 1280832327}
-  offset: {x: 1552.023, y: 26.561937}
+  offset: {x: 569.1463, y: 3155.1438}
   cam: {fileID: 0}
   gridSize: -2147483648
   gridPos: {x: 0, y: 0}
@@ -17922,6 +17971,17 @@ MonoBehaviour:
   playerPrefab: {fileID: 5943572767699180725, guid: d9f42fd042f5eea4cbc282214819e58e, type: 3}
   players: []
   pauseCount: 0
+  offensiveData:
+    atk: 0
+    mastery: 5000
+    ability: 10000
+    statScaling: 0
+    damageBuff: 0
+    criticalDamage: 0
+    resistancePenetration: 0
+  defensiveData:
+    damageResistance: 0
+  damage: 0
 --- !u!4 &1882380327
 Transform:
   m_ObjectHideFlags: 0
@@ -17983,6 +18043,7 @@ Transform:
   - {fileID: 1628844826}
   - {fileID: 1280832324}
   - {fileID: 601885775}
+  - {fileID: 704213499}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807

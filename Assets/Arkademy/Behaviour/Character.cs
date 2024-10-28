@@ -6,6 +6,7 @@ using Arkademy.Data;
 using Arkademy.Templates;
 using Arkademy.UI.Game;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Arkademy.Behaviour
 {
@@ -21,6 +22,7 @@ namespace Arkademy.Behaviour
         public Damageable damageable;
         public Destructible destructible;
         public Usable usable;
+        public UnityEvent onDeath;
 
         private List<ISubscription> _handles = new List<ISubscription>();
 
@@ -69,7 +71,7 @@ namespace Arkademy.Behaviour
                     damageable.damageEffectiveness = curr;
                     var radius = body ? body.radius : 0.5f;
                     damageable.trigger.radius = radius * (damageable.faction == 1 ? 0.8f : 1.25f);
-                },true));
+                }, true));
             }
 
             if (data.TryGetAttr(Data.Character.Life, out var life))
@@ -189,6 +191,10 @@ namespace Arkademy.Behaviour
                 {
                     graphic.SetDead();
                 }
+
+                onDeath?.Invoke();
+                if (motor && motor.rb) motor.rb.simulated = false;
+                if (damageable) damageable.OnDamageEvent -= OnDamageTaken;
             }
         }
     }
