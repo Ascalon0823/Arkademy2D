@@ -27,14 +27,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844770440143117538}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.83724177, w: 0.5468329}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2633079717379024880}
   m_Father: {fileID: 3296034594504368936}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 113.7}
 --- !u!61 &63584418693149446
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114,6 +114,9 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  OnStay:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2462870980348067198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +135,8 @@ MonoBehaviour:
   beforeDamageEvent:
     m_PersistentCalls:
       m_Calls: []
+  cooldown: 0
+  lastTrigger: 0
 --- !u!1 &2155729229262081020
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,5 +314,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f02983d88ed4f2f9c96db115b592f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8219127072880277203}
   animator: {fileID: 2953556936301103957}
   playSpeed: 1
+  flipY: 1
+  flipX: 0
+  flipYRefAxis: {x: 1, y: 0}
+  flipYUseAxis: {x: 1, y: 0}
+  flipXRefAxis: {x: 0, y: 0}
+  flipXUseAxis: {x: 0, y: 0}
