@@ -48,13 +48,14 @@ MonoBehaviour:
   data:
     templateName: 
     name: 
+    rarity: 0
+    stackLimit: 0
+    stack: 0
     slotCategory: 0
     attributes: []
-    requirements: []
-    affixes: []
+    affixesWhenEquip: []
   facingDir: {x: 0, y: 0}
-  rotateToFace: 0
-  flipToFace: 0
+  providedUsable: {fileID: 0}
   graphicParent: {fileID: 6819292368722532010}
   graphic: {fileID: 0}
 --- !u!1 &4421503591516784976
@@ -81,10 +82,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4421503591516784976}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2780063941034426444}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

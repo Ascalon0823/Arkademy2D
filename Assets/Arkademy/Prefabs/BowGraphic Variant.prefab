@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowGraphic Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5716740200161492501, guid: 722707d919bf24748846c505dbf590b1, type: 3}
+      propertyPath: rotateToFace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163693518786402058, guid: 722707d919bf24748846c505dbf590b1, type: 3}
+      propertyPath: flipY
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7074890773432494382, guid: 722707d919bf24748846c505dbf590b1, type: 3}
       propertyPath: m_Size.y
       value: 1

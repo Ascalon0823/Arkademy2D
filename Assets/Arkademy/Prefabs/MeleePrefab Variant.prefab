@@ -52,18 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MeleePrefab Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 6819292368722532010, guid: fba003e430d4cc64d8380c495e7a4f76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6819292368722532010, guid: fba003e430d4cc64d8380c495e7a4f76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6819292368722532010, guid: fba003e430d4cc64d8380c495e7a4f76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 8687697317234690914, guid: fba003e430d4cc64d8380c495e7a4f76, type: 3}
       propertyPath: flipToFace
       value: 1

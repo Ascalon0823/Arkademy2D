@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 8219127072880277203}
   - component: {fileID: 2953556936301103957}
   - component: {fileID: 3613158970807989968}
+  - component: {fileID: 694514499643691846}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -272,7 +273,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -8516795641755805246, guid: 8b2484b6c7fd541eeb6014ee7f228ec9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1.5, y: 1.75}
   m_AdaptiveModeThreshold: 0.5
@@ -314,9 +315,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f02983d88ed4f2f9c96db115b592f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 8219127072880277203}
   animator: {fileID: 2953556936301103957}
   playSpeed: 1
+--- !u!114 &694514499643691846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4708443622588872297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b3586e2dff45068ab4559e1876126b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8219127072880277203}
   flipY: 1
   flipX: 0
   flipYRefAxis: {x: 1, y: 0}

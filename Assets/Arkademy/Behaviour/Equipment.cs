@@ -10,8 +10,7 @@ namespace Arkademy.Behaviour
     {
         public Data.Equipment data;
         public Vector2 facingDir;
-        public bool rotateToFace;
-        public bool flipToFace;
+       
 
         [SerializeField] private Usable providedUsable;
         public Transform graphicParent;
@@ -28,6 +27,7 @@ namespace Arkademy.Behaviour
                 graphic = Instantiate(template.equippedGraphicPrefab, graphicParent);
                 graphic.spriteRenderer.sprite = template.equipmentSprite;
                 graphic.animator.runtimeAnimatorController = template.equipmentAnimation;
+                graphic.equipment = this;
             }
             if (data.affixesWhenEquip != null)
             {
@@ -62,22 +62,6 @@ namespace Arkademy.Behaviour
             }
         }
 
-        private void Update()
-        {
-            if (rotateToFace)
-            {
-                graphicParent.up = facingDir;
-            }
-            else if (flipToFace)
-            {
-                graphicParent.up = Vector2.Dot(facingDir, Vector2.left) >= 0 ? Vector2.left : Vector2.right;
-            }
-            else
-            {
-                return;
-            }
-
-            graphicParent.localScale = new Vector3(Vector2.Dot(facingDir, Vector2.left) >= 0 ? 1 : -1, 1, 1);
-        }
+      
     }
 }

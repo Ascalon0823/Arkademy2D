@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 7358648108677042999}
   - component: {fileID: 7074890773432494382}
   - component: {fileID: 1223342127097074733}
+  - component: {fileID: 6163693518786402058}
   m_Layer: 0
   m_Name: Graphic
   m_TagString: Untagged
@@ -157,3 +158,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6163693518786402058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4635972145181981134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b3586e2dff45068ab4559e1876126b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7074890773432494382}
+  flipY: 1
+  flipX: 0
+  flipYRefAxis: {x: -1, y: 0}
+  flipYUseAxis: {x: -1, y: 0}
+  flipXRefAxis: {x: 0, y: 0}
+  flipXUseAxis: {x: 0, y: 0}
