@@ -30,10 +30,6 @@ namespace Arkademy.Behaviour
         public static bool Paused => _current.pauseCount > 0;
         public int pauseCount;
         public static List<Player> localPlayers => _current.players;
-
-        [SerializeField] private Formula.OffensiveData offensiveData;
-        [SerializeField] private Formula.DefensiveData defensiveData;
-        [SerializeField] private long damage;
         private void Awake()
         {
             if (_current && _current != this)
@@ -63,8 +59,6 @@ namespace Arkademy.Behaviour
         private void Update()
         {
             Time.timeScale = Paused ? 0 : 1f;
-            damage = Formula.CalculateDamage(offensiveData, defensiveData);
-
         }
 
         private static Session GetLastSession()
