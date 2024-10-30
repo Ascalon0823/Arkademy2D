@@ -38,13 +38,23 @@ namespace Arkademy.Behaviour
             {
                 handle.Dispose();
             }
+            _handles.Clear();
 
+            foreach (var slot in equipmentSlots)
+            {
+                slot.Equip(null);
+                Destroy(slot);
+            }
+            equipmentSlots.Clear();
             if (data.TryGetAttr(Data.Character.MSpd, out var speed))
             {
                 var rb = gameObject.GetOrAddComponent<Rigidbody2D>();
                 rb.freezeRotation = true;
                 rb.gravityScale = 0f;
+                rb.sleepMode = RigidbodySleepMode2D.NeverSleep;
+                rb.simulated = true;
                 motor = gameObject.GetOrAddComponent<PhysicsMotor>();
+                motor.enabled = true;
                 motor.rb = rb;
                 _handles.Add(
                     speed.Subscribe(values => { motor.speed = values / 100f; }));
@@ -80,13 +90,27 @@ namespace Arkademy.Behaviour
                 destructible = gameObject.GetOrAddComponent<Destructible>();
                 destructible.durability = life.GetValue();
                 destructible.OnDurabilityUpdated += OnDurabilityUpdated;
-                life.Subscribe((curr) => { destructible.SetDurability(curr); });
+                _handles.Add(life.Subscribe((curr) => { destructible.SetDurability(curr); }));
+            }
+
+            if (data.TryGetAttr("Contact Damage", out var contactDamage))
+            {
+                var damage = Instantiate(Resources.Load<DamageDealer>("ContactDamage"), transform);
+                damage.faction = faction;
+                if (body)
+                {
+                    damage.transform.localScale = (body.radius / 0.25f) * Vector3.one;
+                }
+
+                onDeath.AddListener(() => damage.gameObject.SetActive(false));
+                _handles.Add(contactDamage.Subscribe(curr => { damage.damageEventBase.damages = new[] { curr }; }));
             }
 
             if (template.animationController != null)
             {
                 if (!graphic)
                     graphic = Instantiate(Resources.Load<CharacterGraphic>("CharacterGraphic"), transform);
+                graphic.SetDead(false);
                 graphic.transform.localPosition = Vector3.zero;
                 graphic.animator.runtimeAnimatorController = template.animationController;
                 graphic.facingLeft = !template.facingRight;
@@ -110,7 +134,7 @@ namespace Arkademy.Behaviour
             {
                 var ai = gameObject.AddComponent<CharacterAI>();
                 ai.target = this;
-                onDeath.AddListener(()=>ai.enabled = false);
+                onDeath.AddListener(() => ai.enabled = false);
             }
 
             setupCompleted = true;
@@ -192,16 +216,26 @@ namespace Arkademy.Behaviour
 
         private void OnDurabilityUpdated(long prev, long curr)
         {
+            if (curr > 0 && prev <= 0)
+            {
+                Setup(data,faction);
+                return;
+            }
             if (curr <= 0)
             {
-                Debug.Log("Dead");
+                if (prev <= 0) return;
+                Debug.Log($"Dead {prev} {curr}");
                 if (graphic)
                 {
                     graphic.SetDead();
                 }
 
                 onDeath?.Invoke();
-                if (motor && motor.rb) motor.rb.simulated = false;
+                if (motor)
+                {
+                    motor.enabled = false;
+                    motor.rb.simulated = false;
+                }
                 if (damageable) damageable.OnDamageEvent -= OnDamageTaken;
             }
         }

@@ -33,6 +33,10 @@ MonoBehaviour:
       value: 10000
       persistentModifiers: []
       runtimeModifiers: []
+    - key: Contact Damage
+      value: 1000
+      persistentModifiers: []
+      runtimeModifiers: []
   usingPrefab: {fileID: 0}
   characterSprite: {fileID: -2064422764693090554, guid: 3588ea48dde1b774385a9edccf39694e, type: 3}
   animationController: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}

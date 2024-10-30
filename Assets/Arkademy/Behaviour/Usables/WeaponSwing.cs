@@ -66,6 +66,7 @@ namespace Arkademy.Behaviour.Usables
         IEnumerator InternalUse()
         {
             yield return new WaitForSeconds(delayPercentage * nextUseTime);
+            if (!equipment) yield break;
             graphic.playSpeed = effectiveTimePercentage * nextUseTime;
             var pos = (Vector2)equipment.transform.position + equipment.facingDir.normalized;
             var size = Vector2.one * 2f;

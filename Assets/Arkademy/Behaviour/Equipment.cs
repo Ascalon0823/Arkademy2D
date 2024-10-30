@@ -1,4 +1,5 @@
 using System;
+using Arkademy.Behaviour.Usables;
 using Arkademy.Templates;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -12,10 +13,11 @@ namespace Arkademy.Behaviour
         public bool rotateToFace;
         public bool flipToFace;
 
+        [SerializeField] private Usable providedUsable;
         public Transform graphicParent;
         public EquipmentGraphic graphic;
-
-        public void Setup(Data.Equipment newData)
+        
+        public void Setup(Data.Equipment newData, Character user)
         {
             if (string.IsNullOrEmpty(newData.templateName)) return;
             var template = Resources.Load<EquipmentTemplate>(newData.templateName);
@@ -27,8 +29,37 @@ namespace Arkademy.Behaviour
                 graphic.spriteRenderer.sprite = template.equipmentSprite;
                 graphic.animator.runtimeAnimatorController = template.equipmentAnimation;
             }
+            if (data.affixesWhenEquip != null)
+            {
+                foreach (var affix in data.affixesWhenEquip)
+                {
+                    affix.OnEquippedTo(user.data, newData);
+                }
+            }
+            if (template.provideUsable)
+            {
+                var usable = Instantiate(template.provideUsable, transform);
+                if (usable)
+                {
+                    user.usable = usable;
+                    usable.user = user;
+                    if (usable is WeaponSwing ws)
+                        ws.equipment = this;
+                }
+            }
 
             name = data.name;
+        }
+
+        public void UnEquipFrom()
+        {
+            if (data.affixesWhenEquip != null)
+            {
+                foreach (var affix in data.affixesWhenEquip)
+                {
+                    affix.OnRemoved();
+                }
+            }
         }
 
         private void Update()

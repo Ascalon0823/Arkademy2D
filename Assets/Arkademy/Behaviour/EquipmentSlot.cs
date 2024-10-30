@@ -1,6 +1,7 @@
 using Arkademy.Behaviour.Usables;
 using Arkademy.Data;
 using Arkademy.Templates;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Arkademy.Behaviour
@@ -23,32 +24,19 @@ namespace Arkademy.Behaviour
 
         public bool Equip(Data.Equipment newEquipment)
         {
-            if (equipment) return false;
+            if (equipment)
+            {
+                equipment.UnEquipFrom();
+                Destroy(equipment.gameObject);
+            }
+
+            if (newEquipment == null || !newEquipment.Valid()) return true;
+            Debug.Log("change equip");
             var template = Resources.Load<EquipmentTemplate>(newEquipment.templateName);
             equipment = Instantiate(template.equippedPrefab, transform);
-            equipment.Setup(newEquipment);
+            equipment.Setup(newEquipment, user);
             data.OnEquipmentChanged?.Invoke(data.equipment, newEquipment);
             data.equipment = newEquipment;
-            if (newEquipment.affixesWhenEquip != null)
-            {
-                foreach (var affix in newEquipment.affixesWhenEquip)
-                {
-                    affix.OnEquippedTo(user.data, newEquipment);
-                }
-            }
-
-            if (template.provideUsable)
-            {
-                var usable = Instantiate(template.provideUsable, transform) as WeaponSwing;
-                Debug.Log(usable);
-                if (usable)
-                {
-                    user.usable = usable;
-                    usable.user = user;
-                    usable.equipment = equipment;
-                }
-            }
-
             return true;
         }
     }

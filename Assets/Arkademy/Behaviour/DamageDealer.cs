@@ -15,8 +15,12 @@ namespace Arkademy.Behaviour
         public int faction;
         public Data.DamageEvent damageEventBase;
         public UnityEvent<BeforeDamageEvent> beforeDamageEvent;
+        public float cooldown;
+        [SerializeField] private float lastTrigger;
         public void DealDamageTo(Collider2D other)
         {
+            if (!isActiveAndEnabled) return;
+            if (Time.timeSinceLevelLoad - lastTrigger < cooldown) return;
             var damageable = other.GetComponent<Damageable>();
             if (!damageable) return;
             if (damageable.faction == faction) return;
@@ -26,6 +30,7 @@ namespace Arkademy.Behaviour
                 dealer = this
             });
             damageable.TakeDamage(damageEventBase);
+            lastTrigger = Time.timeSinceLevelLoad;
         }
     }
 }

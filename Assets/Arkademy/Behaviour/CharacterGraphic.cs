@@ -34,9 +34,9 @@ namespace Arkademy.Behaviour
             animator.SetTrigger(Attack);
         }
 
-        public void SetDead()
+        public void SetDead(bool isDead = true)
         {
-            animator.SetTrigger("dead");
+            animator.SetBool("dead", isDead);
         }
 
         public void SetHit()

@@ -24,6 +24,14 @@ namespace Arkademy.Data
             };
         }
 
+        public void OnRemoved()
+        {
+            foreach (var effect in effects)
+            {
+                effect.Removed();
+            }
+        }
+
         public void OnEquippedTo(Data.Character character, Data.Equipment equipment)
         {
             var template = Resources.Load<AffixTemplate>(templateName);

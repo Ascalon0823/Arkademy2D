@@ -11,7 +11,9 @@ namespace Arkademy.Behaviour
         public void SetDurability(long newDurability)
         {
             if (durability == newDurability) return;
-            OnDurabilityUpdated?.Invoke(durability, newDurability);
+            var temp = durability;
+            durability = newDurability;
+            OnDurabilityUpdated?.Invoke(temp, newDurability);
         }
 
         private void OnDisable()

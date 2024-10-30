@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 967124f5e2da4fc2a619b624562c29aa, type: 3}
-  m_Name: Wood Stick
+  m_Name: Steel Sword
   m_EditorClassIdentifier: 
   templateData:
-    templateName: Wood Stick
-    name: Wood Stick
-    rarity: 0
+    templateName: Steel Sword
+    name: Steel Sword
+    rarity: 1
     stackLimit: 0
     stack: 0
     slotCategory: 1
     attributes:
-    - key: Physical Damage
+    - key: Physical Attack
       value: 300
       persistentModifiers: []
       runtimeModifiers: []
@@ -28,12 +28,10 @@ MonoBehaviour:
       value: 100
       persistentModifiers: []
       runtimeModifiers: []
-    affixesWhenEquip:
-    - templateName: FlatStr
-      value: 0.5
-  uiSprite: {fileID: -414272318, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+    affixesWhenEquip: []
+  uiSprite: {fileID: -1537304294, guid: aff037da44459934d8265dbcba2fa859, type: 3}
   equippedPrefab: {fileID: 3229429608200534242, guid: 6b6db5b3b635ec24ab284e0b2f50c4aa, type: 3}
-  equipmentSprite: {fileID: -414272318, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+  equipmentSprite: {fileID: -1537304294, guid: aff037da44459934d8265dbcba2fa859, type: 3}
   equipmentAnimation: {fileID: 0}
   equippedGraphicPrefab: {fileID: 1571215621446629128, guid: 7ed9d4b82d6fce04886acba4244ef9df, type: 3}
   provideUsable: {fileID: 7850978344127179132, guid: 5e1b0ba36b688c541a4bc4f67ca5dfe4, type: 3}

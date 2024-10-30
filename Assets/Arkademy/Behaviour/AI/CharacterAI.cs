@@ -16,13 +16,15 @@ namespace Arkademy.Behaviour.AI
             {
                 currEnemy = FindEnemy();
             }
+
             if (!currEnemy) return;
             target.MoveDir((currEnemy.transform.position - target.transform.position).normalized);
         }
 
         private Character FindEnemy()
         {
-            var nearestEnemy = GameObject.FindObjectsOfType<Character>().Where(x => x.faction != target.faction)
+            var nearestEnemy = FindObjectsByType<Character>(FindObjectsSortMode.None).Where(x =>
+                    x.destructible && x.destructible.durability > 0 && x.faction != target.faction)
                 .OrderBy(x => Vector3.Distance(x.transform.position, target.transform.position)).FirstOrDefault();
             return nearestEnemy;
         }
