@@ -22,6 +22,11 @@ namespace Arkademy.Behaviour.UI
             foreach (var holder in holders)
             {
                 var slot = character.slots.Find(x => x.category == holder.category && holder.slot != x);
+                if (slot == null)
+                {
+                    holder.gameObject.SetActive(false);
+                    continue;
+                }
                 holder.SetupSlot(slot);
             }
         }

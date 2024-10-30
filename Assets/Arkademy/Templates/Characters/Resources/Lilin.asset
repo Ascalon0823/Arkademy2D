@@ -16,14 +16,14 @@ MonoBehaviour:
     templateName: Lilin
     name: 
     slots:
-    - category: 0
+    - category: 1
       equipment:
         templateName: Wood Stick
         name: Beginner`s Wood Stick
         rarity: 0
         stackLimit: 0
         stack: 0
-        slotCategory: 0
+        slotCategory: 1
         attributes:
         - key: Physical Attack
           value: 300
@@ -36,16 +36,6 @@ MonoBehaviour:
         affixesWhenEquip:
         - templateName: FlatStr
           value: 0.5
-    - category: 1
-      equipment:
-        templateName: 
-        name: 
-        rarity: 0
-        stackLimit: 0
-        stack: 0
-        slotCategory: 0
-        attributes: []
-        affixesWhenEquip: []
     - category: 2
       equipment:
         templateName: 
@@ -56,7 +46,17 @@ MonoBehaviour:
         slotCategory: 0
         attributes: []
         affixesWhenEquip: []
-    - category: 3
+    - category: 512
+      equipment:
+        templateName: 
+        name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
+        slotCategory: 0
+        attributes: []
+        affixesWhenEquip: []
+    - category: 256
       equipment:
         templateName: 
         name: 
@@ -76,36 +76,6 @@ MonoBehaviour:
         slotCategory: 0
         attributes: []
         affixesWhenEquip: []
-    - category: 5
-      equipment:
-        templateName: 
-        name: 
-        rarity: 0
-        stackLimit: 0
-        stack: 0
-        slotCategory: 0
-        attributes: []
-        affixesWhenEquip: []
-    - category: 6
-      equipment:
-        templateName: 
-        name: 
-        rarity: 0
-        stackLimit: 0
-        stack: 0
-        slotCategory: 0
-        attributes: []
-        affixesWhenEquip: []
-    - category: 7
-      equipment:
-        templateName: 
-        name: 
-        rarity: 0
-        stackLimit: 0
-        stack: 0
-        slotCategory: 0
-        attributes: []
-        affixesWhenEquip: []
     - category: 8
       equipment:
         templateName: 
@@ -116,7 +86,7 @@ MonoBehaviour:
         slotCategory: 0
         attributes: []
         affixesWhenEquip: []
-    - category: 8
+    - category: 16
       equipment:
         templateName: 
         name: 
@@ -126,7 +96,37 @@ MonoBehaviour:
         slotCategory: 0
         attributes: []
         affixesWhenEquip: []
-    - category: 8
+    - category: 32
+      equipment:
+        templateName: 
+        name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
+        slotCategory: 0
+        attributes: []
+        affixesWhenEquip: []
+    - category: 64
+      equipment:
+        templateName: 
+        name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
+        slotCategory: 0
+        attributes: []
+        affixesWhenEquip: []
+    - category: 128
+      equipment:
+        templateName: 
+        name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
+        slotCategory: 0
+        attributes: []
+        affixesWhenEquip: []
+    - category: 256
       equipment:
         templateName: 
         name: 

@@ -46,6 +46,26 @@ MonoBehaviour:
         slotCategory: 0
         attributes: []
         affixesWhenEquip: []
+    - category: 512
+      equipment:
+        templateName: 
+        name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
+        slotCategory: 0
+        attributes: []
+        affixesWhenEquip: []
+    - category: 256
+      equipment:
+        templateName: 
+        name: 
+        rarity: 0
+        stackLimit: 0
+        stack: 0
+        slotCategory: 0
+        attributes: []
+        affixesWhenEquip: []
     - category: 4
       equipment:
         templateName: 
@@ -97,26 +117,6 @@ MonoBehaviour:
         attributes: []
         affixesWhenEquip: []
     - category: 128
-      equipment:
-        templateName: 
-        name: 
-        rarity: 0
-        stackLimit: 0
-        stack: 0
-        slotCategory: 0
-        attributes: []
-        affixesWhenEquip: []
-    - category: 256
-      equipment:
-        templateName: 
-        name: 
-        rarity: 0
-        stackLimit: 0
-        stack: 0
-        slotCategory: 0
-        attributes: []
-        affixesWhenEquip: []
-    - category: 256
       equipment:
         templateName: 
         name: 
