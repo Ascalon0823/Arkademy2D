@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Arkademy.Behaviour.AI;
 using Arkademy.Data;
 using Arkademy.Templates;
 using Arkademy.UI.Game;
@@ -103,6 +104,13 @@ namespace Arkademy.Behaviour
                     slot.Setup(slotData, this);
                     equipmentSlots.Add(slot);
                 }
+            }
+
+            if (faction == 0)
+            {
+                var ai = gameObject.AddComponent<CharacterAI>();
+                ai.target = this;
+                onDeath.AddListener(()=>ai.enabled = false);
             }
 
             setupCompleted = true;
