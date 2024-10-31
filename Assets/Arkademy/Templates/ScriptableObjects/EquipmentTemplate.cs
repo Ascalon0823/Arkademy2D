@@ -4,7 +4,7 @@ using Equipment = Arkademy.Data.Equipment;
 
 namespace Arkademy.Templates
 {
-    [CreateAssetMenu(fileName = "New Equipment Template", menuName = "Template/Equipment", order = 0)]
+    [CreateAssetMenu(fileName = "New Equipment Template", menuName = "Template/Item/Equipment", order = 0)]
     public class EquipmentTemplate : ItemTemplate<Equipment>
     {
         public Behaviour.Equipment equippedPrefab;

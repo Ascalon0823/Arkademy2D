@@ -27,6 +27,10 @@ namespace Arkademy.Behaviour
 
         private List<ISubscription> _handles = new List<ISubscription>();
 
+        public bool ValidTarget(Character other)
+        {
+            return other.damageable && other.damageable.trigger.enabled && other.faction != faction;
+        }
         public void Setup(Data.Character newData, int newFaction)
         {
             data = newData;
@@ -38,6 +42,7 @@ namespace Arkademy.Behaviour
             {
                 handle.Dispose();
             }
+
             _handles.Clear();
 
             foreach (var slot in equipmentSlots)
@@ -45,6 +50,7 @@ namespace Arkademy.Behaviour
                 slot.Equip(null);
                 Destroy(slot);
             }
+
             equipmentSlots.Clear();
             if (data.TryGetAttr(Data.Character.MSpd, out var speed))
             {
@@ -74,6 +80,7 @@ namespace Arkademy.Behaviour
                 damageReceiverTrigger.isTrigger = true;
                 damageable.transform.SetParent(transform, false);
                 damageable.trigger = damageReceiverTrigger;
+                damageable.trigger.enabled = true;
                 damageable.faction = faction;
                 damageable.OnDamageEvent = null;
                 damageable.OnDamageEvent += OnDamageTaken;
@@ -178,9 +185,9 @@ namespace Arkademy.Behaviour
 
         public bool Use()
         {
-            if (!usable) return false;
-
-            if (graphic && usable.Use())
+            if (!usable || !usable.CanUse()) return false;
+            usable.Use();
+            if (graphic)
             {
                 graphic.attackSpeed = 1f / usable.nextUseTime;
                 graphic.SetAttack();
@@ -218,9 +225,10 @@ namespace Arkademy.Behaviour
         {
             if (curr > 0 && prev <= 0)
             {
-                Setup(data,faction);
+                Setup(data, faction);
                 return;
             }
+
             if (curr <= 0)
             {
                 if (prev <= 0) return;
@@ -236,7 +244,12 @@ namespace Arkademy.Behaviour
                     motor.enabled = false;
                     motor.rb.simulated = false;
                 }
-                if (damageable) damageable.OnDamageEvent -= OnDamageTaken;
+
+                if (damageable)
+                {
+                    damageable.trigger.enabled = false;
+                    damageable.OnDamageEvent -= OnDamageTaken;
+                }
             }
         }
     }

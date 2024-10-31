@@ -43,8 +43,9 @@ namespace Arkademy.Behaviour
                 {
                     user.usable = usable;
                     usable.user = user;
-                    if (usable is WeaponSwing ws)
-                        ws.equipment = this;
+                    if (usable is EquipmentAbility ea)
+                        ea.equipment = this;
+                    providedUsable = usable;
                 }
             }
 

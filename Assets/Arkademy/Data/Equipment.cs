@@ -59,11 +59,6 @@ namespace Arkademy.Data
         public Equipment()
         {
         }
-
-        public bool Valid()
-        {
-            return !string.IsNullOrEmpty(templateName);
-        }
         public Equipment Copy()
         {
             var newEquip = new Equipment

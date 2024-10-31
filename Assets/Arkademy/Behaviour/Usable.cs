@@ -9,11 +9,14 @@ namespace Arkademy.Behaviour
         public float nextUseTime;
         public float useTime;
 
-        public virtual bool Use()
+        public virtual bool CanUse()
         {
-            if (nextUseTime > 0f) return false;
+            return nextUseTime <= 0;
+        }
+        public virtual void Use()
+        {
+            if (!CanUse()) return;
             nextUseTime = useTime;
-            return true;
         }
 
         protected virtual void Update()

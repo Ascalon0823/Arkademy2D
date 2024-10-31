@@ -26,7 +26,7 @@ namespace Arkademy.Data
         public class OffensiveData
         {
             public long atk;
-            public long mastery = 5000;
+            public long mastery = 10000;
             public long ability = 10000;
             public long statScaling;
             public long damageBuff;
@@ -41,7 +41,7 @@ namespace Arkademy.Data
         }
         public static long CalculateDamage(OffensiveData offensive, DefensiveData defensive)
         {
-            var dealt = offensive.atk * (offensive.mastery / 100f)
+            var dealt = offensive.atk * (offensive.mastery / 10000f)
                                       * (offensive.ability / 100f) * (1 + offensive.statScaling / 100f)
                                       * (1 + offensive.damageBuff / 10000f) * (1 + offensive.criticalDamage / 10000f);
             var received = dealt *

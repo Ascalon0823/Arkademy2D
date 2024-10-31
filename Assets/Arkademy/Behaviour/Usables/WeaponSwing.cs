@@ -7,9 +7,8 @@ using Random = UnityEngine.Random;
 
 namespace Arkademy.Behaviour.Usables
 {
-    public class WeaponSwing : Usable
+    public class WeaponSwing : EquipmentAbility
     {
-        public Equipment equipment;
 
         public float delayPercentage;
         public float effectiveTimePercentage;
@@ -24,9 +23,9 @@ namespace Arkademy.Behaviour.Usables
             dealer.beforeDamageEvent.AddListener(CalculateDamageEvent);
         }
 
-        public override bool Use()
+        public override void Use()
         {
-            if (!base.Use()) return false;
+            if (!CanUse()) return;
             dealer.faction = user.faction;
             nextUseTime = useTime;
             if (equipment.data.TryGetAttr("Base Speed", out var spd))
@@ -34,7 +33,6 @@ namespace Arkademy.Behaviour.Usables
                 nextUseTime = 1f / (spd.GetValue() / 100f);
             }
             StartCoroutine(InternalUse());
-            return true;
         }
 
         public void CalculateDamageEvent(DamageDealer.BeforeDamageEvent d)

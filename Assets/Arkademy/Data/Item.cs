@@ -11,5 +11,10 @@ namespace Arkademy.Data
         public int rarity;
         public int stackLimit;
         public int stack;
+
+        public virtual bool Valid()
+        {
+            return !string.IsNullOrEmpty(templateName);
+        }
     }
 }

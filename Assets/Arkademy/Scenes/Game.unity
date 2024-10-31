@@ -442,7 +442,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fa69e086ccb38ae49a94d48e446f29b5, type: 2}
   - {fileID: 11400000, guid: 7aef9631fb2891c4aa552c4c14b4ed7a, type: 2}
   renderMap: {fileID: 1280832327}
-  offset: {x: 658.4931, y: -2741.1902}
+  offset: {x: -1274.9896, y: -2639.1672}
   cam: {fileID: 0}
   gridSize: -2147483648
   gridPos: {x: 0, y: 0}
