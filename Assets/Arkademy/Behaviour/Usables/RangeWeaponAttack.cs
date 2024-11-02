@@ -16,14 +16,20 @@ namespace Arkademy.Behaviour.Usables
 
         public override bool CanUse()
         {
-            return base.CanUse() && currAmmu.stack > 0 && GetTarget();
+            return base.CanUse() && currAmmu.stack > 0 && GetTarget() && TargetInRange(target.transform);
+        }
+
+        public bool TargetInRange(Transform t)
+        {
+            range = equipment.data.TryGetAttr("Range", out var r) ? r.GetValue()/100f : 0;
+            return t && Vector3.Distance(t.transform.position, transform.position) < range;
         }
 
         public Character GetTarget()
         {
-            if (target && user.ValidTarget(target)) return target;
+            if (target && user.ValidTarget(target) && TargetInRange(target.transform)) return target;
             target = FindObjectsByType<Character>(FindObjectsSortMode.None)
-                .Where(x => user.ValidTarget(x))
+                .Where(x => user.ValidTarget(x) && TargetInRange(x.transform))
                 .OrderBy(x => Vector3.Distance(transform.position, x.transform.position))
                 .FirstOrDefault();
             return target;
@@ -76,7 +82,6 @@ namespace Arkademy.Behaviour.Usables
                     ffmotor.UpdatePosition(0);
                 }
             }
-            
         }
 
         public override void Use()
@@ -88,6 +93,7 @@ namespace Arkademy.Behaviour.Usables
             {
                 nextUseTime = 1f / (spd.GetValue() / 100f);
             }
+
             StartCoroutine(InternalUse());
         }
     }

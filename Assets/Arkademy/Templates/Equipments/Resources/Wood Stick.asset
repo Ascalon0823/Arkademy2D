@@ -28,6 +28,10 @@ MonoBehaviour:
       value: 100
       persistentModifiers: []
       runtimeModifiers: []
+    - key: Range
+      value: 100
+      persistentModifiers: []
+      runtimeModifiers: []
     affixesWhenEquip:
     - templateName: FlatStr
       value: 0.5

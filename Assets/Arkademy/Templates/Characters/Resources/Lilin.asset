@@ -18,9 +18,9 @@ MonoBehaviour:
     slots:
     - category: 1
       equipment:
-        templateName: Wood Stick
-        name: Beginner`s Wood Stick
-        rarity: 0
+        templateName: Wood Bow
+        name: Wood Bow
+        rarity: 2
         stackLimit: 0
         stack: 0
         slotCategory: 1
@@ -30,12 +30,16 @@ MonoBehaviour:
           persistentModifiers: []
           runtimeModifiers: []
         - key: Base Speed
-          value: 100
+          value: 150
+          persistentModifiers: []
+          runtimeModifiers: []
+        - key: Range
+          value: 600
           persistentModifiers: []
           runtimeModifiers: []
         affixesWhenEquip:
-        - templateName: FlatStr
-          value: 0.5
+        - templateName: FlatDex
+          value: 0
     - category: 2
       equipment:
         templateName: 

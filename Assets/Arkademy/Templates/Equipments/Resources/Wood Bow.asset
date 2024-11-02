@@ -28,6 +28,10 @@ MonoBehaviour:
       value: 150
       persistentModifiers: []
       runtimeModifiers: []
+    - key: Range
+      value: 600
+      persistentModifiers: []
+      runtimeModifiers: []
     affixesWhenEquip:
     - templateName: FlatDex
       value: 0

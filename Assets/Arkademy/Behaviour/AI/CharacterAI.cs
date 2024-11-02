@@ -18,6 +18,7 @@ namespace Arkademy.Behaviour.AI
             }
 
             if (!currEnemy) return;
+            if (UseUsable()) return;
             target.MoveDir((currEnemy.transform.position - target.transform.position).normalized);
         }
 
@@ -27,6 +28,15 @@ namespace Arkademy.Behaviour.AI
                     x.destructible && x.destructible.durability > 0 && x.faction != target.faction)
                 .OrderBy(x => Vector3.Distance(x.transform.position, target.transform.position)).FirstOrDefault();
             return nearestEnemy;
+        }
+
+        private bool UseUsable()
+        {
+            if (!target.usable) return false;
+            if (!currEnemy) return false;
+            if (Vector3.Distance(currEnemy.transform.position, target.transform.position) >
+                target.usable.range) return false;
+            return target.Use();
         }
     }
 }

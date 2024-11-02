@@ -8,6 +8,7 @@ namespace Arkademy.Behaviour
         public Character user;
         public float nextUseTime;
         public float useTime;
+        public float range;
 
         public virtual bool CanUse()
         {

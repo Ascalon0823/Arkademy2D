@@ -116,7 +116,6 @@ namespace Arkademy.Data
 
         public override long GetValue()
         {
-            var v = GetValueWith();
             return GetValueWith();
         }
 

@@ -54,7 +54,7 @@ namespace Arkademy.Behaviour.Usables
                 offensive.atk = patk.GetValue();
                 offensive.statScaling = strBoost;
                 offensive.ability = damagePercentages[i];
-                offensive.mastery = 100;
+                offensive.mastery = 10000;
                 damageEventBase.damages[i] = Formula.CalculateDamage(offensive, defensive);
             }
 
