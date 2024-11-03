@@ -16,7 +16,23 @@ namespace Arkademy.Behaviour.Usables
 
         public override bool CanUse()
         {
-            return base.CanUse() && currAmmu.stack > 0 && GetTarget() && TargetInRange(target.transform);
+            currAmmu = GetAmmunition();
+            return base.CanUse() && currAmmu?.stack > 0 && GetTarget() && TargetInRange(target.transform);
+        }
+
+        public Ammunition GetAmmunition()
+        {
+            if (!equipment || !(equipment.data?.Valid() ?? false)) return null;
+            return  user.data.inventory.items.Select(x =>
+            {
+                var data = Resources.Load<AmmunitionTemplate>(x.templateName)?.templateData;
+                if(data!=null) data.stack = x.stack;
+                return data;
+                
+            }).Where(x=>x?.Valid()??false).FirstOrDefault(x =>
+            {
+                return (x.type & equipment.data.useAmmunition) != 0;
+            });
         }
 
         public bool TargetInRange(Transform t)

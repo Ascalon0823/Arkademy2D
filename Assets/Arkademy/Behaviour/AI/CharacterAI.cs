@@ -15,10 +15,13 @@ namespace Arkademy.Behaviour.AI
             if (!currEnemy)
             {
                 currEnemy = FindEnemy();
+                if(currEnemy)
+                    currEnemy.onDeath.AddListener(() => { currEnemy = null; });
             }
 
             if (!currEnemy) return;
             if (UseUsable()) return;
+            if (TargetInRange()) return;
             target.MoveDir((currEnemy.transform.position - target.transform.position).normalized);
         }
 
@@ -28,6 +31,13 @@ namespace Arkademy.Behaviour.AI
                     x.destructible && x.destructible.durability > 0 && x.faction != target.faction)
                 .OrderBy(x => Vector3.Distance(x.transform.position, target.transform.position)).FirstOrDefault();
             return nearestEnemy;
+        }
+
+        private bool TargetInRange()
+        {
+            if (!currEnemy) return false;
+            if (!target.usable) return false;
+            return Vector3.Distance(target.transform.position, currEnemy.transform.position) < target.usable.range;
         }
 
         private bool UseUsable()

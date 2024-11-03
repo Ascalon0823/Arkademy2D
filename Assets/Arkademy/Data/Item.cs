@@ -16,5 +16,17 @@ namespace Arkademy.Data
         {
             return !string.IsNullOrEmpty(templateName);
         }
+
+        public virtual Item Copy()
+        {
+            return new Item
+            {
+                templateName = templateName,
+                name = name,
+                rarity = rarity,
+                stackLimit = stackLimit,
+                stack = stack
+            };
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace Arkademy.Data
     public class Equipment : Item
     {
         public EquipmentSlot.Category slotCategory;
+        public Ammunition.AmmunitionType useAmmunition;
         public List<Attribute> attributes;
         public List<Affix> affixesWhenEquip;
         private Dictionary<string, Attribute> _attrCache = new Dictionary<string, Attribute>();

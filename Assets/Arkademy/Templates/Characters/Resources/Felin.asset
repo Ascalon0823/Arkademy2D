@@ -24,6 +24,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 1
+        useAmmunition: 0
         attributes:
         - key: Physical Attack
           value: 300
@@ -44,6 +45,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 512
@@ -54,6 +56,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 256
@@ -64,6 +67,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 4
@@ -74,6 +78,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 8
@@ -84,6 +89,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 16
@@ -94,6 +100,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 32
@@ -104,6 +111,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 64
@@ -114,6 +122,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 128
@@ -124,6 +133,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     - category: 256
@@ -134,6 +144,7 @@ MonoBehaviour:
         stackLimit: 0
         stack: 0
         slotCategory: 0
+        useAmmunition: 0
         attributes: []
         affixesWhenEquip: []
     attributes:
@@ -211,6 +222,14 @@ MonoBehaviour:
       value: 10000
       persistentModifiers: []
       runtimeModifiers: []
+    inventory:
+      items:
+      - templateName: Wood Arrow
+        name: Wood Arrow
+        rarity: 0
+        stackLimit: 9999
+        stack: 1
+      capacity: 100
   usingPrefab: {fileID: 0}
   characterSprite: {fileID: -34538813354388608, guid: 743114c57df1f9c489c503cc1ace029e, type: 3}
   animationController: {fileID: 22100000, guid: 6f4be11623c6d1f45a8293c4465b3887, type: 2}

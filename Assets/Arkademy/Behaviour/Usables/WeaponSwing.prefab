@@ -185,6 +185,7 @@ MonoBehaviour:
   user: {fileID: 0}
   nextUseTime: 0
   useTime: 0
+  range: 0
   equipment: {fileID: 0}
   delayPercentage: 0.2
   effectiveTimePercentage: 0.5

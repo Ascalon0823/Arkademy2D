@@ -19,6 +19,7 @@ MonoBehaviour:
     stackLimit: 0
     stack: 0
     slotCategory: 1
+    useAmmunition: 0
     attributes:
     - key: Physical Damage
       value: 300

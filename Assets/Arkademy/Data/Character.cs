@@ -14,6 +14,7 @@ namespace Arkademy.Data
         public List<EquipmentSlot> slots;
 
         public List<Attribute> attributes;
+        public Inventory inventory;
 
         private Dictionary<string, Attribute> _attrCache = new Dictionary<string, Attribute>();
 
@@ -47,6 +48,7 @@ namespace Arkademy.Data
                 name = name,
                 slots = slots.ToList(),
                 attributes = attributes.Select(x => x.Copy()).ToList(),
+                inventory = inventory.Copy()
             };
         }
     }

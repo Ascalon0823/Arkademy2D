@@ -19,6 +19,7 @@ MonoBehaviour:
     stackLimit: 0
     stack: 0
     slotCategory: 1
+    useAmmunition: 1
     attributes:
     - key: Physical Attack
       value: 300
