@@ -251,7 +251,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "eb63f677-e1cd-4cff-9737-a389259b9f6d",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -260,7 +260,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "ed9f4f51-e513-418f-8899-7e6dd54b3b1e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -785,6 +785,17 @@
             "devices": [
                 {
                     "devicePath": "<Joystick>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Touch",
+            "bindingGroup": "Touch",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }
