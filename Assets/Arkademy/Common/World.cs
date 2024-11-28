@@ -25,6 +25,12 @@ namespace Arkademy.Common
             }
         }
 
+        public void AddHour(int hours)
+        {
+            hour += hours;
+            UpdateTime();
+        }
+
         public string HourString()
         {
             return $"{hour + 6:00}:00";
@@ -37,7 +43,7 @@ namespace Arkademy.Common
 
         public string WeekString()
         {
-            return $"W{weeks}";
+            return $"W{weeks+1}";
         }
     }
 }
