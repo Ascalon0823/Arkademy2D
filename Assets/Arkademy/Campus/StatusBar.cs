@@ -23,7 +23,7 @@ namespace Arkademy.Campus
 
         private void OnNewDay(int day)
         {
-            Session.currCharacterRecord.character.energy.currValue = Session.currCharacterRecord.character.energy.maxValue;
+            Session.currCharacterRecord.character.energy.currValue = Session.currCharacterRecord.character.energy.value;
         }
 
         private void LateUpdate()
@@ -31,7 +31,7 @@ namespace Arkademy.Campus
             var time = Session.currCharacterRecord.time;
             var energy = Session.currCharacterRecord.character.energy;
             timeText.text = $"{time.HourString()} {time.DayString()} {time.WeekString()}";
-            energyText.text = $"{energy.currValue}/{energy.maxValue}";
+            energyText.text = $"{energy.currValue}/{energy.value}";
         }
     }
 }

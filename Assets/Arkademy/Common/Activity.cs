@@ -24,7 +24,7 @@ namespace Arkademy.Common
         {
             OnTakeActivity?.Invoke(participant);
             participant.energy.currValue -= energyCost;
-            participant.energy.currValue = Mathf.Clamp(participant.energy.currValue, 0, participant.energy.maxValue);
+            participant.energy.currValue = Mathf.Clamp(participant.energy.currValue, 0, participant.energy.value);
             Session.currCharacterRecord.time.AddHour(timeCost);
         }
 
@@ -47,7 +47,7 @@ namespace Arkademy.Common
             return new Activity
             {
                 timeCost = 16 - Session.currCharacterRecord.time.hour,
-                energyCost = -(character.energy.maxValue - character.energy.currValue),
+                energyCost = -(character.energy.value - character.energy.currValue),
                 participant = character
             };
         }
@@ -71,8 +71,7 @@ namespace Arkademy.Common
                 participant = character,
                 OnTakeActivity = c =>
                 {
-                    Debug.Log("Exercise");
-                    c.energy.maxValue += 1;
+                    c.energy.value += 1;
                 }
             };
         }

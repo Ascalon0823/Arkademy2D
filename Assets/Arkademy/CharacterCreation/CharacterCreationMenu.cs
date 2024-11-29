@@ -31,7 +31,7 @@ namespace Arkademy.CharacterCreation
             currentCharacter.energy = new Resource
             {
                 currValue = 100,
-                maxValue = 100,
+                value = 100,
             };
         }
 
