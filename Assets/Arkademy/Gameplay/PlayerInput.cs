@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
@@ -21,12 +22,29 @@ namespace Arkademy.Gameplay
         public Action<Vector2> onFire;
         public bool fire;
         public bool onUI;
+        [SerializeField] private bool onUIRaw;
         public TouchState touch;
         [TextArea] public string touchData;
 
-        public void OnTouch(InputValue value)
+        private void Update()
         {
-            touch = value.Get<TouchState>();
+            onUIRaw = EventSystem.current.IsPointerOverGameObject();
+            HandleTouch();
+        }
+
+        public void HandleTouch()
+        {
+            if (touch.isNoneEndedOrCanceled)
+            {
+                onUI = false;
+            }
+            else
+            {
+                if (touch.phase == TouchPhase.Began && onUIRaw)
+                    onUI = true;
+            }
+
+            if (onUI) return;
             touchData = JsonConvert.SerializeObject(touch, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -37,7 +55,7 @@ namespace Arkademy.Gameplay
             moveDir = delta.normalized;
             moveAnalog = Vector2.ClampMagnitude(delta / analogRange, 1);
             moveRaw = delta;
-            fire = touch.isTap;
+            
             if (touch.phase == TouchPhase.Began)
             {
                 onPressBegin?.Invoke(touch.position);
@@ -49,10 +67,17 @@ namespace Arkademy.Gameplay
                 onPressEnd?.Invoke(touch.position);
                 pressed = false;
             }
-            if (touch.isTap)
+            if (fire)
             {
                 onFire?.Invoke(touch.position);
+                fire = false;
             }
+        }
+        public void OnTouch(InputValue value)
+        {
+            touch = value.Get<TouchState>();
+            if(touch.isTap)
+                fire = touch.isTap;
         }
     }
 }

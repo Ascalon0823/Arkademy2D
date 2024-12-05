@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Arkademy/Campus/Campus.unity
     guid: d070dd8d349c007458ef13b85da20ac2
+  - enabled: 1
+    path: Assets/Arkademy/Test/Input/TestInput.unity
+    guid: 77d2e4d647998294288a8df20668d3d6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b7e37b1feb4af434db06201f0c461b01, type: 3}
   m_UseUCBPForAssetBundles: 0
