@@ -15,6 +15,9 @@ namespace Arkademy.CharacterCreation
         public Attribute defence = Attribute.defence;
         public bool playable;
 
+        [Header("Behaviour")] public Gameplay.Character behaviourPrefab;
+        public RuntimeAnimatorController animationController;
+        public bool facingRight;
         public Character CreateCharacter()
         {
             return new Character

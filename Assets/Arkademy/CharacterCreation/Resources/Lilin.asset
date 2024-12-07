@@ -26,7 +26,7 @@ MonoBehaviour:
     currValue: 1000
   speed:
     type: 4
-    value: 100
+    value: 400
   castSpeed:
     type: 5
     value: 100
@@ -37,3 +37,6 @@ MonoBehaviour:
     type: 7
     value: 100
   playable: 1
+  behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
+  animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
+  facingRight: 0
