@@ -59,6 +59,8 @@ namespace Arkademy.Gameplay
             {
                 onPressEnd?.Invoke(touch.position);
                 pressed = false;
+                move = Vector2.zero;
+                moveDir = Vector2.zero;
             }
             if (fire)
             {

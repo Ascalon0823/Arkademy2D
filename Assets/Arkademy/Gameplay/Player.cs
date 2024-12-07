@@ -8,6 +8,7 @@ namespace Arkademy.Gameplay
     {
         public Character character;
         public FollowCamera followCamera;
+        public PlayerInput playerInput;
 
         public void Start()
         {
@@ -16,6 +17,12 @@ namespace Arkademy.Gameplay
             characterData.LastPlayed = DateTime.UtcNow;
             character = Character.Create(characterData.character);
             followCamera.followTarget = character.transform;
+        }
+
+        private void Update()
+        {
+            if(!character || !playerInput) return;  
+            character.Move(playerInput.moveDir);
         }
     }
 }
