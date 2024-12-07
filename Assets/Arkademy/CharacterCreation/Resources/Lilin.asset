@@ -13,18 +13,27 @@ MonoBehaviour:
   m_Name: Lilin
   m_EditorClassIdentifier: 
   energy:
-    currProgress: 0
-    progressToNext: 0
-    gainSpeed: 0
-    nextIncrementalMultiplier: 0
     type: 1
-    value: 0
-    currValue: 0
-  speed:
-    currProgress: 0
-    progressToNext: 0
-    gainSpeed: 0
-    nextIncrementalMultiplier: 0
+    value: 100
+    currValue: 100
+  source:
+    type: 3
+    value: 1000
+    currValue: 1000
+  health:
     type: 2
-    value: 0
+    value: 1000
+    currValue: 1000
+  speed:
+    type: 4
+    value: 100
+  castSpeed:
+    type: 5
+    value: 100
+  attack:
+    type: 6
+    value: 100
+  defence:
+    type: 7
+    value: 100
   playable: 1

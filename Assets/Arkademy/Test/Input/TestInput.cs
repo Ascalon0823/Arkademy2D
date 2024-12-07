@@ -28,7 +28,7 @@ namespace Arkademy.Test.Input
                 var worldPos = camera.ScreenToWorldPoint(v);
                 worldPos.z = 0;
                 dragIndicator.transform.position = worldPos;
-                dragIndicator.UpdatePos(worldPos, input.moveDir, input.moveAnalog, worldPos);
+                dragIndicator.UpdatePos(worldPos, input.moveDir, input.move);
             };
             input.onPressEnd += v => { dragIndicator.gameObject.SetActive(false); };
         }
@@ -36,8 +36,7 @@ namespace Arkademy.Test.Input
         private void Update()
         {
             if (dragIndicator.gameObject.activeSelf)
-                dragIndicator.UpdatePos(dragIndicator.transform.position, input.moveDir, input.moveAnalog,
-                    camera.ScreenToWorldPoint(input.moveRaw)-camera.ScreenToWorldPoint(Vector2.zero));
+                dragIndicator.UpdatePos(dragIndicator.transform.position, input.moveDir, input.move);
         }
     }
 }

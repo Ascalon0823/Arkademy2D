@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 namespace Arkademy.Common
 {
     [Serializable]
-    public class Progression
+    public class Progression : Attribute
     {
         public int currProgress;
         public int progressToNext;

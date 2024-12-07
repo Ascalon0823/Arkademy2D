@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Serialization;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Arkademy.Gameplay
@@ -14,8 +15,7 @@ namespace Arkademy.Gameplay
         [SerializeField] private float analogRange = 100f;
         public Vector2 screenPosition;
         public Vector2 moveDir;
-        public Vector2 moveAnalog;
-        public Vector2 moveRaw;
+        public Vector2 move;
         public bool pressed;
         public Action<Vector2> onPressBegin;
         public Action<Vector2> onPressEnd;
@@ -24,7 +24,6 @@ namespace Arkademy.Gameplay
         public bool onUI;
         [SerializeField] private bool onUIRaw;
         public TouchState touch;
-        [TextArea] public string touchData;
 
         private void Update()
         {
@@ -45,17 +44,11 @@ namespace Arkademy.Gameplay
             }
 
             if (onUI) return;
-            touchData = JsonConvert.SerializeObject(touch, new JsonSerializerSettings
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            });
             screenPosition = touch.position;
             var delta = (touch.position - touch.startPosition);
             delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
             moveDir = delta.normalized;
-            moveAnalog = Vector2.ClampMagnitude(delta / analogRange, 1);
-            moveRaw = delta;
-            
+            move = Vector2.ClampMagnitude(delta / analogRange, 1);
             if (touch.phase == TouchPhase.Began)
             {
                 onPressBegin?.Invoke(touch.position);
