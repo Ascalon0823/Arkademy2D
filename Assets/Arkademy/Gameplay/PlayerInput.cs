@@ -14,6 +14,7 @@ namespace Arkademy.Gameplay
         [SerializeField] private float moveDeadZone = 10f;
         [SerializeField] private float analogRange = 100f;
         public Vector2 screenPosition;
+        public Vector2 startPosition;
         public Vector2 moveDir;
         public Vector2 move;
         public bool pressed;
@@ -24,6 +25,7 @@ namespace Arkademy.Gameplay
         public bool onUI;
         [SerializeField] private bool onUIRaw;
         public TouchState touch;
+        public bool confineJoystick;
 
         private void Update()
         {
@@ -45,14 +47,22 @@ namespace Arkademy.Gameplay
 
             if (onUI) return;
             screenPosition = touch.position;
-            var delta = (touch.position - touch.startPosition);
+            var delta = (touch.position - startPosition);
             delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
+            if (delta.magnitude > analogRange)
+            {
+                var clamped = Vector2.ClampMagnitude(delta, analogRange);
+                startPosition += (delta - clamped);
+                delta = screenPosition - startPosition;
+            }
+            
             moveDir = delta.normalized;
             move = Vector2.ClampMagnitude(delta / analogRange, 1);
             if (touch.phase == TouchPhase.Began)
             {
                 onPressBegin?.Invoke(touch.position);
                 pressed = true;
+                startPosition = touch.startPosition;
             }
 
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)

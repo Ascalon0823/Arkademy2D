@@ -31,6 +31,10 @@ namespace Arkademy.Gameplay
             graphic.moveDir = dir;
             graphic.walkSpeed = speed;
             rb.MovePosition(rb.position + dir * speed * Time.deltaTime);
+            if (dir.magnitude > 0f)
+            {
+                graphic.facing = graphic.moveDir;
+            }
         }
     }
 }
