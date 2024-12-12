@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Arkademy
@@ -23,6 +24,18 @@ namespace Arkademy
         public static T GetOrAddComponent<T>(this Component c) where T : Component
         {
             return c.gameObject.GetOrAddComponent<T>();
+        }
+        
+        private static Dictionary<Collider2D, Gameplay.Character> _colliderCharacterMap = new Dictionary<Collider2D, Gameplay.Character>();
+
+        public static bool GetCharacter(this Collider2D collider, out Gameplay.Character character)
+        {
+            return _colliderCharacterMap.TryGetValue(collider, out character);
+        }
+
+        public static void RegisterCharacterCollider(this Collider2D collider, Gameplay.Character character)
+        {
+            _colliderCharacterMap[collider] =  character;
         }
     }
 }

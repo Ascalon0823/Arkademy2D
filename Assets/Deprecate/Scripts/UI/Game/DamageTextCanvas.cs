@@ -64,7 +64,7 @@ namespace Arkademy.UI.Game
                 var text = Instantiate(textPrefab, cam.WorldToScreenPoint(beginningPos), Quaternion.identity, transform);
                 text.beginningWorldPos = beginningPos;
                 text.cam = cam;
-                text.number = de.damages[i];
+                text.content = de.damages[i].ToString();
                 prev = text;
                 yield return new WaitForSeconds(interval);
             }

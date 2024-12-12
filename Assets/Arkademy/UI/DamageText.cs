@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Arkademy.Behaviour.UI
+namespace Arkademy.UI
 {
     public class DamageText : MonoBehaviour
     {
-        public long number;
+        public string content;
         public float life;
         public float maxLife;
         public float speed;
@@ -21,7 +21,7 @@ namespace Arkademy.Behaviour.UI
 
         private void Start()
         {
-            text.text = number.ToString();
+            text.text = content;
             horizontalOffset = new Vector3(Random.Range(-horizontalOffsetRange, horizontalOffsetRange), 0, 0);
             text.color = color;
             if (cam)
@@ -36,7 +36,7 @@ namespace Arkademy.Behaviour.UI
                 return;
             }
 
-            text.text = number.ToString();
+            text.text = content;
             life -= Time.deltaTime;
             text.color = color;
             text.alpha = life / maxLife;
