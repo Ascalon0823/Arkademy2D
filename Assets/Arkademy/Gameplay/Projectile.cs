@@ -13,6 +13,7 @@ namespace Arkademy.Gameplay
         public int faction;
         public int damage;
         public bool rotateToDir;
+
         private void FixedUpdate()
         {
             remainingLife -= Time.fixedDeltaTime;
@@ -21,22 +22,21 @@ namespace Arkademy.Gameplay
                 Destroy(gameObject);
                 return;
             }
+
             body.MovePosition(body.position + dir * speed * Time.fixedDeltaTime);
-            if(rotateToDir)
+            if (rotateToDir)
                 body.MoveRotation(Quaternion.FromToRotation(Vector3.up, dir));
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetCharacter(out var character) && character.faction != faction)
+            if (other.GetCharacter(out var character))
             {
+                if (character.faction == faction) return;
                 character.TakeDamage(damage);
                 Destroy(gameObject);
+                return;
             }
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
             if (passThroughObstacles) return;
             Destroy(gameObject);
         }
