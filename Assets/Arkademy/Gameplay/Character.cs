@@ -18,8 +18,11 @@ namespace Arkademy.Gameplay
         public Collider2D hitBox;
         public bool isDead;
         public bool showDamageText;
+        public bool indestructible;
+        public bool invincible;
+        public int faction;
 
-        public static Character Create(Common.Character data)
+        public static Character Create(Common.Character data, int newFaction)
         {
             var raceName = data.raceName;
             var raceSO = Resources.Load<Race>(raceName);
@@ -29,12 +32,17 @@ namespace Arkademy.Gameplay
             go.graphic.animator.runtimeAnimatorController = raceSO.animationController;
             go.graphic.facingLeft = !raceSO.facingRight;
             go.graphic.walkAnimationDistance = 4;
-            if (go.hitBox)
+            go.faction = newFaction;
+            return go;
+        }
+
+        private void Start()
+        {
+            if (hitBox)
             {
-                go.hitBox.RegisterCharacterCollider(go);
+                hitBox.RegisterCharacterCollider(this);
             }
 
-            return go;
         }
 
         public void Move(Vector2 dir)
@@ -59,12 +67,16 @@ namespace Arkademy.Gameplay
 
         public void TakeDamage(int damage)
         {
-            characterData.health.currValue -= damage;
+            if (invincible) return;
+            
             graphic.SetHit();
             if (showDamageText)
             {
                 DamageCanvas.AddTextTo(Player.Camera, transform, damage.ToString());
             }
+
+            if (indestructible) return;
+            characterData.health.currValue -= damage;
             if (characterData.health.currValue <= 0)
             {
                 characterData.health.currValue = 0;

@@ -19,7 +19,7 @@ namespace Arkademy.Gameplay
             if (character) return;
             var characterData = Session.currCharacterRecord;
             characterData.LastPlayed = DateTime.UtcNow;
-            character = Character.Create(characterData.character);
+            character = Character.Create(characterData.character,0);
             followCamera.followTarget = character.transform;
         }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7579909762247035662}
   - component: {fileID: 7084631033116771475}
   - component: {fileID: 2129529706882394936}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9144095402797545726}
   - component: {fileID: 654781969474306309}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5631147668101929600}
   - component: {fileID: 3513308630628505302}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CharacterGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 7618021547581820144}
   - component: {fileID: 4717580739875485945}
   - component: {fileID: 2523941333017892125}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -400,6 +400,9 @@ MonoBehaviour:
   hitBox: {fileID: 949633718942122014}
   isDead: 0
   showDamageText: 1
+  indestructible: 0
+  invincible: 0
+  faction: 0
 --- !u!50 &4717580739875485945
 Rigidbody2D:
   serializedVersion: 5
