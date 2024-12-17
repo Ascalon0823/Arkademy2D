@@ -11,7 +11,7 @@ namespace Arkademy.Gameplay
 
         private void LateUpdate()
         {
-            var show = playerInput.move.magnitude > 0;
+            var show = playerInput.move.magnitude > 0 && playerInput.pressed;
             joyBase.gameObject.SetActive(show);
             joyTop.gameObject.SetActive(show);
             if (!show) return;

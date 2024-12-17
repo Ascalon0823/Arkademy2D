@@ -11,6 +11,7 @@ namespace Arkademy.Gameplay
 {
     public class PlayerInput : MonoBehaviour
     {
+        [SerializeField] private UnityEngine.InputSystem.PlayerInput playerInput;
         [SerializeField] private float moveDeadZone = 10f;
         [SerializeField] private float analogRange = 100f;
         public Vector2 screenPosition;
@@ -30,7 +31,8 @@ namespace Arkademy.Gameplay
         private void Update()
         {
             onUIRaw = EventSystem.current.IsPointerOverGameObject();
-            HandleTouch();
+            if(playerInput.currentControlScheme == "Touch")
+                HandleTouch();
         }
 
         public void HandleTouch()
@@ -71,6 +73,8 @@ namespace Arkademy.Gameplay
                 pressed = false;
                 move = Vector2.zero;
                 moveDir = Vector2.zero;
+                screenPosition = Vector2.zero;
+                startPosition = Vector2.zero;
             }
             if (fire)
             {
@@ -83,6 +87,12 @@ namespace Arkademy.Gameplay
             touch = value.Get<TouchState>();
             if(touch.isTap)
                 fire = touch.isTap;
+        }
+
+        public void OnMove(InputValue value)
+        {
+            move = value.Get<Vector2>();
+            moveDir = move.normalized;
         }
     }
 }

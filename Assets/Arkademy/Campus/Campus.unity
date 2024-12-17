@@ -5877,6 +5877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023dca8262af42c0bc0c3cce49e5d968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 2017165737}
   moveDeadZone: 10
   analogRange: 100
   screenPosition: {x: 0, y: 0}
