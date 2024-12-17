@@ -5387,7 +5387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ppcam: {fileID: 1796939458}
-  offsetPercentage: {x: 0, y: 0.2}
+  offsetPercentage: {x: 0, y: -0.2}
   followTarget: {fileID: 0}
 --- !u!114 &1796939458
 MonoBehaviour:
