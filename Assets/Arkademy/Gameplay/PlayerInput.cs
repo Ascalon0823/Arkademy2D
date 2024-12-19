@@ -48,6 +48,10 @@ namespace Arkademy.Gameplay
             }
 
             if (onUI) return;
+            if (touch.phase == TouchPhase.None)
+            {
+                return;
+            }
             screenPosition = touch.position;
             var delta = (touch.position - startPosition);
             delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
