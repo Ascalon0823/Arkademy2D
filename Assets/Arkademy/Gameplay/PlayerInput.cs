@@ -31,35 +31,18 @@ namespace Arkademy.Gameplay
         private void Update()
         {
             onUIRaw = EventSystem.current.IsPointerOverGameObject();
-            if(playerInput.currentControlScheme == "Touch")
-                HandleTouch();
+            //if(playerInput.currentControlScheme == "Touch")
+            HandleTouch();
         }
 
         public void HandleTouch()
         {
+            if (fire)
+            {
+                onFire?.Invoke(touch.position);
+                fire = false;
+            }
             if (touch.isNoneEndedOrCanceled)
-            {
-                onUI = false;
-            }
-            else
-            {
-                if (touch.phase == TouchPhase.Began && onUIRaw)
-                    onUI = true;
-            }
-
-            if (onUI) return;
-            if (touch.phase == TouchPhase.None)
-            {
-                return;
-            }
-            screenPosition = touch.position;
-            if (touch.phase == TouchPhase.Began)
-            {
-                onPressBegin?.Invoke(touch.position);
-                pressed = true;
-                startPosition = touch.startPosition;
-            }
-            if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 onPressEnd?.Invoke(touch.position);
                 pressed = false;
@@ -67,7 +50,24 @@ namespace Arkademy.Gameplay
                 moveDir = Vector2.zero;
                 screenPosition = Vector2.zero;
                 startPosition = Vector2.zero;
+                onUI = false;
+                return;
             }
+
+            if (!pressed)
+            {
+                if (onUIRaw) onUI = true;
+                if (!onUI)
+                {
+                    startPosition = touch.startPosition;
+                    onPressBegin?.Invoke(startPosition);
+                }
+            }
+
+            if (onUI) return;
+            pressed = true;
+            screenPosition = touch.position;
+            
             var delta = (touch.position - startPosition);
             delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
             if (delta.magnitude > analogRange)
@@ -78,11 +78,7 @@ namespace Arkademy.Gameplay
             }
             moveDir = delta.normalized;
             move = Vector2.ClampMagnitude(delta / analogRange, 1);
-            if (fire)
-            {
-                onFire?.Invoke(touch.position);
-                fire = false;
-            }
+            
         }
         public void OnTouch(InputValue value)
         {
