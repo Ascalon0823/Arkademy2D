@@ -53,24 +53,12 @@ namespace Arkademy.Gameplay
                 return;
             }
             screenPosition = touch.position;
-            var delta = (touch.position - startPosition);
-            delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
-            if (delta.magnitude > analogRange)
-            {
-                var clamped = Vector2.ClampMagnitude(delta, analogRange);
-                startPosition += (delta - clamped);
-                delta = screenPosition - startPosition;
-            }
-            
-            moveDir = delta.normalized;
-            move = Vector2.ClampMagnitude(delta / analogRange, 1);
             if (touch.phase == TouchPhase.Began)
             {
                 onPressBegin?.Invoke(touch.position);
                 pressed = true;
                 startPosition = touch.startPosition;
             }
-
             if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
             {
                 onPressEnd?.Invoke(touch.position);
@@ -80,6 +68,16 @@ namespace Arkademy.Gameplay
                 screenPosition = Vector2.zero;
                 startPosition = Vector2.zero;
             }
+            var delta = (touch.position - startPosition);
+            delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
+            if (delta.magnitude > analogRange)
+            {
+                var clamped = Vector2.ClampMagnitude(delta, analogRange);
+                startPosition += (delta - clamped);
+                delta = screenPosition - startPosition;
+            }
+            moveDir = delta.normalized;
+            move = Vector2.ClampMagnitude(delta / analogRange, 1);
             if (fire)
             {
                 onFire?.Invoke(touch.position);
