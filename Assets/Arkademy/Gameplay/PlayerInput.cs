@@ -31,12 +31,12 @@ namespace Arkademy.Gameplay
         private void Update()
         {
             onUIRaw = EventSystem.current.IsPointerOverGameObject();
-            //if(playerInput.currentControlScheme == "Touch")
             HandleTouch();
         }
 
         public void HandleTouch()
         {
+            if (playerInput.currentControlScheme != "Touch") return;
             if (fire)
             {
                 onFire?.Invoke(touch.position);

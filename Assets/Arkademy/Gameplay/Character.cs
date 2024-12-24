@@ -21,6 +21,8 @@ namespace Arkademy.Gameplay
         public bool indestructible;
         public bool invincible;
         public int faction;
+        public Vector2 move;
+        public bool moving;
 
         public static Character Create(Common.Character data, int newFaction)
         {
@@ -33,6 +35,7 @@ namespace Arkademy.Gameplay
             go.graphic.facingLeft = !raceSO.facingRight;
             go.graphic.walkAnimationDistance = 4;
             go.faction = newFaction;
+            go.graphic.character = go;
             return go;
         }
 
@@ -42,20 +45,29 @@ namespace Arkademy.Gameplay
             {
                 hitBox.RegisterCharacterCollider(this);
             }
+        }
 
+        private void FixedUpdate()
+        {
+            HandleMovement();
+        }
+
+        public void HandleMovement()
+        {
+            if (isDead) return;
+            var velocity = GetMoveSpeed() * move;
+            moving = velocity.sqrMagnitude > 0f;
+            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
 
         public void Move(Vector2 dir)
         {
-            if (isDead) return;
-            var speed = Calculation.MoveSpeed(characterData.speed.value);
-            graphic.moveDir = dir;
-            graphic.walkSpeed = speed;
-            rb.MovePosition(rb.position + dir * speed * Time.deltaTime);
-            if (dir.magnitude > 0f)
-            {
-                graphic.facing = graphic.moveDir;
-            }
+            move = dir;
+        }
+
+        public float GetMoveSpeed()
+        {
+            return Calculation.MoveSpeed(characterData.speed.value);
         }
 
         public void SetDead()
@@ -68,7 +80,7 @@ namespace Arkademy.Gameplay
         public void TakeDamage(int damage)
         {
             if (invincible) return;
-            
+
             graphic.SetHit();
             if (showDamageText)
             {
