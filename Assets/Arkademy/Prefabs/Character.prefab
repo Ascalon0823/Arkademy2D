@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 4717580739875485945}
   - component: {fileID: 2523941333017892125}
   - component: {fileID: 343931840672124513}
+  - component: {fileID: 8772939818876458486}
   m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
@@ -410,7 +411,8 @@ MonoBehaviour:
   faction: 0
   move: {x: 0, y: 0}
   moving: 0
-  abilities: []
+  abilities:
+  - {fileID: 8772939818876458486}
 --- !u!50 &4717580739875485945
 Rigidbody2D:
   serializedVersion: 5
@@ -488,3 +490,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 7618021547581820144}
   target: {fileID: 0}
+--- !u!114 &8772939818876458486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451363556454966901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56df896cfded431da5cd55861281278f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  remainingCooldown: 0
+  user: {fileID: 7618021547581820144}
+  projectile: {fileID: 7914257082053339661, guid: a3a1316c1e4b9a740836bbf355217f89, type: 3}

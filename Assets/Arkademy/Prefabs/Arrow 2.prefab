@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6531020515338524096}
   - component: {fileID: 7158816507034590459}
   - component: {fileID: 7914257082053339661}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Arrow 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ CircleCollider2D:
     m_Bits: 513
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1526
+    m_Bits: 3574
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915136510816116948}
   - component: {fileID: 1769688826628193528}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}

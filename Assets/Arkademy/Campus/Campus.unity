@@ -4470,8 +4470,7 @@ PrefabInstance:
       propertyPath: indestructible
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 343931840672124513, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

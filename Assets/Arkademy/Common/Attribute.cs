@@ -19,12 +19,4 @@ namespace Arkademy.Common
             };
         }
     }
-
-    [Serializable]
-    public class Attributes
-    {
-        [SerializeField] private List<Attribute> attributes = new List<Attribute>();
-        private Dictionary<Attribute.Type, Attribute> _attributesByType = new Dictionary<Attribute.Type, Attribute>();
-        public Attribute this[Attribute.Type key] => _attributesByType.GetValueOrDefault(key);
-    }
 }
