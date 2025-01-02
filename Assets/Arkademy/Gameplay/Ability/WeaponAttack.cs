@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Arkademy.Common;
+using UnityEngine;
 
 namespace Arkademy.Gameplay.Ability
 {
@@ -8,6 +9,11 @@ namespace Arkademy.Gameplay.Ability
         public override bool CanUse(Character target)
         {
             return base.CanUse(target) && target;
+        }
+
+        public override float GetCooldown()
+        {
+            return Calculation.CastCoolDown(user.characterData.castSpeed.value) * cooldown;
         }
 
         public override void Use(Character target)

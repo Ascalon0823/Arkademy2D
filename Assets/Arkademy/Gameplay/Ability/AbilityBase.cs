@@ -12,6 +12,11 @@ namespace Arkademy.Gameplay.Ability
         {
             return remainingCooldown <= 0 && !user.moving;
         }
+
+        public virtual float GetCooldown()
+        {
+            return cooldown;
+        }
         protected virtual void Update()
         {
             if(remainingCooldown>0)
@@ -20,7 +25,7 @@ namespace Arkademy.Gameplay.Ability
 
         public virtual void Use(Character target)
         {
-            remainingCooldown = cooldown;
+            remainingCooldown = GetCooldown();
         }
     }
 }
