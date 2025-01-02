@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 7618021547581820144}
   - component: {fileID: 4717580739875485945}
   - component: {fileID: 2523941333017892125}
+  - component: {fileID: 343931840672124513}
   m_Layer: 10
   m_Name: Character
   m_TagString: Untagged
@@ -396,6 +397,9 @@ MonoBehaviour:
     defence:
       type: 0
       value: 0
+    detectionRange:
+      type: 0
+      value: 0
   graphic: {fileID: 3513308630628505302}
   rb: {fileID: 4717580739875485945}
   hitBox: {fileID: 949633718942122014}
@@ -406,6 +410,7 @@ MonoBehaviour:
   faction: 0
   move: {x: 0, y: 0}
   moving: 0
+  abilities: []
 --- !u!50 &4717580739875485945
 Rigidbody2D:
   serializedVersion: 5
@@ -469,3 +474,17 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.4
+--- !u!114 &343931840672124513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7451363556454966901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a503c07cda14d76ae27009a978c6c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 7618021547581820144}
+  target: {fileID: 0}

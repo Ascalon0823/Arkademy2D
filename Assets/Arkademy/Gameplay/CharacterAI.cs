@@ -29,12 +29,16 @@ namespace Arkademy.Gameplay
             return enemies.OrderBy(x => Vector3.Distance(x.transform.position, character.transform.position))
                 .FirstOrDefault();
         }
-
+        
         public void UseAbility()
         {
             foreach (var ability in character.abilities)
             {
-                if (ability.CanUse()) ability.Use();
+                if (ability.CanUse(target))
+                {
+                    ability.Use(target);
+                    return;
+                }
             }
         }
     }

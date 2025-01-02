@@ -117,7 +117,7 @@ MonoBehaviour:
   body: {fileID: 6531020515338524096}
   faction: 0
   damage: 1
-  rotateToDir: 0
+  rotateToDir: 1
 --- !u!1 &6797745475715950155
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using Arkademy.Behaviour;
 using Arkademy.Behaviour.UI;
 using Arkademy.CharacterCreation;
 using Arkademy.Common;
+using Arkademy.Gameplay.Ability;
 using Arkademy.UI;
 using Arkademy.UI.Game;
 using UnityEngine;
@@ -23,8 +24,7 @@ namespace Arkademy.Gameplay
         public int faction;
         public Vector2 move;
         public bool moving;
-        public List<Ability.AbilityBase> abilities = new List<Ability.AbilityBase>();
-
+        public List<AbilityBase> abilities = new ();
         public static Character Create(Common.Character data, int newFaction)
         {
             var raceName = data.raceName;

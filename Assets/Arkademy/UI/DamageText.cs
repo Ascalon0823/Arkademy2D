@@ -15,6 +15,7 @@ namespace Arkademy.UI
         public Color color;
         public Vector3 beginningWorldPos;
         public Camera cam;
+        public int height;
         [SerializeField] private TextMeshProUGUI text;
         [SerializeField] private float horizontalOffsetRange;
         [SerializeField] private Vector3 horizontalOffset;

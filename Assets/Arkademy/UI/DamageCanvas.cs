@@ -20,7 +20,7 @@ namespace Arkademy.UI
             Canvas = this;
         }
 
-        private void InternalAddTextTo(Camera cam, Transform t, string content, bool newGroup = false)
+        private void InternalAddTextTo(Camera cam, Transform t, string content, bool newGroup = true)
         {
             if (newGroup) prevs[t] = null;
             var prev = prevs.GetValueOrDefault(t);
@@ -34,7 +34,7 @@ namespace Arkademy.UI
             text.content = content;
             prevs[t] = text;
         }
-        public static void AddTextTo(Camera cam, Transform t, string text, bool newGroup = false)
+        public static void AddTextTo(Camera cam, Transform t, string text, bool newGroup = true)
         {
             Canvas.InternalAddTextTo(cam,t,text,newGroup);
         }
