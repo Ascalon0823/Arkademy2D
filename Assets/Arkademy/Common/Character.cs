@@ -15,5 +15,6 @@ namespace Arkademy.Common
         public Attribute castSpeed;
         public Attribute attack;
         public Attribute defence;
+        public Attribute detectionRange;
     }
 }

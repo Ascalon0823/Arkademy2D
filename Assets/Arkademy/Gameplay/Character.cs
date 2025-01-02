@@ -23,7 +23,7 @@ namespace Arkademy.Gameplay
         public int faction;
         public Vector2 move;
         public bool moving;
-        public List<Ability> abilities = new List<Ability>();
+        public List<Ability.AbilityBase> abilities = new List<Ability.AbilityBase>();
 
         public static Character Create(Common.Character data, int newFaction)
         {

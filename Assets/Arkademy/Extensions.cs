@@ -26,16 +26,16 @@ namespace Arkademy
             return c.gameObject.GetOrAddComponent<T>();
         }
         
-        private static Dictionary<Collider2D, Gameplay.Character> _colliderCharacterMap = new Dictionary<Collider2D, Gameplay.Character>();
+        private static readonly Dictionary<Collider2D, Gameplay.Character> ColliderCharacterMap = new Dictionary<Collider2D, Gameplay.Character>();
 
         public static bool GetCharacter(this Collider2D collider, out Gameplay.Character character)
         {
-            return _colliderCharacterMap.TryGetValue(collider, out character);
+            return ColliderCharacterMap.TryGetValue(collider, out character);
         }
 
         public static void RegisterCharacterCollider(this Collider2D collider, Gameplay.Character character)
         {
-            _colliderCharacterMap[collider] =  character;
+            ColliderCharacterMap[collider] =  character;
         }
     }
 }

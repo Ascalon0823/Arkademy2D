@@ -14,6 +14,11 @@ namespace Arkademy.Common
             return  100f/Mathf.Max(1,castSpeed);
         }
 
+        public static float DetectionRange(int detectionRange)
+        {
+            return detectionRange / 100f;
+        }
+
         public static int Damage(int attack)
         {
             return Mathf.FloorToInt(attack / 100f);

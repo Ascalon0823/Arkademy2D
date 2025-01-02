@@ -13,6 +13,7 @@ namespace Arkademy.CharacterCreation
         public Attribute castSpeed = Attribute.castSpeed;
         public Attribute attack = Attribute.attack;
         public Attribute defence = Attribute.defence;
+        public Attribute detectionRange = Attribute.detectionRange;
         public bool playable;
 
         [Header("Behaviour")] public Gameplay.Character behaviourPrefab;
@@ -29,7 +30,8 @@ namespace Arkademy.CharacterCreation
                 speed = speed.Copy(),
                 castSpeed = castSpeed.Copy(),
                 attack = attack.Copy(),
-                defence = defence.Copy()
+                defence = defence.Copy(),
+                detectionRange = detectionRange.Copy()
             };
         }
     }
