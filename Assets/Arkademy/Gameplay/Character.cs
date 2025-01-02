@@ -78,6 +78,12 @@ namespace Arkademy.Gameplay
             hitBox.gameObject.SetActive(false);
         }
 
+        public void SetAttack(float cooldown)
+        {
+            graphic.attackSpeed = 1f/cooldown;
+            graphic.SetAttack();
+        }
+
         public void TakeDamage(int damage)
         {
             if (invincible) return;
