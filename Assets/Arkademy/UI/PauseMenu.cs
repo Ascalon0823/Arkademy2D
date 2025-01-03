@@ -1,9 +1,8 @@
-using System;
 using Arkademy.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Arkademy.Campus
+namespace Arkademy.UI
 {
     public class PauseMenu : MonoBehaviour
     {

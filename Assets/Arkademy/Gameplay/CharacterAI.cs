@@ -34,9 +34,7 @@ namespace Arkademy.Gameplay
         public void UseAbility()
         {
             
-            var eventData = new AbilityEventData
-            {
-            };
+            var eventData = new AbilityEventData();
             if (target)
             {
                 eventData.PrimaryTarget = target;

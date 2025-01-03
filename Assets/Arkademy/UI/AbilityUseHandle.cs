@@ -1,9 +1,7 @@
-using System;
-using Arkademy.Gameplay.Ability;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Arkademy.Campus
+namespace Arkademy.UI
 {
     public class AbilityUseHandle : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
