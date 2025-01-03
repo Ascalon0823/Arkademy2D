@@ -31,8 +31,14 @@ namespace Arkademy.Gameplay
         {
             onUIRaw = EventSystem.current.IsPointerOverGameObject();
             HandleTouch();
+            HandleKeyboardMouse();
         }
 
+
+        public void HandleKeyboardMouse()
+        {
+            if (playerInput.currentControlScheme != "KeyboardMouse") return;
+        }
         public void HandleTouch()
         {
             if (playerInput.currentControlScheme != "Touch") return;
@@ -81,7 +87,7 @@ namespace Arkademy.Gameplay
         public void OnTouch(InputValue value)
         {
             touch = value.Get<TouchState>();
-            if(touch.isTap)
+            if(touch.isTap && !onUI)
                 fire = touch.isTap;
         }
 
@@ -89,6 +95,21 @@ namespace Arkademy.Gameplay
         {
             move = value.Get<Vector2>();
             moveDir = move.normalized;
+        }
+
+        public void OnPosition(InputValue value)
+        {
+            screenPosition = value.Get<Vector2>();
+        }
+
+        public void OnPrimaryPress(InputValue value)
+        {
+            pressed = value.isPressed;
+        }
+
+        public void OnSecondaryPress(InputValue value)
+        {
+            fire = value.isPressed; 
         }
     }
 }
