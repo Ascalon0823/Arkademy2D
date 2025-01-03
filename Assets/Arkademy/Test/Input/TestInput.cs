@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace Arkademy.Test.Input
 {
-    [RequireComponent(typeof(PlayerInput))]
     public class TestInput : MonoBehaviour
     {
-        [SerializeField] private PlayerInput input;
+        [SerializeField] private PlayerTouchInput input;
 
         [SerializeField] private DragIndicator dragIndicator;
         [SerializeField] private Camera camera;
@@ -28,7 +27,7 @@ namespace Arkademy.Test.Input
                 var worldPos = camera.ScreenToWorldPoint(v);
                 worldPos.z = 0;
                 dragIndicator.transform.position = worldPos;
-                dragIndicator.UpdatePos(worldPos, input.moveDir, input.move);
+                dragIndicator.UpdatePos(worldPos, input.move.normalized, input.move);
             };
             input.onPressEnd += v => { dragIndicator.gameObject.SetActive(false); };
         }
@@ -36,7 +35,7 @@ namespace Arkademy.Test.Input
         private void Update()
         {
             if (dragIndicator.gameObject.activeSelf)
-                dragIndicator.UpdatePos(dragIndicator.transform.position, input.moveDir, input.move);
+                dragIndicator.UpdatePos(dragIndicator.transform.position, input.move.normalized, input.move);
         }
     }
 }

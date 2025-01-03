@@ -2594,7 +2594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 4
+  m_ScaleFactor: 2
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -2655,7 +2655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d9f33100754f1f8d5fbd690cd64a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 2017165736}
+  touchInput: {fileID: 2017165738}
   joyBase: {fileID: 949136242}
   joyTop: {fileID: 884628845}
 --- !u!225 &1153950610
@@ -3218,17 +3218,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5884b15baf5cbc94ca20fbf822afb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelScale: 4
+  pixelScale: 2
   useReferedScale: 1
   referenceResolution: {x: 240, y: 240}
   pixelPerUnit: 16
   cam: {fileID: 1796939461}
   camRect:
     serializedVersion: 2
-    x: -5.859375
-    y: -10.421875
-    width: 11.71875
-    height: 20.84375
+    x: -7.351063
+    y: -10.15625
+    width: 14.702126
+    height: 20.3125
 --- !u!114 &1796939459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3316,7 +3316,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.421875
+  orthographic size: 10.15625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3393,6 +3393,8 @@ GameObject:
   - component: {fileID: 2017165735}
   - component: {fileID: 2017165737}
   - component: {fileID: 2017165736}
+  - component: {fileID: 2017165738}
+  - component: {fileID: 2017165739}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3444,16 +3446,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 2017165737}
-  moveDeadZone: 10
-  analogRange: 100
-  screenPosition: {x: 0, y: 0}
-  startPosition: {x: 0, y: 0}
   moveDir: {x: 0, y: 0}
   move: {x: 0, y: 0}
-  pressed: 0
-  fire: 0
-  onUI: 0
-  onUIRaw: 0
+  playerInputHandlers:
+  - {fileID: 2017165738}
 --- !u!114 &2017165737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3484,6 +3480,61 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 1796939461}
+--- !u!114 &2017165738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017165733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a62ee294b109467fb8a480f4a2b1d704, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scheme: Touch
+  move: {x: 0, y: 0}
+  onUIRaw: 0
+  playerInput: {fileID: 2017165737}
+  moveDeadZone: 10
+  analogRange: 100
+  screenPosition: {x: 0, y: 0}
+  startPosition: {x: 0, y: 0}
+  onUI: 0
+  pressed: 0
+  fire: 0
+--- !u!114 &2017165739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017165733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d1c80210934a7381236a6d65aac08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scheme: KeyboardMouse
+  move: {x: 0, y: 0}
+  onUIRaw: 0
+  playerInput: {fileID: 2017165737}
+  primary:
+    position: {x: 0, y: 0}
+    startPosition: {x: 0, y: 0}
+    currPosition: {x: 0, y: 0}
+    pressed: 0
+    wasPressed: 0
+    onUIRaw: 0
+    onUI: 0
+  secondary:
+    position: {x: 0, y: 0}
+    startPosition: {x: 0, y: 0}
+    currPosition: {x: 0, y: 0}
+    pressed: 0
+    wasPressed: 0
+    onUIRaw: 0
+    onUI: 0
 --- !u!1001 &6182962118235736434
 PrefabInstance:
   m_ObjectHideFlags: 0
