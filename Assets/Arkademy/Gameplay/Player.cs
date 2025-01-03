@@ -27,6 +27,7 @@ namespace Arkademy.Gameplay
         {
             if(!character || !playerInput) return;  
             character.Move(playerInput.moveDir);
+            
         }
     }
 }

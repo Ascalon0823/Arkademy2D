@@ -3,15 +3,48 @@ using UnityEngine;
 
 namespace Arkademy.Gameplay.Ability
 {
+    public struct AbilityEventData
+    {
+        public Character PrimaryTarget;
+        public Character[] OtherTargets;
+        public Vector2? Direction;
+        public Vector2? Position;
+        public int Phase;
+
+        public bool TryGetDirection(Vector2 pos, out Vector2 direction)
+        {
+            direction = Vector2.zero;
+            if (Direction.HasValue)
+            {
+                direction = Direction.Value;
+                return true;
+            }
+
+            if (Position.HasValue)
+            {
+                direction = Position.Value - pos;
+                return true;
+            }
+
+            if (PrimaryTarget)
+            {
+                direction = PrimaryTarget.transform.position - (Vector3)pos;
+                return true;
+            }
+
+            return false;
+        }
+    }
     public class AbilityBase : MonoBehaviour
     {
         public float cooldown;
         public float remainingCooldown;
+        public bool useWhileMoving;
         public Character user;
 
-        public virtual bool CanUse(Character target)
+        public virtual bool CanUse(AbilityEventData eventData)
         {
-            return remainingCooldown <= 0 && !user.moving;
+            return remainingCooldown <= 0 && (!user.moving || useWhileMoving);
         }
 
         public virtual float GetCooldown()
@@ -25,11 +58,10 @@ namespace Arkademy.Gameplay.Ability
                 remainingCooldown -= Time.deltaTime;
         }
 
-        public virtual void Use(Character target)
+        public virtual void Use(AbilityEventData eventData)
         {
+            user.SetAttack(GetCooldown());
             remainingCooldown = GetCooldown();
-            remainingCooldown = remainingCooldown == 0f ? 0.01f : remainingCooldown;
-            user.SetAttack(remainingCooldown);
         }
     }
 }

@@ -26,7 +26,6 @@ namespace Arkademy.Gameplay
         public bool onUI;
         [SerializeField] private bool onUIRaw;
         public TouchState touch;
-        public bool confineJoystick;
 
         private void Update()
         {
@@ -67,7 +66,6 @@ namespace Arkademy.Gameplay
             if (onUI) return;
             pressed = true;
             screenPosition = touch.position;
-            
             var delta = (touch.position - startPosition);
             delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
             if (delta.magnitude > analogRange)

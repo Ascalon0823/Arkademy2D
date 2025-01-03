@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Arkademy.Gameplay.Ability;
 using UnityEngine;
 
 namespace Arkademy.Gameplay
@@ -32,11 +33,21 @@ namespace Arkademy.Gameplay
         
         public void UseAbility()
         {
+            
+            var eventData = new AbilityEventData
+            {
+            };
+            if (target)
+            {
+                eventData.PrimaryTarget = target;
+                eventData.Direction = (target.transform.position - character.transform.position).normalized;
+                eventData.Position = target.transform.position;
+            }
             foreach (var ability in character.abilities)
             {
-                if (ability.CanUse(target))
+                if (ability.CanUse(eventData))
                 {
-                    ability.Use(target);
+                    ability.Use(eventData);
                     return;
                 }
             }

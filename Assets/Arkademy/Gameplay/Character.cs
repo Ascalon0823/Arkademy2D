@@ -23,6 +23,7 @@ namespace Arkademy.Gameplay
         public bool invincible;
         public int faction;
         public Vector2 move;
+        public Vector2 facing;
         public bool moving;
         public List<AbilityBase> abilities = new ();
         public static Character Create(Common.Character data, int newFaction)
@@ -64,6 +65,10 @@ namespace Arkademy.Gameplay
         public void Move(Vector2 dir)
         {
             move = dir;
+            if (dir.sqrMagnitude > 0)
+            {
+                facing = dir;
+            }
         }
 
         public float GetMoveSpeed()

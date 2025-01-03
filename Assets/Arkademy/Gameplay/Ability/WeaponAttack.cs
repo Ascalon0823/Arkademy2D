@@ -1,4 +1,5 @@
-﻿using Arkademy.Common;
+﻿using System.Linq;
+using Arkademy.Common;
 using UnityEngine;
 
 namespace Arkademy.Gameplay.Ability
@@ -6,9 +7,11 @@ namespace Arkademy.Gameplay.Ability
     public class WeaponAttack : AbilityBase
     {
         public Projectile projectile;
-        public override bool CanUse(Character target)
+
+
+        public override bool CanUse(AbilityEventData eventData)
         {
-            return base.CanUse(target) && target;
+            return base.CanUse(eventData) && eventData.TryGetDirection(user.transform.position, out var dir);
         }
 
         public override float GetCooldown()
@@ -16,13 +19,17 @@ namespace Arkademy.Gameplay.Ability
             return Calculation.CastCoolDown(user.characterData.castSpeed.value) * cooldown;
         }
 
-        public override void Use(Character target)
+        public override void Use(AbilityEventData eventData)
         {
-            base.Use(target);
-            var dir = target.transform.position - user.transform.position;
-            var p = Instantiate(projectile,user.transform.position,Quaternion.identity);
-            p.dir = dir.normalized;
-            p.Setup(1,user.faction,false);
+            base.Use(eventData);
+            if (!eventData.TryGetDirection(user.transform.position, out var dir))
+            {
+                dir = user.facing;
+            }
+
+            var proj = Instantiate(projectile, user.transform.position, Quaternion.identity);
+            proj.dir = dir.normalized;
+            proj.Setup(1,user.faction,false);
         }
     }
 }

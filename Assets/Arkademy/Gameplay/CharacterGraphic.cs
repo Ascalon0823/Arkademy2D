@@ -22,12 +22,7 @@ namespace Arkademy.Behaviour
         {
             moveDir = character.move;
             walkSpeed = character.GetMoveSpeed();
-
-            if (moveDir.magnitude > 0f)
-            {
-                facing = moveDir;
-            }
-
+            facing = character.facing;
             if (facing.sqrMagnitude > 0f)
             {
                 spriteRenderer.flipX = Vector2.Dot(facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
