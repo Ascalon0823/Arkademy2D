@@ -22,7 +22,7 @@ namespace Arkademy.Gameplay.Ability
             var dir = target.transform.position - user.transform.position;
             var p = Instantiate(projectile,user.transform.position,Quaternion.identity);
             p.dir = dir.normalized;
-            p.faction = user.faction;
+            p.Setup(1,user.faction,false);
         }
     }
 }

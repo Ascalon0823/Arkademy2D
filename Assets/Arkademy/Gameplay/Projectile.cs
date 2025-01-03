@@ -6,13 +6,17 @@ namespace Arkademy.Gameplay
     public class Projectile : MonoBehaviour
     {
         public float remainingLife;
-        public bool passThroughObstacles;
         public float speed;
         public Vector2 dir;
         public Rigidbody2D body;
-        public int faction;
-        public int damage;
         public bool rotateToDir;
+        public Action<Collider2D> OnHit;
+
+        private void Start()
+        {
+            if (rotateToDir)
+                transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        }
 
         private void FixedUpdate()
         {
@@ -30,15 +34,24 @@ namespace Arkademy.Gameplay
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.GetCharacter(out var character))
+            OnHit?.Invoke(other);
+        }
+
+        public void Setup(int damage, int faction, bool passThrough)
+        {
+            OnHit += other =>
             {
-                if (character.faction == faction) return;
-                character.TakeDamage(damage);
+                if (other.GetCharacter(out var character))
+                {
+                    if (character.faction == faction) return;
+                    character.TakeDamage(damage);
+                    Destroy(gameObject);
+                    return;
+                }
+
+                if (passThrough) return;
                 Destroy(gameObject);
-                return;
-            }
-            if (passThroughObstacles) return;
-            Destroy(gameObject);
+            };
         }
     }
 }

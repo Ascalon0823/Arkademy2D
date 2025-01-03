@@ -111,12 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainingLife: 5
-  passThroughObstacles: 0
   speed: 5
   dir: {x: 0, y: 1}
   body: {fileID: 6531020515338524096}
-  faction: 0
-  damage: 1
   rotateToDir: 1
 --- !u!1 &6797745475715950155
 GameObject:
