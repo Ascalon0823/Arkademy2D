@@ -3450,6 +3450,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   playerInputHandlers:
   - {fileID: 2017165738}
+  - {fileID: 2017165739}
 --- !u!114 &2017165737
 MonoBehaviour:
   m_ObjectHideFlags: 0
