@@ -9,6 +9,8 @@ namespace Arkademy.Gameplay
       
         public string scheme;
         public Vector2 move;
+        public bool interact;
+        public Vector2 interactPos;
         [SerializeField] protected bool onUIRaw;
         [SerializeField] protected UnityEngine.InputSystem.PlayerInput playerInput;
 
@@ -17,6 +19,11 @@ namespace Arkademy.Gameplay
             onUIRaw = EventSystem.current.IsPointerOverGameObject();
             if (playerInput.currentControlScheme != scheme) return;
             HandleInput();
+        }
+
+        protected virtual void LateUpdate()
+        {
+            if (interact) interact = false;
         }
 
         protected virtual void HandleInput()

@@ -14,13 +14,6 @@ namespace Arkademy.Test.Input
 
         private void Start()
         {
-            input.onFire += v =>
-            {
-                Debug.Log($"OnFire: {v}");
-                var worldPos = camera.ScreenToWorldPoint(v);
-                worldPos.z = 0;
-                Instantiate(touchIndicatorPrefab, worldPos, Quaternion.identity);
-            };
             input.onPressBegin += v =>
             {
                 dragIndicator.gameObject.SetActive(true);
@@ -34,6 +27,12 @@ namespace Arkademy.Test.Input
 
         private void Update()
         {
+            if (input.interact)
+            {
+                var worldPos = camera.ScreenToWorldPoint(input.screenPosition);
+                worldPos.z = 0;
+                Instantiate(touchIndicatorPrefab, worldPos, Quaternion.identity);
+            }
             if (dragIndicator.gameObject.activeSelf)
                 dragIndicator.UpdatePos(dragIndicator.transform.position, input.move.normalized, input.move);
         }

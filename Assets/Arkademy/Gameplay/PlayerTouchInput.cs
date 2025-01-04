@@ -16,17 +16,10 @@ namespace Arkademy.Gameplay
         public bool pressed;
         public Action<Vector2> onPressBegin;
         public Action<Vector2> onPressEnd;
-        public Action<Vector2> onFire;
-        public bool fire;
         [SerializeField] private TouchState touch;
-     
+
         protected override void HandleInput()
         {
-            if (fire)
-            {
-                onFire?.Invoke(touch.position);
-                fire = false;
-            }
             if (touch.isNoneEndedOrCanceled)
             {
                 onPressEnd?.Invoke(touch.position);
@@ -52,21 +45,23 @@ namespace Arkademy.Gameplay
             pressed = true;
             screenPosition = touch.position;
             var delta = (touch.position - startPosition);
-            delta = delta.magnitude<moveDeadZone ? Vector2.zero:delta;
+            delta = delta.magnitude < moveDeadZone ? Vector2.zero : delta;
             if (delta.magnitude > analogRange)
             {
                 var clamped = Vector2.ClampMagnitude(delta, analogRange);
                 startPosition += (delta - clamped);
                 delta = screenPosition - startPosition;
             }
+
             move = Vector2.ClampMagnitude(delta / analogRange, 1);
-            
         }
+
         public void OnTouch(InputValue value)
         {
             touch = value.Get<TouchState>();
-            if(touch.isTap && !onUI)
-                fire = touch.isTap;
+            if (!touch.isTap || onUI) return;
+            interact = touch.isTap;
+            interactPos = touch.position;
         }
     }
 }

@@ -6,6 +6,41 @@ namespace Arkademy.Gameplay
 {
     public class PlayerMouseInput : PlayerInputHandler
     {
+        [SerializeField] private MouseButtonHandler primary = new MouseButtonHandler();
+        [SerializeField] private MouseButtonHandler secondary = new MouseButtonHandler();
+
+        protected override void HandleInput()
+        {
+            primary.onUIRaw = onUIRaw;
+            secondary.onUIRaw = onUIRaw;
+            primary.Update();
+            secondary.Update();
+            move = primary.currPosition - primary.startPosition;
+        }
+
+        public void OnPosition(InputValue value)
+        {
+            primary.position = value.Get<Vector2>();
+            secondary.position = value.Get<Vector2>();
+        }
+
+        public void OnPrimaryPress(InputValue value)
+        {
+            primary.pressed = value.isPressed;
+        }
+
+        public void OnSecondaryPress(InputValue value)
+        {
+            secondary.pressed = value.isPressed;
+        }
+
+        public void OnInteract(InputValue value)
+        {
+            interact = !onUIRaw;
+            interactPos = primary.position;
+        }
+
+
         [Serializable]
         private class MouseButtonHandler
         {
@@ -27,46 +62,22 @@ namespace Arkademy.Gameplay
                     wasPressed = false;
                     return;
                 }
+
                 if (pressed && !wasPressed)
                 {
+                    wasPressed = pressed;
                     if (onUIRaw)
                     {
                         onUI = true;
                         return;
                     }
+
                     startPosition = position;
                 }
-                wasPressed = pressed;
-                if (!wasPressed||onUI) return;
+
+                if (!wasPressed || onUI) return;
                 currPosition = position;
             }
-        }
-
-        [SerializeField] private MouseButtonHandler primary = new MouseButtonHandler();
-        [SerializeField] private MouseButtonHandler secondary = new MouseButtonHandler();
-        protected override void HandleInput()
-        {
-           primary.onUIRaw = onUIRaw;
-           secondary.onUIRaw = onUIRaw;
-           primary.Update();
-           secondary.Update();
-           move = primary.currPosition - primary.startPosition;
-        }
-
-        public void OnPosition(InputValue value)
-        {
-            primary.position = value.Get<Vector2>();
-            secondary.position = value.Get<Vector2>();
-        }
-
-        public void OnPrimaryPress(InputValue value)
-        {
-            primary.pressed = value.isPressed;
-        }
-
-        public void OnSecondaryPress(InputValue value)
-        {
-            secondary.pressed = value.isPressed;
         }
     }
 }

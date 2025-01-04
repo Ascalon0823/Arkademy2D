@@ -9,6 +9,8 @@ namespace Arkademy.Gameplay
         [SerializeField] private UnityEngine.InputSystem.PlayerInput playerInput;
         public Vector2 moveDir;
         public Vector2 move;
+        public bool interact;
+        public Vector2 interactPos;
         public List<PlayerInputHandler> playerInputHandlers = new();
 
         private Dictionary<string, PlayerInputHandler> playerInputHandlersDictionary = new();
@@ -30,6 +32,8 @@ namespace Arkademy.Gameplay
 
             move = inputHandler.move;
             moveDir = inputHandler.move.normalized;
+            interact = inputHandler.interact;
+            interactPos = inputHandler.interactPos;
         }
     }
 }

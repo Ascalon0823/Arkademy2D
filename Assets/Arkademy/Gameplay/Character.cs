@@ -26,6 +26,7 @@ namespace Arkademy.Gameplay
         public Vector2 facing;
         public bool moving;
         public List<AbilityBase> abilities = new ();
+        public InteractableDetector interactableDetector;
         public static Character Create(Common.Character data, int newFaction)
         {
             var raceName = data.raceName;

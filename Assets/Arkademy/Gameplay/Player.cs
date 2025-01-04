@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Arkademy.Common;
 using UnityEngine;
 
@@ -19,15 +20,24 @@ namespace Arkademy.Gameplay
             if (character) return;
             var characterData = Session.currCharacterRecord;
             characterData.LastPlayed = DateTime.UtcNow;
-            character = Character.Create(characterData.character,0);
+            character = Character.Create(characterData.character, 0);
             followCamera.followTarget = character.transform;
         }
 
         private void Update()
         {
-            if(!character || !playerInput) return;  
+            if (!character || !playerInput) return;
             character.Move(playerInput.moveDir);
-            
+            if (playerInput.interact && character.interactableDetector)
+            {
+                var interactable = character.interactableDetector.interactables
+                    .OrderBy(x => Vector3.Distance(x.transform.position, character.transform.position))
+                    .FirstOrDefault();
+                if (interactable)
+                {
+                    interactable.OnInteractedBy(character);
+                }
+            }
         }
     }
 }

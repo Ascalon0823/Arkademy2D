@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Arkademy.Gameplay;
 using UnityEngine;
 
 namespace Arkademy
@@ -36,6 +37,18 @@ namespace Arkademy
         public static void RegisterCharacterCollider(this Collider2D collider, Gameplay.Character character)
         {
             ColliderCharacterMap[collider] =  character;
+        }
+        
+        private static readonly Dictionary<Collider2D, Interactable> InteractableMap = new ();
+
+        public static bool GetInteractable(this Collider2D collider, out Gameplay.Interactable interactable)
+        {
+            return InteractableMap.TryGetValue(collider, out interactable);
+        }
+
+        public static void RegisterInteractableTrigger(this Collider2D collider, Gameplay.Interactable interactable)
+        {
+            InteractableMap[collider] = interactable;
         }
     }
 }
