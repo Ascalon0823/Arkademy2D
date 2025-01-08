@@ -6,35 +6,33 @@ namespace Arkademy.Test.Input
 {
     public class TestInput : MonoBehaviour
     {
-        [SerializeField] private PlayerTouchInput input;
-
-        [SerializeField] private DragIndicator dragIndicator;
+        [SerializeField] private PlayerInput input;
         [SerializeField] private Camera camera;
         [SerializeField] private GameObject touchIndicatorPrefab;
+        [SerializeField] private GameObject holdIndicator;
+        [SerializeField] private LineRenderer holdLine;
 
         private void Start()
         {
-            input.onPressBegin += v =>
-            {
-                dragIndicator.gameObject.SetActive(true);
-                var worldPos = camera.ScreenToWorldPoint(v);
-                worldPos.z = 0;
-                dragIndicator.transform.position = worldPos;
-                dragIndicator.UpdatePos(worldPos, input.move.normalized, input.move);
-            };
-            input.onPressEnd += v => { dragIndicator.gameObject.SetActive(false); };
         }
 
         private void Update()
         {
             if (input.interact)
             {
-                var worldPos = camera.ScreenToWorldPoint(input.screenPosition);
+                var worldPos = camera.ScreenToWorldPoint(input.position);
                 worldPos.z = 0;
                 Instantiate(touchIndicatorPrefab, worldPos, Quaternion.identity);
             }
-            if (dragIndicator.gameObject.activeSelf)
-                dragIndicator.UpdatePos(dragIndicator.transform.position, input.move.normalized, input.move);
+
+            holdIndicator.gameObject.SetActive(input.hold);
+            
+            var start = camera.ScreenToWorldPoint(input.holdPos);
+            start.z = 0;
+            var end = camera.ScreenToWorldPoint(input.holdPos + input.holdDir);
+            end.z = 0f;
+            holdIndicator.transform.position = end;
+            holdLine.SetPositions(new[] { start, end });
         }
     }
 }

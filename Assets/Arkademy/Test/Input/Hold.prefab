@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1008191977110936889}
   - component: {fileID: 3691191845989573494}
   m_Layer: 0
-  m_Name: Tap
+  m_Name: Hold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1735395309, guid: 90420e6bf1080c64f91142742483cb10, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.9267976, a: 1}
+  m_Sprite: {fileID: -54970305, guid: 90420e6bf1080c64f91142742483cb10, type: 3}
+  m_Color: {r: 1, g: 0, b: 0.16016197, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
