@@ -5,7 +5,7 @@ namespace Arkademy.Gameplay
 {
     public class Interactable : MonoBehaviour
     {
-        
+        public string interactableInfo;
         public float radius;
         [SerializeField] private CircleCollider2D trigger;
 
@@ -23,6 +23,11 @@ namespace Arkademy.Gameplay
         {
             Debug.Log($"Interacted by {character.name}");
             return true;
+        }
+
+        public virtual string GetPopup(Character character)
+        {
+            return interactableInfo;
         }
     }
 }

@@ -8,11 +8,13 @@ namespace Arkademy.Gameplay
     public class Player : MonoBehaviour
     {
         private static Player _localPlayer;
+        public static Player LocalPlayer => _localPlayer;
         public static Character Character => _localPlayer.character;
         public static Camera Camera => _localPlayer.followCamera.ppcam.cam;
         public Character character;
         public FollowCamera followCamera;
         public PlayerInput playerInput;
+        public Interactable currentInteractableCandidate;
 
         public void Start()
         {
@@ -28,15 +30,16 @@ namespace Arkademy.Gameplay
         {
             if (!character || !playerInput) return;
             character.Move(playerInput.moveDir);
-            if (playerInput.interact && character.interactableDetector)
+            if (character.interactableDetector)
             {
-                var interactable = character.interactableDetector.interactables
+                currentInteractableCandidate = character.interactableDetector.interactables
                     .OrderBy(x => Vector3.Distance(x.transform.position, character.transform.position))
                     .FirstOrDefault();
-                if (interactable)
-                {
-                    interactable.OnInteractedBy(character);
-                }
+            }
+
+            if (playerInput.interact && currentInteractableCandidate)
+            {
+                currentInteractableCandidate.OnInteractedBy(character);
             }
         }
     }
