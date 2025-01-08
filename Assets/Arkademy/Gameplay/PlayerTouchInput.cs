@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
-using TouchPhase = UnityEditor.DeviceSimulation.TouchPhase;
 
 namespace Arkademy.Gameplay
 {
