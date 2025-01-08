@@ -502,6 +502,7 @@ MonoBehaviour:
   abilities:
   - {fileID: 8772939818876458486}
   interactableDetector: {fileID: 761044055528872143}
+  playerMoveMultiplier: 1
 --- !u!50 &4717580739875485945
 Rigidbody2D:
   serializedVersion: 5
@@ -577,6 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a503c07cda14d76ae27009a978c6c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoUseAbility: 0
   character: {fileID: 7618021547581820144}
   target: {fileID: 0}
 --- !u!114 &8772939818876458486
@@ -595,4 +597,6 @@ MonoBehaviour:
   remainingCooldown: 0
   useWhileMoving: 0
   user: {fileID: 7618021547581820144}
+  payloadPrefab: {fileID: 0}
+  currentPayload: {fileID: 0}
   projectile: {fileID: 7914257082053339661, guid: a3a1316c1e4b9a740836bbf355217f89, type: 3}

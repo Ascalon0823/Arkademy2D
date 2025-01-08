@@ -16,6 +16,10 @@ namespace Arkademy.Gameplay
             primary.Update();
             secondary.Update();
             move = primary.currPosition - primary.startPosition;
+            hold = secondary.pressed;
+            holdPos = secondary.startPosition;
+            holdDir = secondary.currPosition - secondary.startPosition;
+            position = primary.position;
         }
 
         public void OnPosition(InputValue value)
@@ -37,7 +41,6 @@ namespace Arkademy.Gameplay
         public void OnInteract(InputValue value)
         {
             interact = !onUIRaw;
-            interactPos = primary.position;
         }
 
 
@@ -51,7 +54,6 @@ namespace Arkademy.Gameplay
             public bool wasPressed;
             public bool onUIRaw;
             public bool onUI;
-
             public void Update()
             {
                 if (wasPressed && !pressed)
@@ -71,7 +73,7 @@ namespace Arkademy.Gameplay
                         onUI = true;
                         return;
                     }
-
+                    
                     startPosition = position;
                 }
 

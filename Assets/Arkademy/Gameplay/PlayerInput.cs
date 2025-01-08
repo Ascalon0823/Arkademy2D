@@ -10,7 +10,10 @@ namespace Arkademy.Gameplay
         public Vector2 moveDir;
         public Vector2 move;
         public bool interact;
-        public Vector2 interactPos;
+        public Vector2 position;
+        public bool hold;
+        public Vector2 holdPos;
+        public Vector2 holdDir;
         public List<PlayerInputHandler> playerInputHandlers = new();
 
         private Dictionary<string, PlayerInputHandler> playerInputHandlersDictionary = new();
@@ -30,10 +33,13 @@ namespace Arkademy.Gameplay
                 return;
             }
 
+            position = inputHandler.position;
             move = inputHandler.move;
             moveDir = inputHandler.move.normalized;
             interact = inputHandler.interact;
-            interactPos = inputHandler.interactPos;
+            hold = inputHandler.hold;
+            holdPos = inputHandler.holdPos;
+            holdDir = inputHandler.holdDir;
         }
     }
 }

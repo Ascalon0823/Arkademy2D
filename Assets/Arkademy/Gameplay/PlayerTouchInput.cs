@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using TouchPhase = UnityEditor.DeviceSimulation.TouchPhase;
 
 namespace Arkademy.Gameplay
 {
@@ -27,6 +28,9 @@ namespace Arkademy.Gameplay
                 move = Vector2.zero;
                 screenPosition = Vector2.zero;
                 startPosition = Vector2.zero;
+                hold = false;
+                holdPos = Vector2.zero;
+                holdDir = Vector2.zero;
                 onUI = false;
                 return;
             }
@@ -53,7 +57,16 @@ namespace Arkademy.Gameplay
                 delta = screenPosition - startPosition;
             }
 
+            if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began &&
+                Time.realtimeSinceStartupAsDouble - touch.startTime >= holdThreshold)
+            {
+                hold = true;
+                holdPos = touch.startPosition;
+            }
+
+            if (hold) holdDir = touch.position - holdPos;
             move = Vector2.ClampMagnitude(delta / analogRange, 1);
+            position = screenPosition;
         }
 
         public void OnTouch(InputValue value)
@@ -61,7 +74,6 @@ namespace Arkademy.Gameplay
             touch = value.Get<TouchState>();
             if (!touch.isTap || onUI) return;
             interact = touch.isTap;
-            interactPos = touch.position;
         }
     }
 }

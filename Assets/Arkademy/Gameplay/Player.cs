@@ -1,10 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Arkademy.Common;
+using Arkademy.Gameplay.Ability;
 using UnityEngine;
 
 namespace Arkademy.Gameplay
 {
+    public enum AbilityBindingType
+    {
+        Tap,
+        Hold,
+        Swipe
+    }
+    [Serializable]
+    public struct PlayerAbilityBinding
+    {
+        public AbilityBindingType binding;
+        public AbilityBase ability;
+    }
     public class Player : MonoBehaviour
     {
         private static Player _localPlayer;
@@ -15,6 +29,8 @@ namespace Arkademy.Gameplay
         public FollowCamera followCamera;
         public PlayerInput playerInput;
         public Interactable currentInteractableCandidate;
+        public AbilityBase holdAbility;
+        public AbilityBase tapAbility;
 
         public void Start()
         {
@@ -40,6 +56,30 @@ namespace Arkademy.Gameplay
             if (playerInput.interact && currentInteractableCandidate)
             {
                 currentInteractableCandidate.OnInteractedBy(character);
+            }
+
+            if (tapAbility && playerInput.interact && !currentInteractableCandidate)
+            {
+                var e = new AbilityEventData
+                {
+                    Direction = playerInput.holdDir,
+                    Position = playerInput.position,
+                };
+                if(tapAbility.CanUse(e))tapAbility.Use(e);
+            }
+            if (holdAbility && playerInput.hold )
+            {
+                var e = new AbilityEventData
+                {
+                    Direction = playerInput.holdDir,
+                    Position = playerInput.position,
+                };
+                if(holdAbility.CanUse(e))holdAbility.Use(e);
+            }
+
+            if (holdAbility && !playerInput.hold && holdAbility.inUse)
+            {
+                holdAbility.Cancel();
             }
         }
     }

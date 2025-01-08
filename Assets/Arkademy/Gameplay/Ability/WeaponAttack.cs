@@ -8,7 +8,6 @@ namespace Arkademy.Gameplay.Ability
     {
         public Projectile projectile;
 
-
         public override bool CanUse(AbilityEventData eventData)
         {
             return base.CanUse(eventData) && eventData.TryGetDirection(user.transform.position, out var dir);
@@ -21,7 +20,7 @@ namespace Arkademy.Gameplay.Ability
 
         public override void Use(AbilityEventData eventData)
         {
-            base.Use(eventData);
+            user.SetAttack(GetCooldown());
             if (!eventData.TryGetDirection(user.transform.position, out var dir))
             {
                 dir = user.facing;
@@ -30,6 +29,7 @@ namespace Arkademy.Gameplay.Ability
             var proj = Instantiate(projectile, user.transform.position, Quaternion.identity);
             proj.dir = dir.normalized;
             proj.Setup(1,user.faction,false);
+            remainingCooldown = GetCooldown();
         }
     }
 }

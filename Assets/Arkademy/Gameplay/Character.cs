@@ -27,6 +27,7 @@ namespace Arkademy.Gameplay
         public bool moving;
         public List<AbilityBase> abilities = new ();
         public InteractableDetector interactableDetector;
+        public float playerMoveMultiplier = 1f;
         public static Character Create(Common.Character data, int newFaction)
         {
             var raceName = data.raceName;
@@ -62,13 +63,13 @@ namespace Arkademy.Gameplay
             moving = velocity.sqrMagnitude > 0f;
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
-
+        
         public void Move(Vector2 dir)
         {
-            move = dir;
-            if (dir.sqrMagnitude > 0)
+            move = dir * playerMoveMultiplier;
+            if (move.sqrMagnitude > 0)
             {
-                facing = dir;
+                facing = move;
             }
         }
 
@@ -84,11 +85,12 @@ namespace Arkademy.Gameplay
             hitBox.gameObject.SetActive(false);
         }
 
-        public void SetAttack(float cooldown)
+        public void SetAttack(float cooldown = 1f)
         {
             graphic.attackSpeed = 1f/cooldown;
             graphic.SetAttack();
         }
+        
 
         public void TakeDamage(int damage)
         {

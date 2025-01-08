@@ -7,6 +7,7 @@ namespace Arkademy.Gameplay
 {
     public class CharacterAI : MonoBehaviour
     {
+        public bool autoUseAbility;
         public Character character;
         public Character target;
         public void Update()
@@ -33,7 +34,7 @@ namespace Arkademy.Gameplay
         
         public void UseAbility()
         {
-            
+            if (!autoUseAbility) return;
             var eventData = new AbilityEventData();
             if (target)
             {

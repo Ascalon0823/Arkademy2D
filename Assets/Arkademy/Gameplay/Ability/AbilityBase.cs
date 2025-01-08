@@ -9,7 +9,6 @@ namespace Arkademy.Gameplay.Ability
         public Character[] OtherTargets;
         public Vector2? Direction;
         public Vector2? Position;
-        public int Phase;
 
         public bool TryGetDirection(Vector2 pos, out Vector2 direction)
         {
@@ -41,6 +40,9 @@ namespace Arkademy.Gameplay.Ability
         public float remainingCooldown;
         public bool useWhileMoving;
         public Character user;
+        public AbilityPayload payloadPrefab;
+        public AbilityPayload currentPayload;
+        public bool inUse;
 
         public virtual bool CanUse(AbilityEventData eventData)
         {
@@ -58,9 +60,14 @@ namespace Arkademy.Gameplay.Ability
                 remainingCooldown -= Time.deltaTime;
         }
 
+        public virtual void Cancel()
+        {
+            
+        }
         public virtual void Use(AbilityEventData eventData)
         {
-            user.SetAttack(GetCooldown());
+            currentPayload = Instantiate(payloadPrefab);
+            currentPayload.Init(eventData,this);
             remainingCooldown = GetCooldown();
         }
     }

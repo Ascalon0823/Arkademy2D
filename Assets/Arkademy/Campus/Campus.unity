@@ -3498,10 +3498,10 @@ MonoBehaviour:
   cam: {fileID: 1796939461}
   camRect:
     serializedVersion: 2
-    x: -5.859375
-    y: -10.421875
-    width: 11.71875
-    height: 20.84375
+    x: -6.953125
+    y: -7.2578125
+    width: 13.90625
+    height: 14.515625
 --- !u!114 &1796939459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3589,7 +3589,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.421875
+  orthographic size: 7.2578125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3709,6 +3709,8 @@ MonoBehaviour:
   followCamera: {fileID: 1796939457}
   playerInput: {fileID: 2017165736}
   currentInteractableCandidate: {fileID: 0}
+  holdAbility: {fileID: 0}
+  tapAbility: {fileID: 0}
 --- !u!114 &2017165736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3725,7 +3727,10 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   move: {x: 0, y: 0}
   interact: 0
-  interactPos: {x: 0, y: 0}
+  position: {x: 0, y: 0}
+  hold: 0
+  holdPos: {x: 0, y: 0}
+  holdDir: {x: 0, y: 0}
   playerInputHandlers:
   - {fileID: 2017165738}
   - {fileID: 2017165739}
@@ -3774,9 +3779,13 @@ MonoBehaviour:
   scheme: Touch
   move: {x: 0, y: 0}
   interact: 0
-  interactPos: {x: 0, y: 0}
+  position: {x: 0, y: 0}
+  hold: 0
+  holdPos: {x: 0, y: 0}
+  holdDir: {x: 0, y: 0}
   onUIRaw: 0
   playerInput: {fileID: 2017165737}
+  holdThreshold: 0.25
   moveDeadZone: 10
   analogRange: 100
   screenPosition: {x: 0, y: 0}
@@ -3798,9 +3807,13 @@ MonoBehaviour:
   scheme: KeyboardMouse
   move: {x: 0, y: 0}
   interact: 0
-  interactPos: {x: 0, y: 0}
+  position: {x: 0, y: 0}
+  hold: 0
+  holdPos: {x: 0, y: 0}
+  holdDir: {x: 0, y: 0}
   onUIRaw: 0
   playerInput: {fileID: 2017165737}
+  holdThreshold: 0.25
   primary:
     position: {x: 0, y: 0}
     startPosition: {x: 0, y: 0}
@@ -3817,6 +3830,51 @@ MonoBehaviour:
     wasPressed: 0
     onUIRaw: 0
     onUI: 0
+--- !u!1 &2135520786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2135520788}
+  - component: {fileID: 2135520787}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2135520787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135520786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c0cabcba2c49be85c547fa47c55952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 0}
+--- !u!4 &2135520788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135520786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6182962118235736434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4335,3 +4393,4 @@ SceneRoots:
   - {fileID: 1796939462}
   - {fileID: 2017165734}
   - {fileID: 1908652097}
+  - {fileID: 2135520788}
