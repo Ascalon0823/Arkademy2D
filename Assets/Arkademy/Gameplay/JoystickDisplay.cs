@@ -6,18 +6,18 @@ namespace Arkademy.Gameplay
 {
     public class JoystickDisplay : MonoBehaviour
     {
-        public PlayerTouchInput touchInput;
+        public PlayerInput input;
         public RectTransform joyBase;
         public RectTransform joyTop;
 
         private void LateUpdate()
         {
-            var show = touchInput.move.magnitude > 0 && touchInput.pressed;
+            var show = input.move.magnitude > 0;
             joyBase.gameObject.SetActive(show);
             joyTop.gameObject.SetActive(show);
             if (!show) return;
-            joyBase.position = touchInput.startPosition;
-            joyTop.position = touchInput.screenPosition;
+            joyBase.position = input.position - input.move;
+            joyTop.position = input.position;
         }
     }
 }

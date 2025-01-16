@@ -13,6 +13,8 @@ namespace Arkademy.Gameplay
         {
             primary.onUIRaw = onUIRaw;
             secondary.onUIRaw = onUIRaw;
+            primary.confineMove = confineMove;
+            primary.confineDistance = confineDistance;
             primary.Update();
             secondary.Update();
             move = primary.currPosition - primary.startPosition;
@@ -47,6 +49,8 @@ namespace Arkademy.Gameplay
         [Serializable]
         private class MouseButtonHandler
         {
+            public bool confineMove;
+            public int confineDistance;
             public Vector2 position;
             public Vector2 startPosition;
             public Vector2 currPosition;
@@ -79,6 +83,10 @@ namespace Arkademy.Gameplay
 
                 if (!wasPressed || onUI) return;
                 currPosition = position;
+                if (confineMove && Vector2.Distance(currPosition, startPosition) > confineDistance)
+                {
+                    startPosition = currPosition + (startPosition - currPosition).normalized * confineDistance;
+                }
             }
         }
     }

@@ -2655,7 +2655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d9f33100754f1f8d5fbd690cd64a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchInput: {fileID: 2017165738}
+  input: {fileID: 2017165736}
   joyBase: {fileID: 949136242}
   joyTop: {fileID: 884628845}
 --- !u!225 &1153950610
@@ -3506,6 +3506,7 @@ MonoBehaviour:
   holdDir: {x: 0, y: 0}
   playerInputHandlers:
   - {fileID: 2017165738}
+  - {fileID: 2017165739}
 --- !u!114 &2017165737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3550,6 +3551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scheme: Touch
   move: {x: 0, y: 0}
+  confineMove: 1
+  confineDistance: 100
   interact: 0
   position: {x: 0, y: 0}
   hold: 0
@@ -3578,6 +3581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scheme: KeyboardMouse
   move: {x: 0, y: 0}
+  confineMove: 1
+  confineDistance: 100
   interact: 0
   position: {x: 0, y: 0}
   hold: 0
@@ -3587,6 +3592,8 @@ MonoBehaviour:
   playerInput: {fileID: 2017165737}
   holdThreshold: 0.25
   primary:
+    confineMove: 0
+    confineDistance: 0
     position: {x: 0, y: 0}
     startPosition: {x: 0, y: 0}
     currPosition: {x: 0, y: 0}
@@ -3595,6 +3602,8 @@ MonoBehaviour:
     onUIRaw: 0
     onUI: 0
   secondary:
+    confineMove: 0
+    confineDistance: 0
     position: {x: 0, y: 0}
     startPosition: {x: 0, y: 0}
     currPosition: {x: 0, y: 0}

@@ -9,6 +9,8 @@ namespace Arkademy.Gameplay
       
         public string scheme;
         public Vector2 move;
+        public bool confineMove;
+        public int confineDistance;
         public bool interact;
         public Vector2 position;
         public bool hold;

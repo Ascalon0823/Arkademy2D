@@ -48,7 +48,7 @@ namespace Arkademy.Gameplay
             screenPosition = touch.position;
             var delta = (touch.position - startPosition);
             delta = delta.magnitude < moveDeadZone ? Vector2.zero : delta;
-            if (delta.magnitude > analogRange)
+            if (confineMove && delta.magnitude > confineDistance)
             {
                 var clamped = Vector2.ClampMagnitude(delta, analogRange);
                 startPosition += (delta - clamped);
@@ -63,7 +63,8 @@ namespace Arkademy.Gameplay
             }
 
             if (hold) holdDir = touch.position - holdPos;
-            move = Vector2.ClampMagnitude(delta / analogRange, 1);
+
+            move = delta;
             position = screenPosition;
         }
 
