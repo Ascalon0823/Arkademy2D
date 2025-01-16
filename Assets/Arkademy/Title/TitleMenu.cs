@@ -1,5 +1,3 @@
-using System;
-using Arkademy.Behaviour;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;

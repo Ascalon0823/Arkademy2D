@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arkademy.Behaviour;
-using Arkademy.Behaviour.UI;
 using Arkademy.CharacterCreation;
 using Arkademy.Common;
 using Arkademy.Gameplay.Ability;
 using Arkademy.UI;
-using Arkademy.UI.Game;
 using UnityEngine;
 
 namespace Arkademy.Gameplay

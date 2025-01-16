@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Arkademy.Behaviour
+namespace Arkademy.Gameplay
 {
     public class CharacterGraphic : MonoBehaviour
     {
