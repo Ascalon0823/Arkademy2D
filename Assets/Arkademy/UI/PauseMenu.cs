@@ -1,6 +1,7 @@
 using Arkademy.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Arkademy.UI
 {
@@ -10,6 +11,7 @@ namespace Arkademy.UI
 
         public bool activated;
 
+        [SerializeField] private Button returnToCampusButton;
         private void Awake()
         {
             Toggle(false);

@@ -25,6 +25,8 @@ namespace Arkademy.Gameplay
         public List<AbilityBase> abilities = new ();
         public InteractableDetector interactableDetector;
         public float playerMoveMultiplier = 1f;
+
+        public Action OnDeath;
         public static Character Create(Common.Character data, int newFaction)
         {
             var raceName = data.raceName;
@@ -60,7 +62,12 @@ namespace Arkademy.Gameplay
             moving = velocity.sqrMagnitude > 0f;
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
-        
+
+        public void SetPosition(Vector2 pos)
+        {
+            transform.position = pos;
+            rb.position = pos;
+        }
         public void Move(Vector2 dir)
         {
             move = dir * playerMoveMultiplier;

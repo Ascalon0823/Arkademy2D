@@ -29,6 +29,7 @@ namespace Arkademy.Gameplay
         public static Camera Camera => _localPlayer.followCamera.ppcam.cam;
         public Character character;
         [SerializeField] private FollowCamera cameraPrefab;
+        
         public FollowCamera followCamera;
         public PlayerInput playerInput;
         public Interactable currentInteractableCandidate;
@@ -50,6 +51,11 @@ namespace Arkademy.Gameplay
             character = Character.Create(characterData.character, 0);
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
+        }
+
+        public Vector2 GetRandomPosArrandCharacter(float distance)
+        {
+            return followCamera.GetRandomPosOutsideViewport(distance);
         }
 
         private void Update()

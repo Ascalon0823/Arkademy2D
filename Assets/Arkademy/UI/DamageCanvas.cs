@@ -5,7 +5,8 @@ namespace Arkademy.UI
 {
     public class DamageCanvas : MonoBehaviour
     {
-        public static DamageCanvas Canvas;
+        
+        private static DamageCanvas Canvas;
 
         [SerializeField] private DamageText textPrefab;
         private Dictionary<Transform, DamageText> prevs = new Dictionary<Transform, DamageText>();
@@ -36,6 +37,10 @@ namespace Arkademy.UI
         }
         public static void AddTextTo(Camera cam, Transform t, string text, bool newGroup = true)
         {
+            if (!Canvas)
+            {
+                Canvas = Instantiate(Resources.Load<DamageCanvas>("DamageCanvas"));
+            }
             Canvas.InternalAddTextTo(cam,t,text,newGroup);
         }
     }

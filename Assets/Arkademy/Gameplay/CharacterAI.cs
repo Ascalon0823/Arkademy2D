@@ -8,13 +8,18 @@ namespace Arkademy.Gameplay
     public class CharacterAI : MonoBehaviour
     {
         public bool autoUseAbility;
+        public bool autoMove;
         public Character character;
         public Character target;
+
         public void Update()
         {
             var enemies = FindEnemies();
             target = SelectEnemy(enemies);
-            UseAbility();
+            if (!UseAbility())
+            {
+                Move();
+            }
         }
 
         public Character[] FindEnemies()
@@ -31,10 +36,17 @@ namespace Arkademy.Gameplay
             return enemies.OrderBy(x => Vector3.Distance(x.transform.position, character.transform.position))
                 .FirstOrDefault();
         }
-        
-        public void UseAbility()
+
+        public void Move()
         {
-            if (!autoUseAbility) return;
+            if (!target || !autoMove) return;
+            var dir = target.transform.position - character.transform.position;
+            character.Move(dir.normalized);
+        }
+
+        public bool UseAbility()
+        {
+            if (!autoUseAbility) return false;
             var eventData = new AbilityEventData();
             if (target)
             {
@@ -42,14 +54,17 @@ namespace Arkademy.Gameplay
                 eventData.Direction = (target.transform.position - character.transform.position).normalized;
                 eventData.Position = target.transform.position;
             }
+
             foreach (var ability in character.abilities)
             {
                 if (ability.CanUse(eventData))
                 {
                     ability.Use(eventData);
-                    return;
+                    return true;
                 }
             }
+
+            return false;
         }
     }
 }
