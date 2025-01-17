@@ -70,6 +70,7 @@ namespace Arkademy.Gameplay
         }
         public void Move(Vector2 dir)
         {
+            if (isDead) return;
             move = dir * playerMoveMultiplier;
             if (move.sqrMagnitude > 0)
             {
@@ -87,6 +88,8 @@ namespace Arkademy.Gameplay
             graphic.SetDead();
             isDead = true;
             hitBox.gameObject.SetActive(false);
+            rb.simulated = false;
+            OnDeath?.Invoke();
         }
 
         public void SetAttack(float cooldown = 1f)

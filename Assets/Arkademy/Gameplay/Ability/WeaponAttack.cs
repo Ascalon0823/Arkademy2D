@@ -28,7 +28,7 @@ namespace Arkademy.Gameplay.Ability
 
             var proj = Instantiate(projectile, user.transform.position, Quaternion.identity);
             proj.dir = dir.normalized;
-            proj.Setup(1,user.faction,false);
+            proj.Setup(1000,user.faction,false);
             remainingCooldown = GetCooldown();
         }
     }

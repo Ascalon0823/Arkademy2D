@@ -19,6 +19,7 @@ namespace Arkademy.Rift
         public bool riftStarted;
 
         public List<Character> spawnedEnemies = new();
+        public List<Character> deadEnemies = new();
         public int spawnLimit;
         public float spawnInterval;
         public bool completed;
@@ -63,6 +64,8 @@ namespace Arkademy.Rift
             enemy.OnDeath += () =>
             {
                 progress += 10;
+                spawnedEnemies.Remove(enemy);
+                deadEnemies.Add(enemy);
             };
             spawnedEnemies.Add(enemy);
             var ai = enemy.GetOrAddComponent<CharacterAI>();

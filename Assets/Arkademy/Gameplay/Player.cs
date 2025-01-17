@@ -49,6 +49,8 @@ namespace Arkademy.Gameplay
             var characterData = Session.currCharacterRecord;
             characterData.LastPlayed = DateTime.UtcNow;
             character = Character.Create(characterData.character, 0);
+            var ai = character.GetOrAddComponent<CharacterAI>();
+            ai.autoUseAbility = true;
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
         }
