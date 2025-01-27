@@ -10,9 +10,7 @@ namespace Arkademy.UI
         public CanvasGroup pauseCanvasGroup;
 
         public bool activated;
-
-        [SerializeField] private Button returnToCampusButton;
-        private void Awake()
+        protected void Awake()
         {
             Toggle(false);
         }
