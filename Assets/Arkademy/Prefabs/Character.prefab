@@ -611,7 +611,6 @@ MonoBehaviour:
   faction: 0
   move: {x: 0, y: 0}
   facing: {x: 0, y: 0}
-  moving: 0
   abilities:
   - {fileID: 8772939818876458486}
   interactableDetector: {fileID: 761044055528872143}
@@ -714,6 +713,9 @@ MonoBehaviour:
   payloadPrefab: {fileID: 0}
   currentPayload: {fileID: 0}
   inUse: 0
+  range: 0
+  weaponRange: 800
+  weaponAttack: 100
   projectile: {fileID: 7914257082053339661, guid: a3a1316c1e4b9a740836bbf355217f89, type: 3}
 --- !u!1001 &406036992813572278
 PrefabInstance:

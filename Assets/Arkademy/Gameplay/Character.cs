@@ -21,7 +21,6 @@ namespace Arkademy.Gameplay
         public int faction;
         public Vector2 move;
         public Vector2 facing;
-        public bool moving;
         public List<AbilityBase> abilities = new ();
         public InteractableDetector interactableDetector;
         public float playerMoveMultiplier = 1f;
@@ -50,6 +49,10 @@ namespace Arkademy.Gameplay
             }
         }
 
+        public bool IsMoving()
+        {
+            return (GetMoveSpeed() * move).sqrMagnitude > 0;
+        }
         private void FixedUpdate()
         {
             HandleMovement();
@@ -59,7 +62,6 @@ namespace Arkademy.Gameplay
         {
             if (isDead) return;
             var velocity = GetMoveSpeed() * move;
-            moving = velocity.sqrMagnitude > 0f;
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
         }
 
@@ -87,14 +89,15 @@ namespace Arkademy.Gameplay
         {
             graphic.SetDead();
             isDead = true;
+            move = Vector2.zero;
             hitBox.gameObject.SetActive(false);
             rb.simulated = false;
             OnDeath?.Invoke();
         }
 
-        public void SetAttack(float cooldown = 1f)
+        public void SetAttack(float attackTime = 1f)
         {
-            graphic.attackSpeed = 1f/cooldown;
+            graphic.attackSpeed = 1f/attackTime;
             graphic.SetAttack();
         }
         

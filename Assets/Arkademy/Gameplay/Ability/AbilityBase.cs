@@ -10,6 +10,14 @@ namespace Arkademy.Gameplay.Ability
         public Vector2? Direction;
         public Vector2? Position;
 
+        public bool TryGetPosition(out Vector2 position)
+        {
+            
+            var result = Position ?? PrimaryTarget?.transform.position;
+            position = result ?? Vector2.zero;
+            return result.HasValue;
+        }
+
         public bool TryGetDirection(Vector2 pos, out Vector2 direction)
         {
             direction = Vector2.zero;
@@ -34,6 +42,7 @@ namespace Arkademy.Gameplay.Ability
             return false;
         }
     }
+
     public class AbilityBase : MonoBehaviour
     {
         public float cooldown;
@@ -44,9 +53,20 @@ namespace Arkademy.Gameplay.Ability
         public AbilityPayload currentPayload;
         public bool inUse;
 
+        public float range;
+
+        public virtual float GetRange()
+        {
+            return range;
+        }
         public virtual bool CanUse(AbilityEventData eventData)
         {
-            return remainingCooldown <= 0 && (!user.moving || useWhileMoving);
+            return remainingCooldown <= 0 && (!user.IsMoving() || useWhileMoving);
+        }
+
+        public virtual bool CanReach(AbilityEventData eventData)
+        {
+            return eventData.TryGetPosition(out var pos) && Vector3.Distance(pos, user.transform.position) <= GetRange();
         }
 
         public virtual float GetCooldown()
@@ -62,12 +82,12 @@ namespace Arkademy.Gameplay.Ability
 
         public virtual void Cancel()
         {
-            
         }
+
         public virtual void Use(AbilityEventData eventData)
         {
             currentPayload = Instantiate(payloadPrefab);
-            currentPayload.Init(eventData,this);
+            currentPayload.Init(eventData, this);
             remainingCooldown = GetCooldown();
         }
     }

@@ -70,6 +70,7 @@ namespace Arkademy.Rift
             spawnedEnemies.Add(enemy);
             var ai = enemy.GetOrAddComponent<CharacterAI>();
             ai.autoMove = true;
+            ai.autoUseAbility = true;
             lastSpawn = Time.timeSinceLevelLoad;
         }
 

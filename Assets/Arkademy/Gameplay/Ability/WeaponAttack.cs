@@ -6,11 +6,19 @@ namespace Arkademy.Gameplay.Ability
 {
     public class WeaponAttack : AbilityBase
     {
+        public float weaponRange;
+        public int weaponAttack;
         public Projectile projectile;
 
         public override bool CanUse(AbilityEventData eventData)
         {
-            return base.CanUse(eventData) && eventData.TryGetDirection(user.transform.position, out var dir);
+            return base.CanUse(eventData)
+                   && eventData.TryGetDirection(user.transform.position, out var dir);
+        }
+
+        public override float GetRange()
+        {
+            return weaponRange/100f;
         }
 
         public override float GetCooldown()
@@ -28,7 +36,7 @@ namespace Arkademy.Gameplay.Ability
 
             var proj = Instantiate(projectile, user.transform.position, Quaternion.identity);
             proj.dir = dir.normalized;
-            proj.Setup(1000,user.faction,false);
+            proj.Setup(weaponAttack,user.faction,false);
             remainingCooldown = GetCooldown();
         }
     }

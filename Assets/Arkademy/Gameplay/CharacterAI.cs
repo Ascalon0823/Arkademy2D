@@ -16,9 +16,9 @@ namespace Arkademy.Gameplay
         {
             var enemies = FindEnemies();
             target = SelectEnemy(enemies);
-            if (!UseAbility())
+            if (!UseAbility(out var reach) )
             {
-                Move();
+                Move(reach);
             }
         }
 
@@ -37,15 +37,21 @@ namespace Arkademy.Gameplay
                 .FirstOrDefault();
         }
 
-        public void Move()
+        public void Move(bool reach)
         {
             if (!target || !autoMove) return;
+            if (reach)
+            {
+                character.Move(Vector2.zero);
+                return;
+            }
             var dir = target.transform.position - character.transform.position;
             character.Move(dir.normalized);
         }
 
-        public bool UseAbility()
+        public bool UseAbility(out bool canReach)
         {
+            canReach = false;
             if (!autoUseAbility) return false;
             var eventData = new AbilityEventData();
             if (target)
@@ -57,6 +63,11 @@ namespace Arkademy.Gameplay
 
             foreach (var ability in character.abilities)
             {
+                if (ability.CanReach(eventData))
+                {
+                    canReach = true;
+                }
+
                 if (ability.CanUse(eventData))
                 {
                     ability.Use(eventData);
