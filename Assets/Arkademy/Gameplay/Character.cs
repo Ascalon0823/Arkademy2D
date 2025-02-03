@@ -51,7 +51,7 @@ namespace Arkademy.Gameplay
 
         public bool IsMoving()
         {
-            return (GetMoveSpeed() * move).sqrMagnitude > 0;
+            return move.sqrMagnitude > 0;
         }
         private void FixedUpdate()
         {
@@ -107,6 +107,7 @@ namespace Arkademy.Gameplay
             if (invincible) return;
 
             graphic.SetHit();
+            damage = Calculation.DamageTaken(damage, characterData.defence.value);
             if (showDamageText)
             {
                 DamageCanvas.AddTextTo(Player.Camera, transform, damage.ToString());

@@ -16,5 +16,7 @@ namespace Arkademy.Common
         public Attribute attack;
         public Attribute defence;
         public Attribute detectionRange;
+
+        public Item weapon;
     }
 }

@@ -1,43 +1,27 @@
-﻿using System.Linq;
-using Arkademy.Common;
 using UnityEngine;
 
 namespace Arkademy.Gameplay.Ability
 {
     public class WeaponAttack : AbilityBase
     {
-        public float weaponRange;
-        public int weaponAttack;
-        public Projectile projectile;
+        public override float GetRange()
+        {
+            return user.characterData.weapon.offense.range / 100f;
+        }
 
         public override bool CanUse(AbilityEventData eventData)
         {
-            return base.CanUse(eventData)
-                   && eventData.TryGetDirection(user.transform.position, out var dir);
+            return base.CanUse(eventData) && ValidWeapon();
         }
 
-        public override float GetRange()
+        public virtual bool ValidWeapon()
         {
-            return weaponRange/100f;
+            return user.characterData.weapon != null && user.characterData.weapon.offense != null;
         }
 
-        public override float GetCooldown()
+        public override float GetUseTime()
         {
-            return Calculation.CastCoolDown(user.characterData.castSpeed.value) * cooldown;
-        }
-
-        public override void Use(AbilityEventData eventData)
-        {
-            user.SetAttack(GetCooldown());
-            if (!eventData.TryGetDirection(user.transform.position, out var dir))
-            {
-                dir = user.facing;
-            }
-
-            var proj = Instantiate(projectile, user.transform.position, Quaternion.identity);
-            proj.dir = dir.normalized;
-            proj.Setup(weaponAttack,user.faction,false);
-            remainingCooldown = GetCooldown();
+            return useTime / (user.characterData.weapon.offense.speed / 100f);
         }
     }
 }

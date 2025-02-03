@@ -75,30 +75,24 @@ namespace Arkademy.Gameplay
             {
                 currentInteractableCandidate.OnInteractedBy(character);
             }
-
+            var e = new AbilityEventData
+            {
+                Direction = playerInput.holdDir,
+                Position = playerInput.position,
+            };
             if (tapAbility && playerInput.interact && !currentInteractableCandidate)
             {
-                var e = new AbilityEventData
-                {
-                    Direction = playerInput.holdDir,
-                    Position = playerInput.position,
-                };
                 if (tapAbility.CanUse(e)) tapAbility.Use(e);
             }
 
             if (holdAbility && playerInput.hold)
             {
-                var e = new AbilityEventData
-                {
-                    Direction = playerInput.holdDir,
-                    Position = playerInput.position,
-                };
                 if (holdAbility.CanUse(e)) holdAbility.Use(e);
             }
 
-            if (holdAbility && !playerInput.hold && holdAbility.inUse)
+            if (holdAbility && !playerInput.hold && holdAbility.InUse())
             {
-                holdAbility.Cancel();
+                holdAbility.Use(e,true);
             }
         }
     }

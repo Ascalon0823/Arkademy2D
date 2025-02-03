@@ -12,7 +12,6 @@ namespace Arkademy.Gameplay.Ability
 
         public bool TryGetPosition(out Vector2 position)
         {
-            
             var result = Position ?? PrimaryTarget?.transform.position;
             position = result ?? Vector2.zero;
             return result.HasValue;
@@ -51,22 +50,35 @@ namespace Arkademy.Gameplay.Ability
         public Character user;
         public AbilityPayload payloadPrefab;
         public AbilityPayload currentPayload;
-        public bool inUse;
 
+        public float useTime;
+        public float remainingUseTime;
         public float range;
 
         public virtual float GetRange()
         {
-            return range/100f;
+            return range / 100f;
         }
+
         public virtual bool CanUse(AbilityEventData eventData)
         {
-            return remainingCooldown <= 0 && (!user.IsMoving() || useWhileMoving);
+            return !InCooldown() && !InUse() && (!user.IsMoving() || useWhileMoving);
+        }
+
+        public virtual bool InCooldown()
+        {
+            return remainingCooldown > 0;
+        }
+
+        public virtual bool InUse()
+        {
+            return remainingUseTime > 0;
         }
 
         public virtual bool CanReach(AbilityEventData eventData)
         {
-            return eventData.TryGetPosition(out var pos) && Vector3.Distance(pos, user.transform.position) <= GetRange();
+            return eventData.TryGetPosition(out var pos) &&
+                   Vector3.Distance(pos, user.transform.position) <= GetRange();
         }
 
         public virtual float GetCooldown()
@@ -74,21 +86,23 @@ namespace Arkademy.Gameplay.Ability
             return cooldown;
         }
 
+        public virtual float GetUseTime()
+        {
+            return useTime;
+        }
+
         protected virtual void Update()
         {
             if (remainingCooldown > 0)
                 remainingCooldown -= Time.deltaTime;
+            if (remainingUseTime > 0)
+                remainingUseTime -= Time.deltaTime;
         }
 
-        public virtual void Cancel()
+        public virtual void Use(AbilityEventData eventData, bool canceled = false)
         {
-        }
-
-        public virtual void Use(AbilityEventData eventData)
-        {
-            currentPayload = Instantiate(payloadPrefab);
-            user.SetAttack();
-            currentPayload.Init(eventData, this, 1f);
+            user.SetAttack(GetUseTime());
+            remainingUseTime = GetUseTime();
             remainingCooldown = GetCooldown();
         }
     }

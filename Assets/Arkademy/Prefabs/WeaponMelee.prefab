@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6891698861192322180}
-  - component: {fileID: 2772037435511809776}
+  - component: {fileID: 8934869099841005907}
   m_Layer: 0
   m_Name: WeaponMelee
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2772037435511809776
+--- !u!114 &8934869099841005907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,14 +41,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5456851107520956109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62889ac647464cdeb6e754252d783389, type: 3}
+  m_Script: {fileID: 11500000, guid: fa1f8849937e457bac65b71e6af73ed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldown: 1
+  cooldown: 0
   remainingCooldown: 0
   useWhileMoving: 0
   user: {fileID: 0}
-  payloadPrefab: {fileID: 8617571059630319620, guid: d66c689f83bb0f143b05cfd3450f426a, type: 3}
+  payloadPrefab: {fileID: 0}
   currentPayload: {fileID: 0}
-  inUse: 0
-  range: 100
+  useTime: 1
+  remainingUseTime: 0
+  range: 0
+  weaponRange: 100
+  weaponSpeed: 100
+  meleePrefab: {fileID: 8617571059630319620, guid: d66c689f83bb0f143b05cfd3450f426a, type: 3}
