@@ -57,7 +57,7 @@ namespace Arkademy.Gameplay.Ability
 
         public virtual float GetRange()
         {
-            return range;
+            return range/100f;
         }
         public virtual bool CanUse(AbilityEventData eventData)
         {
@@ -87,7 +87,8 @@ namespace Arkademy.Gameplay.Ability
         public virtual void Use(AbilityEventData eventData)
         {
             currentPayload = Instantiate(payloadPrefab);
-            currentPayload.Init(eventData, this);
+            user.SetAttack();
+            currentPayload.Init(eventData, this, 1f);
             remainingCooldown = GetCooldown();
         }
     }

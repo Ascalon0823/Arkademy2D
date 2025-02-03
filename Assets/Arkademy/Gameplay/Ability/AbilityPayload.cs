@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Arkademy.Gameplay.Ability
@@ -5,9 +6,11 @@ namespace Arkademy.Gameplay.Ability
     public class AbilityPayload : MonoBehaviour
     {
         public AbilityBase ability;
-        public virtual void Init(AbilityEventData data, AbilityBase parent)
+        public float duration;
+        public virtual void Init(AbilityEventData data, AbilityBase parent, float dura)
         {
             ability = parent;
+            duration = dura;
         }
 
         public virtual void UpdatePayload(AbilityEventData data)
@@ -18,6 +21,15 @@ namespace Arkademy.Gameplay.Ability
         public virtual void Cancel()
         {
             
+        }
+
+        protected virtual void Update()
+        {
+            duration -= Time.deltaTime;
+            if (duration < 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

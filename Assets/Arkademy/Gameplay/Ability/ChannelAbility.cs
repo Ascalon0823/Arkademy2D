@@ -13,7 +13,7 @@ namespace Arkademy.Gameplay.Ability
             }
 
             currentPayload = Instantiate(payloadPrefab);
-            currentPayload.Init(eventData, this);
+            currentPayload.Init(eventData, this, 1f);
             inUse = true;
         }
 

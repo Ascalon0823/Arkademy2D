@@ -68,7 +68,7 @@ namespace Arkademy.Gameplay
                     canReach = true;
                 }
 
-                if (ability.CanUse(eventData))
+                if (ability.CanUse(eventData) && canReach)
                 {
                     ability.Use(eventData);
                     return true;
