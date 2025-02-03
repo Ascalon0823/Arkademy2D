@@ -11,6 +11,7 @@ namespace Arkademy.Gameplay.Ability
             transform.SetParent(parent.transform);
             transform.localPosition = Vector2.zero;
             transform.up = data.TryGetDirection(parent.user.transform.position, out var dir) ? dir : parent.user.facing;
+            transform.localScale = new Vector3(parent.GetRange(), parent.GetRange());
             trigger.OnTrigger.AddListener(c =>
             {
                 if (c.GetCharacter(out var chara) && chara.faction != parent.user.faction)
