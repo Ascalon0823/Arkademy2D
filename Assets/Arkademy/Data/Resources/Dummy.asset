@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e4ae0155d14d04809f5b5c5a499fe4, type: 3}
+  m_Name: Dummy
+  m_EditorClassIdentifier: 
+  race:
+    displayName: Decoy
+    attributes:
+    - type: 1
+      calType: 0
+      value: 1000000000
+      current: 1000000000
+    playable: 0
+    behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
+    animationController: {fileID: 22100000, guid: 2faf1d9e5e4aae1418d765bdd2d2bdb0, type: 2}
+    facingLeft: 0
+    abilities: []
+  displays:
+  - attribute:
+      type: 1
+      calType: 0
+      value: 1000000000
+      current: 1000000000
+    baseValue: 1000000000
+    value: 10000000
+    current: 10000000
+    baseCurrent: 1000000000

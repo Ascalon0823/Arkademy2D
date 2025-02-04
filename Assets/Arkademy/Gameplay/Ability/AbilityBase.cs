@@ -48,9 +48,6 @@ namespace Arkademy.Gameplay.Ability
         public float remainingCooldown;
         public bool useWhileMoving;
         public Character user;
-        public AbilityPayload payloadPrefab;
-        public AbilityPayload currentPayload;
-
         public float useTime;
         public float remainingUseTime;
         public float range;
@@ -104,6 +101,18 @@ namespace Arkademy.Gameplay.Ability
             user.SetAttack(GetUseTime());
             remainingUseTime = GetUseTime();
             remainingCooldown = GetCooldown();
+        }
+
+        public virtual void GiveToUser(Character newUser)
+        {
+            user = newUser;
+            user.abilities.Add(this);
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if(user)
+                user.abilities.Remove(this);
         }
     }
 }

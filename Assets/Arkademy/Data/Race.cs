@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Arkademy.Gameplay.Ability;
 using UnityEngine;
 
 namespace Arkademy.Data
@@ -15,7 +16,8 @@ namespace Arkademy.Data
         public Gameplay.Character behaviourPrefab;
         public RuntimeAnimatorController animationController;
         public bool facingLeft;
-        
+
+        public List<AbilityBase> abilities=new List<AbilityBase>();
         public static Race GetRace(string name)
         {
             if (!_raceCache.TryGetValue(name, out var cached))

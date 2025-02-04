@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b550c119b94373b88903886dfd2597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trigger: {fileID: 3481068814425628677}
   OnTrigger:
     m_PersistentCalls:
       m_Calls: []
@@ -159,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1384726304416747139}
-  - component: {fileID: 8617571059630319620}
+  - component: {fileID: 3346731908101472055}
   m_Layer: 0
   m_Name: MeleePayload
   m_TagString: Untagged
@@ -175,15 +176,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9130645440309851555}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.56136036, w: 0.82757145}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7131720639930290673}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8617571059630319620
+--- !u!114 &3346731908101472055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,9 +193,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9130645440309851555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e460d37bd478494082e4e51fd2ff1fbd, type: 3}
+  m_Script: {fileID: 11500000, guid: e886eb79218b414b94e5b670e38b5411, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 0}
-  duration: 0
   trigger: {fileID: 1572755193924098906}
+  remainingLife: 0
+  triggerPointPercentage: 0.75
+  triggerPoint: 0.75

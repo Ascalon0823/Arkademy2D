@@ -25,6 +25,7 @@ namespace Arkademy.Gameplay
         public List<AbilityBase> abilities = new();
         public InteractableDetector interactableDetector;
         public UnityEvent<DamageData> OnDeath;
+        public bool setupCompleted;
 
         public static Character Create(Race race, Data.Character data, int newFaction)
         {
@@ -42,10 +43,22 @@ namespace Arkademy.Gameplay
             graphic.walkAnimationDistance = 4;
             faction = newFaction;
             graphic.character = this;
+            foreach (var ability in race.abilities)
+            {
+                var instance = Instantiate(ability, transform);
+                instance.GiveToUser(this);
+            }
+
+            setupCompleted = true;
         }
 
         private void Start()
         {
+            if (!setupCompleted)
+            {
+                SetupAs(Race.GetRace(data.raceName), data, faction);
+            }
+
             if (hitBox)
             {
                 hitBox.RegisterCharacterCollider(this);
@@ -60,11 +73,15 @@ namespace Arkademy.Gameplay
         public void TakeDamage(DamageData damage)
         {
             graphic.SetHit();
-            data.SetCurr(Attribute.Type.Life, Mathf.Max(0, data.GetBase(Attribute.Type.Life) - damage.amount));
+            var life = data[Attribute.Type.Life];
+            life.current = Mathf.Max(0, life.current - damage.amount);
+            isDead = life.current == 0;
             if (isDead)
             {
                 OnDeath?.Invoke(damage);
             }
+
+            DamageCanvas.AddTextTo(Player.Camera, transform, Mathf.CeilToInt(damage.amount / 100f).ToString());
         }
 
         private void FixedUpdate()
@@ -75,7 +92,7 @@ namespace Arkademy.Gameplay
 
         private void HandleMove()
         {
-            var velocity = wantToMove *  data.Get(Attribute.Type.MovSpeed);
+            var velocity = wantToMove * data.Get(Attribute.Type.MovSpeed);
             if (velocity.sqrMagnitude > 0)
             {
                 facing = velocity.normalized;

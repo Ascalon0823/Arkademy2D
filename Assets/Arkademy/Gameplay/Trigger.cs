@@ -6,6 +6,7 @@ namespace Arkademy.Gameplay
 {
     public class Trigger : MonoBehaviour
     {
+        public Collider2D trigger;
         public UnityEvent<Collider2D> OnTrigger;
         private void OnTriggerEnter2D(Collider2D other)
         {

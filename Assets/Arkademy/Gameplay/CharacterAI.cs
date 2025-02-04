@@ -15,8 +15,10 @@ namespace Arkademy.Gameplay
 
         public void Update()
         {
+            if (character.isDead) return;
             var enemies = FindEnemies();
             target = SelectEnemy(enemies);
+
             if (!UseAbility(out var reach))
             {
                 Move(reach);
@@ -26,7 +28,7 @@ namespace Arkademy.Gameplay
         public Character[] FindEnemies()
         {
             var colliders = Physics2D.OverlapCircleAll(character.transform.position,
-                character.data.Get(Attribute.Type.Range, 100));
+                character.data.Get(Attribute.Type.Vision));
             return colliders.Select(x => x.GetCharacter(out var e) ? e : null)
                 .Where(x => x && x.faction != character.faction && !x.isDead)
                 .ToArray();

@@ -4,13 +4,14 @@ namespace Arkademy.Data
     {
         public enum Type
         {
-            None,
+            None, 
             Life,
             MovSpeed,
             Attack,
             Range,
             Defense,
-            Vision
+            Vision,
+            AttackSpeed,
         }
     }
 }
