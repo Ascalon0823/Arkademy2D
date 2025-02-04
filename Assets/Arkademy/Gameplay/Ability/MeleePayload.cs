@@ -11,6 +11,7 @@ namespace Arkademy.Gameplay.Ability
         [Range(0f, 1f)] public float triggerPointPercentage;
         public float triggerPoint;
 
+        public int triggerCount;
         private void Awake()
         {
             trigger.trigger.enabled = false;

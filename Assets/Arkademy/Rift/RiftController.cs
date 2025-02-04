@@ -44,8 +44,8 @@ namespace Arkademy.Rift
 
         private void Initiate()
         {
-            _raceList = Resources.LoadAll<Data.Scriptable.RaceObject>("").Where(x => !x.race.playable)
-                .Select(x => x.race).ToList();
+            _raceList = Resources.LoadAll<Data.Scriptable.RaceObject>("")
+                .Select(x => x.race).Where(x => !x.playable && x.spawnable).ToList();
             difficulty = RiftSetup;
             progress = 0;
             SpawnPlayer();

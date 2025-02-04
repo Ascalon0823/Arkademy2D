@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: Dummy
   m_EditorClassIdentifier: 
   race:
-    displayName: Decoy
+    displayName: Dummy
     attributes:
     - type: 1
       calType: 0
       value: 1000000000
       current: 1000000000
     playable: 0
+    spawnable: 0
     behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
     animationController: {fileID: 22100000, guid: 2faf1d9e5e4aae1418d765bdd2d2bdb0, type: 2}
-    facingLeft: 0
+    facingLeft: 1
     abilities: []
   displays:
   - attribute:

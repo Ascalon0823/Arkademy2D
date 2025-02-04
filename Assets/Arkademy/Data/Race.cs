@@ -13,6 +13,7 @@ namespace Arkademy.Data
         public string displayName;
         public List<Attribute> attributes = new();
         public bool playable;
+        public bool spawnable;
         public Gameplay.Character behaviourPrefab;
         public RuntimeAnimatorController animationController;
         public bool facingLeft;
