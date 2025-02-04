@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6785724012844837057}
   - component: {fileID: 2041245678630681521}
   - component: {fileID: 2910668160401642425}
+  - component: {fileID: 2765380609262276090}
   m_Layer: 10
   m_Name: ResourceDisplay
   m_TagString: Untagged
@@ -114,12 +115,23 @@ MonoBehaviour:
   bar: {fileID: 2694334513480215709}
   bg: {fileID: 8763811005356722972}
   bgSpeed: 5
-  targetResource:
-    type: 0
-    value: 0
-    currValue: 0
   attributeType: 0
   character: {fileID: 0}
+  group: {fileID: 2765380609262276090}
+  hideIfEmpty: 0
+  hideIfFull: 0
+--- !u!225 &2765380609262276090
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613928279489405889}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3476552226770745487
 GameObject:
   m_ObjectHideFlags: 0

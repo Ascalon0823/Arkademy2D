@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Arkademy.Common;
+using Arkademy.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Arkademy.Gameplay.Ability;
 using UnityEngine;
+using Attribute = Arkademy.Data.Attribute;
 
 namespace Arkademy.Gameplay
 {
@@ -16,7 +17,7 @@ namespace Arkademy.Gameplay
         {
             var enemies = FindEnemies();
             target = SelectEnemy(enemies);
-            if (!UseAbility(out var reach) )
+            if (!UseAbility(out var reach))
             {
                 Move(reach);
             }
@@ -25,7 +26,7 @@ namespace Arkademy.Gameplay
         public Character[] FindEnemies()
         {
             var colliders = Physics2D.OverlapCircleAll(character.transform.position,
-                Common.Calculation.DetectionRange(character.characterData.detectionRange.value));
+                character.data.Get(Attribute.Type.Range, 100));
             return colliders.Select(x => x.GetCharacter(out var e) ? e : null)
                 .Where(x => x && x.faction != character.faction && !x.isDead)
                 .ToArray();
@@ -42,11 +43,12 @@ namespace Arkademy.Gameplay
             if (!target || !autoMove) return;
             if (reach)
             {
-                character.Move(Vector2.zero);
+                character.wantToMove = Vector2.zero;
                 return;
             }
+
             var dir = target.transform.position - character.transform.position;
-            character.Move(dir.normalized);
+            character.wantToMove = dir.normalized;
         }
 
         public bool UseAbility(out bool canReach)

@@ -76,21 +76,28 @@ namespace Arkademy.Data
             return 10000 - baseValue;
         }
 
-        public float GetValue(bool original = false)
+     
+        public float Value(bool original = false)
+        {
+            return ToRealValue(BaseValue(original));
+        }
+        
+
+        private float ToRealValue(int v)
         {
             switch (calType)
             {
                 case CalculationType.Flat:
-                    return GetBaseValue(original) / 100f;
+                    return v / 100f;
                 case CalculationType.Percent:
                 case CalculationType.Chance:
-                    return GetBaseValue(original) / 10000f;
+                    return v / 10000f;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        public int GetBaseValue(bool original = false)
+        public int BaseValue(bool original = false)
         {
             if (original) return value;
             var final = value;

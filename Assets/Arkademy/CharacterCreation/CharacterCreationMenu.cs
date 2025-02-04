@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
-using Arkademy.Common;
+using Arkademy.Data;
+using Arkademy.Data.Scriptable;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ namespace Arkademy.CharacterCreation
         [SerializeField] private Button cancel;
 
         [SerializeField] private Race[] races;
+
         private void Awake()
         {
             nameInputField.onValueChanged.RemoveAllListeners();
@@ -33,15 +35,15 @@ namespace Arkademy.CharacterCreation
         }
 
         public void OnEnable()
-        { 
-            races = Resources.LoadAll<Race>("");
-            races = races.Where(x => x.playable).ToArray();
+        {
+            races = Resources.LoadAll<RaceObject>("").Select(x => x.race)
+                .Where(x => x.playable).ToArray();
             SelectRace(0);
         }
 
         public void SelectRace(int idx)
         {
-            currentCharacter = races[idx].CreateCharacter();
+            currentCharacter = races[idx].CreateCharacterData();
             currentCharacter.displayName = nameInputField.text;
         }
 
@@ -50,7 +52,8 @@ namespace Arkademy.CharacterCreation
             var characterRecord = new CharacterRecord
             {
                 character = currentCharacter,
-                time = new GameTime()
+                CreationTime = DateTime.UtcNow,
+                PlayedDuration = new TimeSpan(0)
             };
             Session.currPlayerRecord.characterRecords.Add(characterRecord);
             Session.currPlayerRecord.Save();

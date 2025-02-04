@@ -1,44 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using Arkademy.CharacterCreation;
-using Arkademy.Common;
+using Arkademy.Data;
 using Arkademy.Gameplay.Ability;
 using Arkademy.UI;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
+using Attribute = Arkademy.Data.Attribute;
+using Race = Arkademy.Data.Race;
 
 namespace Arkademy.Gameplay
 {
     public class Character : MonoBehaviour
     {
-        public Common.Character characterData;
+        public Data.Character data;
         public CharacterGraphic graphic;
-        public Rigidbody2D rb;
+        public Rigidbody2D body;
         public Collider2D hitBox;
         public bool isDead;
-        public bool showDamageText;
-        public bool indestructible;
-        public bool invincible;
         public int faction;
-        public Vector2 move;
+        public Vector2 wantToMove;
         public Vector2 facing;
-        public List<AbilityBase> abilities = new ();
+        public List<AbilityBase> abilities = new();
         public InteractableDetector interactableDetector;
-        public float playerMoveMultiplier = 1f;
+        public UnityEvent<DamageData> OnDeath;
 
-        public Action OnDeath;
-        public static Character Create(Common.Character data, int newFaction)
+        public static Character Create(Race race, Data.Character data, int newFaction)
         {
-            var raceName = data.raceName;
-            var raceSO = Resources.Load<Race>(raceName);
-            if (!raceSO || !raceSO.behaviourPrefab) return null;
-            var go = Instantiate(raceSO.behaviourPrefab);
-            go.characterData = data;
-            go.graphic.animator.runtimeAnimatorController = raceSO.animationController;
-            go.graphic.facingLeft = !raceSO.facingRight;
-            go.graphic.walkAnimationDistance = 4;
-            go.faction = newFaction;
-            go.graphic.character = go;
+            if (race == null) return null;
+            var go = Instantiate(race.behaviourPrefab);
+            go.SetupAs(race, data, newFaction);
             return go;
+        }
+
+        public void SetupAs(Race race, Data.Character newData, int newFaction)
+        {
+            data = newData;
+            graphic.animator.runtimeAnimatorController = race.animationController;
+            graphic.facingLeft = race.facingLeft;
+            graphic.walkAnimationDistance = 4;
+            faction = newFaction;
+            graphic.character = this;
         }
 
         private void Start()
@@ -51,75 +54,52 @@ namespace Arkademy.Gameplay
 
         public bool IsMoving()
         {
-            return move.sqrMagnitude > 0;
-        }
-        private void FixedUpdate()
-        {
-            HandleMovement();
+            return wantToMove.sqrMagnitude > 0;
         }
 
-        public void HandleMovement()
+        public void TakeDamage(DamageData damage)
         {
-            if (isDead) return;
-            var velocity = GetMoveSpeed() * move;
-            rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            graphic.SetHit();
+            data.SetCurr(Attribute.Type.Life, Mathf.Max(0, data.GetBase(Attribute.Type.Life) - damage.amount));
+            if (isDead)
+            {
+                OnDeath?.Invoke(damage);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            HandleDeath();
+            HandleMove();
+        }
+
+        private void HandleMove()
+        {
+            var velocity = wantToMove *  data.Get(Attribute.Type.MovSpeed);
+            if (velocity.sqrMagnitude > 0)
+            {
+                facing = velocity.normalized;
+            }
+
+            body.MovePosition(body.position + velocity * Time.fixedDeltaTime);
+        }
+
+        private void HandleDeath()
+        {
+            body.simulated = !isDead;
+            hitBox.enabled = !isDead;
         }
 
         public void SetPosition(Vector2 pos)
         {
             transform.position = pos;
-            rb.position = pos;
-        }
-        public void Move(Vector2 dir)
-        {
-            if (isDead) return;
-            move = dir * playerMoveMultiplier;
-            if (move.sqrMagnitude > 0)
-            {
-                facing = move;
-            }
-        }
-
-        public float GetMoveSpeed()
-        {
-            return Calculation.MoveSpeed(characterData.speed.value);
-        }
-
-        public void SetDead()
-        {
-            graphic.SetDead();
-            isDead = true;
-            move = Vector2.zero;
-            hitBox.gameObject.SetActive(false);
-            rb.simulated = false;
-            OnDeath?.Invoke();
+            body.position = pos;
         }
 
         public void SetAttack(float attackTime = 1f)
         {
-            graphic.attackSpeed = 1f/attackTime;
+            graphic.attackSpeed = 1f / attackTime;
             graphic.SetAttack();
-        }
-        
-
-        public void TakeDamage(int damage)
-        {
-            if (invincible) return;
-
-            graphic.SetHit();
-            damage = Calculation.DamageTaken(damage, characterData.defence.value);
-            if (showDamageText)
-            {
-                DamageCanvas.AddTextTo(Player.Camera, transform, damage.ToString());
-            }
-
-            if (indestructible) return;
-            characterData.health.currValue -= damage;
-            if (characterData.health.currValue <= 0)
-            {
-                characterData.health.currValue = 0;
-                SetDead();
-            }
         }
     }
 }

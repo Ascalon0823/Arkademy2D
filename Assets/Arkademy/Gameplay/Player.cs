@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arkademy.Common;
+using Arkademy.Data;
 using Arkademy.Gameplay.Ability;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace Arkademy.Gameplay
         public static Camera Camera => _localPlayer.followCamera.ppcam.cam;
         public Character character;
         [SerializeField] private FollowCamera cameraPrefab;
-        
+
         public FollowCamera followCamera;
         public PlayerInput playerInput;
         public Interactable currentInteractableCandidate;
@@ -46,9 +46,10 @@ namespace Arkademy.Gameplay
 
         public void Setup()
         {
-            var characterData = Session.currCharacterRecord;
-            characterData.LastPlayed = DateTime.UtcNow;
-            character = Character.Create(characterData.character, 0);
+            var charaRecord = Session.currCharacterRecord;
+            charaRecord.LastPlayed = DateTime.UtcNow;
+            var race = Race.GetRace(charaRecord.character.raceName);
+            character = Character.Create(race, charaRecord.character, 0);
             var ai = character.GetOrAddComponent<CharacterAI>();
             ai.autoUseAbility = true;
             followCamera = Instantiate(cameraPrefab);
@@ -63,7 +64,7 @@ namespace Arkademy.Gameplay
         private void Update()
         {
             if (!character || !playerInput) return;
-            character.Move(playerInput.moveDir);
+            character.wantToMove = playerInput.moveDir;
             if (character.interactableDetector)
             {
                 currentInteractableCandidate = character.interactableDetector.interactables
@@ -75,6 +76,7 @@ namespace Arkademy.Gameplay
             {
                 currentInteractableCandidate.OnInteractedBy(character);
             }
+
             var e = new AbilityEventData
             {
                 Direction = playerInput.holdDir,
@@ -92,7 +94,7 @@ namespace Arkademy.Gameplay
 
             if (holdAbility && !playerInput.hold && holdAbility.InUse())
             {
-                holdAbility.Use(e,true);
+                holdAbility.Use(e, true);
             }
         }
     }

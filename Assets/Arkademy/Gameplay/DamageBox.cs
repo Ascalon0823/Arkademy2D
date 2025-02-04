@@ -1,4 +1,5 @@
 using System;
+using Arkademy.Data;
 using UnityEngine;
 
 namespace Arkademy.Gameplay
@@ -12,7 +13,7 @@ namespace Arkademy.Gameplay
         {
             if (other.GetCharacter(out var chara) && chara.faction != faction)
             {
-                chara.TakeDamage(damage);
+                chara.TakeDamage(new DamageData { amount = damage });
             }
         }
     }

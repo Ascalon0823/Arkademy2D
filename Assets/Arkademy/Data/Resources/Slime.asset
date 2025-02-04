@@ -10,91 +10,91 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31e4ae0155d14d04809f5b5c5a499fe4, type: 3}
-  m_Name: Lilin
+  m_Name: Slime
   m_EditorClassIdentifier: 
   race:
-    displayName: Lilin
+    displayName: Slime
     attributes:
     - type: 1
       calType: 0
-      value: 10000
-      current: 10000
+      value: 2000
+      current: 2000
     - type: 2
       calType: 0
-      value: 400
+      value: 100
       current: 0
     - type: 3
       calType: 0
-      value: 100
+      value: 50
       current: 0
     - type: 4
       calType: 0
-      value: 100
+      value: 800
       current: 0
     - type: 5
       calType: 0
-      value: 100
+      value: 50
       current: 0
     - type: 6
       calType: 0
-      value: 1000
+      value: 800
       current: 0
-    playable: 1
+    playable: 0
     behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
-    animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
+    animationController: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
     facingLeft: 1
   displays:
   - attribute:
       type: 1
       calType: 0
-      value: 10000
-      current: 10000
-    baseValue: 10000
-    value: 100
-    current: 100
-    baseCurrent: 10000
+      value: 2000
+      current: 2000
+    baseValue: 2000
+    value: 20
+    current: 20
+    baseCurrent: 2000
   - attribute:
       type: 2
       calType: 0
-      value: 400
+      value: 100
       current: 0
-    baseValue: 400
-    value: 4
+    baseValue: 100
+    value: 1
     current: 0
     baseCurrent: 0
   - attribute:
       type: 3
       calType: 0
-      value: 100
+      value: 50
       current: 0
-    baseValue: 100
-    value: 1
+    baseValue: 50
+    value: 0.5
     current: 0
     baseCurrent: 0
   - attribute:
       type: 4
       calType: 0
-      value: 100
+      value: 800
       current: 0
-    baseValue: 100
-    value: 1
+    baseValue: 800
+    value: 8
     current: 0
     baseCurrent: 0
   - attribute:
       type: 5
       calType: 0
-      value: 100
+      value: 50
       current: 0
-    baseValue: 100
-    value: 1
+    baseValue: 50
+    value: 0.5
     current: 0
     baseCurrent: 0
   - attribute:
       type: 6
       calType: 0
-      value: 1000
+      value: 800
       current: 0
-    baseValue: 1000
-    value: 10
+    baseValue: 800
+    value: 8
     current: 0
     baseCurrent: 0

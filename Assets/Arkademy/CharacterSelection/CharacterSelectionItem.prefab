@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3600294836349075774}
   - component: {fileID: 234673534465803631}
   - component: {fileID: 1440035372077949114}
-  - component: {fileID: 2209486140065184567}
   m_Layer: 5
   m_Name: Sprite
   m_TagString: Untagged
@@ -155,20 +154,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2209486140065184567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37381294682304288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73cd878bbf2e65d499eaebe98e437c41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 234673534465803631}
-  imageComponent: {fileID: 3600294836349075774}
 --- !u!1 &367719397298055478
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,6 +314,7 @@ GameObject:
   - component: {fileID: 6232387327943320319}
   - component: {fileID: 4051189004542108461}
   - component: {fileID: 4930843670203498649}
+  - component: {fileID: 3047340796336014869}
   m_Layer: 5
   m_Name: SpriteHolder
   m_TagString: Untagged
@@ -414,6 +400,20 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3047340796336014869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4600787326206469428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e19fcc88814fc5b2f6955996e33709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 3600294836349075774}
+  spriteRenderer: {fileID: 234673534465803631}
 --- !u!1 &4635124176742039536
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,19 +584,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e73bd77996a4243a62c5d01f8ac3287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  list: {fileID: 0}
+  menu: {fileID: 0}
   record:
     character:
       displayName: 
-      level:
+      raceName: 
+      energy:
+        type: 0
         value: 0
-        currProgress: 0
-        progressToNext: 0
-      health:
-        maxValue: 0
         currValue: 0
-      strength:
+      source:
+        type: 0
         value: 0
+        currValue: 0
+      health:
+        type: 0
+        value: 0
+        currValue: 0
+      speed:
+        type: 0
+        value: 0
+      castSpeed:
+        type: 0
+        value: 0
+      attack:
+        type: 0
+        value: 0
+      defence:
+        type: 0
+        value: 0
+      detectionRange:
+        type: 0
+        value: 0
+      weapon:
+        name: 
+        displayName: 
+        offense:
+          attack: 0
+          range: 0
+          speed: 0
+          isRange: 0
+        defense:
+          defense: 0
+    time:
+      weeks: 0
+      dayOfWeek: 0
+      hour: 0
   setupDone: 0
   selected: 0
   selectionHighlight: {fileID: 367719397298055478}

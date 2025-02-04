@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-namespace Arkademy.Common
+namespace Arkademy.Data
 {
     public static class Session
     {

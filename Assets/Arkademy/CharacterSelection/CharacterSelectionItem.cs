@@ -1,4 +1,4 @@
-using Arkademy.Common;
+using Arkademy.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;

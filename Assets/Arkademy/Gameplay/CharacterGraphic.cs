@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Attribute = Arkademy.Data.Attribute;
 
 namespace Arkademy.Gameplay
 {
@@ -9,10 +10,7 @@ namespace Arkademy.Gameplay
         public bool facingLeft;
         public Animator animator;
         public GameObject shadow;
-        public Vector2 facing;
-        public Vector2 moveDir;
         public float walkAnimationDistance;
-        public float walkSpeed;
         public float attackSpeed;
         public Gameplay.Character character;
         private static readonly int Walking = Animator.StringToHash("walking");
@@ -20,27 +18,20 @@ namespace Arkademy.Gameplay
 
         private void LateUpdate()
         {
-            moveDir = character.move;
-            walkSpeed = character.GetMoveSpeed();
-            facing = character.facing;
-            if (facing.sqrMagnitude > 0f)
+            if (character.facing.sqrMagnitude > 0f && !character.isDead)
             {
-                spriteRenderer.flipX = Vector2.Dot(facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
+                spriteRenderer.flipX = Vector2.Dot(character.facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
             }
 
-            animator.SetFloat("walkSpeed", walkSpeed / walkAnimationDistance);
+            animator.SetFloat("walkSpeed", character.data.Get(Attribute.Type.MovSpeed) / walkAnimationDistance);
             animator.SetFloat("attackSpeed", attackSpeed);
-            animator.SetBool(Walking, moveDir.sqrMagnitude > 0f);
+            animator.SetBool(Walking, character.IsMoving() && !character.isDead);
+            animator.SetBool("dead", character.isDead);
         }
 
         public void SetAttack()
         {
             animator.SetTrigger(Attack);
-        }
-
-        public void SetDead(bool isDead = true)
-        {
-            animator.SetBool("dead", isDead);
         }
 
         public void SetHit()

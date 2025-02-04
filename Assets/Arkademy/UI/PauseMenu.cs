@@ -1,7 +1,6 @@
-using Arkademy.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using Arkademy.Data;
 
 namespace Arkademy.UI
 {

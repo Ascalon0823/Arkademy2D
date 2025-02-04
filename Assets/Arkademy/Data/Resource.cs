@@ -14,5 +14,15 @@ namespace Arkademy.Data
         {
             return _resTypes.Contains(type);
         }
+        
+        public float Curr()
+        {
+            return ToRealValue(current);
+        }
+
+        public int BaseCurr()
+        {
+            return current;
+        }
     }
 }

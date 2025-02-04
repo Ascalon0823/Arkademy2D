@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arkademy.CharacterCreation;
+using Arkademy.Data;
 using Arkademy.Gameplay;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Arkademy.Rift
 {
-    public class RiftController :MonoBehaviour
+    public class RiftController : MonoBehaviour
     {
         public static RiftController Instance;
         public static int RiftSetup;
@@ -18,14 +18,14 @@ namespace Arkademy.Rift
         public Player playerPrefab;
         public bool riftStarted;
 
-        public List<Character> spawnedEnemies = new();
-        public List<Character> deadEnemies = new();
+        public List<Gameplay.Character> spawnedEnemies = new();
+        public List<Gameplay.Character> deadEnemies = new();
         public int spawnLimit;
         public float spawnInterval;
         public bool completed;
         [SerializeField] private float lastSpawn;
         private List<Race> _raceList = new();
-        
+
         private void Awake()
         {
             if (Instance && Instance != this)
@@ -44,7 +44,8 @@ namespace Arkademy.Rift
 
         private void Initiate()
         {
-            _raceList = Resources.LoadAll<Race>("").Where(x => !x.playable).ToList();
+            _raceList = Resources.LoadAll<Data.Scriptable.RaceObject>("").Where(x => !x.race.playable)
+                .Select(x => x.race).ToList();
             difficulty = RiftSetup;
             progress = 0;
             SpawnPlayer();
@@ -59,14 +60,14 @@ namespace Arkademy.Rift
         private void SpawnEnemy()
         {
             var spawnTarget = _raceList[Random.Range(0, _raceList.Count)];
-            var enemy = Character.Create(spawnTarget.CreateCharacter(), 1);
+            var enemy = Gameplay.Character.Create(spawnTarget, spawnTarget.CreateCharacterData(), 1);
             enemy.SetPosition(Player.LocalPlayer.GetRandomPosArrandCharacter(1f));
-            enemy.OnDeath += () =>
+            enemy.OnDeath.AddListener(d =>
             {
                 progress += 10;
                 spawnedEnemies.Remove(enemy);
                 deadEnemies.Add(enemy);
-            };
+            });
             spawnedEnemies.Add(enemy);
             var ai = enemy.GetOrAddComponent<CharacterAI>();
             ai.autoMove = true;
@@ -78,13 +79,12 @@ namespace Arkademy.Rift
         {
             foreach (var enemy in spawnedEnemies)
             {
-                
             }
         }
 
         private void Update()
         {
-            if (!riftStarted ||completed) return;
+            if (!riftStarted || completed) return;
             passedTime += Time.deltaTime;
             if (passedTime > 300)
             {
