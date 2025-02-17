@@ -22,8 +22,8 @@ namespace Arkademy.Gameplay.Ability
             base.Use(eventData, canceled);
             var payload = Instantiate(meleePayload, transform);
             payload.transform.localPosition = Vector3.zero;
-            payload.transform.up =
-                eventData.TryGetDirection(user.transform.position, out var dir) ? dir : user.facing;
+            var direction = eventData.TryGetDirection(user.transform.position, out var dir) ? dir : user.facing;
+            payload.transform.up = direction;
             payload.transform.localScale = new Vector3(GetRange(), GetRange());
             payload.remainingLife = GetUseTime();
             payload.triggerPoint = payload.triggerPointPercentage * payload.remainingLife;
@@ -33,6 +33,7 @@ namespace Arkademy.Gameplay.Ability
                 if (c.GetCharacter(out var chara) && chara.faction != user.faction && payload.triggerCount>0)
                 {
                     chara.TakeDamage(new DamageData(user.data.GetBase(Attribute.Type.Attack)));
+                    chara.KnockBack(direction.normalized * 1f);
                     payload.trigger.Ignores.Add(c);
                     payload.triggerCount--;
                 }

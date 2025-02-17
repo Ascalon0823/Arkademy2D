@@ -21,6 +21,7 @@ namespace Arkademy.Gameplay
         public bool isDead;
         public int faction;
         public Vector2 wantToMove;
+        public Vector2 velocity;
         public Vector2 facing;
         public List<AbilityBase> abilities = new();
         public InteractableDetector interactableDetector;
@@ -84,6 +85,11 @@ namespace Arkademy.Gameplay
             DamageCanvas.AddTextTo(Player.Camera, transform, Mathf.CeilToInt(damage.amount / 100f).ToString());
         }
 
+        public void KnockBack(Vector2 displacement)
+        {
+           SetPosition(body.position + displacement);
+        }
+
         private void FixedUpdate()
         {
             HandleDeath();
@@ -92,7 +98,7 @@ namespace Arkademy.Gameplay
 
         private void HandleMove()
         {
-            var velocity = wantToMove * data.Get(Attribute.Type.MovSpeed);
+            velocity = wantToMove * data.Get(Attribute.Type.MovSpeed);
             if (velocity.sqrMagnitude > 0)
             {
                 facing = velocity.normalized;
