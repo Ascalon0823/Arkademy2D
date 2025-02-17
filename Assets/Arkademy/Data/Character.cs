@@ -9,6 +9,8 @@ namespace Arkademy.Data
     {
         public string displayName;
         public string raceName;
+        public int xp;
+        public int gold;
 
         [JsonIgnore] private Dictionary<Attribute.Type, Attribute> _attributes;
 

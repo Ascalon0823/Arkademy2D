@@ -4,6 +4,7 @@ using System.Linq;
 using Arkademy.Data;
 using Arkademy.Gameplay;
 using UnityEngine;
+using Attribute = Arkademy.Data.Attribute;
 using Random = UnityEngine.Random;
 
 namespace Arkademy.Rift
@@ -11,7 +12,7 @@ namespace Arkademy.Rift
     public class RiftController : MonoBehaviour
     {
         public static RiftController Instance;
-        public static int RiftSetup;
+        public static int? RiftSetup;
         public int difficulty;
         public int progress;
         public float passedTime;
@@ -46,7 +47,7 @@ namespace Arkademy.Rift
         {
             _raceList = Resources.LoadAll<Data.Scriptable.RaceObject>("")
                 .Select(x => x.race).Where(x => !x.playable && x.spawnable).ToList();
-            difficulty = RiftSetup;
+            difficulty = RiftSetup??difficulty;
             progress = 0;
             SpawnPlayer();
             riftStarted = true;
@@ -61,6 +62,21 @@ namespace Arkademy.Rift
         {
             var spawnTarget = _raceList[Random.Range(0, _raceList.Count)];
             var enemy = Gameplay.Character.Create(spawnTarget, spawnTarget.CreateCharacterData(), 1);
+            var difficultyLifeModifier = new Attribute.Modifier
+            {
+                attrType = Attribute.Type.Life,
+                category = Attribute.Modifier.Category.Multiplication,
+                value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 5f) * 10000)
+            };
+            var difficultyAttackModifier = new Attribute.Modifier
+            {
+                attrType = Attribute.Type.Attack,
+                category = Attribute.Modifier.Category.Multiplication,
+                value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 10f) * 10000)
+            };
+            enemy.data[Attribute.Type.Life].AddMod(difficultyLifeModifier);
+            enemy.data.SetCurr(Attribute.Type.Life, enemy.data.GetBase(Attribute.Type.Life,10000));
+            enemy.data[Attribute.Type.Attack].AddMod(difficultyAttackModifier);
             enemy.SetPosition(Player.LocalPlayer.GetRandomPosArrandCharacter(1f));
             enemy.OnDeath.AddListener(d =>
             {

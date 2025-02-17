@@ -32,7 +32,6 @@ namespace Arkademy.Data
 
             modifiers.Add(modifier);
         }
-
         public void RemoveMod(Modifier modifier)
         {
             if (Modifiers.TryGetValue(modifier.category, out var modifiers))

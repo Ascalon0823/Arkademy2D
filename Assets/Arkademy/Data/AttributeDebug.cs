@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Arkademy.Data
 {
@@ -10,10 +12,12 @@ namespace Arkademy.Data
         public float value;
         public float current;
         public int baseCurrent;
+        public List<Attribute.Modifier> modifiers;
 
         public AttrDisplay(Attribute attribute)
         {
             this.attribute = attribute;
+            modifiers = this.attribute.Modifiers.ToList().SelectMany(x => x.Value).ToList();
             Update();
         }
 
@@ -23,6 +27,7 @@ namespace Arkademy.Data
             value = attribute.Value();
             current = attribute.Curr();
             baseCurrent = attribute.BaseCurr();
+            modifiers = this.attribute.Modifiers.ToList().SelectMany(x => x.Value).ToList();
         }
     }
 }
