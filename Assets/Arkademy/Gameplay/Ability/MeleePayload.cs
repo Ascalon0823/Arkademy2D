@@ -12,9 +12,15 @@ namespace Arkademy.Gameplay.Ability
         public float triggerPoint;
 
         public int triggerCount;
+        public Animator animator;
         private void Awake()
         {
             trigger.trigger.enabled = false;
+        }
+
+        private void Start()
+        {
+            animator.speed = 1 / remainingLife;
         }
 
         private void Update()
