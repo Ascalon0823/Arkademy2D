@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Arkademy.Data
 {
@@ -31,8 +32,13 @@ namespace Arkademy.Data
 
         [JsonIgnore] public Dictionary<Modifier.Category, List<Modifier>> Modifiers = new();
 
-        public void AddMod(Modifier modifier)
+        public void AddMod(Modifier modifier, bool adjustCurr = true)
         {
+            var ratio = 1f;
+            if (IsResource() && adjustCurr)
+            {
+                ratio = current * 1f / BaseValue();
+            }
             if (!Modifiers.TryGetValue(modifier.category, out var modifiers))
             {
                 modifiers = new List<Modifier>();
@@ -40,12 +46,25 @@ namespace Arkademy.Data
             }
 
             modifiers.Add(modifier);
+            if (IsResource() && adjustCurr)
+            {
+                current = Mathf.RoundToInt(ratio * BaseValue());
+            }
         }
-        public void RemoveMod(Modifier modifier)
+        public void RemoveMod(Modifier modifier, bool adjustCurr = true)
         {
+            var ratio = 1f;
+            if (IsResource() && adjustCurr)
+            {
+                ratio = current * 1f / BaseValue();
+            }
             if (Modifiers.TryGetValue(modifier.category, out var modifiers))
             {
                 modifiers.Remove(modifier);
+            }
+            if (IsResource() && adjustCurr)
+            {
+                current = Mathf.RoundToInt(ratio * BaseValue());
             }
         }
 

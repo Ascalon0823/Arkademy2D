@@ -81,7 +81,6 @@ namespace Arkademy.Rift
                 value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 10f) * 10000)
             };
             enemy.data[Attribute.Type.Life].AddMod(difficultyLifeModifier);
-            enemy.data.SetCurr(Attribute.Type.Life, enemy.data.GetBase(Attribute.Type.Life, 10000));
             enemy.data[Attribute.Type.Attack].AddMod(difficultyAttackModifier);
             enemy.SetPosition(Player.LocalPlayer.GetRandomPosArrandCharacter(1f));
             enemy.OnDeath.AddListener(d =>
