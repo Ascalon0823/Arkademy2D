@@ -328,6 +328,10 @@ MonoBehaviour:
   spawnInterval: 1
   completed: 0
   lastSpawn: 0
+  passed: 0
+  xpGain: 0
+  goldGain: 0
+  progressMultiplier: 1
 --- !u!1 &2049944052
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +734,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7964432128831020506, guid: 5102b8d213f95cb47aed9f55e6acc6ae, type: 3}
+      propertyPath: m_ScaleFactor
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8367493405106993932, guid: 5102b8d213f95cb47aed9f55e6acc6ae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -778,7 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 4
+  m_ScaleFactor: 3
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0

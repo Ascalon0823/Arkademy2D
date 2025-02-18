@@ -18,6 +18,15 @@ namespace Arkademy.Data
             public Type attrType;
             public Category category;
             public int value;
+            public Modifier Copy()
+            {
+                return new Modifier
+                {
+                    attrType = attrType,
+                    category = category,
+                    value = value
+                };
+            }
         }
 
         [JsonIgnore] public Dictionary<Modifier.Category, List<Modifier>> Modifiers = new();
@@ -39,5 +48,7 @@ namespace Arkademy.Data
                 modifiers.Remove(modifier);
             }
         }
+
+        
     }
 }

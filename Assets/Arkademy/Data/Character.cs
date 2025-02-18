@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Arkademy.Data
@@ -11,14 +12,16 @@ namespace Arkademy.Data
         public string raceName;
         public int xp;
         public int gold;
+        public List<EquipmentSlot> equipmentSlots = new List<EquipmentSlot>();
 
         [JsonIgnore] private Dictionary<Attribute.Type, Attribute> _attributes;
 
-        [JsonIgnore] public Dictionary<Attribute.Type, Attribute> attributes
+        [JsonIgnore]
+        public Dictionary<Attribute.Type, Attribute> attributes
         {
             get
             {
-                if(_attributes == null)SetupAttribute();
+                if (_attributes == null) SetupAttribute();
                 return _attributes;
             }
         }
@@ -73,6 +76,58 @@ namespace Arkademy.Data
             {
                 _attributes[attr.type] = attr.Copy();
             }
+        }
+
+        public Equipment GetEquipment(int slotIdx)
+        {
+            return equipmentSlots.FirstOrDefault(x => x.slot == slotIdx)?.equipment;
+        }
+
+        public void Equip(Equipment equipment)
+        {
+            var baseData = ItemBase.GetItemBase(equipment.baseName);
+            if (baseData == null) return;
+            var slot = equipmentSlots.FirstOrDefault(x => x.slot == baseData.slot);
+            if (slot == null) return;
+            if (slot.equipment != null)
+            {
+                UnEquip(slot);
+            }
+            slot.equipment = equipment;
+            Setup(slot);
+        }
+
+        public void Setup(EquipmentSlot slot)
+        {
+            if (slot == null) return;
+            foreach (var mod in slot.currentModifiers)
+            {
+                this[mod.attrType]?.RemoveMod(mod);
+            }
+            slot.currentModifiers.Clear();
+            if (slot.equipment == null)
+            {
+                return;
+            }
+           
+            var baseData = ItemBase.GetItemBase(slot.equipment.baseName);
+            var modifiers = new List<Attribute.Modifier>();
+            modifiers.AddRange(baseData.equipmentModifiers);
+            modifiers.AddRange(slot.equipment.additional);
+            foreach (var mod in modifiers)
+            {
+                var instance = mod.Copy();
+                slot.currentModifiers.Add(instance);
+                this[mod.attrType]?.AddMod(instance);
+            }
+        }
+
+        public void UnEquip(EquipmentSlot slot)
+        {
+            if (slot?.equipment == null) return;
+
+            slot.equipment = null;
+            Setup(slot);
         }
     }
 }

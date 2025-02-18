@@ -18,6 +18,7 @@ namespace Arkademy.Data
         public RuntimeAnimatorController animationController;
         public bool facingLeft;
 
+        public List<EquipmentSlot> slots = new();
         public List<AbilityBase> abilities=new List<AbilityBase>();
         public static Race GetRace(string name)
         {
@@ -35,6 +36,7 @@ namespace Arkademy.Data
             {
                 displayName = string.IsNullOrEmpty(charaName) ? displayName : charaName,
                 raceName = displayName,
+                equipmentSlots = slots
             };
         } 
     }

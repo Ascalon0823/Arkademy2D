@@ -50,6 +50,10 @@ namespace Arkademy.Gameplay
                 instance.GiveToUser(this);
             }
 
+            foreach (var slot in newData.equipmentSlots)
+            {
+                newData.Setup(slot);
+            }
             setupCompleted = true;
         }
 

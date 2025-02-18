@@ -32,6 +32,7 @@ namespace Arkademy.Rift
 
         [SerializeField] private int xpGain;
         [SerializeField] private int goldGain;
+        [SerializeField] private float progressMultiplier;
         private void Awake()
         {
             if (Instance && Instance != this)
@@ -85,8 +86,8 @@ namespace Arkademy.Rift
             enemy.SetPosition(Player.LocalPlayer.GetRandomPosArrandCharacter(1f));
             enemy.OnDeath.AddListener(d =>
             {
-                progress += 10;
-                xpGain += 10 * difficulty;
+                progress += Mathf.RoundToInt(10 * progressMultiplier);
+                xpGain += 10 * (1+difficulty);
                 goldGain += Mathf.CeilToInt(Random.Range(0.5f,1.5f) * 10 * (1+difficulty));
                 spawnedEnemies.Remove(enemy);
                 deadEnemies.Add(enemy);
@@ -113,10 +114,16 @@ namespace Arkademy.Rift
 
         private void CompleteRift()
         {
+            if(passedTime<=300)
+                passed = true;
             Session.currCharacterRecord.PlayedDuration += DateTime.UtcNow - Session.currCharacterRecord.LastPlayed;
             Session.currCharacterRecord.LastPlayed  = DateTime.UtcNow;
             Session.currCharacterRecord.character.xp += xpGain;
             Session.currCharacterRecord.character.gold += goldGain;
+            if (passed)
+            {
+                Session.currCharacterRecord.clearedDifficulty = difficulty + Mathf.CeilToInt(300 - passedTime) / 20;
+            }
             Session.Save();
             SceneManager.LoadScene("Campus");
         }
@@ -130,10 +137,9 @@ namespace Arkademy.Rift
                 passed = false;
             }
 
-            if (progress >= 1000 && passedTime <= 300)
+            if (progress >= 1000 )
             {
                 completed = true;
-                passed = true;
                 ClearAllEnemies();
                 CompleteRift();
                 return;

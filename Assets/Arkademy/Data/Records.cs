@@ -38,5 +38,6 @@ namespace Arkademy.Data
         public DateTime LastPlayed;
         public TimeSpan PlayedDuration;
         public Character character;
+        public int clearedDifficulty;
     }
 }
