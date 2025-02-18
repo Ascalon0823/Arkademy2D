@@ -28,11 +28,13 @@ namespace Arkademy.Rift
         [SerializeField] private float lastSpawn;
         private List<Race> _raceList = new();
 
+        [SerializeField] private int eliteCounter;
         [SerializeField] private bool passed;
 
         [SerializeField] private int xpGain;
         [SerializeField] private int goldGain;
         [SerializeField] private float progressMultiplier;
+
         private void Awake()
         {
             if (Instance && Instance != this)
@@ -55,6 +57,7 @@ namespace Arkademy.Rift
                 .Select(x => x.race).Where(x => !x.playable && x.spawnable).ToList();
             difficulty = RiftSetup ?? difficulty;
             progress = 0;
+            eliteCounter = 5;
             SpawnPlayer();
             riftStarted = true;
         }
@@ -66,6 +69,9 @@ namespace Arkademy.Rift
 
         private void SpawnEnemy()
         {
+            eliteCounter--;
+            var isElite = eliteCounter <= 0;
+            if (isElite) eliteCounter = 5;
             var spawnTarget = _raceList[Random.Range(0, _raceList.Count)];
             var enemy = Gameplay.Character.Create(spawnTarget, spawnTarget.CreateCharacterData(), 1);
             var difficultyLifeModifier = new Attribute.Modifier
@@ -82,12 +88,42 @@ namespace Arkademy.Rift
             };
             enemy.data[Attribute.Type.Life].AddMod(difficultyLifeModifier);
             enemy.data[Attribute.Type.Attack].AddMod(difficultyAttackModifier);
+            if (isElite)
+            {
+                enemy.data[Attribute.Type.Life].AddMod(new Attribute.Modifier
+                {
+                    attrType = Attribute.Type.Life,
+                    category = Attribute.Modifier.Category.Multiplication,
+                    value = 30000,
+                });
+
+                enemy.data[Attribute.Type.Attack].AddMod(new Attribute.Modifier
+                {
+                    attrType = Attribute.Type.Attack,
+                    category = Attribute.Modifier.Category.Multiplication,
+                    value = 20000
+                });
+                enemy.data[Attribute.Type.AttackSpeed].AddMod(new Attribute.Modifier
+                {
+                    attrType = Attribute.Type.AttackSpeed,
+                    category = Attribute.Modifier.Category.Multiplication,
+                    value = 15000
+                });
+                enemy.data[Attribute.Type.MovSpeed].AddMod(new Attribute.Modifier
+                {
+                    attrType = Attribute.Type.MovSpeed,
+                    category = Attribute.Modifier.Category.Multiplication,
+                    value = 15000
+                });
+                enemy.graphic.spriteRenderer.color = Color.red;
+            }
+
             enemy.SetPosition(Player.LocalPlayer.GetRandomPosArrandCharacter(1f));
             enemy.OnDeath.AddListener(d =>
             {
-                progress += Mathf.RoundToInt(10 * progressMultiplier);
-                xpGain += 10 * (1+difficulty);
-                goldGain += Mathf.CeilToInt(Random.Range(0.5f,1.5f) * 10 * (1+difficulty));
+                progress += Mathf.RoundToInt(10 * progressMultiplier * (isElite ? 2 : 1));
+                xpGain += 10 * (1 + difficulty) * (isElite ? 2 : 1);
+                goldGain += Mathf.CeilToInt(Random.Range(0.5f, 1.5f) * 10 * (1 + difficulty) * (isElite ? 2 : 1));
                 spawnedEnemies.Remove(enemy);
                 deadEnemies.Add(enemy);
             });
@@ -113,16 +149,17 @@ namespace Arkademy.Rift
 
         private void CompleteRift()
         {
-            if(passedTime<=300)
+            if (passedTime <= 300)
                 passed = true;
             Session.currCharacterRecord.PlayedDuration += DateTime.UtcNow - Session.currCharacterRecord.LastPlayed;
-            Session.currCharacterRecord.LastPlayed  = DateTime.UtcNow;
+            Session.currCharacterRecord.LastPlayed = DateTime.UtcNow;
             Session.currCharacterRecord.character.xp += xpGain;
             Session.currCharacterRecord.character.gold += goldGain;
             if (passed)
             {
                 Session.currCharacterRecord.clearedDifficulty = difficulty + Mathf.CeilToInt(300 - passedTime) / 20;
             }
+
             Session.Save();
             SceneManager.LoadScene("Campus");
         }
@@ -136,7 +173,7 @@ namespace Arkademy.Rift
                 passed = false;
             }
 
-            if (progress >= 1000 )
+            if (progress >= 1000)
             {
                 completed = true;
                 ClearAllEnemies();
