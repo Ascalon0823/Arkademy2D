@@ -1,4 +1,4 @@
-using Arkademy.Data;
+using Arkademy.Campus.UI;
 using Arkademy.Gameplay;
 using Arkademy.Rift;
 using UnityEngine;
@@ -11,8 +11,7 @@ namespace Arkademy.Campus
     {
         public override bool OnInteractedBy(Character character)
         {
-            RiftController.RiftSetup = Session.currCharacterRecord.clearedDifficulty + 1;
-            SceneManager.LoadScene("Rift");
+            RiftStartMenu.Show();
             return true;
         }
     }

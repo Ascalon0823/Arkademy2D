@@ -48,6 +48,19 @@ MonoBehaviour:
     behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
     animationController: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
     facingLeft: 1
+    slots:
+    - slot: 0
+      equipment:
+        baseName: WoodSword
+        stack: 0
+        additional: []
+      currentModifiers:
+      - attrType: 3
+        category: 0
+        value: 2000
+      - attrType: 4
+        category: 0
+        value: 100
     abilities:
     - {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
   displays:
@@ -60,6 +73,7 @@ MonoBehaviour:
     value: 100
     current: 100
     baseCurrent: 10000
+    modifiers: []
   - attribute:
       type: 2
       calType: 0
@@ -69,6 +83,7 @@ MonoBehaviour:
     value: 4
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
       type: 3
       calType: 0
@@ -78,6 +93,7 @@ MonoBehaviour:
     value: 10
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
       type: 4
       calType: 0
@@ -87,6 +103,7 @@ MonoBehaviour:
     value: 1
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
       type: 5
       calType: 0
@@ -96,6 +113,7 @@ MonoBehaviour:
     value: 1
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
       type: 6
       calType: 0
@@ -105,6 +123,7 @@ MonoBehaviour:
     value: 10
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
       type: 7
       calType: 0
@@ -114,3 +133,4 @@ MonoBehaviour:
     value: 1
     current: 0
     baseCurrent: 0
+    modifiers: []
