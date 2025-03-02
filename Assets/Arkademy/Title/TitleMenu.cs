@@ -1,5 +1,6 @@
 using Arkademy.Backend;
 using Arkademy.Data;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,7 @@ namespace Arkademy.Title
                 return;
             }
             Session.currPlayerRecord = user.playerRecord.ToPlayerRecordData();
+            Debug.Log(JsonConvert.SerializeObject(user));
             landingPage.SetActive(false);
             buttons.SetActive(true);
         }

@@ -124,5 +124,34 @@ namespace Arkademy.Backend
 
             return JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
         }
+
+        public static async Task<bool> CreateCharacter(Data.CharacterRecord record)
+        {
+            var serverRecord = new CharacterRecord
+            {
+                displayName = record.character.displayName,
+                CreationTime = record.CreationTime,
+                LastPlayedTime = record.LastPlayed
+            };
+            var data = JToken.FromObject(record.character);
+            data["clearedDifficulty"] = record.clearedDifficulty;
+            serverRecord.Data = data;
+            
+            var result = await Service._client
+                .PostAsync("createCharacter", new StringContent(
+                    JsonConvert.SerializeObject(serverRecord, new JsonSerializerSettings
+                    {
+                        DateFormatString = "yyyy-MM-ddTH:mm:ss.fffK"
+                    }),
+                    Encoding.UTF8,
+                    "application/json"));
+            if (!result.IsSuccessStatusCode)
+            {
+                Debug.LogError(await result.Content.ReadAsStringAsync());
+                return false;
+            }
+            Debug.Log(await result.Content.ReadAsStringAsync());
+            return true;
+        }
     }
 }

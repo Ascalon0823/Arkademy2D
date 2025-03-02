@@ -1,11 +1,14 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Arkademy.Backend;
 using Arkademy.Data;
 using Arkademy.Data.Scriptable;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using CharacterRecord = Arkademy.Data.CharacterRecord;
 
 namespace Arkademy.CharacterCreation
 {
@@ -27,9 +30,7 @@ namespace Arkademy.CharacterCreation
                 confirm.interactable = !string.IsNullOrEmpty(s);
                 currentCharacter.displayName = s;
             });
-            confirm.onClick.RemoveAllListeners();
             confirm.interactable = false;
-            confirm.onClick.AddListener(OnConfirm);
             cancel.onClick.RemoveAllListeners();
             cancel.onClick.AddListener(OnCancel);
         }
@@ -47,14 +48,20 @@ namespace Arkademy.CharacterCreation
             currentCharacter.displayName = nameInputField.text;
         }
 
-        public void OnConfirm()
+        public async void OnConfirm()
         {
             var characterRecord = new CharacterRecord
             {
                 character = currentCharacter,
                 CreationTime = DateTime.UtcNow,
-                PlayedDuration = new TimeSpan(0)
+                PlayedDuration = new TimeSpan(0),
+                LastPlayed = DateTime.UtcNow
             };
+            if (!await BackendService.CreateCharacter(characterRecord))
+            {
+                Debug.Log("Failed to create character");
+                return;
+            }
             Session.currPlayerRecord.characterRecords.Add(characterRecord);
             Session.currPlayerRecord.Save();
             Session.currCharacterRecord = characterRecord;

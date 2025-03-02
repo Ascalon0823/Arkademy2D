@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Arkademy.Data;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -65,6 +66,7 @@ namespace Arkademy.CharacterSelection
 
             foreach (var record in records)
             {
+                Debug.Log(JsonConvert.SerializeObject(record));
                 var item = Instantiate(itemPrefab, container);
                 item.Setup(record);
                 _spawnedListItems.Add(item);
