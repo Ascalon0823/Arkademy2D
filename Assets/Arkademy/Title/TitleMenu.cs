@@ -1,3 +1,5 @@
+using Arkademy.Backend;
+using Arkademy.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,8 +21,15 @@ namespace Arkademy.Title
             versionText.text = Application.version;
         }
 
-        public void BeginSession()
+        public async void BeginSession()
         {
+            var user = await BackendService.GetUser();
+            if (user == null)
+            {
+                SceneManager.LoadScene("UserAuth");
+                return;
+            }
+            Session.currPlayerRecord = user.playerRecord.ToPlayerRecordData();
             landingPage.SetActive(false);
             buttons.SetActive(true);
         }
@@ -43,6 +52,11 @@ namespace Arkademy.Title
         public void ClearSaveData()
         {
             PlayerPrefs.DeleteKey("PlayerData");
+        }
+        [ContextMenu("Clear User Cache")]
+        public void ClearUserCache()
+        {
+            PlayerPrefs.DeleteKey("PlayerToken");
         }
     }
 }

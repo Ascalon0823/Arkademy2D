@@ -1,4 +1,5 @@
 using System.Linq;
+using UnityEngine.Device;
 using UnityEngine.SceneManagement;
 
 namespace Arkademy.Data
@@ -7,7 +8,25 @@ namespace Arkademy.Data
     {
         private static PlayerRecord _playerRecord;
 
-        public static PlayerRecord currPlayerRecord => _playerRecord ??= PlayerRecord.LoadOrNew();
+        public static PlayerRecord currPlayerRecord
+        {
+            get
+            {
+                if (_playerRecord == null)
+                {
+                    if (Application.isEditor)
+                    {
+                        _playerRecord = PlayerRecord.LoadOrNew();
+                        return _playerRecord;
+                    }
+                    SceneManager.LoadScene("Title");
+                    return null;
+                }
+
+                return _playerRecord;
+            }
+            set => _playerRecord = value;
+        }
 
         private static CharacterRecord _characterRecord;
 

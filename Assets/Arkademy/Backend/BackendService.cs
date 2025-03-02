@@ -63,7 +63,7 @@ namespace Arkademy.Backend
 
         private HttpClient _client;
 
-        public static async Task Login(string username, string password)
+        public static async Task<bool> Login(string username, string password)
         {
             var payload = new JObject();
             payload["username"] = username;
@@ -77,20 +77,39 @@ namespace Arkademy.Backend
             if (!result.IsSuccessStatusCode)
             {
                 Debug.LogError(await result.Content.ReadAsStringAsync());
-                return;
+                return false;
             }
 
             var tokenJson = JObject.Parse(await result.Content.ReadAsStringAsync());
             if (!tokenJson.TryGetValue("token", out var tokenObj))
             {
                 Debug.LogError("Token not found in result");
-                return;
+                return false;
             }
 
             var token = tokenObj.ToString();
             Service.AddToken(tokenObj.ToString());
             PlayerPrefs.SetString("PlayerToken", token);
             Debug.Log("Login successfully");
+            return true;
+        }
+
+        public static async Task<bool> Register(string username, string password)
+        {
+            var payload = new JObject();
+            payload["username"] = username;
+            payload["password"] = password;
+            var result = await Service._client
+                .PostAsync("register", new StringContent(
+                    payload.ToString(),
+                    Encoding.UTF8,
+                    "application/json"));
+            if (!result.IsSuccessStatusCode)
+            {
+                Debug.LogError(await result.Content.ReadAsStringAsync());
+                return false;
+            }
+            return true;
         }
 
         public static async Task<User> GetUser()
