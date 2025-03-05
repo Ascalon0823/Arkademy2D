@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Arkademy.Data;
 using Arkademy.Gameplay;
 using UnityEngine;
@@ -147,7 +148,7 @@ namespace Arkademy.Rift
             }
         }
 
-        private void CompleteRift()
+        private async Task CompleteRift()
         {
             if (passedTime <= 300)
                 passed = true;
@@ -159,11 +160,11 @@ namespace Arkademy.Rift
                 Session.currCharacterRecord.character.clearedRift = difficulty + Mathf.CeilToInt(300 - passedTime) / 20;
             }
 
-            Session.Save();
+            await Session.Save();
             SceneManager.LoadScene("Campus");
         }
 
-        private void Update()
+        private async void Update()
         {
             if (!riftStarted || completed) return;
             passedTime += Time.deltaTime;
@@ -176,7 +177,7 @@ namespace Arkademy.Rift
             {
                 completed = true;
                 ClearAllEnemies();
-                CompleteRift();
+                await CompleteRift();
                 return;
             }
 

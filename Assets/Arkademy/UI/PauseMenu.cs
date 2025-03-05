@@ -36,9 +36,9 @@ namespace Arkademy.UI
             await Session.Save();
         }
 
-        public void OnReturnToTitle()
+        public async void OnReturnToTitle()
         {
-            Session.Save();
+            await Session.Save();
             SceneManager.LoadScene("Title");
         }
     }
