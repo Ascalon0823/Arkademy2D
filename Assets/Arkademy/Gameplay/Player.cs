@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Arkademy.Data;
 using Arkademy.Gameplay.Ability;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Arkademy.Gameplay
@@ -36,10 +37,12 @@ namespace Arkademy.Gameplay
         public AbilityBase holdAbility;
         public AbilityBase tapAbility;
         public bool setupComplete;
+        [TextArea] [SerializeField] private string currentPlayerData;
 
         public void Start()
         {
             _localPlayer = this;
+            currentPlayerData = JsonConvert.SerializeObject(Session.currPlayerRecord);
             if (setupComplete) return;
             Setup();
         }

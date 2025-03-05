@@ -54,18 +54,11 @@ namespace Arkademy.CharacterCreation
             {
                 character = currentCharacter,
                 CreationTime = DateTime.UtcNow,
-                PlayedDuration = new TimeSpan(0),
                 LastPlayed = DateTime.UtcNow
             };
-            if (!await BackendService.CreateCharacter(characterRecord))
-            {
-                Debug.Log("Failed to create character");
-                return;
-            }
             Session.currPlayerRecord.characterRecords.Add(characterRecord);
-            Session.currPlayerRecord.Save();
             Session.currCharacterRecord = characterRecord;
-            characterRecord.LastPlayed = DateTime.UtcNow;
+            await Session.Save();
             SceneManager.LoadScene("Campus");
         }
 

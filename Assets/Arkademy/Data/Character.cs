@@ -13,6 +13,7 @@ namespace Arkademy.Data
         public int xp;
         public int gold;
         public List<EquipmentSlot> equipmentSlots = new List<EquipmentSlot>();
+        public int clearedRift;
 
         [JsonIgnore] private Dictionary<Attribute.Type, Attribute> _attributes;
 

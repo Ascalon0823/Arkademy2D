@@ -64,7 +64,7 @@ namespace Arkademy.UserAuth
             }
 
             Session.currPlayerRecord = user.playerRecord.ToPlayerRecordData();
-            Session.currPlayerRecord.Save();
+            await Session.Save();
             SceneManager.LoadScene("CharacterSelection");
         }
         public async void Confirm()

@@ -151,13 +151,12 @@ namespace Arkademy.Rift
         {
             if (passedTime <= 300)
                 passed = true;
-            Session.currCharacterRecord.PlayedDuration += DateTime.UtcNow - Session.currCharacterRecord.LastPlayed;
             Session.currCharacterRecord.LastPlayed = DateTime.UtcNow;
             Session.currCharacterRecord.character.xp += xpGain;
             Session.currCharacterRecord.character.gold += goldGain;
             if (passed)
             {
-                Session.currCharacterRecord.clearedDifficulty = difficulty + Mathf.CeilToInt(300 - passedTime) / 20;
+                Session.currCharacterRecord.character.clearedRift = difficulty + Mathf.CeilToInt(300 - passedTime) / 20;
             }
 
             Session.Save();

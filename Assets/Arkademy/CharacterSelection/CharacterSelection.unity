@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 4
+  m_ScaleFactor: 2
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -350,17 +350,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5884b15baf5cbc94ca20fbf822afb5ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelScale: 4
+  pixelScale: 2
   useReferedScale: 1
   referenceResolution: {x: 240, y: 240}
   pixelPerUnit: 16
   cam: {fileID: 1796939461}
   camRect:
     serializedVersion: 2
-    x: -5.859375
-    y: -10.421875
-    width: 11.71875
-    height: 20.84375
+    x: -7.328125
+    y: -13.78125
+    width: 14.65625
+    height: 27.5625
 --- !u!114 &1796939459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +448,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.421875
+  orthographic size: 13.78125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1005,7 +1005,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 624936185064480748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7670234582600410587}
+        m_TargetAssemblyTypeName: Arkademy.CharacterSelection.CharacterSelectionMenu,
+          Assembly-CSharp
+        m_MethodName: OnConfirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &3703490568143710353
 CanvasRenderer:
   m_ObjectHideFlags: 0

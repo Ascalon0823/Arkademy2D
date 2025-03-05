@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Arkademy.Backend;
 using Arkademy.Data;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using CharacterRecord = Arkademy.Data.CharacterRecord;
 
 namespace Arkademy.CharacterSelection
 {
@@ -21,10 +24,9 @@ namespace Arkademy.CharacterSelection
         private void Awake()
         {
             confirm.interactable = false;
-            confirm.onClick.AddListener(OnConfirm);
             cancel.onClick.AddListener(OnCancel);
             var characters = Session.currPlayerRecord.characterRecords;
-            SetCharacters(characters);
+            SetCharacters(characters.OrderByDescending(x=>x.LastPlayed).ToList());
             
         }
 
@@ -32,10 +34,11 @@ namespace Arkademy.CharacterSelection
         {
             SceneManager.LoadScene("Arkademy/Title/Title");
         }
-        public void OnConfirm()
+        public async void OnConfirm()
         {
             Session.currCharacterRecord = currentSelection.record;
             currentSelection.record.LastPlayed = DateTime.UtcNow;
+            await Session.Save();
             SceneManager.LoadScene("Campus");
         }
 
@@ -66,7 +69,6 @@ namespace Arkademy.CharacterSelection
 
             foreach (var record in records)
             {
-                Debug.Log(JsonConvert.SerializeObject(record));
                 var item = Instantiate(itemPrefab, container);
                 item.Setup(record);
                 _spawnedListItems.Add(item);

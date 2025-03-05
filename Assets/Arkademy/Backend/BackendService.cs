@@ -1,14 +1,11 @@
 using System;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using Application = UnityEngine.Device.Application;
-using AuthenticationHeaderValue = System.Net.Http.Headers.AuthenticationHeaderValue;
 
 namespace Arkademy.Backend
 {
@@ -109,6 +106,7 @@ namespace Arkademy.Backend
                 Debug.LogError(await result.Content.ReadAsStringAsync());
                 return false;
             }
+
             return true;
         }
 
@@ -124,34 +122,28 @@ namespace Arkademy.Backend
 
             return JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
         }
-
-        public static async Task<bool> CreateCharacter(Data.CharacterRecord record)
+        
+        public static async Task<PlayerRecord> UpdatePlayer(Data.PlayerRecord record)
         {
-            var serverRecord = new CharacterRecord
+            var serverRecord = record.ToServerPlayerRecord();
+            var payload = JsonConvert.SerializeObject(serverRecord, new JsonSerializerSettings
             {
-                displayName = record.character.displayName,
-                CreationTime = record.CreationTime,
-                LastPlayedTime = record.LastPlayed
-            };
-            var data = JToken.FromObject(record.character);
-            data["clearedDifficulty"] = record.clearedDifficulty;
-            serverRecord.Data = data;
-            
+                DateFormatString = "yyyy-MM-ddTH:mm:ssK"
+            });
+            Debug.Log(payload);
             var result = await Service._client
-                .PostAsync("createCharacter", new StringContent(
-                    JsonConvert.SerializeObject(serverRecord, new JsonSerializerSettings
-                    {
-                        DateFormatString = "yyyy-MM-ddTH:mm:ss.fffK"
-                    }),
+                .PatchAsync("player", new StringContent(payload,
                     Encoding.UTF8,
                     "application/json"));
+
             if (!result.IsSuccessStatusCode)
             {
                 Debug.LogError(await result.Content.ReadAsStringAsync());
-                return false;
+                return null;
             }
+
             Debug.Log(await result.Content.ReadAsStringAsync());
-            return true;
+            return JsonConvert.DeserializeObject<PlayerRecord>(await result.Content.ReadAsStringAsync());
         }
     }
 }

@@ -20,15 +20,12 @@ namespace Arkademy.Backend
     [Serializable]
     public class PlayerRecord
     {
-        public DateTime CreationTime;
-        public DateTime LastPlayedTime;
         public CharacterRecord[] characters;
     }
 
     [Serializable]
     public class CharacterRecord
     {
-        public string displayName;
         public DateTime CreationTime;
         public DateTime LastPlayedTime;
         public JToken Data;
@@ -46,12 +43,29 @@ namespace Arkademy.Backend
             };
         }
 
+        public static PlayerRecord ToServerPlayerRecord(this Data.PlayerRecord playerRecord)
+        {
+            return new PlayerRecord
+            {
+                characters = playerRecord.characterRecords.Select(x => x.ToServerCharacterRecord()).ToArray()
+            };
+        }
+
+        public static CharacterRecord ToServerCharacterRecord(this Data.CharacterRecord characterRecord)
+        {
+            return new CharacterRecord
+            {
+                LastPlayedTime = characterRecord.LastPlayed,
+                CreationTime = characterRecord.CreationTime,
+                Data = JToken.FromObject(characterRecord.character)
+            };
+        }
+
         public static Data.CharacterRecord ToCharacterRecordData(this CharacterRecord characterRecord)
         {
             return new Data.CharacterRecord
             {
                 character = characterRecord.Data.ToObject<Character>(),
-                clearedDifficulty = characterRecord.Data["clearedDifficulty"]?.ToObject<int>() ?? 0,
                 CreationTime = characterRecord.CreationTime,
                 LastPlayed = characterRecord.LastPlayedTime
             };

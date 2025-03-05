@@ -56,7 +56,7 @@ namespace Arkademy.Campus.UI
                 Destroy(b.gameObject);
             }
             _spawnedButtons.Clear();
-            var maxButton = Session.currCharacterRecord.clearedDifficulty + 1;
+            var maxButton = Session.currCharacterRecord.character.clearedRift + 1;
             for (var i = maxButton; i >= 0; i--)
             {
                 var level = i;

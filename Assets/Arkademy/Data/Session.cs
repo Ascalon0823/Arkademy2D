@@ -1,4 +1,6 @@
 using System.Linq;
+using System.Threading.Tasks;
+using Arkademy.Backend;
 using UnityEngine.Device;
 using UnityEngine.SceneManagement;
 
@@ -44,15 +46,19 @@ namespace Arkademy.Data
                         return null;
                     }
 
-                    _characterRecord = player.characterRecords.OrderBy(x => x.LastPlayed).First();
+                    _characterRecord = player.characterRecords.OrderByDescending(x => x.LastPlayed).First();
                 }
                 return _characterRecord;
             }
             set => _characterRecord = value;
         }
         
-        public static void Save()
+        public static async Task Save()
         {
+            if (await BackendService.UpdatePlayer(currPlayerRecord) == null)
+            {
+                return;
+            }
             currPlayerRecord.Save();
         }
     }

@@ -31,9 +31,9 @@ namespace Arkademy.UI
         {
             Toggle(false);
         }
-        public void OnSave()
+        public async void OnSave()
         {
-            Session.Save();
+            await Session.Save();
         }
 
         public void OnReturnToTitle()
