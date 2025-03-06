@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Arkademy.Backend
 {
@@ -16,6 +16,40 @@ namespace Arkademy.Backend
 
         private static BackendService _instance;
 
+        public Uri BaseUrl;
+        public string Token;
+
+        public async Task<T> Get<T>(string url)
+        {
+            var uri = new Uri(BaseUrl, new Uri(url,UriKind.Relative));
+            var request = UnityWebRequest.Get(uri);
+            request.SetRequestHeader("Authorization", Token);
+            await request.SendWebRequest();
+            var result = request.result;
+            if (result != UnityWebRequest.Result.Success)
+            {
+                return default;
+            }
+            return JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+        }
+
+        public async Task<UnityWebRequest> Post(string url, string payload)
+        {
+            var request = UnityWebRequest.Post(new Uri(BaseUrl, new Uri(url,UriKind.Relative)), payload, "application/json");
+            request.SetRequestHeader("Authorization", Token);
+            await request.SendWebRequest();
+            return request;
+        }
+
+        public async Task<UnityWebRequest> Patch(string url, string payload)
+        {
+            var request = UnityWebRequest.Post(new Uri(BaseUrl, new Uri(url,UriKind.Relative)), payload, "application/json");
+            request.method = "PATCH";
+            request.SetRequestHeader("Authorization", Token);
+            await request.SendWebRequest();
+            return request;
+            
+        }
         private static BackendService Service
         {
             get
@@ -28,25 +62,14 @@ namespace Arkademy.Backend
                 var token =
                     TryGetLocalToken(out var cached) ? cached : "";
                 if (!string.IsNullOrEmpty(envConf.overrideToken)) token = envConf.overrideToken;
-                var httpClient = new HttpClient
-                {
-                    BaseAddress = new Uri(envConf.baseURL)
-                };
-
                 var service = new BackendService
                 {
-                    _client = httpClient
+                    BaseUrl = new Uri(envConf.baseURL),
+                    Token = token
                 };
-                service.AddToken(token);
                 _instance = service;
                 return _instance;
             }
-        }
-
-        private void AddToken(string token)
-        {
-            _client.DefaultRequestHeaders.Remove("Authorization");
-            _client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", token);
         }
 
         private static bool TryGetLocalToken(out string token)
@@ -58,26 +81,25 @@ namespace Arkademy.Backend
             return true;
         }
 
-        private HttpClient _client;
-
         public static async Task<bool> Login(string username, string password)
         {
             var payload = new JObject();
             payload["username"] = username;
             payload["password"] = password;
-            var result = await Service._client.PostAsync("login",
-                new StringContent(
-                    payload.ToString(),
-                    Encoding.UTF8,
-                    "application/json"
-                ));
-            if (!result.IsSuccessStatusCode)
+            var result = await Service.Post("login", payload.ToString());
+            // var result = await Service._client.PostAsync("login",
+            //     new StringContent(
+            //         payload.ToString(),
+            //         Encoding.UTF8,
+            //         "application/json"
+            //     ));
+            if (result.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError(await result.Content.ReadAsStringAsync());
+                Debug.LogError(result.error);
                 return false;
             }
 
-            var tokenJson = JObject.Parse(await result.Content.ReadAsStringAsync());
+            var tokenJson = JObject.Parse(result.downloadHandler.text);
             if (!tokenJson.TryGetValue("token", out var tokenObj))
             {
                 Debug.LogError("Token not found in result");
@@ -85,7 +107,7 @@ namespace Arkademy.Backend
             }
 
             var token = tokenObj.ToString();
-            Service.AddToken(tokenObj.ToString());
+            Service.Token = token;
             PlayerPrefs.SetString("PlayerToken", token);
             Debug.Log("Login successfully");
             return true;
@@ -96,14 +118,10 @@ namespace Arkademy.Backend
             var payload = new JObject();
             payload["username"] = username;
             payload["password"] = password;
-            var result = await Service._client
-                .PostAsync("register", new StringContent(
-                    payload.ToString(),
-                    Encoding.UTF8,
-                    "application/json"));
-            if (!result.IsSuccessStatusCode)
+            var result = await Service.Post("register", payload.ToString());
+            if (result.result!=UnityWebRequest.Result.Success)
             {
-                Debug.LogError(await result.Content.ReadAsStringAsync());
+                Debug.LogError(result.error);
                 return false;
             }
 
@@ -112,17 +130,10 @@ namespace Arkademy.Backend
 
         public static async Task<User> GetUser()
         {
-            var result = await Service._client.GetAsync("user");
-            if (!result.IsSuccessStatusCode)
-            {
-                Debug.Log(JsonConvert.SerializeObject(result.RequestMessage));
-                Debug.LogError(await result.Content.ReadAsStringAsync());
-                return null;
-            }
-
-            return JsonConvert.DeserializeObject<User>(await result.Content.ReadAsStringAsync());
+            var result = await Service.Get<User>("user");
+            return result;
         }
-        
+
         public static async Task<PlayerRecord> UpdatePlayer(Data.PlayerRecord record)
         {
             var serverRecord = record.ToServerPlayerRecord();
@@ -131,19 +142,14 @@ namespace Arkademy.Backend
                 DateFormatString = "yyyy-MM-ddTH:mm:ssK"
             });
             Debug.Log(payload);
-            var result = await Service._client
-                .PatchAsync("player", new StringContent(payload,
-                    Encoding.UTF8,
-                    "application/json"));
+            var result = await Service.Patch("player", payload);
 
-            if (!result.IsSuccessStatusCode)
+            if (result.result!=UnityWebRequest.Result.Success)
             {
-                Debug.LogError(await result.Content.ReadAsStringAsync());
+                Debug.LogError(result.error);
                 return null;
             }
-
-            Debug.Log(await result.Content.ReadAsStringAsync());
-            return JsonConvert.DeserializeObject<PlayerRecord>(await result.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<PlayerRecord>(result.downloadHandler.text);
         }
     }
 }
