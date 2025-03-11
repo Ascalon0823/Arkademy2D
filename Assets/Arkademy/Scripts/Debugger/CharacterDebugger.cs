@@ -14,7 +14,7 @@ namespace Arkademy.Debugger
         private void Start()
         {
             if(!Application.isEditor)Destroy(this);
-            displays = character.data.attributes.Select(x => new AttrDisplay(x.Value)).ToList();
+            displays = character.Attributes.GetAll().Select(x => new AttrDisplay(x)).ToList();
         }
 
         private void LateUpdate()

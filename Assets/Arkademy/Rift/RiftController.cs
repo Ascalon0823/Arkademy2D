@@ -87,30 +87,30 @@ namespace Arkademy.Rift
                 category = Attribute.Modifier.Category.Multiplication,
                 value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 10f) * 10000)
             };
-            enemy.data[Attribute.Type.Life].AddMod(difficultyLifeModifier);
-            enemy.data[Attribute.Type.Attack].AddMod(difficultyAttackModifier);
+            enemy.Attributes.AddMod(difficultyLifeModifier);
+            enemy.Attributes.AddMod(difficultyAttackModifier);
             if (isElite)
             {
-                enemy.data[Attribute.Type.Life].AddMod(new Attribute.Modifier
+                enemy.Attributes.AddMod(new Attribute.Modifier
                 {
                     attrType = Attribute.Type.Life,
                     category = Attribute.Modifier.Category.Multiplication,
                     value = 30000,
                 });
 
-                enemy.data[Attribute.Type.Attack].AddMod(new Attribute.Modifier
+                enemy.Attributes.AddMod(new Attribute.Modifier
                 {
                     attrType = Attribute.Type.Attack,
                     category = Attribute.Modifier.Category.Multiplication,
                     value = 20000
                 });
-                enemy.data[Attribute.Type.AttackSpeed].AddMod(new Attribute.Modifier
+                enemy.Attributes.AddMod(new Attribute.Modifier
                 {
                     attrType = Attribute.Type.AttackSpeed,
                     category = Attribute.Modifier.Category.Multiplication,
                     value = 15000
                 });
-                enemy.data[Attribute.Type.MovSpeed].AddMod(new Attribute.Modifier
+                enemy.Attributes.AddMod(new Attribute.Modifier
                 {
                     attrType = Attribute.Type.MovSpeed,
                     category = Attribute.Modifier.Category.Multiplication,

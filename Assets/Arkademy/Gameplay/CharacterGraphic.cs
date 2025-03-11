@@ -23,7 +23,7 @@ namespace Arkademy.Gameplay
                 spriteRenderer.flipX = Vector2.Dot(character.facing, Vector2.left) >= 0 ? !facingLeft : facingLeft;
             }
 
-            animator.SetFloat("walkSpeed", character.data.Get(Attribute.Type.MovSpeed) / walkAnimationDistance);
+            animator.SetFloat("walkSpeed", character.Attributes.Get(Attribute.Type.MovSpeed) / walkAnimationDistance);
             animator.SetFloat("attackSpeed", attackSpeed);
             animator.SetBool(Walking, character.IsMoving() && !character.isDead);
             animator.SetBool("dead", character.isDead);

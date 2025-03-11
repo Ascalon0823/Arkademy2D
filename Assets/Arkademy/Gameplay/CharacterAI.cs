@@ -28,7 +28,7 @@ namespace Arkademy.Gameplay
         public Character[] FindEnemies()
         {
             var colliders = Physics2D.OverlapCircleAll(character.transform.position,
-                character.data.Get(Attribute.Type.Vision));
+                character.Attributes.Get(Attribute.Type.Vision));
             return colliders.Select(x => x.GetCharacter(out var e) ? e : null)
                 .Where(x => x && x.faction != character.faction && !x.isDead)
                 .ToArray();

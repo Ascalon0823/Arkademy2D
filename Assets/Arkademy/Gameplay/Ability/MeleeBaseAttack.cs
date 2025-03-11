@@ -9,12 +9,12 @@ namespace Arkademy.Gameplay.Ability
         public int triggerCount;
         public override float GetRange()
         {
-            return user.data.Get(Attribute.Type.Range);
+            return user.Attributes.Get(Attribute.Type.Range);
         }
 
-        public override float GetUseTime()
+        public override float GetUseTime()          
         {
-            return 1f/user.data.Get(Attribute.Type.AttackSpeed);
+            return 1f/user.Attributes.Get(Attribute.Type.AttackSpeed);
         }
 
         public override void Use(AbilityEventData eventData, bool canceled = false)
@@ -32,7 +32,7 @@ namespace Arkademy.Gameplay.Ability
             {
                 if (c.GetCharacter(out var chara) && chara.faction != user.faction && payload.triggerCount>0)
                 {
-                    chara.TakeDamage(new DamageData(user.data.GetBase(Attribute.Type.Attack)));
+                    chara.TakeDamage(new DamageData(user.Attributes.GetBase(Attribute.Type.Attack)));
                     chara.KnockBack(direction.normalized * 1f);
                     payload.trigger.Ignores.Add(c);
                     payload.triggerCount--;

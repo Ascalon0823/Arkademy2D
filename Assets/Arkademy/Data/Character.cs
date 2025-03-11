@@ -6,6 +6,17 @@ using Newtonsoft.Json;
 namespace Arkademy.Data
 {
     [Serializable]
+    public class Investment
+    {
+        public int xp;
+    }
+
+    [Serializable]
+    public class AttrInvestment:Investment
+    {
+        public Attribute.Type type;
+    }
+    [Serializable]
     public class Character
     {
         public string displayName;
@@ -14,6 +25,7 @@ namespace Arkademy.Data
         public int gold;
         public List<EquipmentSlot> equipmentSlots = new List<EquipmentSlot>();
         public int clearedRift;
+        public List<AttrInvestment> attrInvestments = new List<AttrInvestment>();
 
         [JsonIgnore] private Dictionary<Attribute.Type, Attribute> _attributes;
 

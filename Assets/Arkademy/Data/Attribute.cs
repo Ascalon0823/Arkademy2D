@@ -15,7 +15,7 @@ namespace Arkademy.Data
             Chance
         }
 
-        
+        public string name;
         public Type type;
         public CalculationType calType;
         public int value;

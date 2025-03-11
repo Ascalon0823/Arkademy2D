@@ -20,7 +20,7 @@ namespace Arkademy.UI
         public void Update()
         {
             group.alpha = character.isDead ? 0 : 1;
-            bar.fillAmount = character.data.GetCurr(attributeType) / character.data.Get(attributeType,1f);
+            bar.fillAmount = character.Attributes.GetCurr(attributeType) / Mathf.Max(character.Attributes.Get(attributeType),1f);
             var target = Mathf.Lerp(bg.fillAmount, bar.fillAmount, Time.deltaTime * bgSpeed);
             if (Mathf.Abs(target - bar.fillAmount) < 0.1f * Time.deltaTime)
             {

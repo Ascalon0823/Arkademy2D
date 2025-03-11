@@ -16,6 +16,18 @@ namespace Arkademy.Data
     public class Equipment : Item
     {
         public List<Attribute.Modifier> additional = new List<Attribute.Modifier>();
+
+        public List<Attribute.Modifier> GetAllMods()
+        {
+            var result = new List<Attribute.Modifier>();
+            var baseItem = ItemBase.GetItemBase(baseName);
+            if (baseItem != null)
+            {
+                result.AddRange(baseItem.equipmentModifiers);
+            }
+            result.AddRange(additional);
+            return result;
+        }
     }
 
     [Serializable]

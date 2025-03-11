@@ -12,6 +12,7 @@ namespace Arkademy.Data
             Defense,
             Vision,
             AttackSpeed,
+            AttackTargetCount
         }
     }
 }

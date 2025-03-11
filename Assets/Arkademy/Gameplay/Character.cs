@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Arkademy.CharacterCreation;
 using Arkademy.Data;
 using Arkademy.Gameplay.Ability;
@@ -12,6 +13,8 @@ using Race = Arkademy.Data.Race;
 
 namespace Arkademy.Gameplay
 {
+    
+
     public class Character : MonoBehaviour
     {
         public Data.Character data;
@@ -28,6 +31,8 @@ namespace Arkademy.Gameplay
         public UnityEvent<DamageData> OnDeath;
         public bool setupCompleted;
 
+        public Attributes Attributes;
+
         public static Character Create(Race race, Data.Character data, int newFaction)
         {
             if (race == null) return null;
@@ -39,6 +44,7 @@ namespace Arkademy.Gameplay
         public void SetupAs(Race race, Data.Character newData, int newFaction)
         {
             data = newData;
+            Attributes = new Attributes(race,data);
             graphic.animator.runtimeAnimatorController = race.animationController;
             graphic.facingLeft = race.facingLeft;
             graphic.walkAnimationDistance = 4;
@@ -48,11 +54,6 @@ namespace Arkademy.Gameplay
             {
                 var instance = Instantiate(ability, transform);
                 instance.GiveToUser(this);
-            }
-
-            foreach (var slot in newData.equipmentSlots)
-            {
-                newData.Setup(slot);
             }
             setupCompleted = true;
         }
@@ -78,7 +79,7 @@ namespace Arkademy.Gameplay
         public void TakeDamage(DamageData damage)
         {
             graphic.SetHit();
-            var life = data[Attribute.Type.Life];
+            var life = Attributes[Attribute.Type.Life];
             life.current = Mathf.Max(0, life.current - damage.amount);
             isDead = life.current == 0;
             if (isDead)
@@ -91,7 +92,7 @@ namespace Arkademy.Gameplay
 
         public void KnockBack(Vector2 displacement)
         {
-           SetPosition(body.position + displacement);
+            SetPosition(body.position + displacement);
         }
 
         private void FixedUpdate()
@@ -102,7 +103,7 @@ namespace Arkademy.Gameplay
 
         private void HandleMove()
         {
-            velocity = wantToMove * data.Get(Attribute.Type.MovSpeed);
+            velocity = wantToMove * Attributes.Get(Attribute.Type.MovSpeed);
             if (velocity.sqrMagnitude > 0)
             {
                 facing = velocity.normalized;
