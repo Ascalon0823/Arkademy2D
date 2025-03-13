@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Arkademy.Data
 {
@@ -43,6 +44,7 @@ namespace Arkademy.Data
     {
         private static Dictionary<string, ItemBase> _itemCache = new Dictionary<string, ItemBase>();
         public string baseName;
+        public Sprite icon;
         public bool isEquipment;
         public List<Attribute.Modifier> equipmentModifiers = new List<Attribute.Modifier>();
         public int slot;

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemBase:
     baseName: WoodSword
+    icon: {fileID: -1537304294, guid: aff037da44459934d8265dbcba2fa859, type: 3}
     isEquipment: 1
     equipmentModifiers:
     - attrType: 3

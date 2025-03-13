@@ -8,7 +8,7 @@ namespace Arkademy.Data
         {
             Type.Life
         };
-        public int current;
+        public long current;
 
         public bool IsResource()
         {
@@ -20,7 +20,7 @@ namespace Arkademy.Data
             return ToRealValue(current);
         }
 
-        public int BaseCurr()
+        public long BaseCurr()
         {
             return current;
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Arkademy.Data;
 using Arkademy.Gameplay;
+using Arkademy.Gameplay.Pickup;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Attribute = Arkademy.Data.Attribute;
@@ -35,6 +36,9 @@ namespace Arkademy.Rift
         [SerializeField] private int xpGain;
         [SerializeField] private int goldGain;
         [SerializeField] private float progressMultiplier;
+
+        [SerializeField] private Healer[] healersPickupPrefabs;
+        [SerializeField] private float healerDropChance;
 
         private void Awake()
         {
@@ -87,6 +91,12 @@ namespace Arkademy.Rift
                 category = Attribute.Modifier.Category.Multiplication,
                 value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 10f) * 10000)
             };
+            enemy.Attributes.AddMod(new Attribute.Modifier
+            {
+                attrType = Attribute.Type.Vision,
+                category = Attribute.Modifier.Category.Addition,
+                value = 10000
+            });
             enemy.Attributes.AddMod(difficultyLifeModifier);
             enemy.Attributes.AddMod(difficultyAttackModifier);
             if (isElite)
@@ -127,12 +137,27 @@ namespace Arkademy.Rift
                 goldGain += Mathf.CeilToInt(Random.Range(0.5f, 1.5f) * 10 * (1 + difficulty) * (isElite ? 2 : 1));
                 spawnedEnemies.Remove(enemy);
                 deadEnemies.Add(enemy);
+                var dropHealer = Random.Range(0f, 1f) < healerDropChance || isElite;
+                if (dropHealer)
+                {
+                    DropHealers(enemy.transform.position, Random.Range(1, isElite ? 5 : 1));
+                }
             });
             spawnedEnemies.Add(enemy);
             var ai = enemy.GetOrAddComponent<CharacterAI>();
             ai.autoMove = true;
             ai.autoUseAbility = true;
             lastSpawn = Time.timeSinceLevelLoad;
+        }
+
+        private void DropHealers(Vector3 pos, int amount)
+        {
+            for (var i = 0; i < amount; i++)
+            {
+                var healerPrefab = healersPickupPrefabs[Random.Range(0, healersPickupPrefabs.Length)];
+                var healer = Instantiate(healerPrefab, pos + (Vector3)Random.insideUnitCircle, Quaternion.identity);
+                healer.healAmount += Mathf.CeilToInt(healer.healAmount * (difficulty * 0.1f));
+            }
         }
 
         private void ClearAllEnemies()

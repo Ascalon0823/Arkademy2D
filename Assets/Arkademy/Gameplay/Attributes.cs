@@ -130,7 +130,7 @@ namespace Arkademy.Gameplay
             return default;
         }
 
-        public int GetBase(Attribute.Type type)
+        public long GetBase(Attribute.Type type)
         {
             if (_attrs.TryGetValue(type, out var attr))
             {
@@ -147,7 +147,7 @@ namespace Arkademy.Gameplay
             }
             return default;
         }
-        public int GetBaseCurr(Attribute.Type type)
+        public long GetBaseCurr(Attribute.Type type)
         {
             if (_attrs.TryGetValue(type, out var attr))
             {

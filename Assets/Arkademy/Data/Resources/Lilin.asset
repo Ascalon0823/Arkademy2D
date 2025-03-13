@@ -20,82 +20,94 @@ MonoBehaviour:
       calType: 0
       value: 10000
       current: 10000
-      abbrev: HP
+      abbrev: LIFE
       icon: {fileID: -1435901422, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
       canInvest: 1
       returnRate: 500
       diminishingReturn: 9950
       initialInvestReq: 100
       investReqIncrement: 100
-    - name: 
+    - name: Move Speed
       type: 2
       calType: 0
       value: 400
       current: 0
-      abbrev: 
+      abbrev: M.SPD
       icon: {fileID: 36524170, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
       canInvest: 1
       returnRate: 10
       diminishingReturn: 9900
       initialInvestReq: 500
       investReqIncrement: 250
-    - name: 
+    - name: Attack
       type: 3
       calType: 0
       value: 1000
       current: 0
-      abbrev: 
+      abbrev: ATK
       icon: {fileID: -700397270, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
       canInvest: 1
       returnRate: 100
       diminishingReturn: 10000
       initialInvestReq: 500
       investReqIncrement: 300
-    - name: 
+    - name: Attack Range
       type: 4
       calType: 0
       value: 100
       current: 0
-      abbrev: 
+      abbrev: A.RAN
       icon: {fileID: 332399191, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
       canInvest: 0
       returnRate: 0
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
-    - name: 
+    - name: Defense
       type: 5
       calType: 0
       value: 100
       current: 0
-      abbrev: 
+      abbrev: DEF
       icon: {fileID: 63651900, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
       canInvest: 0
       returnRate: 0
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
-    - name: 
+    - name: Vision
       type: 6
       calType: 0
       value: 1000
       current: 0
-      abbrev: 
+      abbrev: VIS
       icon: {fileID: -1092600621, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
       canInvest: 0
       returnRate: 0
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
-    - name: 
+    - name: Attack Speed
       type: 7
       calType: 1
       value: 10000
       current: 0
-      abbrev: 
+      abbrev: A.SPD
       icon: {fileID: 271495957, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
       canInvest: 1
       returnRate: 500
+      diminishingReturn: 9500
+      initialInvestReq: 1000
+      investReqIncrement: 600
+    - name: Pickup Range
+      type: 9
+      calType: 0
+      value: 200
+      current: 0
+      abbrev: P.RAN
+      icon: {fileID: 271495957, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
+      canInvest: 1
+      returnRate: 10
       diminishingReturn: 9500
       initialInvestReq: 1000
       investReqIncrement: 600
@@ -194,6 +206,17 @@ MonoBehaviour:
       current: 0
     baseValue: 10000
     value: 1
+    current: 0
+    baseCurrent: 0
+    modifiers: []
+  - attribute:
+      name: 
+      type: 9
+      calType: 0
+      value: 200
+      current: 0
+    baseValue: 200
+    value: 2
     current: 0
     baseCurrent: 0
     modifiers: []

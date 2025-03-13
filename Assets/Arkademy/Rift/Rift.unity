@@ -328,10 +328,16 @@ MonoBehaviour:
   spawnInterval: 1
   completed: 0
   lastSpawn: 0
+  eliteCounter: 0
   passed: 0
   xpGain: 0
   goldGain: 0
   progressMultiplier: 1
+  healersPickupPrefabs:
+  - {fileID: 5230495757804811643, guid: 2c6af561ba55f49aa986bd94f1b44313, type: 3}
+  - {fileID: 5893536033681471637, guid: 26e2b5b314793499a8e010c0749f6938, type: 3}
+  - {fileID: 834376972923330484, guid: 41174d4e99c12481593b1d63003480bc, type: 3}
+  healerDropChance: 0.1
 --- !u!1 &2049944052
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 3
+  m_ScaleFactor: 2
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0

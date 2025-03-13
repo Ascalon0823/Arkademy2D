@@ -4,6 +4,7 @@ using System.Linq;
 using Arkademy.CharacterCreation;
 using Arkademy.Data;
 using Arkademy.Gameplay.Ability;
+using Arkademy.Gameplay.Pickup;
 using Arkademy.UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -80,16 +81,24 @@ namespace Arkademy.Gameplay
         {
             graphic.SetHit();
             var life = Attributes[Attribute.Type.Life];
-            life.current = Mathf.Max(0, life.current - damage.amount);
+            life.current = Math.Max(0, life.current - damage.amount);
             isDead = life.current == 0;
             if (isDead)
             {
                 OnDeath?.Invoke(damage);
             }
 
-            DamageCanvas.AddTextTo(Player.Camera, transform, Mathf.CeilToInt(damage.amount / 100f).ToString());
+            DamageCanvas.AddTextTo(Player.Camera, transform, 
+                $"<color=#{ColorUtility.ToHtmlStringRGBA(Color.white)}> {Mathf.CeilToInt(damage.amount / 100f).ToString()}</color>");
         }
 
+        public void Heal(int amount)
+        {
+            var life = Attributes[Attribute.Type.Life];
+            life.current = Math.Min(life.BaseValue(), life.current + amount);
+            DamageCanvas.AddTextTo(Player.Camera, transform, 
+                $"<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}> {Mathf.CeilToInt(amount / 100f).ToString()}</color>");
+        }
         public void KnockBack(Vector2 displacement)
         {
             SetPosition(body.position + displacement);
@@ -99,8 +108,22 @@ namespace Arkademy.Gameplay
         {
             HandleDeath();
             HandleMove();
+            HandlePickup();
         }
 
+        private void HandlePickup()
+        {
+            var range = Attributes.Get(Attribute.Type.PickupRange);
+            if (range == 0f) return;
+            var pickups = Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Pickup"));
+            if (pickups == null || pickups.Length == 0) return;
+            foreach (var pickup in pickups)
+            {
+                var behaviour = pickup.GetComponent<PickupBase>();
+                if(!behaviour)return;
+                behaviour.PickupBy(this);
+            }
+        }
         private void HandleMove()
         {
             velocity = wantToMove * Attributes.Get(Attribute.Type.MovSpeed);

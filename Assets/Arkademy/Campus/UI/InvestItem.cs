@@ -50,7 +50,7 @@ namespace Arkademy.Campus.UI
             level = _profile.GetInvestLevel(_investment.xp);
             reduce.interactable = _investment.xp > originalInvestment;
             add.interactable = Session.currCharacterRecord.character.xp > nextCost;
-            attrDisplay.text = $"{_profile.type.ToString()}[{level}]: {_attribute.Value()}";
+            attrDisplay.text = $"{_profile.abbrev}[{level}]: {_attribute.Value()}";
         }
 
         public void ResetInvestment()

@@ -66,7 +66,7 @@ namespace Arkademy.Data
             return this[t]?.Value() ?? defaultValue;
         }
 
-        public int GetBase(Attribute.Type t, int defaultValue = 0)
+        public long GetBase(Attribute.Type t, long defaultValue = 0)
         {
             return this[t]?.BaseValue() ?? defaultValue;
         }
@@ -76,7 +76,7 @@ namespace Arkademy.Data
             return this[t]?.Curr() ?? defaultValue;
         }
 
-        public int GetBaseCurr(Attribute.Type t, int defaultValue = 0)
+        public long GetBaseCurr(Attribute.Type t, long defaultValue = 0)
         {
             return this[t]?.BaseCurr() ?? defaultValue;
         }

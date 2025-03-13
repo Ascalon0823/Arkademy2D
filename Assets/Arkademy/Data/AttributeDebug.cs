@@ -8,10 +8,10 @@ namespace Arkademy.Data
     public class AttrDisplay
     {
         public Attribute attribute;
-        public int baseValue;
+        public long baseValue;
         public float value;
         public float current;
-        public int baseCurrent;
+        public long baseCurrent;
         public List<Attribute.Modifier> modifiers;
 
         public AttrDisplay(Attribute attribute)

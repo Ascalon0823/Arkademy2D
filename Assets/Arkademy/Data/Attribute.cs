@@ -18,7 +18,7 @@ namespace Arkademy.Data
         public string name;
         public Type type;
         public CalculationType calType;
-        public int value;
+        public long value;
       
         public Attribute Copy()
         {
@@ -30,7 +30,7 @@ namespace Arkademy.Data
                 current = current
             };
         }
-        private int CalculateFlat(int baseValue)
+        private long CalculateFlat(long baseValue)
         {
             if (Modifiers.TryGetValue(Modifier.Category.Addition, out var list))
             {
@@ -52,7 +52,7 @@ namespace Arkademy.Data
             return baseValue;
         }
 
-        private int CalculateChance(int baseValue)
+        private long CalculateChance(long baseValue)
         {
             baseValue = 10000 - baseValue;
             if (Modifiers.TryGetValue(Modifier.Category.Addition, out var list))
@@ -83,7 +83,7 @@ namespace Arkademy.Data
         }
         
 
-        private float ToRealValue(int v)
+        private float ToRealValue(long v)
         {
             switch (calType)
             {
@@ -97,7 +97,7 @@ namespace Arkademy.Data
             }
         }
 
-        public int BaseValue(bool original = false)
+        public long BaseValue(bool original = false)
         {
             if (original) return value;
             var final = value;
