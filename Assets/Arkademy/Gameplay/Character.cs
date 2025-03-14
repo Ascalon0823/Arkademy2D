@@ -103,6 +103,7 @@ namespace Arkademy.Gameplay
         {
             SetPosition(body.position + displacement);
         }
+        
 
         private void FixedUpdate()
         {
@@ -151,6 +152,17 @@ namespace Arkademy.Gameplay
         {
             graphic.attackSpeed = 1f / attackTime;
             graphic.SetAttack();
+        }
+
+        public void ChangeEquipment(Equipment equipment)
+        {
+            var baseItem = ItemBase.GetItemBase(equipment.baseName);
+            if (baseItem == null || !baseItem.isEquipment) return;
+            var slot = data.equipmentSlots.FirstOrDefault(x => x.slot == baseItem.slot);
+            if (slot == null) return;
+            data.AddToInventory(slot.equipment);
+            slot.equipment = equipment;
+            Attributes.UpdateEquipment(slot);
         }
     }
 }
