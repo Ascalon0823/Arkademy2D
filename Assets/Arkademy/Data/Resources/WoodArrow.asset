@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14b5b7374b87421cbb6ef76843b91108, type: 3}
-  m_Name: WoodSword
+  m_Name: WoodArrow
   m_EditorClassIdentifier: 
   itemBase:
-    baseName: WoodSword
-    icon: {fileID: -1537304294, guid: aff037da44459934d8265dbcba2fa859, type: 3}
-    isEquipment: 1
+    baseName: WoodArrow
+    icon: {fileID: -15767776, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+    isEquipment: 0
     equipmentModifiers:
-    - attrType: 3
-      category: 2
-      value: 2000
     - attrType: 4
-      category: 2
-      value: 150
+      category: 0
+      value: 100
+    - attrType: 3
+      category: 0
+      value: 500
     slot: 0
     tags:
       tags: []
-    ammunitionRequirements: []
+    ammunitionRequirements:
+    - Ammunition

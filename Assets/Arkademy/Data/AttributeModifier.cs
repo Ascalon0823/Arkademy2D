@@ -13,7 +13,8 @@ namespace Arkademy.Data
             public enum Category
             {
                 Addition,
-                Multiplication
+                Multiplication,
+                Replace
             }
 
             public Type attrType;

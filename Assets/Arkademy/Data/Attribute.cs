@@ -19,7 +19,7 @@ namespace Arkademy.Data
         public Type type;
         public CalculationType calType;
         public long value;
-      
+
         public Attribute Copy()
         {
             return new Attribute
@@ -30,9 +30,15 @@ namespace Arkademy.Data
                 current = current
             };
         }
+
         private long CalculateFlat(long baseValue)
         {
-            if (Modifiers.TryGetValue(Modifier.Category.Addition, out var list))
+            if (Modifiers.TryGetValue(Modifier.Category.Replace, out var list))
+            {
+                baseValue = list.Max(x => x.value);
+            }
+
+            if (Modifiers.TryGetValue(Modifier.Category.Addition, out list))
             {
                 foreach (var mod in list)
                 {
@@ -40,9 +46,9 @@ namespace Arkademy.Data
                 }
             }
 
-            if (Modifiers.TryGetValue(Modifier.Category.Multiplication, out var list2))
+            if (Modifiers.TryGetValue(Modifier.Category.Multiplication, out list))
             {
-                foreach (var mod in list2)
+                foreach (var mod in list)
                 {
                     baseValue *= mod.value;
                     baseValue /= 10000;
@@ -54,8 +60,13 @@ namespace Arkademy.Data
 
         private long CalculateChance(long baseValue)
         {
+            if (Modifiers.TryGetValue(Modifier.Category.Replace, out var list))
+            {
+                baseValue = list.Max(x => x.value);
+            }
+
             baseValue = 10000 - baseValue;
-            if (Modifiers.TryGetValue(Modifier.Category.Addition, out var list))
+            if (Modifiers.TryGetValue(Modifier.Category.Addition, out list))
             {
                 foreach (var mod in list)
                 {
@@ -64,9 +75,9 @@ namespace Arkademy.Data
                 }
             }
 
-            if (Modifiers.TryGetValue(Modifier.Category.Multiplication, out var list2))
+            if (Modifiers.TryGetValue(Modifier.Category.Multiplication, out list))
             {
-                foreach (var mod in list2)
+                foreach (var mod in list)
                 {
                     baseValue *= 10000 - mod.value;
                     baseValue /= 10000;
@@ -76,12 +87,12 @@ namespace Arkademy.Data
             return 10000 - baseValue;
         }
 
-     
+
         public float Value(bool original = false)
         {
             return ToRealValue(BaseValue(original));
         }
-        
+
 
         private float ToRealValue(long v)
         {

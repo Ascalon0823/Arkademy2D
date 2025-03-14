@@ -255,5 +255,5 @@ MonoBehaviour:
   remainingLife: 0
   triggerPointPercentage: 0.75
   triggerPoint: 0.75
-  triggerCount: 0
+  triggerCount: 1
   animator: {fileID: 1569304666774073515}

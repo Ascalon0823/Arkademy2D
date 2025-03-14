@@ -6,7 +6,6 @@ namespace Arkademy.Gameplay.Ability
     public class MeleeBaseAttack : AbilityBase
     {
         public MeleePayload meleePayload;
-        public int triggerCount;
         public override float GetRange()
         {
             return user.Attributes.Get(Attribute.Type.Range);
@@ -27,7 +26,6 @@ namespace Arkademy.Gameplay.Ability
             payload.transform.localScale = new Vector3(GetRange(), GetRange());
             payload.remainingLife = GetUseTime();
             payload.triggerPoint = payload.triggerPointPercentage * payload.remainingLife;
-            payload.triggerCount = triggerCount;
             payload.trigger.OnTrigger.AddListener(c =>
             {
                 if (c.GetCharacter(out var chara) && chara.faction != user.faction && payload.triggerCount>0)

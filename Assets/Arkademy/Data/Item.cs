@@ -14,6 +14,11 @@ namespace Arkademy.Data
     }
 
     [Serializable]
+    public class ItemTag
+    {
+        public List<string> tags = new List<string>();
+    }
+    [Serializable]
     public class Equipment : Item
     {
         public List<Attribute.Modifier> additional = new List<Attribute.Modifier>();
@@ -36,7 +41,6 @@ namespace Arkademy.Data
     {
         public int slot;
         public Equipment equipment;
-        [JsonIgnore] public List<Attribute.Modifier> currentModifiers = new List<Attribute.Modifier>();
     }
 
     [Serializable]
@@ -48,6 +52,8 @@ namespace Arkademy.Data
         public bool isEquipment;
         public List<Attribute.Modifier> equipmentModifiers = new List<Attribute.Modifier>();
         public int slot;
+        public ItemTag tags;
+        public List<string> ammunitionRequirements;
 
         public static ItemBase GetItemBase(string name)
         {
