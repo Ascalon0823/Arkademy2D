@@ -64,7 +64,7 @@ namespace Arkademy.Gameplay
                 mod = new Attribute.Modifier
                 {
                     attrType = attr.type,
-                    category = Attribute.Modifier.Category.Addition,
+                    category = profile.investCalculationType,
                     value = 0
                 };
                 _investmentModifiers[attrInvestment] = mod;

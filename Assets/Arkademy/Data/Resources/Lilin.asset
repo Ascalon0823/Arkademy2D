@@ -27,6 +27,7 @@ MonoBehaviour:
       diminishingReturn: 9950
       initialInvestReq: 100
       investReqIncrement: 100
+      investCalculationType: 0
     - name: Move Speed
       type: 2
       calType: 0
@@ -39,6 +40,7 @@ MonoBehaviour:
       diminishingReturn: 9900
       initialInvestReq: 500
       investReqIncrement: 250
+      investCalculationType: 0
     - name: Attack
       type: 3
       calType: 0
@@ -47,10 +49,11 @@ MonoBehaviour:
       abbrev: ATK
       icon: {fileID: -700397270, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
       canInvest: 1
-      returnRate: 100
+      returnRate: 500
       diminishingReturn: 10000
       initialInvestReq: 500
       investReqIncrement: 300
+      investCalculationType: 1
     - name: Attack Range
       type: 4
       calType: 0
@@ -63,6 +66,7 @@ MonoBehaviour:
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
+      investCalculationType: 0
     - name: Defense
       type: 5
       calType: 0
@@ -75,6 +79,7 @@ MonoBehaviour:
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
+      investCalculationType: 0
     - name: Vision
       type: 6
       calType: 0
@@ -87,6 +92,7 @@ MonoBehaviour:
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
+      investCalculationType: 0
     - name: Attack Speed
       type: 7
       calType: 1
@@ -99,6 +105,7 @@ MonoBehaviour:
       diminishingReturn: 9500
       initialInvestReq: 1000
       investReqIncrement: 600
+      investCalculationType: 0
     - name: Pickup Range
       type: 9
       calType: 0
@@ -111,6 +118,7 @@ MonoBehaviour:
       diminishingReturn: 9500
       initialInvestReq: 1000
       investReqIncrement: 600
+      investCalculationType: 0
     playable: 1
     spawnable: 1
     behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
@@ -122,13 +130,6 @@ MonoBehaviour:
         baseName: WoodSword
         stack: 0
         additional: []
-      currentModifiers:
-      - attrType: 3
-        category: 0
-        value: 2000
-      - attrType: 4
-        category: 0
-        value: 100
     abilities:
     - {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
   displays:

@@ -13,6 +13,7 @@ namespace Arkademy.Data
         public int diminishingReturn;
         public int initialInvestReq;
         public int investReqIncrement;
+        public Modifier.Category investCalculationType;
 
         public int GetInvestLevel(int xp)
         {
