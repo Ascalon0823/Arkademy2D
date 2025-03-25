@@ -19,10 +19,10 @@ namespace Arkademy.Rift
             var floorPos = new List<Vector3Int>();
             foreach (var pair in map.Rooms)
             {
-                for(var x =0; x < map.roomSize; x++)
-                for (var y = 0; y < map.roomSize; y++)
+                for(var x =0; x < map.config.roomSize; x++)
+                for (var y = 0; y < map.config.roomSize; y++)
                 {
-                    var pos = new Vector2Int(x, y) + pair.Key * map.roomSize;
+                    var pos = new Vector2Int(x, y) + pair.Key * map.config.roomSize;
                     var worldPos = new Vector3Int(pos.x, pos.y, 0);
                     var value = pair.Value.Cells[x, y];
                     var tile = palette[value];
