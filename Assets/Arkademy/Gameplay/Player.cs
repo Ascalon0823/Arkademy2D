@@ -39,6 +39,7 @@ namespace Arkademy.Gameplay
         public bool setupComplete;
         [TextArea] [SerializeField] private string currentPlayerData;
 
+        public Vector3 characterStartPosition;
         public void Start()
         {
             _localPlayer = this;
@@ -57,6 +58,7 @@ namespace Arkademy.Gameplay
             ai.autoUseAbility = true;
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
+            character.SetPosition(characterStartPosition);
         }
 
         public Vector2 GetRandomPosArrandCharacter(float distance)

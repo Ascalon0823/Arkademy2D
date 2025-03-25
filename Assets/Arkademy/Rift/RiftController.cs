@@ -40,6 +40,9 @@ namespace Arkademy.Rift
         [SerializeField] private Healer[] healersPickupPrefabs;
         [SerializeField] private float healerDropChance;
 
+        [SerializeField] private RiftMap map;
+        [SerializeField] private RiftMapRenderer renderer;
+
         private void Awake()
         {
             if (Instance && Instance != this)
@@ -63,22 +66,38 @@ namespace Arkademy.Rift
             difficulty = RiftSetup ?? difficulty;
             progress = 0;
             eliteCounter = 5;
+            map.Generate();
+            renderer.Render();
             SpawnPlayer();
+            SpawnEnemies();
             riftStarted = true;
+        }
+
+        private void SpawnEnemies()
+        {
+            var perRoomCount = 1000 / map.Rooms.Count;
+            foreach (var room in map.Rooms.Values)
+            {
+                for (var i = 0; i < perRoomCount / 10; i++)
+                {
+                    SpawnEnemy(room.WorldPos(room.GetRandomOpenArea()));
+                }
+            }
         }
 
         private void SpawnPlayer()
         {
-            Instantiate(playerPrefab);
+            Instantiate(playerPrefab).characterStartPosition = map.startPos;
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(Vector3 position)
         {
             eliteCounter--;
             var isElite = eliteCounter <= 0;
             if (isElite) eliteCounter = 5;
             var spawnTarget = _raceList[Random.Range(0, _raceList.Count)];
             var enemy = Gameplay.Character.Create(spawnTarget, spawnTarget.CreateCharacterData(), 1);
+            enemy.SetPosition(position);
             var difficultyLifeModifier = new Attribute.Modifier
             {
                 attrType = Attribute.Type.Life,
@@ -91,12 +110,7 @@ namespace Arkademy.Rift
                 category = Attribute.Modifier.Category.Multiplication,
                 value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 10f) * 10000)
             };
-            enemy.Attributes.AddMod(new Attribute.Modifier
-            {
-                attrType = Attribute.Type.Vision,
-                category = Attribute.Modifier.Category.Addition,
-                value = 10000
-            });
+           
             enemy.Attributes.AddMod(difficultyLifeModifier);
             enemy.Attributes.AddMod(difficultyAttackModifier);
             if (isElite)
@@ -129,7 +143,7 @@ namespace Arkademy.Rift
                 enemy.graphic.spriteRenderer.color = Color.red;
             }
 
-            enemy.SetPosition(Player.LocalPlayer.GetRandomPosArrandCharacter(1f));
+            
             enemy.OnDeath.AddListener(d =>
             {
                 progress += Mathf.RoundToInt(10 * progressMultiplier * (isElite ? 2 : 1));
@@ -207,10 +221,10 @@ namespace Arkademy.Rift
             }
 
 
-            if (Time.timeSinceLevelLoad - lastSpawn >= spawnInterval && spawnedEnemies.Count <= spawnLimit)
-            {
-                SpawnEnemy();
-            }
+            // if (Time.timeSinceLevelLoad - lastSpawn >= spawnInterval && spawnedEnemies.Count <= spawnLimit)
+            // {
+            //     SpawnEnemy();
+            // }
         }
     }
 }
