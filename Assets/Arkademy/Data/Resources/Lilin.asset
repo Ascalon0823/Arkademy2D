@@ -25,8 +25,8 @@ MonoBehaviour:
       canInvest: 1
       returnRate: 500
       diminishingReturn: 9950
-      initialInvestReq: 100
-      investReqIncrement: 100
+      initialInvestReq: 10
+      investReqIncrement: 10
       investmentBaseValue: 0
       investCalculationType: 0
     - name: Move Speed
@@ -39,8 +39,8 @@ MonoBehaviour:
       canInvest: 1
       returnRate: 10
       diminishingReturn: 9900
-      initialInvestReq: 500
-      investReqIncrement: 250
+      initialInvestReq: 50
+      investReqIncrement: 25
       investmentBaseValue: 0
       investCalculationType: 0
     - name: Attack
@@ -53,8 +53,8 @@ MonoBehaviour:
       canInvest: 1
       returnRate: 500
       diminishingReturn: 10000
-      initialInvestReq: 500
-      investReqIncrement: 300
+      initialInvestReq: 50
+      investReqIncrement: 30
       investmentBaseValue: 10000
       investCalculationType: 1
     - name: Attack Range
@@ -109,8 +109,8 @@ MonoBehaviour:
       canInvest: 1
       returnRate: 500
       diminishingReturn: 9500
-      initialInvestReq: 1000
-      investReqIncrement: 600
+      initialInvestReq: 100
+      investReqIncrement: 60
       investmentBaseValue: 0
       investCalculationType: 0
     - name: Pickup Range
@@ -123,8 +123,8 @@ MonoBehaviour:
       canInvest: 1
       returnRate: 10
       diminishingReturn: 9500
-      initialInvestReq: 1000
-      investReqIncrement: 600
+      initialInvestReq: 100
+      investReqIncrement: 60
       investmentBaseValue: 0
       investCalculationType: 0
     playable: 1
@@ -138,6 +138,7 @@ MonoBehaviour:
         baseName: WoodSword
         stack: 0
         additional: []
+        providedAbilities: []
     abilities:
     - {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
   displays:

@@ -45,7 +45,7 @@ namespace Arkademy.Gameplay
                 if (other.GetCharacter(out var character))
                 {
                     if (character.faction == faction) return;
-                    character.TakeDamage(new DamageData());
+                    character.TakeDamage(new DamageData(damage));
                     Destroy(gameObject);
                     return;
                 }

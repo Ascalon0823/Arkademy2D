@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Arkademy.Gameplay.Ability;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Arkademy.Data
     {
         public List<Attribute.Modifier> additional = new List<Attribute.Modifier>();
 
+        [JsonIgnore] public List<AbilityBase> providedAbilities = new List<AbilityBase>();
         public List<Attribute.Modifier> GetAllMods()
         {
             var result = new List<Attribute.Modifier>();
@@ -54,7 +56,8 @@ namespace Arkademy.Data
         public int slot;
         public ItemTag tags;
         public List<string> ammunitionRequirements;
-
+        public WeaponBaseAttack baseAttack;
+        public AbilityPayload abilityPayload;
         public static ItemBase GetItemBase(string name)
         {
             if (!_itemCache.TryGetValue(name, out var cached))

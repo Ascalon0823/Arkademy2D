@@ -36,10 +36,12 @@ namespace Arkademy.Gameplay
         public Interactable currentInteractableCandidate;
         public AbilityBase holdAbility;
         public AbilityBase tapAbility;
+        public bool autoUseTapAbility;
         public bool setupComplete;
         [TextArea] [SerializeField] private string currentPlayerData;
 
         public Vector3 characterStartPosition;
+
         public void Start()
         {
             _localPlayer = this;
@@ -54,8 +56,6 @@ namespace Arkademy.Gameplay
             charaRecord.LastPlayed = DateTime.UtcNow;
             var race = Race.GetRace(charaRecord.character.raceName);
             character = Character.Create(race, charaRecord.character, 0);
-            var ai = character.GetOrAddComponent<CharacterAI>();
-            ai.autoUseAbility = true;
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
             character.SetPosition(characterStartPosition);
@@ -82,12 +82,23 @@ namespace Arkademy.Gameplay
                 currentInteractableCandidate.OnInteractedBy(character);
             }
 
+            var colliders = Physics2D.OverlapCircleAll(character.transform.position,
+                character.Attributes.Get(Data.Attribute.Type.Vision));
+            var enemy = colliders.Select(x => x.GetCharacter(out var e) ? e : null)
+                .Where(x => x && x.faction != character.faction && !x.isDead)
+                .OrderBy(x => Vector3.Distance(x.transform.position, character.transform.position))
+                .FirstOrDefault();
             var e = new AbilityEventData
             {
-                Direction = playerInput.holdDir,
-                Position = playerInput.position,
+                PrimaryTarget = enemy,
+                Direction = playerInput.hold ? playerInput.holdDir : null,
+                Position = (playerInput.hold || playerInput.interact) ? playerInput.position : null,
             };
-            if (tapAbility && playerInput.interact && !currentInteractableCandidate)
+            Debug.Log(enemy);
+            tapAbility = character.abilities.LastOrDefault(x => x is WeaponBaseAttack);
+
+            if (tapAbility && ((autoUseTapAbility && enemy && tapAbility.CanReach(e)) || playerInput.interact) &&
+                !currentInteractableCandidate)
             {
                 if (tapAbility.CanUse(e)) tapAbility.Use(e);
             }

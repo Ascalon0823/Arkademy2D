@@ -1,3 +1,4 @@
+using Arkademy.Gameplay.Ability;
 using UnityEngine;
 
 namespace Arkademy.Data.Scriptable
@@ -6,5 +7,6 @@ namespace Arkademy.Data.Scriptable
     public class ItemBaseObject : ScriptableObject
     {
         public ItemBase itemBase;
+       
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2818957491570678382}
   - component: {fileID: 2713306822502893894}
   m_Layer: 0
-  m_Name: MeleeBaseAttack
+  m_Name: WeaponAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

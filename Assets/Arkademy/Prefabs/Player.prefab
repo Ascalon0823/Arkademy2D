@@ -58,7 +58,10 @@ MonoBehaviour:
   currentInteractableCandidate: {fileID: 0}
   holdAbility: {fileID: 0}
   tapAbility: {fileID: 0}
+  autoUseTapAbility: 1
   setupComplete: 0
+  currentPlayerData: 
+  characterStartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4361632494538741494
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,10 +13,17 @@ namespace Arkademy.Gameplay.Ability
             Action<AbilityPayload> onTriggered)
         {
             base.Init(data, parent, dura, triggerTime, onTriggered);
+            
+        }
+
+        public override void Trigger()
+        {
+            base.Trigger();
             var projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            projectile.Setup((int)parent.user.Attributes.GetBase(Attribute.Type.Attack),
-                parent.user.faction, false
+            projectile.Setup((int)ability.user.Attributes.GetBase(Attribute.Type.Attack),
+                ability.user.faction, false
             );
+            projectile.dir = transform.up;
         }
     }
 }

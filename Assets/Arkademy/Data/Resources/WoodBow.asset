@@ -33,3 +33,5 @@ MonoBehaviour:
       - Range
     ammunitionRequirements:
     - Arrow
+    baseAttack: {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
+    abilityPayload: {fileID: 8010566915666072564, guid: 08541b6e4b813478ab95c9b20332804b, type: 3}

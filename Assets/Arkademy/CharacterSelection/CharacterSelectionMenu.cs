@@ -25,7 +25,7 @@ namespace Arkademy.CharacterSelection
         {
             confirm.interactable = false;
             cancel.onClick.AddListener(OnCancel);
-            var characters = Session.currPlayerRecord.characterRecords;
+            var characters = Session.currPlayerRecord.characterRecords??new List<CharacterRecord>();
             SetCharacters(characters.OrderByDescending(x=>x.LastPlayed).ToList());
             
         }

@@ -56,6 +56,15 @@ namespace Arkademy.Gameplay
                 var instance = Instantiate(ability, transform);
                 instance.GiveToUser(this);
             }
+
+            foreach (var slot in data.equipmentSlots)
+            {
+                if (slot.equipment != null)
+                {
+                    slot.equipment.providedAbilities.Clear();
+                    ChangeEquipment(slot.equipment);
+                }
+            }
             setupCompleted = true;
         }
 
@@ -161,8 +170,20 @@ namespace Arkademy.Gameplay
             var slot = data.equipmentSlots.FirstOrDefault(x => x.slot == baseItem.slot);
             if (slot == null) return;
             data.AddToInventory(slot.equipment);
+            foreach (var ability in slot.equipment.providedAbilities)
+            {
+                abilities.Remove(ability);
+                Destroy(ability.gameObject);
+            }
+            
+            slot.equipment.providedAbilities.Clear();
             slot.equipment = equipment;
+            var weaponAbility = Instantiate(baseItem.baseAttack,transform);
+            weaponAbility.payloadPrefab = baseItem.abilityPayload;
+            slot.equipment.providedAbilities.Add(weaponAbility);
+            weaponAbility.GiveToUser(this);
             Attributes.UpdateEquipment(slot);
+            
         }
     }
 }

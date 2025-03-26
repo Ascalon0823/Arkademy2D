@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Arkademy.Backend;
 using UnityEngine.Device;
 using UnityEngine.SceneManagement;
+using Application = UnityEngine.Application;
 
 namespace Arkademy.Data
 {
@@ -16,12 +17,12 @@ namespace Arkademy.Data
             {
                 if (_playerRecord == null)
                 {
-                    if (Application.isEditor)
+                    if (BackendService.Offline)
                     {
                         _playerRecord = PlayerRecord.LoadOrNew();
                         return _playerRecord;
                     }
-                    SceneManager.LoadScene("Title");
+                    SceneManager.LoadScene("UserAuth");
                     return null;
                 }
 

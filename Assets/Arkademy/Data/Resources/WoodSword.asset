@@ -27,3 +27,5 @@ MonoBehaviour:
     tags:
       tags: []
     ammunitionRequirements: []
+    baseAttack: {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
+    abilityPayload: {fileID: 3346731908101472055, guid: d66c689f83bb0f143b05cfd3450f426a, type: 3}

@@ -28,3 +28,5 @@ MonoBehaviour:
       tags: []
     ammunitionRequirements:
     - Ammunition
+    baseAttack: {fileID: 0}
+    abilityPayload: {fileID: 0}
