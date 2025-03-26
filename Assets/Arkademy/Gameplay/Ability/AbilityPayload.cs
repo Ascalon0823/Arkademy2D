@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Arkademy.Gameplay.Ability
 {
@@ -7,29 +8,50 @@ namespace Arkademy.Gameplay.Ability
     {
         public AbilityBase ability;
         public float duration;
-        public virtual void Init(AbilityEventData data, AbilityBase parent, float dura)
+        public float triggerPoint;
+        public UnityEvent<AbilityPayload> OnTriggered;
+
+        public virtual void Init(AbilityEventData data,
+            AbilityBase parent, float dura, float triggerTime,
+            Action<AbilityPayload> onTriggered)
         {
             ability = parent;
             duration = dura;
+            triggerPoint = dura - triggerTime;
+            OnTriggered.AddListener(p => onTriggered(p));
+            transform.parent = parent.transform;
+            transform.localPosition = Vector3.zero;
+            var direction = data.TryGetDirection(parent.user.transform.position, out var dir)
+                ? dir
+                : parent.user.facing;
+            transform.up = direction;
         }
 
         public virtual void UpdatePayload(AbilityEventData data)
         {
-            
         }
 
         public virtual void Cancel()
         {
-            
         }
 
         protected virtual void Update()
         {
             duration -= Time.deltaTime;
+            if (duration < triggerPoint)
+            {
+                Trigger();
+            }
+
             if (duration < 0)
             {
                 Destroy(gameObject);
             }
+        }
+
+        public virtual void Trigger()
+        {
+            OnTriggered?.Invoke(this);
         }
     }
 }

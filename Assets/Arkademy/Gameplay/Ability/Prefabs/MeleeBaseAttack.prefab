@@ -51,5 +51,4 @@ MonoBehaviour:
   useTime: 0
   remainingUseTime: 0
   range: 0
-  meleePayload: {fileID: 3346731908101472055, guid: d66c689f83bb0f143b05cfd3450f426a, type: 3}
-  triggerCount: 1
+  payloadPrefab: {fileID: 3346731908101472055, guid: d66c689f83bb0f143b05cfd3450f426a, type: 3}
