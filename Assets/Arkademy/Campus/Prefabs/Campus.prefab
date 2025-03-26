@@ -3243,6 +3243,7 @@ MonoBehaviour:
     baseName: WoodBow
     stack: 1
     additional: []
+    providedAbilities: []
 --- !u!1001 &4122085956466624116
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,4 +15,4 @@ MonoBehaviour:
   envName: prod
   baseURL: http://192.168.1.87:8080
   overrideToken: 
-  offline: 1
+  offline: 0
