@@ -10,6 +10,7 @@ namespace Arkademy.Gameplay.Ability
         public float duration;
         public float triggerPoint;
         public UnityEvent<AbilityPayload> OnTriggered;
+        public bool triggered;
 
         public virtual void Init(AbilityEventData data,
             AbilityBase parent, float dura, float triggerTime,
@@ -18,7 +19,10 @@ namespace Arkademy.Gameplay.Ability
             ability = parent;
             duration = dura;
             triggerPoint = dura - triggerTime;
-            OnTriggered.AddListener(p => onTriggered(p));
+            if (onTriggered != null)
+            {
+                OnTriggered.AddListener(p => onTriggered(p));
+            }
             transform.parent = parent.transform;
             transform.localPosition = Vector3.zero;
             var direction = data.TryGetDirection(parent.user.transform.position, out var dir)
@@ -38,8 +42,9 @@ namespace Arkademy.Gameplay.Ability
         protected virtual void Update()
         {
             duration -= Time.deltaTime;
-            if (duration < triggerPoint)
+            if (duration < triggerPoint && !triggered)
             {
+                triggered = true;
                 Trigger();
             }
 
@@ -51,6 +56,7 @@ namespace Arkademy.Gameplay.Ability
 
         public virtual void Trigger()
         {
+            if (!this) return;
             OnTriggered?.Invoke(this);
         }
     }
