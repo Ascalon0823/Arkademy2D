@@ -27,6 +27,7 @@ MonoBehaviour:
       diminishingReturn: 9950
       initialInvestReq: 100
       investReqIncrement: 100
+      investmentBaseValue: 0
       investCalculationType: 0
     - name: Move Speed
       type: 2
@@ -40,6 +41,7 @@ MonoBehaviour:
       diminishingReturn: 9900
       initialInvestReq: 500
       investReqIncrement: 250
+      investmentBaseValue: 0
       investCalculationType: 0
     - name: Attack
       type: 3
@@ -53,6 +55,7 @@ MonoBehaviour:
       diminishingReturn: 10000
       initialInvestReq: 500
       investReqIncrement: 300
+      investmentBaseValue: 10000
       investCalculationType: 1
     - name: Attack Range
       type: 4
@@ -66,6 +69,7 @@ MonoBehaviour:
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
+      investmentBaseValue: 0
       investCalculationType: 0
     - name: Defense
       type: 5
@@ -79,6 +83,7 @@ MonoBehaviour:
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
+      investmentBaseValue: 0
       investCalculationType: 0
     - name: Vision
       type: 6
@@ -92,6 +97,7 @@ MonoBehaviour:
       diminishingReturn: 0
       initialInvestReq: 0
       investReqIncrement: 0
+      investmentBaseValue: 0
       investCalculationType: 0
     - name: Attack Speed
       type: 7
@@ -105,6 +111,7 @@ MonoBehaviour:
       diminishingReturn: 9500
       initialInvestReq: 1000
       investReqIncrement: 600
+      investmentBaseValue: 0
       investCalculationType: 0
     - name: Pickup Range
       type: 9
@@ -118,6 +125,7 @@ MonoBehaviour:
       diminishingReturn: 9500
       initialInvestReq: 1000
       investReqIncrement: 600
+      investmentBaseValue: 0
       investCalculationType: 0
     playable: 1
     spawnable: 1
