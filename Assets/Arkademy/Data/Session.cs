@@ -55,11 +55,12 @@ namespace Arkademy.Data
         
         public static async Task Save()
         {
+            currPlayerRecord.Save();
+            if (BackendService.Offline) return;
             if (await BackendService.UpdatePlayer(currPlayerRecord) == null)
             {
                 return;
             }
-            currPlayerRecord.Save();
         }
     }
 }

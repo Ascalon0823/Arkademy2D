@@ -19,6 +19,8 @@ namespace Arkademy.Backend
         public Uri BaseUrl;
         public string Token;
 
+        public static bool Offline => Env().offline;
+
         public async Task<T> Get<T>(string url)
         {
             var uri = new Uri(BaseUrl, new Uri(url,UriKind.Relative));
@@ -50,14 +52,19 @@ namespace Arkademy.Backend
             return request;
             
         }
+
+        public static BackendEnvironment Env()
+        {
+            var env = Application.isEditor ? DEV : PROD;
+            return Resources.LoadAll<BackendEnvironment>("")
+                .FirstOrDefault(x => x.envName == env);
+        }
         private static BackendService Service
         {
             get
             {
                 if (_instance != null) return _instance;
-                var env = Application.isEditor ? DEV : PROD;
-                var envConf = Resources.LoadAll<BackendEnvironment>("")
-                    .FirstOrDefault(x => x.envName == env);
+                var envConf = Env();
                 if (!envConf) throw new Exception("Backend environment not found");
                 var token =
                     TryGetLocalToken(out var cached) ? cached : "";

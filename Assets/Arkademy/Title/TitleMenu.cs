@@ -24,14 +24,17 @@ namespace Arkademy.Title
 
         public async void BeginSession()
         {
-            var user = await BackendService.GetUser();
-            if (user == null)
+            if (!BackendService.Offline)
             {
-                SceneManager.LoadScene("UserAuth");
-                return;
+                var user = await BackendService.GetUser();
+                if (user == null)
+                {
+                    SceneManager.LoadScene("UserAuth");
+                    return;
+                }
+                Session.currPlayerRecord = user.playerRecord.ToPlayerRecordData();
+                Debug.Log(JsonConvert.SerializeObject(user));
             }
-            Session.currPlayerRecord = user.playerRecord.ToPlayerRecordData();
-            Debug.Log(JsonConvert.SerializeObject(user));
             landingPage.SetActive(false);
             buttons.SetActive(true);
         }

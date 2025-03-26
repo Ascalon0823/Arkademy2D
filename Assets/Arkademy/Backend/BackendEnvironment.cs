@@ -8,5 +8,6 @@ namespace Arkademy.Backend
         public string envName;
         public string baseURL;
         public string overrideToken;
+        public bool offline;
     }
 }
