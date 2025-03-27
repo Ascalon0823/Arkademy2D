@@ -16,6 +16,7 @@ namespace Arkademy.Title
         [SerializeField] private TextMeshProUGUI versionText;
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             landingPage.SetActive(true);
             buttons.SetActive(false);
             debugPage.SetActive(false);
