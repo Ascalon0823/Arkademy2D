@@ -66,6 +66,10 @@ namespace Arkademy.Rift
             difficulty = RiftSetup ?? difficulty;
             progress = 0;
             eliteCounter = 5;
+
+            Random.InitState((int)DateTime.Now.Ticks);
+            map.config.seed = Random.Range(int.MinValue, int.MaxValue);
+
             map.Generate();
             renderer.Render();
             SpawnPlayer();
@@ -110,7 +114,7 @@ namespace Arkademy.Rift
                 category = Attribute.Modifier.Category.Multiplication,
                 value = Mathf.CeilToInt(Mathf.Pow(2, difficulty / 10f) * 10000)
             };
-           
+
             enemy.Attributes.AddMod(difficultyLifeModifier);
             enemy.Attributes.AddMod(difficultyAttackModifier);
             if (isElite)
@@ -143,7 +147,7 @@ namespace Arkademy.Rift
                 enemy.graphic.spriteRenderer.color = Color.red;
             }
 
-            
+
             enemy.OnDeath.AddListener(d =>
             {
                 progress += Mathf.RoundToInt(10 * progressMultiplier * (isElite ? 2 : 1));
