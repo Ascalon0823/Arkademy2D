@@ -81,24 +81,16 @@ namespace Arkademy.Gameplay
             {
                 currentInteractableCandidate.OnInteractedBy(character);
             }
-
-            var colliders = Physics2D.OverlapCircleAll(character.transform.position,
-                character.Attributes.Get(Data.Attribute.Type.Vision));
-            var enemy = colliders.Select(x => x.GetCharacter(out var e) ? e : null)
-                .Where(x => x && x.faction != character.faction && !x.isDead)
-                .OrderBy(x => Vector3.Distance(x.transform.position, character.transform.position))
-                .FirstOrDefault();
+            
+         
+            tapAbility = character.abilities.LastOrDefault(x => x is WeaponBaseAttack);
             var e = new AbilityEventData
             {
-                PrimaryTarget = enemy,
+                PrimaryTarget = tapAbility?.GetPrimaryTarget(),
                 Direction = playerInput.hold ? playerInput.holdDir : null,
                 Position = (playerInput.hold || playerInput.interact) ? playerInput.position : null,
             };
-            Debug.Log(enemy);
-            tapAbility = character.abilities.LastOrDefault(x => x is WeaponBaseAttack);
-
-            if (tapAbility && ((autoUseTapAbility && enemy && tapAbility.CanReach(e)) || playerInput.interact) &&
-                !currentInteractableCandidate)
+            if (tapAbility  && ((autoUseTapAbility && tapAbility.CanReach(e)) || playerInput.interact) && !currentInteractableCandidate)
             {
                 if (tapAbility.CanUse(e)) tapAbility.Use(e);
             }

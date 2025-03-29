@@ -185,5 +185,14 @@ namespace Arkademy.Gameplay
             Attributes.UpdateEquipment(slot);
             
         }
+
+        public List<Character> VisibleCharacters()
+        {
+            return Physics2D.OverlapCircleAll(transform.position, Attributes.Get(Attribute.Type.Vision))
+                .Select(x => x.GetCharacter(out var c) ? c : null)
+                .Where(x => x && x.faction != faction && !x.isDead)
+                .OrderBy(x => Vector3.Distance(x.transform.position, transform.position))
+                .ToList();
+        }
     }
 }

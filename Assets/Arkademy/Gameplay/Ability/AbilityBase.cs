@@ -1,4 +1,7 @@
-using System;
+
+using System.Collections.Generic;
+using System.Linq;
+using Arkademy.Data;
 using UnityEngine;
 
 namespace Arkademy.Gameplay.Ability
@@ -51,7 +54,6 @@ namespace Arkademy.Gameplay.Ability
         public float useTime;
         public float remainingUseTime;
         public float range;
-
         public virtual float GetRange()
         {
             return range / 100f;
@@ -113,6 +115,22 @@ namespace Arkademy.Gameplay.Ability
         {
             if(user)
                 user.abilities.Remove(this);
+        }
+
+        public virtual Character GetPrimaryTarget()
+        {
+            return GetTargetCandidates(out var candidates) ? candidates.First() : null;
+        }
+        public virtual bool GetTargetCandidates(out List<Character> characters)
+        {
+            var searchRange = Mathf.Min(GetRange(), user.Attributes.Get(Attribute.Type.Vision));
+            characters = Physics2D.OverlapCircleAll(user.transform.position, searchRange)
+                .Select(x => x.GetCharacter(out var c) ? c : null)
+                .Where(x => x && x.faction != user.faction && !x.isDead)
+                .OrderBy(x => Vector3.Distance(x.transform.position, user.transform.position))
+                .ToList();
+            return characters.Any();
+
         }
     }
 }
