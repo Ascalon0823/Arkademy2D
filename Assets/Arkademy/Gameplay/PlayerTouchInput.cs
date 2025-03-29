@@ -64,7 +64,7 @@ namespace Arkademy.Gameplay
 
             if (hold) holdDir = touch.position - holdPos;
 
-            move = delta;
+            move = hold ? Vector2.zero : delta;
             position = screenPosition;
         }
 
