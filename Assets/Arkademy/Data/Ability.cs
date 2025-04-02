@@ -20,6 +20,7 @@ namespace Arkademy.Data
         {
             public int energy;
         }
+
         public string name;
         public string displayName;
         public string description;
@@ -27,19 +28,30 @@ namespace Arkademy.Data
         public Cost cost;
         public float useTime;
         public float cooldown;
-        
-        
+
+
         [Serializable]
         public abstract class Effect
         {
+            [Flags]
+            public enum CharacterType
+            {
+                
+                Self = 1<<1,
+                Friendly = 1<<2,
+                Enemy = 1<<3
+            }
+
             [Serializable]
-            public struct ApplicationEvent
+            public struct EffectEventData
             {
                 public Gameplay.Character dealer;
                 public Gameplay.Ability.AbilityBase ability;
                 public Gameplay.Character receiver;
             }
-            public abstract void Apply(ApplicationEvent e);
+
+            public CharacterType affects;
+            public abstract void Apply(EffectEventData e);
         }
 
         [Serializable]
@@ -50,12 +62,9 @@ namespace Arkademy.Data
             public int numOfHit;
             public int maxNumOfHit;
 
-            public override void Apply(ApplicationEvent e)
+            public override void Apply(EffectEventData e)
             {
-                
             }
         }
     }
-
-  
 }
