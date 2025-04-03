@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainingLife: 5
-  speed: 5
+  speed: 10
   dir: {x: 0, y: 0}
   body: {fileID: 906608850244787289}
   rotateToDir: 1

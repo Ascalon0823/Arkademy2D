@@ -39,6 +39,7 @@ namespace Arkademy.Backend
             {
                 characterRecords = playerRecord.characters?
                     .Select(x => x.ToCharacterRecordData())
+                    .Where(x=>x?.character!=null)
                     .ToList() ?? new List<Data.CharacterRecord>()
             };
         }
@@ -57,18 +58,17 @@ namespace Arkademy.Backend
             {
                 LastPlayedTime = characterRecord.LastPlayed,
                 CreationTime = characterRecord.CreationTime,
-                Data = JToken.FromObject(characterRecord.character)
+                Data = JToken.FromObject(characterRecord)
             };
         }
 
         public static Data.CharacterRecord ToCharacterRecordData(this CharacterRecord characterRecord)
         {
-            return new Data.CharacterRecord
+            Debug.Log(characterRecord.Data);
+            return JsonConvert.DeserializeObject<Data.CharacterRecord>(characterRecord.Data.ToString(), new JsonSerializerSettings
             {
-                character = characterRecord.Data.ToObject<Character>(),
-                CreationTime = characterRecord.CreationTime,
-                LastPlayed = characterRecord.LastPlayedTime
-            };
+                DateFormatString = "yyyy-MM-ddTH:mm:ssK"
+            });
         }
     }
 }
