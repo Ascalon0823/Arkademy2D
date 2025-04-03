@@ -12,13 +12,16 @@ namespace Arkademy.Gameplay.Ability
         public UnityEvent<AbilityPayload> OnTriggered;
         public bool triggered;
 
+        public virtual string GetDescription()
+        {
+            return "";
+        }
         public virtual void Init(AbilityEventData data,
-            AbilityBase parent, float dura, float triggerTime,
+            AbilityBase parent, float dura,
             Action<AbilityPayload> onTriggered)
         {
             ability = parent;
             duration = dura;
-            triggerPoint = dura - triggerTime;
             if (onTriggered != null)
             {
                 OnTriggered.AddListener(p => onTriggered(p));
@@ -31,7 +34,7 @@ namespace Arkademy.Gameplay.Ability
             transform.up = direction;
         }
 
-        public virtual void UpdatePayload(AbilityEventData data)
+        public virtual void UpdatePayload(AbilityEventData data,bool canceled)
         {
         }
 

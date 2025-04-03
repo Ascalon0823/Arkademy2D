@@ -15,43 +15,115 @@ MonoBehaviour:
   race:
     displayName: Slime
     attributes:
-    - type: 1
+    - name: 
+      type: 1
       calType: 0
       value: 2000
       current: 2000
-    - type: 2
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
+    - name: 
+      type: 2
       calType: 0
       value: 100
       current: 0
-    - type: 3
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
+    - name: 
+      type: 3
       calType: 0
       value: 500
       current: 0
-    - type: 4
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
+    - name: 
+      type: 4
       calType: 0
       value: 100
       current: 0
-    - type: 5
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
+    - name: 
+      type: 5
       calType: 0
       value: 50
       current: 0
-    - type: 6
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
+    - name: 
+      type: 6
       calType: 0
       value: 800
       current: 0
-    - type: 7
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
+    - name: 
+      type: 7
       calType: 0
       value: 50
       current: 0
+      abbrev: 
+      icon: {fileID: 0}
+      canInvest: 0
+      returnRate: 0
+      diminishingReturn: 0
+      initialInvestReq: 0
+      investReqIncrement: 0
+      investmentBaseValue: 0
+      investCalculationType: 0
     playable: 0
     spawnable: 1
     behaviourPrefab: {fileID: 7618021547581820144, guid: 245f0fdafef52be43b4278822e59d560, type: 3}
     animationController: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
     facingLeft: 1
+    slots: []
     abilities:
-    - {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
+    - Melee
   displays:
   - attribute:
+      name: 
       type: 1
       calType: 0
       value: 2000
@@ -60,7 +132,9 @@ MonoBehaviour:
     value: 20
     current: 20
     baseCurrent: 2000
+    modifiers: []
   - attribute:
+      name: 
       type: 2
       calType: 0
       value: 100
@@ -69,7 +143,9 @@ MonoBehaviour:
     value: 1
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
+      name: 
       type: 3
       calType: 0
       value: 500
@@ -78,7 +154,9 @@ MonoBehaviour:
     value: 5
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
+      name: 
       type: 4
       calType: 0
       value: 100
@@ -87,7 +165,9 @@ MonoBehaviour:
     value: 1
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
+      name: 
       type: 5
       calType: 0
       value: 50
@@ -96,7 +176,9 @@ MonoBehaviour:
     value: 0.5
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
+      name: 
       type: 6
       calType: 0
       value: 800
@@ -105,7 +187,9 @@ MonoBehaviour:
     value: 8
     current: 0
     baseCurrent: 0
+    modifiers: []
   - attribute:
+      name: 
       type: 7
       calType: 0
       value: 50
@@ -114,3 +198,4 @@ MonoBehaviour:
     value: 0.5
     current: 0
     baseCurrent: 0
+    modifiers: []

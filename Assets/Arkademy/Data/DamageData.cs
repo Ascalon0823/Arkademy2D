@@ -1,11 +1,12 @@
 using System;
+using System.Linq;
 
 namespace Arkademy.Data
 {
     [Serializable]
     public class DamageData
     {
-        public long amount;
+        public long[] amounts;
         public Character dealer;
 
         public DamageData()
@@ -14,7 +15,17 @@ namespace Arkademy.Data
         }
         public DamageData(long newAmount)
         {
-            amount = newAmount;
+            amounts = new []{newAmount};
+        }
+
+        public DamageData(long[] newAmounts)
+        {
+            amounts = newAmounts;
+        }
+
+        public long Sum()
+        {
+            return amounts.Sum();
         }
     }
 }

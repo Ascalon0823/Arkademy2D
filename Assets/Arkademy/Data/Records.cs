@@ -37,5 +37,8 @@ namespace Arkademy.Data
         public DateTime CreationTime;
         public DateTime LastPlayed;
         public Character character;
+        public string tapAbilityName;
+        public string holdAbilityName;
+        public string swipeAbilityName;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,6 @@ namespace Arkademy.UI
         private static DamageCanvas Canvas;
 
         [SerializeField] private DamageText textPrefab;
-        private Dictionary<Transform, DamageText> prevs = new Dictionary<Transform, DamageText>();
         private void Awake()
         {
             if (Canvas && Canvas != this)
@@ -21,10 +21,8 @@ namespace Arkademy.UI
             Canvas = this;
         }
 
-        private void InternalAddTextTo(Camera cam, Transform t, string content, bool newGroup = true)
+        private DamageText InternalAddTextTo(Camera cam, Transform t, string content, DamageText prev)
         {
-            if (newGroup) prevs[t] = null;
-            var prev = prevs.GetValueOrDefault(t);
             var beginningPos = prev ?
                  //prev.beginningWorldPos + new Vector3(0, 0.35f) 
                  new Vector3(t.position.x, prev.beginningWorldPos.y + 0.35f)
@@ -33,15 +31,37 @@ namespace Arkademy.UI
             text.beginningWorldPos = beginningPos;
             text.cam = cam;
             text.content = content;
-            prevs[t] = text;
+            return text;
         }
-        public static void AddTextTo(Camera cam, Transform t, string text, bool newGroup = true)
+        public static void AddTextTo(Camera cam, Transform t, string text)
         {
             if (!Canvas)
             {
                 Canvas = Instantiate(Resources.Load<DamageCanvas>("DamageCanvas"));
             }
-            Canvas.InternalAddTextTo(cam,t,text,newGroup);
+            Canvas.InternalAddTextTo(cam,t,text,null);
+        }
+
+        public void StartAddingText(Camera cam, Transform t, string[] text)
+        {
+            StartCoroutine(AddTexts(cam, t, text));
+        }
+        private IEnumerator AddTexts(Camera cam, Transform t, string[] texts)
+        {
+            DamageText prev = null;
+            foreach (var text in texts)
+            {
+                prev = InternalAddTextTo(cam, t, text, prev);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        public static void AddTextTo(Camera cam, Transform t, string[] text)
+        {
+            if (!Canvas)
+            {
+                Canvas = Instantiate(Resources.Load<DamageCanvas>("DamageCanvas"));
+            }
+            Canvas.StartAddingText(cam,t,text);
         }
     }
 }

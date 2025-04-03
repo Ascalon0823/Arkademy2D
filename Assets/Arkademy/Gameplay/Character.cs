@@ -14,8 +14,6 @@ using Race = Arkademy.Data.Race;
 
 namespace Arkademy.Gameplay
 {
-    
-
     public class Character : MonoBehaviour
     {
         public Data.Character data;
@@ -45,15 +43,16 @@ namespace Arkademy.Gameplay
         public void SetupAs(Race race, Data.Character newData, int newFaction)
         {
             data = newData;
-            Attributes = new Attributes(race,data);
+            Attributes = new Attributes(race, data);
             graphic.animator.runtimeAnimatorController = race.animationController;
             graphic.facingLeft = race.facingLeft;
             graphic.walkAnimationDistance = 4;
             faction = newFaction;
             graphic.character = this;
-            foreach (var ability in race.abilities)
+            foreach (var abilityName in race.abilities)
             {
-                var instance = Instantiate(ability, transform);
+                var ability = Data.Ability.GetAbility(abilityName);
+                var instance = AbilityBase.CreateAbility(ability);
                 instance.GiveToUser(this);
             }
 
@@ -65,6 +64,7 @@ namespace Arkademy.Gameplay
                     ChangeEquipment(slot.equipment);
                 }
             }
+
             setupCompleted = true;
         }
 
@@ -90,29 +90,33 @@ namespace Arkademy.Gameplay
         {
             graphic.SetHit();
             var life = Attributes[Attribute.Type.Life];
-            life.current = Math.Max(0, life.current - damage.amount);
+            life.current = Math.Max(0, life.current - damage.Sum());
             isDead = life.current == 0;
             if (isDead)
             {
                 OnDeath?.Invoke(damage);
             }
 
-            DamageCanvas.AddTextTo(Player.Camera, transform, 
-                $"<color=#{ColorUtility.ToHtmlStringRGBA(Color.white)}> {Mathf.CeilToInt(damage.amount / 100f).ToString()}</color>");
+
+            DamageCanvas.AddTextTo(Player.Camera, transform, damage.amounts.Select(x =>
+                    $"<color=#{ColorUtility.ToHtmlStringRGBA(Color.white)}> {Mathf.CeilToInt(x / 100f).ToString()}</color>")
+                .ToArray()
+            );
         }
 
         public void Heal(int amount)
         {
             var life = Attributes[Attribute.Type.Life];
             life.current = Math.Min(life.BaseValue(), life.current + amount);
-            DamageCanvas.AddTextTo(Player.Camera, transform, 
+            DamageCanvas.AddTextTo(Player.Camera, transform,
                 $"<color=#{ColorUtility.ToHtmlStringRGBA(Color.green)}> {Mathf.CeilToInt(amount / 100f).ToString()}</color>");
         }
+
         public void KnockBack(Vector2 displacement)
         {
             SetPosition(body.position + displacement);
         }
-        
+
 
         private void FixedUpdate()
         {
@@ -130,10 +134,11 @@ namespace Arkademy.Gameplay
             foreach (var pickup in pickups)
             {
                 var behaviour = pickup.GetComponent<PickupBase>();
-                if(!behaviour)return;
+                if (!behaviour) return;
                 behaviour.PickupBy(this);
             }
         }
+
         private void HandleMove()
         {
             velocity = wantToMove * Attributes.Get(Attribute.Type.MovSpeed);
@@ -175,15 +180,14 @@ namespace Arkademy.Gameplay
                 abilities.Remove(ability);
                 Destroy(ability.gameObject);
             }
-            
+
             slot.equipment.providedAbilities.Clear();
             slot.equipment = equipment;
-            var weaponAbility = Instantiate(baseItem.baseAttack,transform);
-            weaponAbility.payloadPrefab = baseItem.abilityPayload;
-            slot.equipment.providedAbilities.Add(weaponAbility);
-            weaponAbility.GiveToUser(this);
+            // var weaponAbility = Instantiate(baseItem.baseAttack,transform);
+            // weaponAbility.payloadPrefab = baseItem.abilityPayload;
+            // slot.equipment.providedAbilities.Add(weaponAbility);
+            // weaponAbility.GiveToUser(this);
             Attributes.UpdateEquipment(slot);
-            
         }
 
         public List<Character> VisibleCharacters()

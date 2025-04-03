@@ -20,7 +20,7 @@ MonoBehaviour:
       calType: 0
       value: 10000
       current: 10000
-      abbrev: LIFE
+      abbrev: HP
       icon: {fileID: -1435901422, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
       canInvest: 1
       returnRate: 500
@@ -32,11 +32,11 @@ MonoBehaviour:
     - name: Move Speed
       type: 2
       calType: 0
-      value: 400
+      value: 600
       current: 0
       abbrev: M.SPD
       icon: {fileID: 36524170, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
-      canInvest: 1
+      canInvest: 0
       returnRate: 10
       diminishingReturn: 9900
       initialInvestReq: 50
@@ -50,7 +50,7 @@ MonoBehaviour:
       current: 0
       abbrev: ATK
       icon: {fileID: -700397270, guid: 20fdce085bf600f4e93dcabd08de50c1, type: 3}
-      canInvest: 1
+      canInvest: 0
       returnRate: 500
       diminishingReturn: 10000
       initialInvestReq: 50
@@ -106,7 +106,7 @@ MonoBehaviour:
       current: 0
       abbrev: A.SPD
       icon: {fileID: 271495957, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
-      canInvest: 1
+      canInvest: 0
       returnRate: 500
       diminishingReturn: 9500
       initialInvestReq: 100
@@ -120,7 +120,7 @@ MonoBehaviour:
       current: 0
       abbrev: P.RAN
       icon: {fileID: 271495957, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
-      canInvest: 1
+      canInvest: 0
       returnRate: 10
       diminishingReturn: 9500
       initialInvestReq: 100
@@ -140,7 +140,8 @@ MonoBehaviour:
         additional: []
         providedAbilities: []
     abilities:
-    - {fileID: 2713306822502893894, guid: 5f5cee21496823f45b4561fa190db40e, type: 3}
+    - DoubleSlash
+    - ArielSlash
   displays:
   - attribute:
       name: 
@@ -157,10 +158,10 @@ MonoBehaviour:
       name: 
       type: 2
       calType: 0
-      value: 400
+      value: 600
       current: 0
-    baseValue: 400
-    value: 4
+    baseValue: 600
+    value: 6
     current: 0
     baseCurrent: 0
     modifiers: []

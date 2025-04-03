@@ -1,9 +1,16 @@
 using System;
 using System.Collections.Generic;
+using Arkademy.Data.Scriptable;
+using Arkademy.Gameplay.Ability;
 using UnityEngine;
 
 namespace Arkademy.Data
 {
+    [Serializable]
+    public class AbilityInvestment : Investment
+    {
+        public string abilityName;
+    }
     [Serializable]
     public class Ability
     {
@@ -28,7 +35,15 @@ namespace Arkademy.Data
         public Cost cost;
         public float useTime;
         public float cooldown;
-
+        public bool usableWhileMoving;
+        public float reach;
+        public bool continuous;
+        public AbilityBase abilityPrefab;
+        public AbilityPayload payloadPrefab;
+        public static Ability GetAbility(string name)
+        {
+            return Resources.Load<AbilityObject>(name).ability;
+        }
 
         [Serializable]
         public abstract class Effect
@@ -37,9 +52,9 @@ namespace Arkademy.Data
             public enum CharacterType
             {
                 
-                Self = 1<<1,
-                Friendly = 1<<2,
-                Enemy = 1<<3
+                Self = 1<<0,
+                Friendly = 1<<1,
+                Enemy = 1<<2
             }
 
             [Serializable]

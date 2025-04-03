@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5fa35d157345d9968b671fb7972dc7, type: 3}
-  m_Name: DoubleSlash
+  m_Name: ArielSlash
   m_EditorClassIdentifier: 
   ability:
-    name: DoubleSlash
-    displayName: Double Slash
+    name: ArielSlash
+    displayName: Ariel Slash
     description: 
     targetType: 1
     cost:
-      energy: 0
+      energy: 300
     useTime: 1
     cooldown: 0
-    usableWhileMoving: 1
-    reach: 2
-    continuous: 0
+    usableWhileMoving: 0
+    reach: 5
+    continuous: 1
     abilityPrefab: {fileID: 0}
-    payloadPrefab: {fileID: 3346731908101472055, guid: d1d03e4a953974e07a94a98823bd4f8f, type: 3}
+    payloadPrefab: {fileID: 8295354792423453701, guid: 70992b6615ad54f8386c2fdb88a94656, type: 3}

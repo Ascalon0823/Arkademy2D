@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using System.Linq;
 using Arkademy.Data;
@@ -47,21 +46,35 @@ namespace Arkademy.Gameplay.Ability
 
     public class AbilityBase : MonoBehaviour
     {
-        public float cooldown;
+        public Data.Ability abilityData;
         public float remainingCooldown;
-        public bool useWhileMoving;
         public Character user;
-        public float useTime;
         public float remainingUseTime;
-        public float range;
+        public AbilityPayload currPayload;
+
+        public static AbilityBase CreateAbility(Data.Ability data)
+        {
+            AbilityBase ability = null;
+            if (data.abilityPrefab)
+            {
+                ability = Instantiate(data.abilityPrefab);
+            }
+            else
+            {
+                var go = new GameObject(data.name);
+                ability = go.AddComponent<AbilityBase>();
+            }
+            ability.abilityData = data;
+            return ability;
+        }
         public virtual float GetRange()
         {
-            return range / 100f;
+            return abilityData.reach;
         }
 
         public virtual bool CanUse(AbilityEventData eventData)
         {
-            return !InCooldown() && !InUse() && (!user.IsMoving() || useWhileMoving);
+            return !InCooldown() && (!InUse()||abilityData.continuous) && (!user.IsMoving() || abilityData.usableWhileMoving);
         }
 
         public virtual bool InCooldown()
@@ -82,12 +95,12 @@ namespace Arkademy.Gameplay.Ability
 
         public virtual float GetCooldown()
         {
-            return cooldown;
+            return abilityData.cooldown;
         }
 
         public virtual float GetUseTime()
         {
-            return useTime;
+            return abilityData.useTime;
         }
 
         protected virtual void Update()
@@ -98,22 +111,64 @@ namespace Arkademy.Gameplay.Ability
                 remainingUseTime -= Time.deltaTime;
         }
 
+        public virtual void InitPayload(AbilityEventData eventData)
+        {
+            currPayload = Instantiate(abilityData.payloadPrefab);
+            currPayload.Init(eventData, this, GetUseTime(),  null);
+        }
+
+        public virtual void HandleInstantPayload(AbilityEventData eventData)
+        {
+            remainingCooldown = GetCooldown();
+            remainingUseTime = GetUseTime();
+            InitPayload(eventData);
+        }
+
+        public virtual void HandleContinuousPayload(AbilityEventData eventData, bool canceled)
+        {
+            if (canceled)
+            {
+                currPayload.UpdatePayload(eventData, canceled);
+                currPayload = null;
+                remainingCooldown = GetCooldown();
+                remainingUseTime = 0;
+                return;
+            }
+
+            remainingUseTime = GetUseTime();
+            if (!currPayload)
+            {
+                InitPayload(eventData);
+            }
+            else
+            {
+                currPayload.UpdatePayload(eventData, canceled);
+            }
+        }
+
         public virtual void Use(AbilityEventData eventData, bool canceled = false)
         {
             user.SetAttack(GetUseTime());
-            remainingUseTime = GetUseTime();
-            remainingCooldown = GetCooldown();
+            if (!abilityData.continuous)
+            {
+                HandleInstantPayload(eventData);
+            }
+            else
+            {
+                HandleContinuousPayload(eventData, canceled);
+            }
         }
 
         public virtual void GiveToUser(Character newUser)
         {
             user = newUser;
             user.abilities.Add(this);
+            transform.parent = user.transform;
         }
 
         protected virtual void OnDestroy()
         {
-            if(user)
+            if (user)
                 user.abilities.Remove(this);
         }
 
@@ -121,6 +176,7 @@ namespace Arkademy.Gameplay.Ability
         {
             return GetTargetCandidates(out var candidates) ? candidates.First() : null;
         }
+
         public virtual bool GetTargetCandidates(out List<Character> characters)
         {
             var searchRange = Mathf.Min(GetRange(), user.Attributes.Get(Attribute.Type.Vision));
@@ -130,7 +186,6 @@ namespace Arkademy.Gameplay.Ability
                 .OrderBy(x => Vector3.Distance(x.transform.position, user.transform.position))
                 .ToList();
             return characters.Any();
-
         }
     }
 }

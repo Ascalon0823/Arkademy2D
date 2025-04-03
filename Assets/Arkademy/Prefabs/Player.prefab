@@ -53,11 +53,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   cameraPrefab: {fileID: 9071569250273388120, guid: 0da22fa044291384d8f5733f2acb2a51, type: 3}
+  charaRecord:
+    character:
+      displayName: 
+      raceName: 
+      xp: 0
+      gold: 0
+      equipmentSlots: []
+      clearedRift: 0
+      attrInvestments: []
+      inventory: []
+    tapAbilityName: 
+    holdAbilityName: 
+    swipeAbilityName: 
   followCamera: {fileID: 0}
   playerInput: {fileID: 7456729860109310057}
   currentInteractableCandidate: {fileID: 0}
   holdAbility: {fileID: 0}
   tapAbility: {fileID: 0}
+  swipeAbility: {fileID: 0}
   autoUseTapAbility: 1
   setupComplete: 0
   currentPlayerData: 
@@ -138,7 +152,7 @@ MonoBehaviour:
   holdDir: {x: 0, y: 0}
   onUIRaw: 0
   playerInput: {fileID: 4361632494538741494}
-  holdThreshold: 0.25
+  holdThreshold: 0.1
   moveDeadZone: 10
   analogRange: 100
   screenPosition: {x: 0, y: 0}

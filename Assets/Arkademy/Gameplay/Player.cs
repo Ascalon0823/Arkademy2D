@@ -30,12 +30,13 @@ namespace Arkademy.Gameplay
         public static Camera Camera => _localPlayer.followCamera.ppcam.cam;
         public Character character;
         [SerializeField] private FollowCamera cameraPrefab;
-
+        public CharacterRecord charaRecord;
         public FollowCamera followCamera;
         public PlayerInput playerInput;
         public Interactable currentInteractableCandidate;
         public AbilityBase holdAbility;
         public AbilityBase tapAbility;
+        public AbilityBase swipeAbility;
         public bool autoUseTapAbility;
         public bool setupComplete;
         [TextArea] [SerializeField] private string currentPlayerData;
@@ -52,10 +53,13 @@ namespace Arkademy.Gameplay
 
         public void Setup()
         {
-            var charaRecord = Session.currCharacterRecord;
+            charaRecord = Session.currCharacterRecord;
             charaRecord.LastPlayed = DateTime.UtcNow;
             var race = Race.GetRace(charaRecord.character.raceName);
             character = Character.Create(race, charaRecord.character, 0);
+            tapAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.tapAbilityName);
+            holdAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.holdAbilityName);
+            swipeAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.swipeAbilityName);
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
             character.SetPosition(characterStartPosition);
@@ -82,8 +86,6 @@ namespace Arkademy.Gameplay
                 currentInteractableCandidate.OnInteractedBy(character);
             }
             
-         
-            tapAbility = character.abilities.LastOrDefault(x => x is WeaponBaseAttack);
             var e = new AbilityEventData
             {
                 PrimaryTarget = tapAbility?.GetPrimaryTarget(),
@@ -100,7 +102,7 @@ namespace Arkademy.Gameplay
                 if (holdAbility.CanUse(e)) holdAbility.Use(e);
             }
 
-            if (holdAbility && !playerInput.hold && holdAbility.InUse())
+            if (holdAbility && (!playerInput.hold||!holdAbility.CanUse(e)) && holdAbility.InUse())
             {
                 holdAbility.Use(e, true);
             }

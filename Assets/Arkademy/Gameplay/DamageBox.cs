@@ -13,7 +13,7 @@ namespace Arkademy.Gameplay
         {
             if (other.GetCharacter(out var chara) && chara.faction != faction)
             {
-                chara.TakeDamage(new DamageData { amount = damage });
+                chara.TakeDamage(new DamageData(damage));
             }
         }
     }

@@ -21,8 +21,7 @@ namespace Arkademy.Data
         public bool facingLeft;
 
         public List<EquipmentSlot> slots = new();
-        public List<AbilityBase> abilities=new List<AbilityBase>();
-
+        public List<string> abilities = new();
         public static Race GetRace(string name)
         {
             if (!_raceCache.TryGetValue(name, out var cached))

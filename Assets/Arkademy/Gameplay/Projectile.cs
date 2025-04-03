@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Arkademy.Data;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Arkademy.Gameplay
         public Rigidbody2D body;
         public bool rotateToDir;
         public Action<Collider2D> OnHit;
+        public List<Collider2D> ignores = new();
 
         private void Start()
         {
@@ -27,7 +29,6 @@ namespace Arkademy.Gameplay
                 Destroy(gameObject);
                 return;
             }
-
             body.MovePosition(body.position + dir * speed * Time.fixedDeltaTime);
             if (rotateToDir)
                 body.MoveRotation(Quaternion.FromToRotation(Vector3.up, dir));
@@ -35,9 +36,9 @@ namespace Arkademy.Gameplay
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (ignores.Contains(other)) return;
             OnHit?.Invoke(other);
         }
-
         public void Setup(int damage, int faction, bool passThrough)
         {
             OnHit += other =>

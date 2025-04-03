@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 1384726304416747139}
   - component: {fileID: 3346731908101472055}
   m_Layer: 0
-  m_Name: MeleePayload
+  m_Name: DoubleSlashPayload
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,9 +262,9 @@ MonoBehaviour:
   trigger: {fileID: 1572755193924098906}
   remainingTriggerCount: 0
   currentHitCount: 0
-  triggerCount: 1
+  triggerCount: 2
   damagePercent: 100
-  maxDamagePercent: 100
-  maxTriggerCount: 1
-  hitCount: 1
-  maxHitCount: 1
+  maxDamagePercent: 300
+  maxTriggerCount: 2
+  hitCount: 3
+  maxHitCount: 5
