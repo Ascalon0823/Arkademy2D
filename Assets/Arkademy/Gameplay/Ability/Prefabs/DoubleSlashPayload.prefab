@@ -262,9 +262,9 @@ MonoBehaviour:
   trigger: {fileID: 1572755193924098906}
   remainingTriggerCount: 0
   currentHitCount: 0
-  triggerCount: 2
+  triggerCount: 5
   damagePercent: 100
   maxDamagePercent: 300
-  maxTriggerCount: 2
-  hitCount: 3
-  maxHitCount: 5
+  maxTriggerCount: 5
+  hitCount: 2
+  maxHitCount: 2

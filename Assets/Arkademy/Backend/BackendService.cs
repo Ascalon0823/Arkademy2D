@@ -19,7 +19,19 @@ namespace Arkademy.Backend
         public Uri BaseUrl;
         public string Token;
 
-        public static bool Offline => Env().offline;
+        public static bool Offline
+        {
+            get
+            {
+                if (!Application.isEditor)
+                {
+                    return !Application.absoluteURL.Contains("192.168");
+                }
+                return Env().offline;
+            }
+        }
+
+        
 
         public async Task<T> Get<T>(string url)
         {

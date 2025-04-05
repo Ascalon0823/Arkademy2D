@@ -140,8 +140,14 @@ MonoBehaviour:
         additional: []
         providedAbilities: []
     abilities:
-    - DoubleSlash
-    - ArielSlash
+    - abilityName: DoubleSlash
+      beginningLevel: 1
+      maxLevel: 20
+      xpPerLevel: 100
+    - abilityName: ArielSlash
+      beginningLevel: 1
+      maxLevel: 20
+      xpPerLevel: 100
   displays:
   - attribute:
       name: 

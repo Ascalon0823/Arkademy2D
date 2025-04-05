@@ -7,11 +7,6 @@ using UnityEngine;
 namespace Arkademy.Data
 {
     [Serializable]
-    public class AbilityInvestment : Investment
-    {
-        public string abilityName;
-    }
-    [Serializable]
     public class Ability
     {
         public enum TargetType

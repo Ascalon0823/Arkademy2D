@@ -120,7 +120,10 @@ MonoBehaviour:
     facingLeft: 1
     slots: []
     abilities:
-    - Melee
+    - abilityName: Melee
+      beginningLevel: 1
+      maxLevel: 0
+      xpPerLevel: 0
   displays:
   - attribute:
       name: 

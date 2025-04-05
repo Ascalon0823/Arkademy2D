@@ -51,7 +51,9 @@ namespace Arkademy.Gameplay
             graphic.character = this;
             foreach (var abilityName in race.abilities)
             {
-                var ability = Data.Ability.GetAbility(abilityName);
+                var ability = Data.Ability.GetAbility(abilityName.abilityName);
+                var level = data.GetAbilityLevel(abilityName.abilityName);
+                if (level == 0) continue;
                 var instance = AbilityBase.CreateAbility(ability);
                 instance.GiveToUser(this);
             }

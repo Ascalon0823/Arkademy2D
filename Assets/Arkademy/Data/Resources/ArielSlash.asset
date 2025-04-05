@@ -26,3 +26,4 @@ MonoBehaviour:
     continuous: 1
     abilityPrefab: {fileID: 0}
     payloadPrefab: {fileID: 8295354792423453701, guid: 70992b6615ad54f8386c2fdb88a94656, type: 3}
+  abilitySlotType: 3

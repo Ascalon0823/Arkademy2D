@@ -72,6 +72,11 @@ namespace Arkademy.Gameplay.Ability
             return abilityData.reach;
         }
 
+        public virtual int GetLevel()
+        {
+            return user.data.GetAbilityLevel(abilityData.name);
+        }
+
         public virtual bool CanUse(AbilityEventData eventData)
         {
             return !InCooldown() && (!InUse()||abilityData.continuous) && (!user.IsMoving() || abilityData.usableWhileMoving);

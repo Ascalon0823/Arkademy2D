@@ -7,7 +7,15 @@ using UnityEngine.UI;
 
 namespace Arkademy.Data
 {
-    
+    [Serializable]
+    public class AbilityAvailability
+    {
+        public string abilityName;
+        public int beginningLevel;
+        public int maxLevel;
+        public int xpPerLevel;
+    }
+
     [Serializable]
     public class Race
     {
@@ -21,7 +29,7 @@ namespace Arkademy.Data
         public bool facingLeft;
 
         public List<EquipmentSlot> slots = new();
-        public List<string> abilities = new();
+        public List<AbilityAvailability> abilities = new();
         public static Race GetRace(string name)
         {
             if (!_raceCache.TryGetValue(name, out var cached))
@@ -29,6 +37,7 @@ namespace Arkademy.Data
                 cached = Resources.Load<Scriptable.RaceObject>(name).race;
                 _raceCache[name] = cached;
             }
+
             return cached;
         }
 
@@ -40,6 +49,6 @@ namespace Arkademy.Data
                 raceName = displayName,
                 equipmentSlots = slots
             };
-        } 
+        }
     }
 }

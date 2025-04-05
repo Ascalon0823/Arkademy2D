@@ -36,8 +36,8 @@ namespace Arkademy.Gameplay.Ability
             if (canceled)
             {
                 indicator.SetActive(false);
-                remainingTriggerCount = Mathf.FloorToInt(Mathf.Lerp(triggerCount, maxTriggerCount, 1f / 20f));
-                currentHitCount = Mathf.FloorToInt(Mathf.Lerp(hitCount, maxHitCount, 1f / 20f));
+                remainingTriggerCount = Mathf.FloorToInt(Mathf.Lerp(triggerCount, maxTriggerCount, ability.GetLevel() / 20f));
+                currentHitCount = Mathf.FloorToInt(Mathf.Lerp(hitCount, maxHitCount, ability.GetLevel() / 20f));
                 var projectile = Instantiate(projectilePrefab,transform.position,transform.rotation);
                 projectile.dir = dir;
                 projectile.OnHit += c =>
@@ -49,7 +49,7 @@ namespace Arkademy.Gameplay.Ability
                         {
                             var baseDamage = ability.user.Attributes.GetBase(Attribute.Type.Attack);
                             baseDamage = baseDamage *
-                                Mathf.FloorToInt(Mathf.Lerp(damagePercent, maxDamagePercent, 1f / 20f)) / 100;
+                                Mathf.FloorToInt(Mathf.Lerp(damagePercent, maxDamagePercent, ability.GetLevel() / 20f)) / 100;
                             baseDamage = Random.Range(80, 120) * baseDamage / 100;
                             damages[i] = baseDamage;
                         }

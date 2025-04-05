@@ -24,8 +24,8 @@ namespace Arkademy.Gameplay.Ability
         {
             base.Init(data, parent, dura, onTriggered);
             
-            remainingTriggerCount = Mathf.FloorToInt(Mathf.Lerp(triggerCount, maxTriggerCount, 1f / 20f));
-            currentHitCount = Mathf.FloorToInt(Mathf.Lerp(hitCount, maxHitCount, 1f / 20f));
+            remainingTriggerCount = Mathf.FloorToInt(Mathf.Lerp(triggerCount, maxTriggerCount, ability.GetLevel() / 20f));
+            currentHitCount = Mathf.FloorToInt(Mathf.Lerp(hitCount, maxHitCount, ability.GetLevel()/ 20f));
             transform.localScale = new Vector3(parent.GetRange(), parent.GetRange());
             animator.speed = 1 / dura;
             trigger.OnTrigger.AddListener(c =>
@@ -37,7 +37,7 @@ namespace Arkademy.Gameplay.Ability
                     {
                         var baseDamage = parent.user.Attributes.GetBase(Attribute.Type.Attack);
                         baseDamage = baseDamage *
-                            Mathf.FloorToInt(Mathf.Lerp(damagePercent, maxDamagePercent, 1f / 20f)) / 100;
+                            Mathf.FloorToInt(Mathf.Lerp(damagePercent, maxDamagePercent, ability.GetLevel()/ 20f)) / 100;
                         baseDamage = Random.Range(80, 120) * baseDamage / 100;
                         damages[i] = baseDamage;
                     }
