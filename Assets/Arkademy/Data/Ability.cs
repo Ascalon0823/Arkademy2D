@@ -9,6 +9,14 @@ namespace Arkademy.Data
     [Serializable]
     public class Ability
     {
+        public enum AbilitySlotType
+        {
+            None,
+            Passive,
+            Tap,
+            Hold,
+            Swipe
+        }
         public enum TargetType
         {
             None,
@@ -36,6 +44,7 @@ namespace Arkademy.Data
         public AbilityBase abilityPrefab;
         public AbilityPayload payloadPrefab;
         public Sprite icon;
+        public AbilitySlotType abilitySlotType;
         public static Ability GetAbility(string name)
         {
             return Resources.Load<AbilityObject>(name).ability;

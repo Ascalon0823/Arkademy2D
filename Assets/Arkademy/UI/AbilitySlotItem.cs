@@ -10,21 +10,21 @@ namespace Arkademy.UI
 {
     public class AbilitySlotItem : MonoBehaviour
     {
-        public string slotType;
+        public Ability.AbilitySlotType slotType;
         public string abilityName;
 
         public Image icon;
         public TextMeshProUGUI abilityText;
-
+        public AbilityPage page;
         public void Init()
         {
             var characterRecord = Session.currCharacterRecord;
-            if (slotType == "tap")
+            if (slotType == Ability.AbilitySlotType.Tap)
             {
                 abilityName = characterRecord.tapAbilityName;
             }
 
-            if (slotType == "hold")
+            if (slotType == Ability.AbilitySlotType.Hold)
             {
                 abilityName = characterRecord.holdAbilityName;
             }
@@ -35,12 +35,12 @@ namespace Arkademy.UI
         {
             abilityName = newAbility;
             var charaRecord = Session.currCharacterRecord;
-            if (slotType == "tap")
+            if (slotType == Ability.AbilitySlotType.Tap)
             {
                 charaRecord.tapAbilityName = abilityName;
             }
 
-            if (slotType == "hold")
+            if (slotType == Ability.AbilitySlotType.Hold)
             {
                 charaRecord.holdAbilityName = abilityName;
             }
@@ -60,6 +60,11 @@ namespace Arkademy.UI
             var ability = Data.Ability.GetAbility(abilityName);
             abilityText.text = ability.displayName;
             icon.sprite = ability.icon;
+        }
+
+        public void OnClick()
+        {
+            page.BeginSelection(this);
         }
     }
 }

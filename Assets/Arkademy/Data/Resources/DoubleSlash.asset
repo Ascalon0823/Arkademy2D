@@ -27,4 +27,4 @@ MonoBehaviour:
     abilityPrefab: {fileID: 0}
     payloadPrefab: {fileID: 3346731908101472055, guid: d1d03e4a953974e07a94a98823bd4f8f, type: 3}
     icon: {fileID: 541181531, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
-  abilitySlotType: 2
+    abilitySlotType: 2

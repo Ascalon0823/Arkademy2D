@@ -12,7 +12,7 @@ namespace Arkademy.Data
     }
 
     [Serializable]
-    public class AttrInvestment:Investment
+    public class AttrInvestment : Investment
     {
         public Attribute.Type type;
     }
@@ -23,6 +23,7 @@ namespace Arkademy.Data
         public string abilityName;
         public int addedLevel;
     }
+
     [Serializable]
     public class Character
     {
@@ -36,12 +37,27 @@ namespace Arkademy.Data
         public List<Item> inventory = new List<Item>();
 
         public List<AbilityInvestment> abilityInvestments = new List<AbilityInvestment>();
-      
+
 
         public bool AddToInventory(Item item)
         {
             inventory.Add(item);
             return true;
+        }
+
+        public List<string> GetAllAbilities()
+        {
+            var race = Race.GetRace(raceName);
+            return race.abilities.Select(x => x.abilityName).ToList();
+        }
+
+        public List<string> GetAvailableAbilities()
+        {
+            var race = Race.GetRace(raceName);
+            return race.abilities
+                .Where(x => x.beginningLevel +
+                    (abilityInvestments.FirstOrDefault(z => z.abilityName == x.abilityName)?.addedLevel ?? 0) > 0)
+                .Select(x => x.abilityName).ToList();
         }
 
         public int GetAbilityLevel(string abilityName)
@@ -50,7 +66,7 @@ namespace Arkademy.Data
             var availability = race.abilities.FirstOrDefault(x => x.abilityName == abilityName);
             if (availability == null) return 0;
             var investment = abilityInvestments.FirstOrDefault(x => x.abilityName == abilityName);
-            return availability.beginningLevel + (investment?.addedLevel??0);
+            return availability.beginningLevel + (investment?.addedLevel ?? 0);
         }
     }
 }
