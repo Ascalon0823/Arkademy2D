@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Arkademy.Data;
 using Arkademy.Gameplay.Ability;
+using Arkademy.UI;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ namespace Arkademy.Gameplay
         public AbilityBase swipeAbility;
         public bool autoUseTapAbility;
         public bool setupComplete;
+        public CharacterHUD characterHUDPrefab;
         [TextArea] [SerializeField] private string currentPlayerData;
 
         public Vector3 characterStartPosition;
@@ -63,6 +65,7 @@ namespace Arkademy.Gameplay
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
             character.SetPosition(characterStartPosition);
+            var hud = Instantiate(characterHUDPrefab);
         }
 
         public Vector2 GetRandomPosArrandCharacter(float distance)
@@ -85,14 +88,15 @@ namespace Arkademy.Gameplay
             {
                 currentInteractableCandidate.OnInteractedBy(character);
             }
-            
+
             var e = new AbilityEventData
             {
                 PrimaryTarget = tapAbility?.GetPrimaryTarget(),
                 Direction = playerInput.hold ? playerInput.holdDir : null,
                 Position = (playerInput.hold || playerInput.interact) ? playerInput.position : null,
             };
-            if (tapAbility  && ((autoUseTapAbility && tapAbility.CanReach(e)) || playerInput.interact) && !currentInteractableCandidate)
+            if (tapAbility && ((autoUseTapAbility && tapAbility.CanReach(e)) || playerInput.interact) &&
+                !currentInteractableCandidate)
             {
                 if (tapAbility.CanUse(e)) tapAbility.Use(e);
             }
@@ -102,7 +106,7 @@ namespace Arkademy.Gameplay
                 if (holdAbility.CanUse(e)) holdAbility.Use(e);
             }
 
-            if (holdAbility && (!playerInput.hold||!holdAbility.CanUse(e)) && holdAbility.InUse())
+            if (holdAbility && (!playerInput.hold || !holdAbility.CanUse(e)) && holdAbility.InUse())
             {
                 holdAbility.Use(e, true);
             }

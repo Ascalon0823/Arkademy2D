@@ -63,6 +63,7 @@ MonoBehaviour:
       clearedRift: 0
       attrInvestments: []
       inventory: []
+      abilityInvestments: []
     tapAbilityName: 
     holdAbilityName: 
     swipeAbilityName: 
@@ -74,6 +75,7 @@ MonoBehaviour:
   swipeAbility: {fileID: 0}
   autoUseTapAbility: 1
   setupComplete: 0
+  characterHUDPrefab: {fileID: 6576489518021566028, guid: b738dd4381efa4d6486ac5f098e0420b, type: 3}
   currentPlayerData: 
   characterStartPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4361632494538741494
