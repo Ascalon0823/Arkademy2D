@@ -55,8 +55,6 @@ namespace Arkademy.CharacterCreation
                 character = currentCharacter,
                 CreationTime = DateTime.UtcNow,
                 LastPlayed = DateTime.UtcNow,
-                tapAbilityName = "DoubleSlash",
-                holdAbilityName = "ArielSlash"
             };
             Session.currPlayerRecord.characterRecords.Add(characterRecord);
             Session.currCharacterRecord = characterRecord;

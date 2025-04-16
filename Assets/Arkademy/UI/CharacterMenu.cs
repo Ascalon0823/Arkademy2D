@@ -8,7 +8,7 @@ namespace Arkademy.UI
         
         private static CharacterMenu _instance;
         
-        public CanvasGroup[] canvasGroups;
+        public Page[] pages;
         public int currPage;
         private void Awake()
         {
@@ -45,25 +45,23 @@ namespace Arkademy.UI
         public void PrevPage()
         {
             currPage--;
-            currPage = currPage<0 ? canvasGroups.Length - 1 : currPage; 
+            currPage = currPage<0 ? pages.Length - 1 : currPage; 
             TogglePage(currPage);
         }
 
         public void NextPage()
         {
             currPage++;
-            currPage = currPage > canvasGroups.Length - 1 ? 0 : currPage;
+            currPage = currPage > pages.Length - 1 ? 0 : currPage;
             TogglePage(currPage);
         }
 
         public void TogglePage(int idx)
         {
-            if(canvasGroups==null) return;
-            for (var i = 0; i < canvasGroups.Length; i++)
+            if(pages==null) return;
+            for (var i = 0; i < pages.Length; i++)
             {
-                canvasGroups[i].alpha = idx == i ? 1 : 0;
-                canvasGroups[i].interactable = idx == i;
-                canvasGroups[i].blocksRaycasts = idx == i;
+                pages[i].Toggle(i==idx);
             }
         }
 

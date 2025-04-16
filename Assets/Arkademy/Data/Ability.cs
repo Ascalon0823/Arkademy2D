@@ -35,6 +35,7 @@ namespace Arkademy.Data
         public bool continuous;
         public AbilityBase abilityPrefab;
         public AbilityPayload payloadPrefab;
+        public Sprite icon;
         public static Ability GetAbility(string name)
         {
             return Resources.Load<AbilityObject>(name).ability;

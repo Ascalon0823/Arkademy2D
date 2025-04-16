@@ -59,13 +59,18 @@ namespace Arkademy.Gameplay
             charaRecord.LastPlayed = DateTime.UtcNow;
             var race = Race.GetRace(charaRecord.character.raceName);
             character = Character.Create(race, charaRecord.character, 0);
-            tapAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.tapAbilityName);
-            holdAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.holdAbilityName);
-            swipeAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.swipeAbilityName);
+            UpdateAbilityBindings();
             followCamera = Instantiate(cameraPrefab);
             followCamera.followTarget = character.transform;
             character.SetPosition(characterStartPosition);
             var hud = Instantiate(characterHUDPrefab);
+        }
+
+        public void UpdateAbilityBindings()
+        {
+            tapAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.tapAbilityName);
+            holdAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.holdAbilityName);
+            swipeAbility = character.abilities.FirstOrDefault(x => x.abilityData.name == charaRecord.swipeAbilityName);
         }
 
         public Vector2 GetRandomPosArrandCharacter(float distance)

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace Arkademy.UI
 {
-    public class SystemPage : MonoBehaviour
+    public class SystemPage : Page
     {
         public async void OnSave()
         {
