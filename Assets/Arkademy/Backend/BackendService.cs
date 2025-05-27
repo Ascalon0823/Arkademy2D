@@ -23,10 +23,6 @@ namespace Arkademy.Backend
         {
             get
             {
-                if (!Application.isEditor)
-                {
-                    return !Application.absoluteURL.Contains("192.168");
-                }
                 return Env().offline;
             }
         }

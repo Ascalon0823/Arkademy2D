@@ -60,6 +60,12 @@ namespace Arkademy.Data
                 .Select(x => x.abilityName).ToList();
         }
 
+        public List<AttributeProfile> GetAllAttributeProfiles()
+        {
+            var race = Race.GetRace(raceName);
+            return race.attributes;
+        }
+
         public int GetAbilityLevel(string abilityName)
         {
             var race = Race.GetRace(raceName);

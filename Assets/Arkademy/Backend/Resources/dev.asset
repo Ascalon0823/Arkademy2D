@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: dev
   m_EditorClassIdentifier: 
   envName: dev
-  baseURL: http://192.168.1.87:8080
+  baseURL: https://api-arkademy-202926652276.asia-southeast1.run.app
   overrideToken: 
   offline: 0

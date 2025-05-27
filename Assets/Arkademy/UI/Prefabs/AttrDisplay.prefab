@@ -676,6 +676,7 @@ GameObject:
   - component: {fileID: 6621566438247308574}
   - component: {fileID: 4302446724783002079}
   - component: {fileID: 5232110193693511008}
+  - component: {fileID: 8901753726882219866}
   m_Layer: 5
   m_Name: AttrDisplay
   m_TagString: Untagged
@@ -791,6 +792,47 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &8901753726882219866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3870627107396348855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136305acbed14c23a4ce873702e40da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attribute:
+    name: 
+    type: 0
+    calType: 0
+    value: 0
+    current: 0
+  profile:
+    name: 
+    type: 0
+    calType: 0
+    value: 0
+    current: 0
+    abbrev: 
+    icon: {fileID: 0}
+    canInvest: 0
+    returnRate: 0
+    diminishingReturn: 0
+    initialInvestReq: 0
+    investReqIncrement: 0
+    investmentBaseValue: 0
+    investCalculationType: 0
+  investment:
+    xp: 0
+    type: 0
+  attrText: {fileID: 8102829389543517409}
+  investmentText: {fileID: 23858222599589638}
+  reduce: {fileID: 2423632256495612798}
+  add: {fileID: 6183948050529045938}
+  statsPage: {fileID: 0}
 --- !u!1 &5606485848399991595
 GameObject:
   m_ObjectHideFlags: 0
