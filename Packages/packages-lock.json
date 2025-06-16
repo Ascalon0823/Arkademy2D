@@ -312,6 +312,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "studio.arkademy.pixelperfect": {
+      "version": "https://github.com/Ascalon0823/PixelPerfectPackage.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "c0bf3b2cedc917561d0580dd25eff1937dcc4c6e"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

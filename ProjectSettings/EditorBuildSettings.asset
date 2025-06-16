@@ -4,28 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Arkademy/Title/Title.unity
-    guid: 8d0f2cae91168ad449f2f37023f8434f
-  - enabled: 1
-    path: Assets/Arkademy/CharacterSelection/CharacterSelection.unity
-    guid: ee0411d098f4fcb40a87dcb47c7c7be9
-  - enabled: 1
-    path: Assets/Arkademy/CharacterCreation/CharacterCreation.unity
-    guid: 4f5a33e244e4d1b4b8d65d8489e19f00
-  - enabled: 1
-    path: Assets/Arkademy/Campus/Campus.unity
-    guid: d070dd8d349c007458ef13b85da20ac2
-  - enabled: 1
-    path: Assets/Arkademy/Test/Input/TestInput.unity
-    guid: 77d2e4d647998294288a8df20668d3d6
-  - enabled: 1
-    path: Assets/Arkademy/Rift/Rift.unity
-    guid: 071bc32549c95974b802f7ad1b15eb36
-  - enabled: 1
-    path: Assets/Arkademy/UserAuth/UserAuth.unity
-    guid: b92ae5aae50bb4948ac8859c4387646a
+  m_Scenes: []
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b7e37b1feb4af434db06201f0c461b01, type: 3}
   m_UseUCBPForAssetBundles: 0
