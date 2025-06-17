@@ -29,7 +29,6 @@ namespace Midterm.Field
 
         private void Start()
         {
-            seed = Random.Range(0, 10000);
             Random.InitState(seed);
             xOff = Random.Range(-10000, 10000);
             yOff = Random.Range(-10000, 10000);
