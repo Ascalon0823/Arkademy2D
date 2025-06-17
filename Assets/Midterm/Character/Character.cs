@@ -64,16 +64,17 @@ namespace Midterm.Character
             life = Mathf.Clamp(life, 0, maxLife);
             animator.SetTrigger("hit");
         }
-        
+
         public List<Ability> abilities;
 
         public void UseAbilities()
         {
+            if (life <= 0) return;
             foreach (var ability in abilities)
             {
                 if (ability.CanUse())
                 {
-                    ability.Use();  
+                    ability.Use();
                 }
             }
         }
