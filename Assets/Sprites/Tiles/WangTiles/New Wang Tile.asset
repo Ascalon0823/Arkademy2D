@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50e238f3a6c4bda9c69ce69cae4d638, type: 3}
+  m_Name: New Wang Tile
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 4788be64fa98a6043b41daff24a7e3af, type: 2}
+  - {fileID: 11400000, guid: 948bf9c54200da049b0142f958756df5, type: 2}
+  - {fileID: 11400000, guid: c39acf6b7bc4fbd4bba9c483c4e6ed4c, type: 2}
+  - {fileID: 11400000, guid: 6b701068096474a4f9cb741f0b460397, type: 2}
+  - {fileID: 11400000, guid: 69c76573c20bf034dab69d64b6c44919, type: 2}
+  - {fileID: 11400000, guid: 5c295c8cc3dd99a4fac018f82af81854, type: 2}
+  - {fileID: 11400000, guid: fe8b3ce46c350cc46bb79f7d9a640057, type: 2}
+  - {fileID: 11400000, guid: 6bf02e142f558e94e9863e3ffec102de, type: 2}
+  - {fileID: 11400000, guid: c5af710f628f087418bcdf8042d1b662, type: 2}
+  - {fileID: 11400000, guid: 404208264df28634387c31cd36f00997, type: 2}
+  - {fileID: 11400000, guid: 1a20b3f975b0daa4c9b5e98020b8b22f, type: 2}
+  - {fileID: 11400000, guid: dedf5887d02377345aa082d71508bf38, type: 2}
+  - {fileID: 11400000, guid: 46ef12f3ac963ee459817d66e4b2393d, type: 2}
+  - {fileID: 11400000, guid: 0744314de20de904f97422adf1ddfc4c, type: 2}
+  - {fileID: 11400000, guid: fa69e086ccb38ae49a94d48e446f29b5, type: 2}
+  - {fileID: 11400000, guid: 7aef9631fb2891c4aa552c4c14b4ed7a, type: 2}
