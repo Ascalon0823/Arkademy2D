@@ -12,12 +12,12 @@ namespace Midterm.Character
 
         private void Update()
         {
-            UpdateGraphic();    
+            UpdateGraphic();
         }
 
         private void FixedUpdate()
         {
-           Move();
+            Move();
         }
 
 
@@ -29,14 +29,15 @@ namespace Midterm.Character
                 faceDir = moveDir.normalized;
             }
         }
+
         public Animator animator;
         public SpriteRenderer spriteRenderer;
 
         public void UpdateGraphic()
         {
             var isMoving = moveDir.magnitude > 0.01f;
-            animator.SetBool("walking",isMoving);
-            animator.SetFloat("walkSpeed", moveSpeed/4f);
+            animator.SetBool("walking", isMoving);
+            animator.SetFloat("walkSpeed", moveSpeed / 4f);
             spriteRenderer.flipX = faceDir.x > 0;
         }
     }
