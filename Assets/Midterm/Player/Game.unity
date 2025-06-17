@@ -128,6 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 82453728}
+  - component: {fileID: 82453729}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -150,6 +151,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &82453729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82453727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf630028eadc477c95ed7af726b0acf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actualTime: 0
+  totalTime: 0
+  waveTime: 0
+  waveCount: 0
+  speed: 10
+  player: {fileID: 1302658427}
+  enemyPrefab: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+  spawnInterval: 1
+  spawnLimit: 30
+  lastSpawnTime: 0
+  spawnedEnemies: []
+  despawnDistance: 1.5
 --- !u!1 &89206050
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 3
+  m_ScaleFactor: 2
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -583,7 +608,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.25
+  orthographic size: 7.828125
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -626,17 +651,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4809bca0d1f6649ad7e6fd436c2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelScale: 3
+  pixelScale: 2
   useReferedScale: 1
   referenceResolution: {x: 270, y: 480}
   pixelPerUnit: 16
   cam: {fileID: 1172519571}
   camRect:
     serializedVersion: 2
-    x: -20
-    y: -11.25
-    width: 40
-    height: 22.5
+    x: -13.90625
+    y: -7.828125
+    width: 27.8125
+    height: 15.65625
 --- !u!114 &1176643550
 MonoBehaviour:
   m_ObjectHideFlags: 0
