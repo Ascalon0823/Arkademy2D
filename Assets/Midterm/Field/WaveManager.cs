@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -42,12 +43,18 @@ namespace Midterm.Field
                 {
                     toDespawn.Add(enemy);
                 }
+                
             }
 
             foreach (var despawn in toDespawn)
             {
                 spawnedEnemies.Remove(despawn);
                 Destroy(despawn.gameObject);
+            }
+
+            foreach (var dead in spawnedEnemies.Where(x => x.life <= 0).ToList())
+            {
+                spawnedEnemies.Remove(dead);
             }
         }
 
