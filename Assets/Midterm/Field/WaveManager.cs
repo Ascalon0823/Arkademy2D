@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Midterm.Character;
+using Midterm.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Midterm.Field
 {
     public class WaveManager : MonoBehaviour
     {
+        public static WaveManager Instance;
         public float actualTime;
         public float totalTime;
         public float waveTime;
@@ -23,6 +27,21 @@ namespace Midterm.Field
         public float lastSpawnTime;
         public List<Character.Character> spawnedEnemies = new();
         public float despawnDistance;
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+        private void Start()
+        {
+            player.currCharacter.onDead.AddListener(() =>
+            {
+                SaveEngine.Instance.Save(player.record);
+                SceneManager.LoadScene("Midterm/Player/Game");
+            });
+            player.record.playCount++;
+        }
+
         private void Update()
         {
             actualTime = Time.timeSinceLevelLoad;

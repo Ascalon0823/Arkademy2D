@@ -315,6 +315,10 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   faceDir: {x: 0, y: 0}
   moveSpeed: 2
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+  totalXp: 0
   animator: {fileID: 1139579494305693209}
   spriteRenderer: {fileID: 4389125003512978588}
   life: 1
@@ -333,6 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1780161883150957635}
+  xp: 1
+  xpPickupPrefab: {fileID: 4775992617235150854, guid: c012899dcce79c24390d55744a23b90a, type: 3}
 --- !u!114 &5236785464338595565
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -901,6 +901,8 @@ GameObject:
   - component: {fileID: 1248266158}
   - component: {fileID: 1248266159}
   - component: {fileID: 1248266160}
+  - component: {fileID: 1248266161}
+  - component: {fileID: 1248266162}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1006,12 +1008,42 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   faceDir: {x: 0, y: 0}
   moveSpeed: 4
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
   animator: {fileID: 1620720491}
   spriteRenderer: {fileID: 1620720492}
   life: 10
   maxLife: 10
   abilities:
   - {fileID: 598278376}
+--- !u!114 &1248266161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248266156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1921f2583d1f431eb99fbfeb98c90f6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 3
+  character: {fileID: 1248266160}
+--- !u!114 &1248266162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248266156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccee2bcd4a94637ad6e9435762e34c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalXp: 0
 --- !u!1 &1268372403
 GameObject:
   m_ObjectHideFlags: 0

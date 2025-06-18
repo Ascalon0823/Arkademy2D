@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Midterm.Character
 {
@@ -12,6 +13,7 @@ namespace Midterm.Character
         public Vector2 faceDir;
         public float moveSpeed;
 
+        public UnityEvent onDead;
         private void Update()
         {
             UseAbilities();
@@ -52,7 +54,15 @@ namespace Midterm.Character
             animator.SetBool("walking", isMoving);
             animator.SetFloat("walkSpeed", moveSpeed / 4f);
             spriteRenderer.flipX = faceDir.x > 0;
-            animator.SetBool("dead", life <= 0);
+            if (life <= 0)
+            {
+                if (!animator.GetBool("dead"))
+                    animator.SetBool("dead", true);
+            }
+            else
+            {
+                animator.SetBool("dead", false);
+            }
         }
 
         public int life;
@@ -62,6 +72,11 @@ namespace Midterm.Character
         {
             life -= damage;
             life = Mathf.Clamp(life, 0, maxLife);
+            if (life <= 0)
+            {
+                onDead?.Invoke();
+            }
+
             animator.SetTrigger("hit");
         }
 
