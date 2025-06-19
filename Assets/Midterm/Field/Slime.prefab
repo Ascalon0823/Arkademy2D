@@ -315,10 +315,11 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   faceDir: {x: 0, y: 0}
   moveSpeed: 2
+  attackSpeed: 1
+  power: 1
   onDead:
     m_PersistentCalls:
       m_Calls: []
-  totalXp: 0
   animator: {fileID: 1139579494305693209}
   spriteRenderer: {fileID: 4389125003512978588}
   life: 1
@@ -351,7 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef18322f99c741058fdb3ea8ae7d9525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 100
   interval: 1
   contactCharacter: {fileID: 0}
   lastDamageTime: 0
+  dealer: {fileID: 1780161883150957635}

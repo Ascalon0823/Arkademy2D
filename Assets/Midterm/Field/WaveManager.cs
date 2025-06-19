@@ -36,8 +36,9 @@ namespace Midterm.Field
         {
             player.currCharacter.onDead.AddListener(() =>
             {
+                player.record.gold += waveCount;
                 SaveEngine.Instance.Save(player.record);
-                SceneManager.LoadScene("Midterm/Player/Game");
+                SceneManager.LoadScene("Midterm/Player/Title");
             });
             player.record.playCount++;
         }

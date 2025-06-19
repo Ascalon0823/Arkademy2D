@@ -9,6 +9,7 @@ namespace Midterm.Character
         public float interval;
         [SerializeField] private Character contactCharacter;
         [SerializeField] private float lastDamageTime;
+        public Character dealer;
 
         private void OnCollisionEnter2D(Collision2D other)
         {
@@ -35,7 +36,7 @@ namespace Midterm.Character
 
         protected virtual void DealDamage(Character character)
         {
-            character.TakeDamage(damage);
+            character.TakeDamage(Mathf.FloorToInt(damage * dealer.power));
             lastDamageTime = Time.timeSinceLevelLoad;
         }
 

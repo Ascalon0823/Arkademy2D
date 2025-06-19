@@ -17,6 +17,16 @@ namespace Midterm.Character
             return remainingUseTime <= 0 && remainingCooldown <= 0;
         }
 
+        public virtual float GetUseTime()
+        {
+            return useTime / user.attackSpeed;
+        }
+
+        public virtual float GetCooldown()
+        {
+            return cooldown / user.attackSpeed;
+        }
+
         protected virtual void Update()
         {
             UpdateUseTime();
@@ -37,8 +47,8 @@ namespace Midterm.Character
 
         public virtual void Use()
         {
-            remainingUseTime = useTime;
-            remainingCooldown = cooldown + useTime;
+            remainingUseTime = GetUseTime();
+            remainingCooldown = GetCooldown() + remainingUseTime;
         }
     }
 }

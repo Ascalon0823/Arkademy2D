@@ -6,9 +6,11 @@ namespace Midterm.Character
     {
         [SerializeField] protected GameObject slash;
         [SerializeField] protected Animator slashAnimator;
-
+        [SerializeField] protected DamageTrigger damageTrigger;
+        
         protected override void Update()
         {
+            damageTrigger.damage = Mathf.FloorToInt(100 * user.power);
             base.Update();
             if (remainingUseTime <= 0)
             {
@@ -21,7 +23,7 @@ namespace Midterm.Character
             base.Use();
             slash.SetActive(true);
             slash.transform.localPosition = user.faceDir * 0.5f;
-            slashAnimator.SetFloat("speed", 1f / useTime);
+            slashAnimator.SetFloat("speed", 1f / GetUseTime());
         }
     }
 }

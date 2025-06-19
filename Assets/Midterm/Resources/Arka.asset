@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5aa3d7f61aa441497f399fa9dfe7f0a, type: 3}
+  m_Name: Arka
+  m_EditorClassIdentifier: 
+  internalName: test
+  displayName: Arka
+  unlocked: 1
+  unlockPrice: 0
+  icon: {fileID: -233907598127230352, guid: da1b2d56d1bf15e43bebf3292061dd4a, type: 3}
+  animator: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
+  life: 2000
+  power: 1
+  speed: 4
+  atkSpeed: 1
+  initialAbilities:
+  - {fileID: 788610333823814048, guid: 538adc80622a25d4b88a2815346ad98e, type: 3}

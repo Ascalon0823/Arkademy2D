@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,8 +13,28 @@ namespace Midterm.Character
         public Vector2 moveDir;
         public Vector2 faceDir;
         public float moveSpeed;
+        public float attackSpeed;
+        public float power;
 
         public UnityEvent onDead;
+
+        public void SetupAs(PlayableCharacterData data)
+        {
+            gameObject.name = data.internalName;
+            moveSpeed = data.speed;
+            attackSpeed = data.atkSpeed;
+            animator.runtimeAnimatorController = data.animator;
+            life = data.life;
+            maxLife = data.life;
+            power = data.power;
+            abilities.Clear();
+            foreach (var ability in data.initialAbilities)
+            {
+                var abilityInstance = Instantiate(ability, transform);
+                abilities.Add(abilityInstance);
+                abilityInstance.user = this;
+            }
+        }
         private void Update()
         {
             UseAbilities();
@@ -80,7 +101,7 @@ namespace Midterm.Character
             animator.SetTrigger("hit");
         }
 
-        public List<Ability> abilities;
+        public List<Ability> abilities = new List<Ability>();
 
         public void UseAbilities()
         {
