@@ -13,8 +13,9 @@ namespace Midterm.Character
 
         public float cooldown;
         [SerializeField] protected float remainingUseTime;
-        [SerializeField] protected float remainingCooldown;
-
+        [SerializeField] protected float lastUseTime;
+        public float remainingCooldown;
+        [SerializeField] protected float lastCooldown;
         public virtual bool CanUse()
         {
             return remainingUseTime <= 0 && remainingCooldown <= 0;
@@ -51,7 +52,14 @@ namespace Midterm.Character
         public virtual void Use()
         {
             remainingUseTime = GetUseTime();
+            lastUseTime = remainingUseTime;
             remainingCooldown = GetCooldown() + remainingUseTime;
+            lastCooldown = remainingCooldown;
+        }
+
+        public float GetCooldownPercentage()
+        {
+            return remainingCooldown / lastCooldown;
         }
     }
 }

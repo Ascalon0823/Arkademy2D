@@ -6,6 +6,7 @@ namespace Midterm.Character
     public class Level : MonoBehaviour
     {
         public int totalXp;
+        public int lastXp;
         public int nextXp;
         public int currLevel;
         public UnityEvent<int> onLevelUp;
@@ -21,8 +22,14 @@ namespace Midterm.Character
         private void LevelUp()
         {
             currLevel++;
-            nextXp += 5;
+            lastXp = nextXp;
+            nextXp += currLevel <= 2 ? 5 : currLevel<=10 ? 15 : 25;
             onLevelUp?.Invoke(currLevel);
+        }
+
+        public float GetXPPercentage()
+        {
+            return (totalXp - lastXp)*1f/(nextXp-lastXp);
         }
     }
 }

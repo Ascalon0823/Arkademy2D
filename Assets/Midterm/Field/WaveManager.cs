@@ -61,6 +61,11 @@ namespace Midterm.Field
             SpawnEnemy();
         }
 
+        public float GetCurrWaveProgress()
+        {
+            return waveTime / 120f;
+        }
+
         private void DespawnFarEnemy()
         {
             var toDespawn = new List<Character.Character>();
