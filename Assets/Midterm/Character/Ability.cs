@@ -5,8 +5,11 @@ namespace Midterm.Character
 {
     public class Ability : MonoBehaviour
     {
+        public string internalName;
         public Character user;
         public float useTime;
+        public Sprite icon;
+        public int currLevel;
 
         public float cooldown;
         [SerializeField] protected float remainingUseTime;

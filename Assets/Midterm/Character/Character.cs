@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -113,6 +114,19 @@ namespace Midterm.Character
                     ability.Use();
                 }
             }
+        }
+
+        public void LevelUpAbility(Ability ability)
+        {
+            var existing = abilities.FirstOrDefault(x=>x.internalName == ability.internalName);
+            if (existing)
+            {
+                existing.currLevel++;
+                return;
+            }
+            var newAbi = Instantiate(ability, transform);
+            abilities.Add(newAbi);
+            newAbi.user = this;
         }
     }
 }

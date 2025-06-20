@@ -16,8 +16,7 @@ namespace Midterm.Field
         public float totalTime;
         public float waveTime;
         public int waveCount;
-        [Range(0f,10f)]
-        public float speed;
+        [Range(0f, 10f)] public float speed;
 
         public Player.Player player;
 
@@ -27,6 +26,10 @@ namespace Midterm.Field
         public float lastSpawnTime;
         public List<Character.Character> spawnedEnemies = new();
         public float despawnDistance;
+        public List<Ability> availableAbilities = new List<Ability>();
+        
+        public LevelUpUI levelUpUI;
+
         private void Awake()
         {
             Instance = this;
@@ -40,6 +43,11 @@ namespace Midterm.Field
                 SaveEngine.Instance.Save(player.record);
                 SceneManager.LoadScene("Midterm/Player/Title");
             });
+            player.currCharacter.GetComponent<Level>().onLevelUp.AddListener(level =>
+            {
+                levelUpUI.levelUpEvent.Enqueue(level);
+                levelUpUI.Toggle(true);
+            });
             player.record.playCount++;
         }
 
@@ -48,7 +56,7 @@ namespace Midterm.Field
             actualTime = Time.timeSinceLevelLoad;
             totalTime += Time.deltaTime * speed;
             waveTime = totalTime % 120;
-            waveCount = 1+Mathf.FloorToInt(totalTime / 120);
+            waveCount = 1 + Mathf.FloorToInt(totalTime / 120);
             DespawnFarEnemy();
             SpawnEnemy();
         }
@@ -59,11 +67,10 @@ namespace Midterm.Field
             foreach (var enemy in spawnedEnemies)
             {
                 if (Vector3.Distance(enemy.transform.position, player.currCharacter.transform.position) >
-                    player.currCamera.camRect.size.magnitude/2f *despawnDistance)
+                    player.currCamera.camRect.size.magnitude / 2f * despawnDistance)
                 {
                     toDespawn.Add(enemy);
                 }
-                
             }
 
             foreach (var despawn in toDespawn)
@@ -84,7 +91,7 @@ namespace Midterm.Field
             if (spawnedEnemies.Count >= spawnLimit) return;
             lastSpawnTime = Time.timeSinceLevelLoad;
             var pos = player.currCamera.GetRandomPositionOutSideScreen(despawnDistance);
-            var spawned = Instantiate(enemyPrefab,pos,Quaternion.identity);
+            var spawned = Instantiate(enemyPrefab, pos, Quaternion.identity);
             spawnedEnemies.Add(spawned);
         }
     }

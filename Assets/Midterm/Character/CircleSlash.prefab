@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b9d7e8c144c66a3818c889728b1fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  internalName: circle_slash
   user: {fileID: 0}
   useTime: 0.5
+  icon: {fileID: 541181531, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
+  currLevel: 0
   cooldown: 1
   remainingUseTime: 0.5
   remainingCooldown: 1.5

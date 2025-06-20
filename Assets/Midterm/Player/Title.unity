@@ -215,7 +215,6 @@ MonoBehaviour:
   currSelection: {fileID: 0}
   title: {fileID: 1387380583}
   characterHolder: {fileID: 394834200}
-  selectionHighlight: {fileID: 0}
   spawned: []
   itemPrefab: {fileID: 1236806505396798767, guid: 906b94109bd9d1943948a86dab1c1232, type: 3}
   unlockButton: {fileID: 1365868512}

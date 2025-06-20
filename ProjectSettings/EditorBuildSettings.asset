@@ -12,5 +12,5 @@ EditorBuildSettings:
     path: Assets/Midterm/Player/Game.unity
     guid: 3f8126c0eba1a1c4d8fd60b658cc67d3
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: b7e37b1feb4af434db06201f0c461b01, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1e6ea45d6131b0b4c9eb36e6721931e9, type: 3}
   m_UseUCBPForAssetBundles: 0
