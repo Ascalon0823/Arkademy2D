@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ArkademyStudio.PixelPerfect;
 using Midterm.Character;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Midterm.Player
@@ -14,14 +15,22 @@ namespace Midterm.Player
         public int gold;
         public List<string> unlockedCharacters;
     }
+
     public class Player : MonoBehaviour
     {
         public static Player Local;
         public static string SelectedCharacterInternalName;
         public PlayerSaveData record;
         public Vector2 playerMove;
+
+        public Vector2 playerPointAt;
+        public bool playerCasting;
+        public bool playerPreparing;
         public Character.Character currCharacter;
         public PixelPerfectCamera currCamera;
+
+        public bool rawOnUI;
+        public bool onUI;
 
         private void Awake()
         {
@@ -46,7 +55,26 @@ namespace Midterm.Player
 
         private void Update()
         {
+            rawOnUI = EventSystem.current.IsPointerOverGameObject();
             currCharacter.moveDir = playerMove;
+            currCharacter.preparing = playerPreparing;
+            currCharacter.pointAt = currCamera.GetWorldPos(playerPointAt);
+            currCharacter.casting = playerCasting;
+        }
+
+        public void OnPointAt(InputValue value)
+        {
+            playerPointAt = value.Get<Vector2>();
+        }
+
+        public void OnCast(InputValue value)
+        {
+            playerCasting = value.isPressed && (!rawOnUI || playerCasting);
+        }
+
+        public void OnPrepare(InputValue value)
+        {
+            playerPreparing = value.isPressed && (!rawOnUI || playerPreparing);
         }
     }
 }

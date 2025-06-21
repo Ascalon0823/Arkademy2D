@@ -9,14 +9,19 @@ namespace Midterm.Character
     {
         public Image lifeFill;
         public Image levelFill;
+        public Image energyFill;
         public TextMeshProUGUI lvText;
+
         private void LateUpdate()
         {
             var level = Player.Player.Local.currCharacter.GetComponent<Level>();
-            
-            lvText.text = $"Lv {level.currLevel+1}";
+
+            lvText.text = $"Lv {level.currLevel + 1}";
             levelFill.fillAmount = level.GetXPPercentage();
-            lifeFill.fillAmount = Player.Player.Local.currCharacter.life*1f/Player.Player.Local.currCharacter.maxLife;
+            lifeFill.fillAmount = Player.Player.Local.currCharacter.life * 1f /
+                                  Player.Player.Local.currCharacter.maxLife;
+            energyFill.fillAmount = Player.Player.Local.currCharacter.energy * 1f /
+                                    Player.Player.Local.currCharacter.maxEnergy;
         }
     }
 }

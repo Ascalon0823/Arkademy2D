@@ -19,6 +19,8 @@ namespace Midterm.Character
 
         public UnityEvent onDead;
 
+        public bool preparing;
+
         public void SetupAs(PlayableCharacterData data)
         {
             gameObject.name = data.internalName;
@@ -36,9 +38,11 @@ namespace Midterm.Character
                 abilityInstance.user = this;
             }
         }
+
         private void Update()
         {
             UseAbilities();
+            Cast();
         }
 
         private void LateUpdate()
@@ -60,6 +64,7 @@ namespace Midterm.Character
                 return;
             }
 
+            if (preparing) return;
             body.MovePosition(body.position + moveDir.normalized * moveSpeed * Time.fixedDeltaTime);
             if (moveDir.magnitude > 0.01f)
             {
@@ -118,15 +123,74 @@ namespace Midterm.Character
 
         public void LevelUpAbility(Ability ability)
         {
-            var existing = abilities.FirstOrDefault(x=>x.internalName == ability.internalName);
+            var existing = abilities.FirstOrDefault(x => x.internalName == ability.internalName);
             if (existing)
             {
                 existing.currLevel++;
                 return;
             }
+
             var newAbi = Instantiate(ability, transform);
             abilities.Add(newAbi);
             newAbi.user = this;
+        }
+
+        public Spell currSpell;
+
+        public List<Spell> spells = new List<Spell>();
+        public float energy;
+        public int maxEnergy;
+        public Vector2 pointAt;
+        public bool casting;
+        public bool wasCasting;
+
+        public void ChangeSpell(string spellKey)
+        {
+            if (currSpell && currSpell.casting) return;
+            if (currSpell && currSpell.key == spellKey) return;
+            if (string.IsNullOrEmpty(spellKey)) return;
+            var newSpellPrefab = spells.FirstOrDefault(x => x.key == spellKey);
+            if (!newSpellPrefab) return;
+            if (currSpell)
+            {
+                Destroy(currSpell.gameObject);
+            }
+
+            currSpell = Instantiate(newSpellPrefab, transform);
+            currSpell.user = this;
+        }
+
+        public void Cast()
+        {
+            if (!currSpell) return;
+            InternalCast();
+            wasCasting = casting;
+        }
+
+        private void InternalCast()
+        {
+            if (wasCasting && !casting)
+            {
+                currSpell.EndUse(pointAt);
+                return;
+            }
+
+            if (!wasCasting && casting)
+            {
+                currSpell.BeginUse(pointAt);
+                return;
+            }
+
+            if (wasCasting && casting)
+            {
+                currSpell.Use(pointAt);
+            }
+        }
+
+        public void GainEnergy(int amount)
+        {
+            energy += amount;
+            energy = Mathf.Clamp(energy, 0, maxEnergy);
         }
     }
 }
