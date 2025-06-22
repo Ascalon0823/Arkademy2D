@@ -1,15 +1,16 @@
 using Midterm.Character;
+using UnityEngine;
 
 namespace Midterm.Field
 {
-    public class XPPickup : Character.Pickup
+    public class EnergyPickup : Pickup
     {
-        public int xp;
+        public int energy;
 
         public override void PickupBy(Character.Character character)
         {
             base.PickupBy(character);
-            character.GetComponent<Level>().AddXp(xp);
+            character.GainEnergy(energy);
         }
     }
 }

@@ -5,6 +5,9 @@ using Midterm.Character;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.LowLevel;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Midterm.Player
 {
@@ -59,7 +62,7 @@ namespace Midterm.Player
             currCharacter.moveDir = playerMove;
             currCharacter.preparing = playerPreparing;
             currCharacter.pointAt = currCamera.GetWorldPos(playerPointAt);
-            currCharacter.casting = playerCasting;
+            //currCharacter.casting = playerCasting;
         }
 
         public void OnPointAt(InputValue value)
@@ -76,5 +79,7 @@ namespace Midterm.Player
         {
             playerPreparing = value.isPressed && (!rawOnUI || playerPreparing);
         }
+
+        
     }
 }

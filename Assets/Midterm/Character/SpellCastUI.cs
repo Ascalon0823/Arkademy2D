@@ -13,12 +13,16 @@ namespace Midterm.Character
         public RectTransform[] optionsLocation;
         public List<RectTransform> currSelections = new();
 
+        public CanvasGroup cg;
         public bool preparing;
         public bool readyToPrepare;
         public Character character;
 
         public Image currSpellIcon;
 
+        public bool hasPointer;
+
+        public GameObject readyToCastIndicator;
         private void Start()
         {
             selectionBase.SetActive(false);
@@ -26,17 +30,22 @@ namespace Midterm.Character
 
         private void LateUpdate()
         {
-            if (character.preparing && !preparing)
+            var ready = character.energy >= character.maxEnergy && !character.currSpell && !preparing;
+            cg.alpha = character.energy >= character.maxEnergy ? 1 : 0.5f;
+            cg.interactable = character.energy >= character.maxEnergy && !character.currSpell;
+            cg.blocksRaycasts = character.energy >= character.maxEnergy && !character.currSpell;
+            readyToCastIndicator.SetActive(ready);
+            if ((character.preparing || hasPointer) && !preparing)
             {
                 OnBeginPrepare();
             }
 
-            if (preparing && !character.preparing)
+            if (preparing && !(character.preparing||hasPointer))
             {
                 OnEndPrepare();
             }
 
-            if (preparing)
+            if (preparing && !hasPointer)
             {
                 if (!readyToPrepare && character.moveDir.magnitude < 0.01f)
                 {
@@ -49,7 +58,7 @@ namespace Midterm.Character
                 }
             }
 
-            currSpellIcon.sprite = character.currSpell?.icon ?? null;
+            currSpellIcon.sprite = character.currSpell ? character.currSpell.icon : null;
             currSpellIcon.enabled = currSpellIcon.sprite;
         }
 
@@ -62,12 +71,12 @@ namespace Midterm.Character
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            OnBeginPrepare();
+            hasPointer = true;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            OnEndPrepare();
+            hasPointer = false;
         }
 
         public void OnBeginPrepare()

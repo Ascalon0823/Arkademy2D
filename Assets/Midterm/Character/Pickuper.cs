@@ -10,6 +10,7 @@ namespace Midterm.Character
         private void FixedUpdate()
         {
             if(!character || character.life<=0)return;
+            if (character.currSpell && character.currSpell.casting) return;
             var pickups = Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Pickup"));
             foreach (var c in pickups)
             {

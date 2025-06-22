@@ -1,6 +1,7 @@
 using System;
 using Midterm.Character;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Midterm.Field
 {
@@ -10,12 +11,19 @@ namespace Midterm.Field
 
         public int xp;
         public XPPickup xpPickupPrefab;
+        public int energy;
+        public EnergyPickup energyPickupPrefab;
+
         private void Start()
         {
             character.onDead.AddListener(() =>
             {
-                var xpPickup=Instantiate(xpPickupPrefab,transform.position,Quaternion.identity);
+                var xpPickup = Instantiate(xpPickupPrefab, transform.position + (Vector3)Random.insideUnitCircle,
+                    Quaternion.identity);
                 xpPickup.xp = xp;
+                var energyPickup = Instantiate(energyPickupPrefab,
+                    transform.position + (Vector3)Random.insideUnitCircle, Quaternion.identity);
+                energyPickup.energy = energy;
             });
         }
 

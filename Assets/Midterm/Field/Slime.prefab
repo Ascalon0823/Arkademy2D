@@ -320,11 +320,19 @@ MonoBehaviour:
   onDead:
     m_PersistentCalls:
       m_Calls: []
+  preparing: 0
   animator: {fileID: 1139579494305693209}
   spriteRenderer: {fileID: 4389125003512978588}
   life: 1
   maxLife: 1
   abilities: []
+  currSpell: {fileID: 0}
+  spells: []
+  energy: 0
+  maxEnergy: 0
+  pointAt: {x: 0, y: 0}
+  casting: 0
+  wasCasting: 0
 --- !u!114 &5407998040487526582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,6 +348,8 @@ MonoBehaviour:
   character: {fileID: 1780161883150957635}
   xp: 1
   xpPickupPrefab: {fileID: 4775992617235150854, guid: c012899dcce79c24390d55744a23b90a, type: 3}
+  energy: 10
+  energyPickupPrefab: {fileID: 3091749355740264013, guid: de8e9a12f61597f4bb201d9a1ba19605, type: 3}
 --- !u!114 &5236785464338595565
 MonoBehaviour:
   m_ObjectHideFlags: 0

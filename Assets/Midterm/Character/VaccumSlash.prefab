@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internalName: test_slash
   key: E
-  energyCost: 5
+  energyCost: 20
   user: {fileID: 0}
   casting: 0
   icon: {fileID: -1622351205, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   slashPrefab: {fileID: 9206433682126803748, guid: 18db58cd40a3b49419533af49e0483b8, type: 3}
-  interval: 0.5
+  interval: 0.25
   lastUse: 0

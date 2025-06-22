@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Midterm.Field;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -43,6 +44,7 @@ namespace Midterm.Character
         {
             UseAbilities();
             Cast();
+            if(indicator)indicator.transform.position = pointAt;
         }
 
         private void LateUpdate()
@@ -52,6 +54,7 @@ namespace Midterm.Character
 
         private void FixedUpdate()
         {
+         
             collider.enabled = life > 0;
             Move();
         }
@@ -143,11 +146,11 @@ namespace Midterm.Character
         public Vector2 pointAt;
         public bool casting;
         public bool wasCasting;
-
+        public Transform indicator;
         public void ChangeSpell(string spellKey)
         {
+            if (!energy.Equals(maxEnergy)) return;
             if (currSpell && currSpell.casting) return;
-            if (currSpell && currSpell.key == spellKey) return;
             if (string.IsNullOrEmpty(spellKey)) return;
             var newSpellPrefab = spells.FirstOrDefault(x => x.key == spellKey);
             if (!newSpellPrefab) return;
@@ -158,33 +161,22 @@ namespace Midterm.Character
 
             currSpell = Instantiate(newSpellPrefab, transform);
             currSpell.user = this;
+            currSpell.BeginUse(pointAt);
+            FieldManager.Instance?.Darken(true);
         }
 
         public void Cast()
         {
+            
             if (!currSpell) return;
-            InternalCast();
-            wasCasting = casting;
-        }
-
-        private void InternalCast()
-        {
-            if (wasCasting && !casting)
+            if (!currSpell.casting)
             {
-                currSpell.EndUse(pointAt);
+                Destroy(currSpell.gameObject);
+                FieldManager.Instance?.Darken(false);
                 return;
             }
-
-            if (!wasCasting && casting)
-            {
-                currSpell.BeginUse(pointAt);
-                return;
-            }
-
-            if (wasCasting && casting)
-            {
-                currSpell.Use(pointAt);
-            }
+            currSpell.Use(pointAt);
+           
         }
 
         public void GainEnergy(int amount)

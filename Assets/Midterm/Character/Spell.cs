@@ -14,15 +14,16 @@ namespace Midterm.Character
 
         public virtual bool CanCast()
         {
-            return user.energy >= energyCost;
+            return user.energy > 0;
         }
+
         public virtual void BeginUse(Vector2 pos)
         {
             if (!CanCast()) return;
             casting = true;
             Use(pos);
         }
-        
+
         public virtual void Use(Vector2 pos)
         {
             if (!casting) return;

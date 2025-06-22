@@ -9,14 +9,15 @@ namespace Midterm.Field
 {
     public class FieldManager : MonoBehaviour
     {
+        public static FieldManager Instance;
         public Tilemap tilemap;
+        public Tilemap pillarTilemap;
         public WangTile.WangTile wangTile;
-        public GameObject pillarPrefab;
+        public TileBase pillarTile;
         public int seed;
         public int xOff;
         public int yOff;
-        [Range(1,8)]
-        public int scale;
+        [Range(1, 8)] public int scale;
 
         [Range(0f, 1f)] public float pillarPercent;
 
@@ -25,10 +26,11 @@ namespace Midterm.Field
         public Vector2Int lastLowerChunk;
         public Vector2Int lastUpperChunk;
         public HashSet<Vector2Int> froms = new HashSet<Vector2Int>();
-        
+
 
         private void Start()
         {
+            Instance = this;
             Random.InitState(seed);
             xOff = Random.Range(-10000, 10000);
             yOff = Random.Range(-10000, 10000);
@@ -47,12 +49,12 @@ namespace Midterm.Field
             if (lowerChunk == lastLowerChunk && upperChunk == lastUpperChunk) return;
             lastLowerChunk = lowerChunk;
             lastUpperChunk = upperChunk;
-            for(var i =lowerChunk.x;i<upperChunk.x;i++)
+            for (var i = lowerChunk.x; i < upperChunk.x; i++)
             for (var j = lowerChunk.y; j < upperChunk.y; j++)
             {
-                var from = new Vector2Int(i*chunkSize, j*chunkSize);
+                var from = new Vector2Int(i * chunkSize, j * chunkSize);
                 if (froms.Contains(from)) continue;
-                var to = new Vector2Int((i+1)*chunkSize, (j+1)*chunkSize);
+                var to = new Vector2Int((i + 1) * chunkSize, (j + 1) * chunkSize);
                 Build(from, to);
                 froms.Add(from);
             }
@@ -77,8 +79,7 @@ namespace Midterm.Field
                 var pillar = Random.Range(0f, 1f) < pillarPercent;
                 if (pillar)
                 {
-                    Instantiate(pillarPrefab, new Vector3(coordX + 0.5f, coordY + 0.5f, 0), Quaternion.identity,
-                        transform);
+                    pillarTilemap.SetTile(new Vector3Int(coordX, coordY, 0), pillarTile);
                 }
 
                 data[i][j] = p > 0.5f ? 1 : 0;
@@ -98,8 +99,21 @@ namespace Midterm.Field
         {
             foreach (var from in froms)
             {
-                Gizmos.DrawWireCube(new Vector3(from.x + chunkSize/2f, from.y + chunkSize/2f, 0), Vector3.one * chunkSize);
+                Gizmos.DrawWireCube(new Vector3(from.x + chunkSize / 2f, from.y + chunkSize / 2f, 0),
+                    Vector3.one * chunkSize);
             }
+        }
+
+        public void Darken(bool darken)
+        {
+            LeanTween.color(gameObject, darken ? new Color(0.5f, 0.5f, 0.5f) : Color.white, darken ? 0.333f :1f)
+                .setFromColor(tilemap.color)
+                .setDelay(darken?0:1f)
+                .setOnUpdateColor(x =>
+                {
+                    tilemap.color = x;
+                    pillarTilemap.color = x;
+                }).setEaseInOutCirc();
         }
     }
 }

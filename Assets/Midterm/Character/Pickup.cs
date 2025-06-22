@@ -6,7 +6,7 @@ namespace Midterm.Character
     {
         public virtual void PickupBy(Character character)
         {
-            
+            Destroy(gameObject);
         }
     }
 }
