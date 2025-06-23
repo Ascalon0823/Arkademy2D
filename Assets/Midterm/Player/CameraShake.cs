@@ -14,8 +14,14 @@ namespace Midterm.Player
         [ContextMenu("Shake")]
         public void Shake(float str, float time)
         {
+            
             if(str>=shakeStrength)shakeStrength = str;
             if (remainingShake < time) shakeTime = time;
+            if (remainingShake <= 0)
+            {
+                shakeStrength = str;
+                shakeTime = time;
+            }
             remainingShake = shakeTime;
         }
 

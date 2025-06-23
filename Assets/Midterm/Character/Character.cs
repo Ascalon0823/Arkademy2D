@@ -105,7 +105,7 @@ namespace Midterm.Character
             life = Mathf.Clamp(life, 0, maxLife);
             if (Player.Player.Local.currCharacter == this)
             {
-                Player.Player.Local.shake.Shake(0.5f, 0.2f);
+                Player.Player.Local.shake.Shake(0.25f, 0.2f);
             }
             if (life <= 0)
             {
@@ -173,7 +173,7 @@ namespace Midterm.Character
             currSpell.user = this;
             currSpell.BeginUse(pointAt);
             FieldManager.Instance?.Darken(true);
-            Player.Player.Local.shake.Shake(0.25f, 2f);
+            Player.Player.Local.shake.Shake(0.15f, 2f);
         }
 
         public void Cast()
