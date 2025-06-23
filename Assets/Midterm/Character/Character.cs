@@ -44,7 +44,7 @@ namespace Midterm.Character
         {
             UseAbilities();
             Cast();
-            if(indicator)indicator.transform.position = pointAt;
+            if (indicator) indicator.transform.position = pointAt;
         }
 
         private void LateUpdate()
@@ -54,7 +54,6 @@ namespace Midterm.Character
 
         private void FixedUpdate()
         {
-         
             collider.enabled = life > 0;
             Move();
         }
@@ -98,16 +97,26 @@ namespace Midterm.Character
         public int life;
         public int maxLife;
 
+        public DamageTextSpawner damageTextSpawner;
+
         public void TakeDamage(int damage)
         {
             life -= damage;
             life = Mathf.Clamp(life, 0, maxLife);
+            if (Player.Player.Local.currCharacter == this)
+            {
+                Player.Player.Local.shake.Shake(0.5f, 0.2f);
+            }
             if (life <= 0)
             {
                 onDead?.Invoke();
             }
 
             animator.SetTrigger("hit");
+            if (damageTextSpawner)
+            {
+                damageTextSpawner.SpawnDamage(new []{damage});
+            }
         }
 
         public List<Ability> abilities = new List<Ability>();
@@ -147,6 +156,7 @@ namespace Midterm.Character
         public bool casting;
         public bool wasCasting;
         public Transform indicator;
+
         public void ChangeSpell(string spellKey)
         {
             if (!energy.Equals(maxEnergy)) return;
@@ -163,11 +173,11 @@ namespace Midterm.Character
             currSpell.user = this;
             currSpell.BeginUse(pointAt);
             FieldManager.Instance?.Darken(true);
+            Player.Player.Local.shake.Shake(0.25f, 2f);
         }
 
         public void Cast()
         {
-            
             if (!currSpell) return;
             if (!currSpell.casting)
             {
@@ -175,8 +185,8 @@ namespace Midterm.Character
                 FieldManager.Instance?.Darken(false);
                 return;
             }
+
             currSpell.Use(pointAt);
-           
         }
 
         public void GainEnergy(int amount)

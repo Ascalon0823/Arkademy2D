@@ -52,8 +52,10 @@ MonoBehaviour:
   currLevel: 0
   cooldown: 0
   remainingUseTime: 0
+  lastUseTime: 0
   remainingCooldown: 0
-  damage: 1
+  lastCooldown: 0
+  damage: 50
   circle: {fileID: 6975470052739932696}
   radius: 2
 --- !u!1 &7565014488006909850

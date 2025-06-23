@@ -32,9 +32,13 @@ namespace Midterm.Player
         public Character.Character currCharacter;
         public PixelPerfectCamera currCamera;
 
+        public CameraShake shake;
         public bool rawOnUI;
         public bool onUI;
+        public DamageTextGroup damageCanvas;
+        public DamageText damageTextPrefab;
 
+        public Transform cameraOffset;
         private void Awake()
         {
             Local = this;
@@ -62,6 +66,17 @@ namespace Midterm.Player
             currCharacter.moveDir = playerMove;
             currCharacter.preparing = playerPreparing;
             currCharacter.pointAt = currCamera.GetWorldPos(playerPointAt);
+            var w = currCamera.camRect.width;
+            var h = currCamera.camRect.height;
+            if (w > h)
+            {
+                cameraOffset.localPosition = new Vector3(0, 0, -10);
+            }
+            else
+            {
+                cameraOffset.localPosition = new Vector3(0, (w - h) / 4, -10);
+            }
+            
             //currCharacter.casting = playerCasting;
         }
 
@@ -80,6 +95,11 @@ namespace Midterm.Player
             playerPreparing = value.isPressed && (!rawOnUI || playerPreparing);
         }
 
-        
+        public void SpawnDamageText(Transform target, int[] amount)
+        {
+            var group = Instantiate(damageCanvas, target.position + 0.5f * Vector3.up, target.rotation);
+            group.damages = amount;
+            group.prefab = damageTextPrefab;
+        }
     }
 }

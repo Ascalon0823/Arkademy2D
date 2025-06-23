@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 2
+  m_ScaleFactor: 3
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -2208,17 +2208,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4809bca0d1f6649ad7e6fd436c2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelScale: 2
+  pixelScale: 3
   useReferedScale: 1
   referenceResolution: {x: 480, y: 480}
   pixelPerUnit: 16
   cam: {fileID: 2007372155}
   camRect:
     serializedVersion: 2
-    x: -11.71875
-    y: -20.84375
-    width: 23.4375
-    height: 41.6875
+    x: -13.375
+    y: -28.9375
+    width: 26.75
+    height: 57.875
 --- !u!114 &2007372153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2306,7 +2306,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20.84375
+  orthographic size: 28.9375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

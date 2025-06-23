@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 1780161883150957635}
   - component: {fileID: 5407998040487526582}
   - component: {fileID: 5236785464338595565}
+  - component: {fileID: -3462312232389417051}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -323,8 +324,9 @@ MonoBehaviour:
   preparing: 0
   animator: {fileID: 1139579494305693209}
   spriteRenderer: {fileID: 4389125003512978588}
-  life: 1
-  maxLife: 1
+  life: 200
+  maxLife: 200
+  damageTextSpawner: {fileID: -3462312232389417051}
   abilities: []
   currSpell: {fileID: 0}
   spells: []
@@ -333,6 +335,7 @@ MonoBehaviour:
   pointAt: {x: 0, y: 0}
   casting: 0
   wasCasting: 0
+  indicator: {fileID: 0}
 --- !u!114 &5407998040487526582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,8 +365,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef18322f99c741058fdb3ea8ae7d9525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  interval: 1
+  damage: 50
+  interval: 0.5
   contactCharacter: {fileID: 0}
   lastDamageTime: 0
   dealer: {fileID: 1780161883150957635}
+--- !u!114 &-3462312232389417051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276198161880909905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6ea5aad74f24b20a5c7574d9586f25e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
