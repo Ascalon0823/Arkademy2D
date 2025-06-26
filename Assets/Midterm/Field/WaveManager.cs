@@ -9,6 +9,93 @@ using Random = UnityEngine.Random;
 
 namespace Midterm.Field
 {
+    [Serializable]
+    public class WaveData
+    {
+        public float spawnInterval;
+        public int spawnLimit;
+        public List<Enemy> spawnableEnemies;
+    }
+
+    [Serializable]
+    public class SpecialSpawnPattern
+    {
+        public enum SpecialSpawnType
+        {
+            Surround,
+            Swarm
+        }
+
+        public int minimumWaveCount;
+        public float delay;
+        public int waveInterval;
+        public Enemy enemyPrefab;
+
+        public SpecialSpawnType specialSpawnType;
+        public bool spawned;
+        public int lastSpawnedWave;
+
+        public bool CanSpawn(int waveCount, float waveTime)
+        {
+            if (lastSpawnedWave != waveCount)
+            {
+                spawned = false;
+            }
+
+            return !spawned && (waveCount == minimumWaveCount || (waveCount - minimumWaveCount) % waveInterval == 0)
+                            && waveTime >= delay;
+        }
+
+        public void Spawn(int waveCount)
+        {
+            switch (specialSpawnType)
+            {
+                case SpecialSpawnType.Surround:
+                    for (var i = 0; i < 30; i++)
+                    {
+                        var pos = Player.Player.Local.currCharacter.transform.position
+                                  + Quaternion.Euler(0, 0, i / 30f * 360f) * Vector3.up * 10;
+                        var spawnedEnemey = GameObject.Instantiate(enemyPrefab, pos, Quaternion.identity);
+                        spawnedEnemey.autoDespawn = true;
+                        spawnedEnemey.remainingTime = 10f;
+                        spawnedEnemey.character.moveSpeed = 1f;
+                        spawnedEnemey.character.maxLife = 500;
+                        spawnedEnemey.character.life = 500;
+                        spawnedEnemey.fixedMove = true;
+                        spawnedEnemey.fixMovingDir =
+                            (Player.Player.Local.currCharacter.transform.position - pos).normalized;
+                        spawnedEnemey.energyDropRate = 0.0f;
+                    }
+
+                    break;
+                case SpecialSpawnType.Swarm:
+                    var from = Player.Player.Local.currCharacter.transform.position +
+                               (Vector3)Random.insideUnitCircle.normalized * 10f;
+                    var moveDir = (Player.Player.Local.currCharacter.transform.position - from).normalized;
+                    for (var i = 0; i < 30; i++)
+                    {
+                        var spawnedEnemey = GameObject.Instantiate(enemyPrefab,
+                            from + (Vector3)Random.insideUnitCircle * 3f, Quaternion.identity);
+                        spawnedEnemey.autoDespawn = true;
+                        spawnedEnemey.remainingTime = 3f;
+                        spawnedEnemey.character.moveSpeed = 6f;
+                        spawnedEnemey.character.maxLife = 1;
+                        spawnedEnemey.character.life = 1;
+                        spawnedEnemey.fixedMove = true;
+                        spawnedEnemey.fixMovingDir = moveDir;
+                        spawnedEnemey.energyDropRate = 0.0f;
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            spawned = true;
+            lastSpawnedWave = waveCount;
+        }
+    }
+
     public class WaveManager : MonoBehaviour
     {
         public static WaveManager Instance;
@@ -19,15 +106,13 @@ namespace Midterm.Field
         [Range(0f, 10f)] public float speed;
 
         public Player.Player player;
-
-        public Character.Character enemyPrefab;
-        public float spawnInterval;
-        public int spawnLimit;
         public float lastSpawnTime;
         public List<Character.Character> spawnedEnemies = new();
         public float despawnDistance;
         public List<Ability> availableAbilities = new List<Ability>();
-        
+
+        public List<WaveData> waveData = new List<WaveData>();
+        public List<SpecialSpawnPattern> specialSpawnPatterns = new List<SpecialSpawnPattern>();
         public LevelUpUI levelUpUI;
 
         private void Awake()
@@ -55,10 +140,10 @@ namespace Midterm.Field
         {
             actualTime = Time.timeSinceLevelLoad;
             totalTime += Time.deltaTime * speed;
-            waveTime = totalTime % 120;
-            waveCount = 1 + Mathf.FloorToInt(totalTime / 120);
+            waveTime = totalTime % 60;
+            waveCount = 1 + Mathf.FloorToInt(totalTime / 60);
             DespawnFarEnemy();
-            SpawnEnemy();
+            SpawnEnemy(waveData[Mathf.Clamp(waveCount - 1, 0, waveData.Count - 1)]);
         }
 
         public float GetCurrWaveProgress()
@@ -90,14 +175,23 @@ namespace Midterm.Field
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemy(WaveData data)
         {
-            if (Time.timeSinceLevelLoad - lastSpawnTime <= spawnInterval) return;
-            if (spawnedEnemies.Count >= spawnLimit) return;
+            foreach (var spawnPattern in specialSpawnPatterns)
+            {
+                if (spawnPattern.CanSpawn(waveCount, waveTime))
+                {
+                    spawnPattern.Spawn(waveCount);
+                }
+            }
+
+            if (Time.timeSinceLevelLoad - lastSpawnTime <= data.spawnInterval) return;
+            if (spawnedEnemies.Count >= data.spawnLimit) return;
             lastSpawnTime = Time.timeSinceLevelLoad;
             var pos = player.currCamera.GetRandomPositionOutSideScreen(despawnDistance);
+            var enemyPrefab = data.spawnableEnemies[Random.Range(0, data.spawnableEnemies.Count)];
             var spawned = Instantiate(enemyPrefab, pos, Quaternion.identity);
-            spawnedEnemies.Add(spawned);
+            spawnedEnemies.Add(spawned.character);
         }
     }
 }

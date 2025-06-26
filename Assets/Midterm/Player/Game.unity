@@ -494,15 +494,32 @@ MonoBehaviour:
   waveCount: 0
   speed: 10
   player: {fileID: 1302658427}
-  enemyPrefab: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
-  spawnInterval: 1
-  spawnLimit: 30
   lastSpawnTime: 0
   spawnedEnemies: []
   despawnDistance: 1.5
   availableAbilities:
   - {fileID: 788610333823814048, guid: 538adc80622a25d4b88a2815346ad98e, type: 3}
   - {fileID: 8808063754931906655, guid: 2019519732af2da44a62423f11172b6c, type: 3}
+  waveData:
+  - spawnInterval: 0.333
+    spawnLimit: 100
+    spawnableEnemies:
+    - {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+  specialSpawnPatterns:
+  - minimumWaveCount: 3
+    delay: 15
+    waveInterval: 3
+    enemyPrefab: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+    specialSpawnType: 0
+    spawned: 0
+    lastSpawnedWave: 0
+  - minimumWaveCount: 2
+    delay: 30
+    waveInterval: 4
+    enemyPrefab: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+    specialSpawnType: 1
+    spawned: 0
+    lastSpawnedWave: 0
   levelUpUI: {fileID: 453669513}
 --- !u!1 &85310619
 GameObject:

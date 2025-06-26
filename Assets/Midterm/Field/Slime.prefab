@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 820823346284611222}
   - component: {fileID: 4389125003512978588}
   - component: {fileID: 1139579494305693209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1696723381282620466}
   - component: {fileID: 7219607525579099950}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 5407998040487526582}
   - component: {fileID: 5236785464338595565}
   - component: {fileID: -3462312232389417051}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -351,8 +351,13 @@ MonoBehaviour:
   character: {fileID: 1780161883150957635}
   xp: 1
   xpPickupPrefab: {fileID: 4775992617235150854, guid: c012899dcce79c24390d55744a23b90a, type: 3}
-  energy: 10
+  energy: 3
+  energyDropRate: 0.6
   energyPickupPrefab: {fileID: 3091749355740264013, guid: de8e9a12f61597f4bb201d9a1ba19605, type: 3}
+  autoDespawn: 0
+  remainingTime: 0
+  fixedMove: 0
+  fixMovingDir: {x: 0, y: 0}
 --- !u!114 &5236785464338595565
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -112,6 +112,8 @@ namespace Midterm.Character
                 onDead?.Invoke();
             }
 
+            spriteRenderer.color = Color.red;
+            LeanTween.color(spriteRenderer.gameObject, Color.white, 0.666f).setEaseOutExpo();
             animator.SetTrigger("hit");
             if (damageTextSpawner)
             {

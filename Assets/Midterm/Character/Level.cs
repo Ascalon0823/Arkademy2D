@@ -7,6 +7,7 @@ namespace Midterm.Character
     {
         public int totalXp;
         public int lastXp;
+        public int incrementXp;
         public int nextXp;
         public int currLevel;
         public UnityEvent<int> onLevelUp;
@@ -23,7 +24,8 @@ namespace Midterm.Character
         {
             currLevel++;
             lastXp = nextXp;
-            nextXp += currLevel <= 2 ? 5 : currLevel<=10 ? 15 : 25;
+            incrementXp +=  currLevel <= 2 ? 5 : currLevel<=10 ? 15 : 25;
+            nextXp += incrementXp;
             onLevelUp?.Invoke(currLevel);
         }
 
