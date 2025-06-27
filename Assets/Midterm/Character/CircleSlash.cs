@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Midterm.Character
@@ -8,9 +9,31 @@ namespace Midterm.Character
         [SerializeField] protected Animator slashAnimator;
         [SerializeField] protected DamageTrigger damageTrigger;
 
+        public Upgrade power = Upgrade.Power;
+        public Upgrade size = Upgrade.Size;
+        public Upgrade speed = Upgrade.Speed;
+
+        public override List<Upgrade> GetAvailableUpgrades()
+        {
+            return new List<Upgrade>
+            {
+                power, size, speed
+            };
+        }
+
+        public override float GetUseTime()
+        {
+            return base.GetUseTime() * (1-speed.currLevel * 0.1f);
+        }
+
+        public override float GetCooldown()
+        {
+            return base.GetCooldown() * (1-speed.currLevel * 0.1f);
+        }
+
         protected override void Update()
         {
-            damageTrigger.damage = Mathf.FloorToInt(100 * user.power * (1 + currLevel/2f));
+            damageTrigger.damage = Mathf.FloorToInt(100 * user.power * (1 + power.currLevel/2f));
             base.Update();
             if (remainingUseTime <= 0)
             {
@@ -22,8 +45,8 @@ namespace Midterm.Character
         {
             base.Use();
             slash.SetActive(true);
-            slash.transform.localPosition = user.faceDir * 0.5f * (1 + currLevel/4f);
-            slash.transform.localScale = Vector3.one * (1 + currLevel/4f);
+            slash.transform.localPosition = user.faceDir * 0.5f * (1 + size.currLevel/4f);
+            slash.transform.localScale = Vector3.one * (1 + size.currLevel/4f);
             slashAnimator.SetFloat("speed", 1f / GetUseTime());
         }
     }

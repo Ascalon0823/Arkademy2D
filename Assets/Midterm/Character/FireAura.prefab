@@ -50,6 +50,7 @@ MonoBehaviour:
   useTime: 0.5
   icon: {fileID: 683217014, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   currLevel: 0
+  maxLevel: 0
   cooldown: 0
   remainingUseTime: 0
   lastUseTime: 0
@@ -58,6 +59,18 @@ MonoBehaviour:
   damage: 50
   circle: {fileID: 6975470052739932696}
   radius: 2
+  power:
+    name: Power
+    currLevel: 0
+    maxLevel: 99
+  size:
+    name: Size
+    currLevel: 0
+    maxLevel: 99
+  speed:
+    name: Speed
+    currLevel: 0
+    maxLevel: 99
 --- !u!1 &7565014488006909850
 GameObject:
   m_ObjectHideFlags: 0

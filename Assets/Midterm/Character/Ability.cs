@@ -1,21 +1,48 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Midterm.Character
 {
     public class Ability : MonoBehaviour
     {
+
+        [Serializable]
+        public class Upgrade
+        {
+            public string name;
+            public int currLevel;
+            public int maxLevel;
+
+            public Upgrade(string newName)
+            {
+                name = newName;
+                currLevel = 0;
+                maxLevel = 99;
+            }
+            
+            public static Upgrade Power => new Upgrade("Power");
+            public static Upgrade Range  => new Upgrade("Range");
+            public static Upgrade Speed => new Upgrade("Speed");
+            public static Upgrade Size => new Upgrade("Size");
+        }
         public string internalName;
         public Character user;
         public float useTime;
         public Sprite icon;
         public int currLevel;
 
+        public int maxLevel;
         public float cooldown;
         [SerializeField] protected float remainingUseTime;
         [SerializeField] protected float lastUseTime;
         public float remainingCooldown;
         [SerializeField] protected float lastCooldown;
+
+        public virtual List<Upgrade> GetAvailableUpgrades()
+        {
+            return new List<Upgrade>();
+        }
         public virtual bool CanUse()
         {
             return remainingUseTime <= 0 && remainingCooldown <= 0;

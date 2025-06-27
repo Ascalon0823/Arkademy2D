@@ -50,12 +50,27 @@ MonoBehaviour:
   useTime: 0.5
   icon: {fileID: 541181531, guid: 10a54eb6ae34cfb4bb4776a77c67b677, type: 3}
   currLevel: 0
+  maxLevel: 0
   cooldown: 1
   remainingUseTime: 0.5
+  lastUseTime: 0
   remainingCooldown: 1.5
+  lastCooldown: 0
   slash: {fileID: 4069218241740705915}
   slashAnimator: {fileID: 8143686090034853254}
   damageTrigger: {fileID: 9115755925913449487}
+  power:
+    name: Power
+    currLevel: 0
+    maxLevel: 99
+  size:
+    name: Size
+    currLevel: 0
+    maxLevel: 99
+  speed:
+    name: Speed
+    currLevel: 0
+    maxLevel: 99
 --- !u!1 &4069218241740705915
 GameObject:
   m_ObjectHideFlags: 0

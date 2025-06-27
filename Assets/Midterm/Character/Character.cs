@@ -135,12 +135,14 @@ namespace Midterm.Character
             }
         }
 
-        public void LevelUpAbility(Ability ability)
+        public void LevelUpAbility(Ability ability, Ability.Upgrade upgrade)
         {
             var existing = abilities.FirstOrDefault(x => x.internalName == ability.internalName);
+            Debug.Log(ability.internalName);
             if (existing)
             {
-                existing.currLevel++;
+                Debug.Log(upgrade);
+                upgrade.currLevel++;
                 return;
             }
 

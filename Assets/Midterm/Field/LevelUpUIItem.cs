@@ -12,12 +12,14 @@ namespace Midterm.Field
         public TextMeshProUGUI abilityNameText;
 
         public Ability holdAbility;
-        public void SetupAs(Ability ability, LevelUpUI list)
+        public Ability.Upgrade holdUpgrade;
+        public void SetupAs(Ability ability,Ability.Upgrade upgrade, LevelUpUI list)
         {
             icon.sprite = ability.icon;
-            abilityNameText.text = ability.name;
+            abilityNameText.text = ability.name + (upgrade == null ? "" : $"{upgrade.name}+1 => {upgrade.currLevel}");
             parent = list;
             holdAbility = ability;
+            holdUpgrade = upgrade;
         }
 
         public void Select()

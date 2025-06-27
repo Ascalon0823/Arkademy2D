@@ -324,8 +324,8 @@ MonoBehaviour:
   preparing: 0
   animator: {fileID: 1139579494305693209}
   spriteRenderer: {fileID: 4389125003512978588}
-  life: 200
-  maxLife: 200
+  life: 100
+  maxLife: 100
   damageTextSpawner: {fileID: -3462312232389417051}
   abilities: []
   currSpell: {fileID: 0}

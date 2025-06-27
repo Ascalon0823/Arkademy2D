@@ -44,7 +44,7 @@ namespace Midterm.Field
 
         public void Confirm()
         {
-            Player.Player.Local.currCharacter.LevelUpAbility(selectedAbilityItem.holdAbility);
+            Player.Player.Local.currCharacter.LevelUpAbility(selectedAbilityItem.holdAbility,selectedAbilityItem.holdUpgrade);
             Toggle(false);
             if (levelUpEvent.Count == 0) return;
             Toggle(true);
@@ -59,16 +59,25 @@ namespace Midterm.Field
 
             spawnedItems.Clear();
             var lastEvent = levelUpEvent.Dequeue();
-            var availableAbility = WaveManager.Instance.availableAbilities.ToList();
-            var repeat = Mathf.Min(3, availableAbility.Count);
+            //var availableAbility = WaveManager.Instance.availableAbilities.ToList();
+            var availableOption = Player.Player.Local.currCharacter.abilities
+                .SelectMany(x => x.GetAvailableUpgrades().Select(z => (x, z)))
+                .ToList();
+            var newAbilities = WaveManager.Instance.availableAbilities.Where(x =>
+                Player.Player.Local.currCharacter.abilities.All(z => z.internalName != x.internalName)).ToList();
+            foreach (var newAbility in newAbilities)
+            {
+                availableOption.Add((newAbility,null));
+            }
+            var repeat = Mathf.Min(3, availableOption.Count);
             selectedAbilityItem = null;
             for (var i = 0; i < repeat; i++)
             {
-                var idx = Random.Range(0, availableAbility.Count);
-                var ability = availableAbility[idx];
-                availableAbility.RemoveAt(idx);
+                var idx = Random.Range(0, availableOption.Count);
+                var abilityOption = availableOption[idx];
+                availableOption.RemoveAt(idx);
                 var item = Instantiate(levelUpItemPrefab, container);
-                item.SetupAs(ability, this);
+                item.SetupAs(abilityOption.x, abilityOption.z,this);
                 spawnedItems.Add(item);
                 if (!selectedAbilityItem) Select(item);
             }

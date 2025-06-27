@@ -192,9 +192,13 @@ namespace Midterm.Field
             var enemyPrefab = data.spawnableEnemies[Random.Range(0, data.spawnableEnemies.Count)];
             var spawned = Instantiate(enemyPrefab, pos, Quaternion.identity);
             spawnedEnemies.Add(spawned.character);
-            spawned.character.maxLife = Mathf.FloorToInt(spawned.character.maxLife * (1 + waveCount / 2f));
+            spawned.character.maxLife = Mathf.FloorToInt(spawned.character.maxLife * (1 + (waveCount-1) / 2f));
             spawned.character.life = spawned.character.maxLife;
-            spawned.character.power = Mathf.FloorToInt(spawned.character.power * (1 + waveCount / 4f));
+            spawned.character.power = Mathf.FloorToInt(spawned.character.power * (1 + (waveCount-1) / 4f));
+            if (Random.Range(0f, 1f) < 0.05f)
+            {
+                spawned.character.moveSpeed *= 1.5f;
+            }
         }
     }
 }
