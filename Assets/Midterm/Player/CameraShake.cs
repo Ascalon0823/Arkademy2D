@@ -27,7 +27,7 @@ namespace Midterm.Player
 
         private void LateUpdate()
         {
-            remainingShake = Mathf.Clamp(remainingShake - Time.deltaTime, 0.0f, shakeTime);
+            remainingShake = Mathf.Clamp(remainingShake - Time.unscaledDeltaTime, 0.0f, shakeTime);
             transform.localPosition = Random.insideUnitCircle * shakeStrength * Mathf.Clamp01(remainingShake);
         }
     }
