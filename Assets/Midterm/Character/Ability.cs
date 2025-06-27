@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Midterm.Character
 {
     public class Ability : MonoBehaviour
     {
-
         [Serializable]
         public class Upgrade
         {
@@ -20,12 +20,13 @@ namespace Midterm.Character
                 currLevel = 0;
                 maxLevel = 99;
             }
-            
+
             public static Upgrade Power => new Upgrade("Power");
-            public static Upgrade Range  => new Upgrade("Range");
+            public static Upgrade Range => new Upgrade("Range");
             public static Upgrade Speed => new Upgrade("Speed");
             public static Upgrade Size => new Upgrade("Size");
         }
+
         public string internalName;
         public Character user;
         public float useTime;
@@ -39,10 +40,17 @@ namespace Midterm.Character
         public float remainingCooldown;
         [SerializeField] protected float lastCooldown;
 
+        public AudioSource AudioSource;
+        public AudioClip[] useSounds;
+        public AudioClip[] levelUpSounds;
+        public AudioClip equipSound;
+        
+
         public virtual List<Upgrade> GetAvailableUpgrades()
         {
             return new List<Upgrade>();
         }
+
         public virtual bool CanUse()
         {
             return remainingUseTime <= 0 && remainingCooldown <= 0;
@@ -82,6 +90,11 @@ namespace Midterm.Character
             lastUseTime = remainingUseTime;
             remainingCooldown = GetCooldown() + remainingUseTime;
             lastCooldown = remainingCooldown;
+            if (AudioSource && useSounds != null && useSounds.Length > 0)
+            {
+                AudioSource.clip = useSounds[Random.Range(0, useSounds.Length)];
+                AudioSource.Play();
+            }
         }
 
         public float GetCooldownPercentage()

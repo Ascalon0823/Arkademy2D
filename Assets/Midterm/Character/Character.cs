@@ -5,6 +5,7 @@ using Midterm.Field;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Midterm.Character
 {
@@ -77,6 +78,7 @@ namespace Midterm.Character
         public Animator animator;
         public SpriteRenderer spriteRenderer;
 
+        public AudioSource audioSource;
         public void UpdateGraphic()
         {
             var isMoving = moveDir.magnitude > 0.01f;
@@ -99,6 +101,8 @@ namespace Midterm.Character
 
         public DamageTextSpawner damageTextSpawner;
 
+        public AudioClip[] hitClips;
+        public AudioClip[] deathClips;
         public void TakeDamage(int damage)
         {
             life -= damage;
@@ -107,9 +111,21 @@ namespace Midterm.Character
             {
                 Player.Player.Local.shake.Shake(0.25f, 0.2f);
             }
+
+            if (hitClips!=null && hitClips.Length>0)
+            {
+                audioSource.clip = hitClips[Random.Range(0, hitClips.Length)];
+                audioSource.Play();
+            }
             if (life <= 0)
             {
                 onDead?.Invoke();
+                if (deathClips != null && deathClips.Length > 0)
+                {
+                    audioSource.clip = deathClips[Random.Range(0, deathClips.Length)];
+                    audioSource.Play();
+                }
+               
             }
 
             spriteRenderer.color = Color.red;
@@ -143,12 +159,22 @@ namespace Midterm.Character
             {
                 Debug.Log(upgrade);
                 upgrade.currLevel++;
+                if (ability.levelUpSounds!=null && ability.levelUpSounds.Length>0)
+                {
+                    audioSource.clip = ability.levelUpSounds[Random.Range(0, ability.levelUpSounds.Length)];
+                    audioSource.Play();
+                }
                 return;
             }
 
             var newAbi = Instantiate(ability, transform);
             abilities.Add(newAbi);
             newAbi.user = this;
+            if (newAbi.equipSound && newAbi.AudioSource)
+            {
+                audioSource.clip = newAbi.equipSound;
+                audioSource.Play();
+            }
         }
 
         public Spell currSpell;

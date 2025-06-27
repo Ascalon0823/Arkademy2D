@@ -16,6 +16,7 @@ namespace Midterm.Field
         public LevelUpUIItem levelUpItemPrefab;
         [SerializeField] private List<LevelUpUIItem> spawnedItems = new List<LevelUpUIItem>();
 
+        public AudioSource audioSource;
 
         private void Start()
         {
@@ -24,14 +25,17 @@ namespace Midterm.Field
 
         public void Toggle(bool active)
         {
+           
+
+            Time.timeScale = active?0:1;
+            gameObject.SetActive(active);
             if (active)
             {
                 if (levelUpEvent.Count == 0) return;
                 PopulateList();
+                if(audioSource)
+                    audioSource.Play();
             }
-
-            Time.timeScale = active?0:1;
-            gameObject.SetActive(active);
         }
 
 

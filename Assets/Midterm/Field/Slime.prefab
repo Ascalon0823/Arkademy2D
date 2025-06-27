@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 5407998040487526582}
   - component: {fileID: 5236785464338595565}
   - component: {fileID: -3462312232389417051}
+  - component: {fileID: 960102526788766393}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -324,9 +325,22 @@ MonoBehaviour:
   preparing: 0
   animator: {fileID: 1139579494305693209}
   spriteRenderer: {fileID: 4389125003512978588}
+  audioSource: {fileID: 960102526788766393}
   life: 100
   maxLife: 100
   damageTextSpawner: {fileID: -3462312232389417051}
+  hitClips:
+  - {fileID: 8300000, guid: 5d3315287377f994f8b934d3b50e8c2f, type: 3}
+  - {fileID: 8300000, guid: 59612f2ffe84ebd4cbe3cd4599612895, type: 3}
+  - {fileID: 8300000, guid: f0d59f4318af20344868dd685416126c, type: 3}
+  - {fileID: 8300000, guid: f7844ce9de76e6b428b4792bf607c8d9, type: 3}
+  - {fileID: 8300000, guid: 002703d9a00251e469f6aed4ab1d21b8, type: 3}
+  - {fileID: 8300000, guid: a1db8cf432363a04d91743ccd4edf5fb, type: 3}
+  deathClips:
+  - {fileID: 8300000, guid: 27d3ea0d468c3084fae43017b4587b5b, type: 3}
+  - {fileID: 8300000, guid: b803a4b9f04e282449a8a68ca5354829, type: 3}
+  - {fileID: 8300000, guid: 7a8c9d6fa63eed043aebfe875e14d0d5, type: 3}
+  - {fileID: 8300000, guid: 8f9df74c483e3ae4282087371720e4db, type: 3}
   abilities: []
   currSpell: {fileID: 0}
   spells: []
@@ -387,3 +401,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ea5aad74f24b20a5c7574d9586f25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &960102526788766393
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7276198161880909905}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -4829103943685407470, guid: 0905734abc9161648b2dea6d147b8b72, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
