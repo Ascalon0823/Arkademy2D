@@ -10,7 +10,7 @@ namespace Midterm.Character
 
         protected override void Update()
         {
-            damageTrigger.damage = Mathf.FloorToInt(100 * user.power * (1 + currLevel));
+            damageTrigger.damage = Mathf.FloorToInt(100 * user.power * (1 + currLevel/2f));
             base.Update();
             if (remainingUseTime <= 0)
             {
@@ -22,8 +22,8 @@ namespace Midterm.Character
         {
             base.Use();
             slash.SetActive(true);
-            slash.transform.localPosition = user.faceDir * 0.5f * (1 + currLevel);
-            slash.transform.localScale = Vector3.one * (1 + currLevel);
+            slash.transform.localPosition = user.faceDir * 0.5f * (1 + currLevel/4f);
+            slash.transform.localScale = Vector3.one * (1 + currLevel/4f);
             slashAnimator.SetFloat("speed", 1f / GetUseTime());
         }
     }

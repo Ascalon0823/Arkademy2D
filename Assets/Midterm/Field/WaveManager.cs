@@ -59,8 +59,8 @@ namespace Midterm.Field
                         spawnedEnemey.autoDespawn = true;
                         spawnedEnemey.remainingTime = 10f;
                         spawnedEnemey.character.moveSpeed = 1f;
-                        spawnedEnemey.character.maxLife = 500;
-                        spawnedEnemey.character.life = 500;
+                        spawnedEnemey.character.maxLife = Mathf.FloorToInt(500 * (1+waveCount/2f));
+                        spawnedEnemey.character.life = Mathf.FloorToInt(500 * (1+waveCount/2f));
                         spawnedEnemey.fixedMove = true;
                         spawnedEnemey.fixMovingDir =
                             (Player.Player.Local.currCharacter.transform.position - pos).normalized;
@@ -192,6 +192,9 @@ namespace Midterm.Field
             var enemyPrefab = data.spawnableEnemies[Random.Range(0, data.spawnableEnemies.Count)];
             var spawned = Instantiate(enemyPrefab, pos, Quaternion.identity);
             spawnedEnemies.Add(spawned.character);
+            spawned.character.maxLife = Mathf.FloorToInt(spawned.character.maxLife * (1 + waveCount / 2f));
+            spawned.character.life = spawned.character.maxLife;
+            spawned.character.power = Mathf.FloorToInt(spawned.character.power * (1 + waveCount / 4f));
         }
     }
 }
