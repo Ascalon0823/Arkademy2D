@@ -37,7 +37,7 @@ namespace Midterm.Character
                 var e = c.GetComponent<Enemy>();
                 if (e)
                 {
-                    e.character.TakeDamage(Mathf.FloorToInt(damage * user.power * (1+power.currLevel/5f)));
+                    e.character.TakeDamage(Mathf.FloorToInt(damage * user.power * (1+power.currLevel/2f)));
                 }
             }
         }

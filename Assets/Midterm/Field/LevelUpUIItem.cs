@@ -16,7 +16,7 @@ namespace Midterm.Field
         public void SetupAs(Ability ability,Ability.Upgrade upgrade, LevelUpUI list)
         {
             icon.sprite = ability.icon;
-            abilityNameText.text = ability.name + (upgrade == null ? "" : $"{upgrade.name}+1 => {upgrade.currLevel}");
+            abilityNameText.text = ability.internalName + (upgrade == null ? "" : $" {upgrade.name}+1 = {upgrade.currLevel+1}");
             parent = list;
             holdAbility = ability;
             holdUpgrade = upgrade;

@@ -45,8 +45,8 @@ namespace Midterm.Character
         {
             base.Use();
             slash.SetActive(true);
-            slash.transform.localPosition = user.faceDir * 0.5f * (1 + size.currLevel/4f);
-            slash.transform.localScale = Vector3.one * (1 + size.currLevel/4f);
+            slash.transform.localPosition = Vector3.zero;
+            slash.transform.localScale = Vector3.one  * (1 + size.currLevel/2f);
             slashAnimator.SetFloat("speed", 1f / GetUseTime());
         }
     }

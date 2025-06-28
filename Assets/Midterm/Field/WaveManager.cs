@@ -114,6 +114,9 @@ namespace Midterm.Field
         public List<WaveData> waveData = new List<WaveData>();
         public List<SpecialSpawnPattern> specialSpawnPatterns = new List<SpecialSpawnPattern>();
         public LevelUpUI levelUpUI;
+        
+        public EndOfRunUI endOfRunUI;
+        public int endingWave;
 
         private void Awake()
         {
@@ -124,9 +127,7 @@ namespace Midterm.Field
         {
             player.currCharacter.onDead.AddListener(() =>
             {
-                player.record.gold += waveCount;
-                SaveEngine.Instance.Save(player.record);
-                SceneManager.LoadScene("Midterm/Player/Title");
+                endOfRunUI.Toggle();
             });
             player.currCharacter.GetComponent<Level>().onLevelUp.AddListener(level =>
             {
@@ -140,15 +141,20 @@ namespace Midterm.Field
         {
             actualTime = Time.timeSinceLevelLoad;
             totalTime += Time.deltaTime * speed;
-            waveTime = totalTime % 60;
-            waveCount = 1 + Mathf.FloorToInt(totalTime / 60);
+            waveTime = totalTime % 30;
+            waveCount = 1 + Mathf.FloorToInt(totalTime / 30);
+            if (endingWave != -1 && waveCount >= endingWave)
+            {
+                endOfRunUI.Toggle();
+                return;
+            }
             DespawnFarEnemy();
             SpawnEnemy(waveData[Mathf.Clamp(waveCount - 1, 0, waveData.Count - 1)]);
         }
 
         public float GetCurrWaveProgress()
         {
-            return waveTime / 120f;
+            return waveTime / 30f;
         }
 
         private void DespawnFarEnemy()
