@@ -658,7 +658,7 @@ MonoBehaviour:
     lastSpawnedWave: 0
   levelUpUI: {fileID: 453669513}
   endOfRunUI: {fileID: 2058892953}
-  endingWave: 2
+  endingWave: 6
 --- !u!1 &85310619
 GameObject:
   m_ObjectHideFlags: 0
