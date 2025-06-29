@@ -641,18 +641,44 @@ MonoBehaviour:
     spawnLimit: 100
     spawnableEnemies:
     - {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+  - spawnInterval: 0.1
+    spawnLimit: 100
+    spawnableEnemies:
+    - {fileID: 5469918266774747736, guid: 3363fa6760f3f724981fdb19e21c05a8, type: 3}
+    - {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+    - {fileID: 5469918266774747736, guid: 3363fa6760f3f724981fdb19e21c05a8, type: 3}
+  - spawnInterval: 0.1
+    spawnLimit: 150
+    spawnableEnemies:
+    - {fileID: 5469918266774747736, guid: 3363fa6760f3f724981fdb19e21c05a8, type: 3}
+    - {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+    - {fileID: 7292760824186518803, guid: 6bd3e236a767c5b4ea670422bbfea147, type: 3}
+    - {fileID: 7292760824186518803, guid: 6bd3e236a767c5b4ea670422bbfea147, type: 3}
+  - spawnInterval: 0.1
+    spawnLimit: 200
+    spawnableEnemies:
+    - {fileID: 5469918266774747736, guid: 3363fa6760f3f724981fdb19e21c05a8, type: 3}
+    - {fileID: 7292760824186518803, guid: 6bd3e236a767c5b4ea670422bbfea147, type: 3}
+    - {fileID: 5546617277104271611, guid: 30ab5e4e71a90d9479adccce68882589, type: 3}
+    - {fileID: 8546955756378717923, guid: 0575c5ac6e9a7c045aeaf9fd0e11969b, type: 3}
+  - spawnInterval: 0.1
+    spawnLimit: 300
+    spawnableEnemies:
+    - {fileID: 7292760824186518803, guid: 6bd3e236a767c5b4ea670422bbfea147, type: 3}
+    - {fileID: 5546617277104271611, guid: 30ab5e4e71a90d9479adccce68882589, type: 3}
+    - {fileID: 8546955756378717923, guid: 0575c5ac6e9a7c045aeaf9fd0e11969b, type: 3}
   specialSpawnPatterns:
   - minimumWaveCount: 2
     delay: 15
     waveInterval: 3
-    enemyPrefab: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+    enemyPrefab: {fileID: 7286133719332310977, guid: 174d62ad511574a4cb658b547d30edb5, type: 3}
     specialSpawnType: 0
     spawned: 0
     lastSpawnedWave: 0
   - minimumWaveCount: 1
     delay: 10
     waveInterval: 2
-    enemyPrefab: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+    enemyPrefab: {fileID: 5469918266774747736, guid: 3363fa6760f3f724981fdb19e21c05a8, type: 3}
     specialSpawnType: 1
     spawned: 0
     lastSpawnedWave: 0
@@ -3368,7 +3394,7 @@ MonoBehaviour:
   collider: {fileID: 1248266158}
   moveDir: {x: 0, y: 0}
   faceDir: {x: 0, y: 0}
-  moveSpeed: 4
+  moveSpeed: 5
   attackSpeed: 1
   power: 0
   onDead:

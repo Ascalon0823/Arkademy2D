@@ -84,6 +84,7 @@ namespace Midterm.Field
                         spawnedEnemey.fixedMove = true;
                         spawnedEnemey.fixMovingDir = moveDir;
                         spawnedEnemey.energyDropRate = 0.0f;
+                        spawnedEnemey.xp = 1;
                     }
 
                     break;
@@ -198,12 +199,18 @@ namespace Midterm.Field
             var enemyPrefab = data.spawnableEnemies[Random.Range(0, data.spawnableEnemies.Count)];
             var spawned = Instantiate(enemyPrefab, pos, Quaternion.identity);
             spawnedEnemies.Add(spawned.character);
-            spawned.character.maxLife = Mathf.FloorToInt(spawned.character.maxLife * (1 + (waveCount-1) / 2f));
             spawned.character.life = spawned.character.maxLife;
-            spawned.character.power = Mathf.FloorToInt(spawned.character.power * (1 + (waveCount-1) / 4f));
             if (Random.Range(0f, 1f) < 0.05f)
             {
                 spawned.character.moveSpeed *= 1.5f;
+            }
+            if (Random.Range(0f, 1f) < 0.05f)
+            {
+                spawned.character.moveSpeed *= 0.5f;
+                spawned.character.transform.localScale *=2f;
+                spawned.character.maxLife *= 2;
+                spawned.character.life = spawned.character.maxLife;
+                spawned.character.power *= 2;
             }
         }
     }
