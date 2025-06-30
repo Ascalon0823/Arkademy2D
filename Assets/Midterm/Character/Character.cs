@@ -103,7 +103,7 @@ namespace Midterm.Character
 
         public AudioClip[] hitClips;
         public AudioClip[] deathClips;
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, int group = -1)
         {
             life -= damage;
             life = Mathf.Clamp(life, 0, maxLife);
@@ -133,7 +133,7 @@ namespace Midterm.Character
             animator.SetTrigger("hit");
             if (damageTextSpawner)
             {
-                damageTextSpawner.SpawnDamage(new []{damage});
+                damageTextSpawner.SpawnDamage(damage,group);
             }
         }
 

@@ -22,4 +22,5 @@ MonoBehaviour:
   power: 0.8
   speed: 5
   atkSpeed: 1.25
-  initialAbilities: []
+  initialAbilities:
+  - {fileID: 5791202080737012902, guid: 005008e5750d14e4b806d91e11be396b, type: 3}

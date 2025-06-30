@@ -6,9 +6,9 @@ namespace Midterm.Character
 {
     public class DamageTextSpawner : MonoBehaviour
     {
-        public void SpawnDamage(int[] damages)
+        public void SpawnDamage(int damage,int group = -1)
         {
-            Player.Player.Local.SpawnDamageText(transform,damages);
+            Player.Player.Local.SpawnDamageText(transform,damage,group);
         }
     }
 }

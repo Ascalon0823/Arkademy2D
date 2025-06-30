@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Midterm.Player
@@ -9,26 +10,16 @@ namespace Midterm.Player
         public RectTransform content;
 
         public DamageText prefab;
-        public int[] damages;
         public float life;
         public float remainingTime;
         public float speed;
 
-        public void Start()
+        public void AddDamage(int damage)
         {
-            StartCoroutine(SpawnText());
-        }
-
-        private IEnumerator SpawnText()
-        {
-            foreach (var d in damages)
-            {
-                var text = Instantiate(prefab, content);
-                text.remainingTime = life;
-                remainingTime = life;
-                text.text.text = d.ToString();
-                yield return new WaitForSeconds(0.2f);
-            }
+            var text = Instantiate(prefab, content);
+            text.remainingTime = life;
+            remainingTime = life;
+            text.text.text = damage.ToString();
         }
         private void LateUpdate()
         {

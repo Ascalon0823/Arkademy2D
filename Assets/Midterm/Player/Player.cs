@@ -39,6 +39,7 @@ namespace Midterm.Player
         public DamageText damageTextPrefab;
 
         public Transform cameraOffset;
+
         private void Awake()
         {
             Local = this;
@@ -76,7 +77,7 @@ namespace Midterm.Player
             {
                 cameraOffset.localPosition = new Vector3(0, (w - h) / 4, -10);
             }
-            
+
             //currCharacter.casting = playerCasting;
         }
 
@@ -95,11 +96,35 @@ namespace Midterm.Player
             playerPreparing = value.isPressed && (!rawOnUI || playerPreparing);
         }
 
-        public void SpawnDamageText(Transform target, int[] amount)
+        private Dictionary<Transform, Dictionary<int, DamageTextGroup>> damageTextGroups = new();
+
+        public void SpawnDamageText(Transform target, int amount, int grouping = -1)
         {
-            var group = Instantiate(damageCanvas, target.position + 0.5f * Vector3.up, target.rotation);
-            group.damages = amount;
-            group.prefab = damageTextPrefab;
+            if (grouping == -1)
+            {
+                var group = Instantiate(damageCanvas, target.position + 0.5f * Vector3.up, target.rotation);
+
+                group.prefab = damageTextPrefab;
+
+                group.AddDamage(amount);
+            }
+            else
+            {
+                if (!damageTextGroups.TryGetValue(target, out var groups))
+                {
+                    groups = new Dictionary<int, DamageTextGroup>();
+                    damageTextGroups.Add(target, groups);
+                }
+
+                if (!groups.TryGetValue(grouping, out var group) || !group)
+                {
+                    group = Instantiate(damageCanvas, target.position + 0.5f * Vector3.up, target.rotation);
+                    group.prefab = damageTextPrefab;
+                    groups[grouping] = group;
+                }
+
+                group.AddDamage(amount);
+            }
         }
     }
 }

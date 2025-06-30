@@ -7,6 +7,7 @@ namespace Midterm.Character
     public class Projectile : MonoBehaviour
     {
         public int damage;
+        public int group=-1;
         public float speed;
         public List<Collider2D> ignores = new List<Collider2D>();
         public float life;
@@ -17,7 +18,7 @@ namespace Midterm.Character
             if(!chara) return;
             if (chara.life > 0)
             {
-                chara.TakeDamage(damage);
+                chara.TakeDamage(damage, group);
             }
         }
 

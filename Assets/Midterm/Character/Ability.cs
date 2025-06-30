@@ -25,6 +25,7 @@ namespace Midterm.Character
             public static Upgrade Range => new Upgrade("Range");
             public static Upgrade Speed => new Upgrade("Speed");
             public static Upgrade Size => new Upgrade("Size");
+            public static Upgrade Amount => new Upgrade("Amount");
         }
 
         public string internalName;
