@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Midterm.Field;
 using UnityEngine;
 
 namespace Midterm.Character
@@ -22,9 +24,15 @@ namespace Midterm.Character
                 if (lastUse == 0 || (Time.timeSinceLevelLoad - lastUse >= interval / user.attackSpeed))
                 {
                     lastUse = Time.timeSinceLevelLoad;
-                    var dir = (pos - (Vector2)transform.position).normalized;
+                    var nearest = WaveManager.Instance.spawnedEnemies.
+                        Where(x=>x.life>0)
+                        .OrderBy(x => Vector3.Distance(transform.position, x.body.position))
+                        .FirstOrDefault();
+                    var dir = nearest
+                        ? (nearest.body.position - (Vector2)transform.position)
+                        : user.faceDir;
                     var slash = Instantiate(slashPrefab, transform.position, Quaternion.identity);
-                    slash.transform.up = dir;
+                    slash.transform.up = dir.normalized;
                     slash.damage = Mathf.FloorToInt(slash.damage * user.power);
                     slash.ignores.Add(user.collider);
                 }

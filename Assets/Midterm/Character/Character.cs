@@ -67,7 +67,7 @@ namespace Midterm.Character
                 return;
             }
 
-            if (preparing || (currSpell?.casting??false)) return;
+            if (preparing) return;
             body.MovePosition(body.position + moveDir.normalized * moveSpeed * Time.fixedDeltaTime);
             if (moveDir.magnitude > 0.01f)
             {
