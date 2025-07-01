@@ -11,14 +11,26 @@ namespace Midterm.Character
         public float speed;
         public List<Collider2D> ignores = new List<Collider2D>();
         public float life;
+        public int pierce;
+        public Action<Collider2D> onHit;
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (ignores.Contains(other)) return;
+            onHit?.Invoke(other);
             var chara = other.GetComponent<Character>();
             if(!chara) return;
             if (chara.life > 0)
             {
                 chara.TakeDamage(damage, group);
+            }
+
+            if (pierce >= 0)
+            {
+                pierce--;
+                if (pierce < 0)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 

@@ -13,11 +13,13 @@ namespace Midterm.Character
         public Upgrade size = Upgrade.Size;
         public Upgrade speed = Upgrade.Speed;
         public Upgrade amount = Upgrade.Amount;
+        public Upgrade pierce = Upgrade.Pierce;
+        
         public override List<Upgrade> GetAvailableUpgrades()
         {
             return new List<Upgrade>
             {
-                power, size, speed, amount
+                power, size, speed, amount,pierce
             };
         }
 
@@ -50,7 +52,7 @@ namespace Midterm.Character
             for (var i = 0; i < 2 + amount.currLevel; i++)
             {
                 var projectile = Instantiate(projectilePrefab, pos, Quaternion.identity);
-                
+                projectile.pierce = pierce.currLevel;
                 projectile.transform.up = dir;
                 projectile.damage = Mathf.FloorToInt(projectile.damage * (1+power.currLevel/2f));
                 projectile.ignores.Add(user.collider);

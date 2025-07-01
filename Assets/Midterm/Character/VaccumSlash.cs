@@ -32,6 +32,7 @@ namespace Midterm.Character
                         ? (nearest.body.position - (Vector2)transform.position)
                         : user.faceDir;
                     var slash = Instantiate(slashPrefab, transform.position, Quaternion.identity);
+                    slash.pierce = -1;
                     slash.transform.up = dir.normalized;
                     slash.damage = Mathf.FloorToInt(slash.damage * user.power);
                     slash.ignores.Add(user.collider);
