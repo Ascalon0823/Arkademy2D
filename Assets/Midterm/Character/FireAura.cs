@@ -14,6 +14,7 @@ namespace Midterm.Character
         public Upgrade power = Upgrade.Power;
         public Upgrade size = Upgrade.Size;
         public Upgrade speed = Upgrade.Speed;
+        public Transform fx;
 
         public override List<Upgrade> GetAvailableUpgrades()
         {
@@ -46,6 +47,7 @@ namespace Midterm.Character
         {
             base.Update();
             circle.localScale = Vector3.one * (radius + size.currLevel/2f);
+            //fx.localScale = Vector3.one * (1f-GetCooldownPercentage());
         }
     }
 }
