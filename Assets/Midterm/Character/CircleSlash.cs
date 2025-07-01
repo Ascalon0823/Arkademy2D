@@ -34,6 +34,7 @@ namespace Midterm.Character
         protected override void Update()
         {
             damageTrigger.damage = Mathf.FloorToInt(100 * user.power * (1 + power.currLevel/2f));
+            damageTrigger.knockbackPower = user.power;
             base.Update();
             if (remainingUseTime <= 0)
             {

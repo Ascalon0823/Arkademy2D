@@ -53,12 +53,25 @@ namespace Midterm.Character
             UpdateGraphic();
         }
 
+        public Vector2 knockBackDir;
         private void FixedUpdate()
         {
             collider.enabled = life > 0;
+            KnockBack();
             Move();
         }
 
+        public void KnockBack()
+        {
+            if (knockBackDir.magnitude > 0.01f)
+            {
+                body.MovePosition(body.position + knockBackDir * Time.fixedDeltaTime * 3f);
+                var mag = knockBackDir.magnitude - Time.fixedDeltaTime * 3f;
+                if (mag <= 0f) mag = 0f;
+                knockBackDir = Vector2.ClampMagnitude(knockBackDir, mag);
+            }
+            
+        }
 
         public void Move()
         {
@@ -68,6 +81,7 @@ namespace Midterm.Character
             }
 
             if (preparing) return;
+            if (knockBackDir.magnitude > 0.01f) return;
             body.MovePosition(body.position + moveDir.normalized * moveSpeed * Time.fixedDeltaTime);
             if (moveDir.magnitude > 0.01f)
             {

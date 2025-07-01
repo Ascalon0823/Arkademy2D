@@ -29,10 +29,16 @@ namespace Midterm.Character
                         .OrderBy(x => Vector3.Distance(transform.position, x.body.position))
                         .FirstOrDefault();
                     var dir = nearest
-                        ? (nearest.body.position - (Vector2)transform.position)
+                        ? (nearest.body.position - (Vector2)transform.position).normalized
                         : user.faceDir;
                     var slash = Instantiate(slashPrefab, transform.position, Quaternion.identity);
                     slash.pierce = -1;
+                    slash.onHit += (c) =>
+                    {
+                        var chara = c.GetComponent<Character>();
+                        if (!chara) return;
+                        chara.knockBackDir += dir * 2f;
+                    };
                     slash.transform.up = dir.normalized;
                     slash.damage = Mathf.FloorToInt(slash.damage * user.power);
                     slash.ignores.Add(user.collider);
