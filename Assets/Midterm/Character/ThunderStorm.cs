@@ -26,6 +26,7 @@ namespace Midterm.Character
                 if (lastUse == 0 || (Time.timeSinceLevelLoad - lastUse >= interval / user.attackSpeed))
                 {
                     lastUse = Time.timeSinceLevelLoad;
+                    var group = Random.Range(-int.MaxValue, int.MaxValue);
                     var candidates = WaveManager.Instance.spawnedEnemies.Where(x =>
                         x.life > 0 && Player.Player.Local.OnScreen(x.body.position)).ToList();
                     var candidate = candidates[Random.Range(0, candidates.Count)];
@@ -36,7 +37,7 @@ namespace Midterm.Character
                         if (!chara) continue;
                         if (chara.life > 0)
                         {
-                            StartCoroutine(DoDamage(chara, 100));
+                            StartCoroutine(DoDamage(chara, 60,group));
                         }
                     }
 
@@ -47,12 +48,12 @@ namespace Midterm.Character
             }
         }
 
-        public IEnumerator DoDamage(Character chara, int damage)
+        public IEnumerator DoDamage(Character chara, int damage,int group)
         {
-            for (var i = 0; i < 3; i++)
+            for (var i = 0; i < 4; i++)
             {
-                chara.TakeDamage(damage);
-                yield return new WaitForSeconds(0.2f);
+                chara.TakeDamage(damage,group);
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }

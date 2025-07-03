@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Midterm.Player
 {
@@ -17,6 +18,7 @@ namespace Midterm.Player
         public void AddDamage(int damage)
         {
             var text = Instantiate(prefab, content);
+            text.text.transform.localPosition += new Vector3(Random.Range(-4f, 4f), 0, 0);
             text.remainingTime = life;
             remainingTime = life;
             text.text.text = damage.ToString();
