@@ -3402,6 +3402,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   preparing: 0
+  knockBackDir: {x: 0, y: 0}
   animator: {fileID: 1620720491}
   spriteRenderer: {fileID: 1620720492}
   audioSource: {fileID: 1248266163}
@@ -3415,6 +3416,7 @@ MonoBehaviour:
   currSpell: {fileID: 0}
   spells:
   - {fileID: 2424521310919116989, guid: 1267ba743dc30ae40a5aa1d8fd14c39b, type: 3}
+  - {fileID: 3697917974657301354, guid: 974f7e4528e9716488c11383202153a4, type: 3}
   energy: 0
   maxEnergy: 100
   pointAt: {x: 0, y: 0}
@@ -3750,6 +3752,7 @@ MonoBehaviour:
   playerInput: {fileID: 1302658426}
   joyBase: {fileID: 348869125}
   joyTop: {fileID: 63676319}
+  startPos: {x: 0, y: 0}
 --- !u!1 &1317306384
 GameObject:
   m_ObjectHideFlags: 0

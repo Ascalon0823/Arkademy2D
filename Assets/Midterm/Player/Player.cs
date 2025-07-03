@@ -98,6 +98,10 @@ namespace Midterm.Player
 
         private Dictionary<Transform, Dictionary<int, DamageTextGroup>> damageTextGroups = new();
 
+        public bool OnScreen(Vector2 pos)
+        {
+            return currCamera.camRect.Contains(pos);
+        }
         public void SpawnDamageText(Transform target, int amount, int grouping = -1)
         {
             if (grouping == -1)

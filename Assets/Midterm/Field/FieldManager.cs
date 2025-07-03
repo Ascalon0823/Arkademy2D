@@ -104,9 +104,12 @@ namespace Midterm.Field
             }
         }
 
+        private LTDescr existing;
         public void Darken(bool darken)
         {
-            LeanTween.color(gameObject, darken ? new Color(0.5f, 0.5f, 0.5f) : Color.white, darken ? 0.333f :1f)
+            if(existing!=null) LeanTween.cancel(gameObject);
+            
+            existing = LeanTween.color(gameObject, darken ? new Color(0.5f, 0.5f, 0.5f) : Color.white, darken ? 0.333f :1f)
                 .setFromColor(tilemap.color)
                 .setDelay(darken?0:1f)
                 .setOnUpdateColor(x =>

@@ -128,16 +128,17 @@ namespace Midterm.Character
 
             if (hitClips!=null && hitClips.Length>0)
             {
-                audioSource.clip = hitClips[Random.Range(0, hitClips.Length)];
-                audioSource.Play();
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(hitClips[Random.Range(0, hitClips.Length)]);
             }
             if (life <= 0)
             {
                 onDead?.Invoke();
                 if (deathClips != null && deathClips.Length > 0)
                 {
-                    audioSource.clip = deathClips[Random.Range(0, deathClips.Length)];
-                    audioSource.Play();
+                    
+                    audioSource.pitch = Random.Range(0.8f, 1.2f);
+                    audioSource.PlayOneShot(deathClips[Random.Range(0, deathClips.Length)]);
                 }
                
             }
