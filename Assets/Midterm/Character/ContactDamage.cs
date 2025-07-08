@@ -22,7 +22,7 @@ namespace Midterm.Character
 
         protected virtual bool IsValidCharacter(Character character)
         {
-            return character && character == Player.Player.Local.currCharacter && character.life > 0;
+            return character && character == Player.Player.Local.currCharacter && character.life > 0 && !character.collider.isTrigger;
         }
 
         private void FixedUpdate()
