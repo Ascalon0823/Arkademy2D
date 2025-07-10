@@ -3418,6 +3418,7 @@ MonoBehaviour:
   - {fileID: 3697917974657301354, guid: 974f7e4528e9716488c11383202153a4, type: 3}
   - {fileID: 1276461431971741332, guid: 8db15da292405ba4380479091581050a, type: 3}
   - {fileID: 4970306675971334223, guid: 3ceb8772d7491be48b2d2ec7d5ee0d25, type: 3}
+  - {fileID: 9042611436260977563, guid: 03e1417190b3e5c4cb80326ee53836a0, type: 3}
   energy: 0
   maxEnergy: 100
   pointAt: {x: 0, y: 0}
