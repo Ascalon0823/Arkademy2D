@@ -16,9 +16,10 @@ namespace Midterm.Character
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (ignores.Contains(other)) return;
-            onHit?.Invoke(other);
+           
             var chara = other.GetComponent<Character>();
             if(!chara) return;
+            onHit?.Invoke(other);
             if (chara.life > 0)
             {
                 chara.TakeDamage(damage, group);

@@ -637,6 +637,7 @@ MonoBehaviour:
   - {fileID: 788610333823814048, guid: 538adc80622a25d4b88a2815346ad98e, type: 3}
   - {fileID: 8808063754931906655, guid: 2019519732af2da44a62423f11172b6c, type: 3}
   - {fileID: 5791202080737012902, guid: 005008e5750d14e4b806d91e11be396b, type: 3}
+  - {fileID: 6272328728297597236, guid: 8cc6bbdedf065584d8c7188e4eb38876, type: 3}
   waveData:
   - spawnInterval: 0.333
     spawnLimit: 100
