@@ -25,10 +25,12 @@ namespace Midterm.Character
             {
                 if (lastUse == 0 || (Time.timeSinceLevelLoad - lastUse >= interval / user.attackSpeed))
                 {
-                    lastUse = Time.timeSinceLevelLoad;
-                    var group = Random.Range(-int.MaxValue, int.MaxValue);
+                   
                     var candidates = WaveManager.Instance.spawnedEnemies.Where(x =>
                         x.life > 0 && Player.Player.Local.OnScreen(x.body.position)).ToList();
+                    if (candidates.Count == 0) return;
+                    lastUse = Time.timeSinceLevelLoad;
+                    var group = Random.Range(-int.MaxValue, int.MaxValue);
                     var candidate = candidates[Random.Range(0, candidates.Count)];
                     var hits = Physics2D.OverlapCircleAll(candidate.body.position, 2.5f, LayerMask.GetMask("Enemy"));
                     foreach (var hit in hits)

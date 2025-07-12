@@ -25,13 +25,13 @@ namespace Midterm.Field
             successUI.SetActive(Player.Player.Local.currCharacter.life > 0);
             failUI.SetActive(Player.Player.Local.currCharacter.life <= 0);
             resultDetailText.text =
-                $"You survived {WaveManager.Instance.waveCount} waves";
+                $"You survived {WaveManager.Instance.waveCount+1} waves";
         }
 
         public void OnConfirm()
         {
             var player = Player.Player.Local;
-            player.record.gold += WaveManager.Instance.waveCount;
+            player.record.gold += WaveManager.Instance.waveCount+1;
             SaveEngine.Instance.Save(player.record);
             SceneManager.LoadScene("Midterm/Player/Title");
         }

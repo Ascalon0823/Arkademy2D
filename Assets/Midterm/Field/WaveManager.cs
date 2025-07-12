@@ -15,6 +15,7 @@ namespace Midterm.Field
         public float spawnInterval;
         public int spawnLimit;
         public List<Enemy> spawnableEnemies;
+        public bool bossWave;
     }
 
     [Serializable]
@@ -101,7 +102,6 @@ namespace Midterm.Field
     {
         public static WaveManager Instance;
         public float actualTime;
-        public float totalTime;
         public float waveTime;
         public int waveCount;
         [Range(0f, 10f)] public float speed;
@@ -119,6 +119,7 @@ namespace Midterm.Field
         public EndOfRunUI endOfRunUI;
         public int endingWave;
 
+        public Boss currentBoss;
         private void Awake()
         {
             Instance = this;
@@ -140,17 +141,24 @@ namespace Midterm.Field
 
         private void Update()
         {
-            actualTime = Time.timeSinceLevelLoad;
-            totalTime += Time.deltaTime * speed;
-            waveTime = totalTime % 30;
-            waveCount = 1 + Mathf.FloorToInt(totalTime / 30);
+            if (!currentBoss)
+            {
+                actualTime = Time.timeSinceLevelLoad;
+                waveTime += Time.deltaTime * speed;
+                if (waveTime > 30f)
+                {
+                    waveTime = 0f;
+                    waveCount++;
+                }
+            }
+            
             if (endingWave != -1 && waveCount >= endingWave)
             {
                 endOfRunUI.Toggle();
                 return;
             }
             DespawnFarEnemy();
-            SpawnEnemy(waveData[Mathf.Clamp(waveCount - 1, 0, waveData.Count - 1)]);
+            SpawnEnemy(waveData[Mathf.Clamp(waveCount, 0, waveData.Count - 1)]);
         }
 
         public float GetCurrWaveProgress()
@@ -166,6 +174,7 @@ namespace Midterm.Field
                 if (Vector3.Distance(enemy.transform.position, player.currCharacter.transform.position) >
                     player.currCamera.camRect.size.magnitude / 2f * despawnDistance)
                 {
+                    if (enemy.GetComponent<Boss>()) continue;
                     toDespawn.Add(enemy);
                 }
             }
@@ -193,13 +202,27 @@ namespace Midterm.Field
             }
 
             if (Time.timeSinceLevelLoad - lastSpawnTime <= data.spawnInterval) return;
-            if (spawnedEnemies.Count >= data.spawnLimit) return;
+            if (spawnedEnemies.Count >= data.spawnLimit && !data.bossWave) return;
+            if (data.bossWave && currentBoss) return;
             lastSpawnTime = Time.timeSinceLevelLoad;
             var pos = player.currCamera.GetRandomPositionOutSideScreen(despawnDistance);
             var enemyPrefab = data.spawnableEnemies[Random.Range(0, data.spawnableEnemies.Count)];
             var spawned = Instantiate(enemyPrefab, pos, Quaternion.identity);
+            var boss = spawned.GetComponent<Boss>();
+            if (boss)
+            {
+                currentBoss = boss;
+                spawned.character.onDead.AddListener(() =>
+                {
+                    waveCount++;
+                    waveTime = 0;
+                    currentBoss = null;
+                });
+            }
             spawnedEnemies.Add(spawned.character);
+            
             spawned.character.life = spawned.character.maxLife;
+            if (boss) return;
             if (Random.Range(0f, 1f) < 0.05f)
             {
                 spawned.character.moveSpeed *= 1.5f;
