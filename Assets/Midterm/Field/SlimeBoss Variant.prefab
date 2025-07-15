@@ -10,12 +10,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
       propertyPath: life
-      value: 10000
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
       propertyPath: maxLife
-      value: 10000
+      value: 100000
       objectReference: {fileID: 0}
+    - target: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+      propertyPath: 'abilities.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4556254239647368790}
     - target: {fileID: 3107583660357450521, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -64,13 +72,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+      propertyPath: xp
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+      propertyPath: energy
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407998040487526582, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+      propertyPath: energyDropRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7276198161880909905, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
       propertyPath: m_Name
       value: SlimeBoss Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3107583660357450521, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5725162815368770794}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7276198161880909905, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
       insertIndex: -1
@@ -94,3 +117,100 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayName: Slime king
+--- !u!114 &5026401176867808864 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1780161883150957635, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+  m_PrefabInstance: {fileID: 6734353621513181731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147539679499752050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c42810d4da4851b8f298d85e191db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &8526827226946167098 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3107583660357450521, guid: e930e21fe561f5246b572c7637d8435c, type: 3}
+  m_PrefabInstance: {fileID: 6734353621513181731}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8359561956727734544
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8526827226946167098}
+    m_Modifications:
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420135307266541382, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 5026401176867808864}
+    - target: {fileID: 5420135307266541382, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: remainingUseTime
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092825036060326144, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+      propertyPath: m_Name
+      value: SummonSlimes
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+--- !u!114 &4556254239647368790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5420135307266541382, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+  m_PrefabInstance: {fileID: 8359561956727734544}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228446970982424ab5328e45e0bcf542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5725162815368770794 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4283200805205767674, guid: 47f337f6ad356204fae42c4d42dc4960, type: 3}
+  m_PrefabInstance: {fileID: 8359561956727734544}
+  m_PrefabAsset: {fileID: 0}
