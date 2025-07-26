@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   internalName: thunder_storm
-  key: EFI
+  key: EIF
   energyCost: 15
   user: {fileID: 0}
   casting: 0

@@ -54,7 +54,7 @@ namespace Midterm.Character
             {
                 var projectile = Instantiate(fireBallProjectile, pos, Quaternion.identity);
                 projectile.transform.up = dir;
-                projectile.damage = 0;
+                projectile.damage = 50;
                 projectile.ignores.Add(user.collider);
                 projectile.group = group;
                 projectile.transform.localScale *= 1+(size.currLevel/2f);
@@ -71,7 +71,7 @@ namespace Midterm.Character
                     {
                         var otherchara = cc.GetComponent<Character>();
                         if (!otherchara || otherchara.life <= 0 || otherchara == user) return;
-                        otherchara.TakeDamage(Mathf.FloorToInt(300 * (1+power.currLevel/2f)));
+                        otherchara.TakeDamage(Mathf.FloorToInt(100 * (1+power.currLevel/2f)));
                         otherchara.knockBackDir = (otherchara.body.position - p).normalized * 3f;
                     }
                 };

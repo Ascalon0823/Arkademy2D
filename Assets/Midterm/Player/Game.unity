@@ -503,7 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 63676319}
   - component: {fileID: 63676320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1103,7 +1103,7 @@ GameObject:
   - component: {fileID: 142392287}
   - component: {fileID: 142392289}
   - component: {fileID: 142392288}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 150663668}
   - component: {fileID: 150663670}
   - component: {fileID: 150663669}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1529,7 +1529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 348869125}
   - component: {fileID: 348869126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 428120102}
   - component: {fileID: 428120103}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2414,7 +2414,7 @@ GameObject:
   - component: {fileID: 524539117}
   - component: {fileID: 524539119}
   - component: {fileID: 524539118}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2564,7 +2564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 655321235}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Joy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3263,7 +3263,7 @@ GameObject:
   - component: {fileID: 1172519569}
   - component: {fileID: 1172519573}
   - component: {fileID: 1172519574}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3441,7 +3441,7 @@ GameObject:
   - component: {fileID: 1248266161}
   - component: {fileID: 1248266162}
   - component: {fileID: 1248266163}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3570,6 +3570,7 @@ MonoBehaviour:
   - {fileID: 1276461431971741332, guid: 8db15da292405ba4380479091581050a, type: 3}
   - {fileID: 4970306675971334223, guid: 3ceb8772d7491be48b2d2ec7d5ee0d25, type: 3}
   - {fileID: 9042611436260977563, guid: 03e1417190b3e5c4cb80326ee53836a0, type: 3}
+  - {fileID: 1553656893280518301, guid: 1ffe6992f83744c40b5165ad7e0d1dfe, type: 3}
   energy: 0
   maxEnergy: 100
   pointAt: {x: 0, y: 0}
@@ -3792,7 +3793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1268372404}
   - component: {fileID: 1268372405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3972,7 +3973,7 @@ GameObject:
   - component: {fileID: 1302658427}
   - component: {fileID: 1302658426}
   - component: {fileID: 1302658428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4307,7 +4308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348734564}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4721,7 +4722,7 @@ GameObject:
   - component: {fileID: 1503207357}
   - component: {fileID: 1503207359}
   - component: {fileID: 1503207358}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4842,7 +4843,7 @@ GameObject:
   - component: {fileID: 1570662967}
   - component: {fileID: 1570662969}
   - component: {fileID: 1570662968}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4978,7 +4979,7 @@ GameObject:
   - component: {fileID: 1620720490}
   - component: {fileID: 1620720492}
   - component: {fileID: 1620720491}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5466,7 +5467,7 @@ GameObject:
   - component: {fileID: 1978447409}
   - component: {fileID: 1978447411}
   - component: {fileID: 1978447410}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
