@@ -72,7 +72,7 @@ namespace Midterm.Character
                         var otherchara = cc.GetComponent<Character>();
                         if (!otherchara || otherchara.life <= 0 || otherchara == user) return;
                         otherchara.TakeDamage(Mathf.FloorToInt(100 * (1+power.currLevel/2f)));
-                        otherchara.knockBackDir = (otherchara.body.position - p).normalized * 3f;
+                        otherchara.knockBackDir = (otherchara.body.position - p).normalized * 1.5f;
                     }
                 };
                 if (AudioSource && useSounds != null && useSounds.Length > 0)

@@ -109,6 +109,7 @@ namespace Midterm.Field
         public Player.Player player;
         public float lastSpawnTime;
         public List<Character.Character> spawnedEnemies = new();
+        public List<Character.Character> corpse = new();
         public float despawnDistance;
         public List<Ability> availableAbilities = new List<Ability>();
 
@@ -188,6 +189,7 @@ namespace Midterm.Field
             foreach (var dead in spawnedEnemies.Where(x => x.life <= 0).ToList())
             {
                 spawnedEnemies.Remove(dead);
+                corpse.Add(dead);
             }
         }
 
