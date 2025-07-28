@@ -42,11 +42,15 @@ namespace Midterm.Character
         {
             var count = 1 + amount.currLevel;
             var interval = 0.5f;
-            var corpses = WaveManager.Instance.corpse
-                .Where(x => Vector3.Distance(x.transform.position, transform.position) < 10).ToList();
+           
             for (var i = 0; i < count; i++)
             {
-                var candidateCorpse = corpses[Random.Range(0, corpses.Count)];
+                var corpses = WaveManager.Instance.corpse
+                    .OrderBy(x=>Vector3.Distance(x.transform.position,transform.position)).ToList();
+                if (corpses.Count == 0)  yield return new WaitForSeconds(interval);;   
+                var inrange =corpses.Where(x => Vector3.Distance(x.transform.position, transform.position) < 5).ToList();
+                var targets = (inrange.Count == 0 ? corpses : inrange);
+                var candidateCorpse = targets[Random.Range(0, targets.Count)];
                 var p = candidateCorpse.transform.position;
                 var exp = Instantiate(explosionPrefab, p, Quaternion.identity);
                 exp.transform.localScale = Vector3.one * 2f* (1+size.currLevel/2f);
@@ -61,8 +65,7 @@ namespace Midterm.Character
                 }
 
                 WaveManager.Instance.corpse.Remove(candidateCorpse);
-                corpses.Remove(candidateCorpse);
-                Destroy(candidateCorpse);
+                Destroy(candidateCorpse.gameObject);
                 yield return new WaitForSeconds(interval);
             }
         }

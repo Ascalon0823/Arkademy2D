@@ -58,6 +58,7 @@ namespace Midterm.Character
         {
             collider.enabled = life > 0;
             KnockBack();
+            UpdateChillLevel();
             Move();
         }
 
@@ -73,6 +74,26 @@ namespace Midterm.Character
             
         }
 
+        public int chillLevel;
+        public float remainingChillTime;
+
+        public void UpdateChillLevel()
+        {
+            if (chillLevel == 0) return;
+            remainingChillTime -= Time.fixedDeltaTime;
+            if (remainingChillTime <= 0f)
+            {
+                if (chillLevel == 1)
+                {
+                    chillLevel = 0;
+                }
+                else
+                {
+                    chillLevel = 1;
+                    remainingChillTime = 3f;
+                }
+            }
+        }
         public void Move()
         {
             if (life <= 0)
@@ -82,7 +103,9 @@ namespace Midterm.Character
 
             if (preparing) return;
             if (knockBackDir.magnitude > 0.01f) return;
-            body.MovePosition(body.position + moveDir.normalized * moveSpeed * Time.fixedDeltaTime);
+            var movement = moveDir.normalized * moveSpeed * Time.fixedDeltaTime;
+            movement *= 1f - chillLevel * 0.5f;
+            body.MovePosition(body.position + movement);
             if (moveDir.magnitude > 0.01f)
             {
                 faceDir = moveDir.normalized;
@@ -108,6 +131,8 @@ namespace Midterm.Character
             {
                 animator.SetBool("dead", false);
             }
+
+            spriteRenderer.color = chillLevel == 0 ? Color.white : new Color(0.0f, 0.5f, 0.5f+0.25f*chillLevel, 1f);
         }
 
         public int life;
