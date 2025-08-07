@@ -227,8 +227,9 @@ namespace Midterm.Character
         public bool wasCasting;
         public Transform indicator;
 
-        public void ChangeSpell(string spellKey)
+        public void ChangeSpell(string spellKey, out string spellName)
         {
+            spellName = "";
             if (!energy.Equals(maxEnergy)) return;
             if (currSpell && currSpell.casting) return;
             if (string.IsNullOrEmpty(spellKey)) return;
@@ -244,6 +245,7 @@ namespace Midterm.Character
             currSpell.BeginUse(pointAt);
             FieldManager.Instance?.Darken(true);
             Player.Player.Local.shake.Shake(0.15f, 2f);
+            spellName = currSpell.internalName;
         }
 
         public void Cast()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ namespace Midterm.Character
         public bool hasPointer;
 
         public GameObject readyToCastIndicator;
+        public TextMeshProUGUI castText;
         private void Start()
         {
             selectionBase.SetActive(false);
@@ -89,6 +91,7 @@ namespace Midterm.Character
             selectionBase.SetActive(true);
             preparing = true;
             readyToPrepare = false;
+            castText.text = "";
         }
 
         public void OnEndPrepare()
@@ -98,7 +101,14 @@ namespace Midterm.Character
             selectionBase.SetActive(false);
             currSelections.Clear();
             preparing = false;
-            character.ChangeSpell(key);
+            character.ChangeSpell(key, out var spellName);
+            castText.text = spellName;
+            Invoke("ResetCastText",3f);
+        }
+
+        public void ResetCastText()
+        {
+            castText.text = "";
         }
 
         public void OnPrepare(Vector2 dir)
@@ -114,6 +124,7 @@ namespace Midterm.Character
 
             if (currSelections.Contains(nearest)) return;
             currSelections.Add(nearest);
+            castText.text = string.Join("-", currSelections.Select(x => x.gameObject.name));
             nearest.GetComponent<Image>().color = Color.white;
         }
     }
