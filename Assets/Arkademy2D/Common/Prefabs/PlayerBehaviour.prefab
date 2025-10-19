@@ -48,6 +48,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  characterPrefab: {fileID: 1446587484264886479, guid: 4ae1b5bb2079848ebade3b8d11dd091a, type: 3}
+  character: {fileID: 0}
 --- !u!114 &5309017489029482785
 MonoBehaviour:
   m_ObjectHideFlags: 0
