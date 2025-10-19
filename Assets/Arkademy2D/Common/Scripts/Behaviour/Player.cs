@@ -20,10 +20,13 @@ namespace Arkademy2D.Common.Behaviour
         private void Update()
         {
             if (!isLocalPlayer) return;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                character.transform.position += Vector3.up * 0.1f;
-            }
+            if (!character) return;
+            var dir = Vector2.zero;
+            if (Input.GetKey(KeyCode.W)) dir += Vector2.up;
+            if (Input.GetKey(KeyCode.S)) dir += Vector2.down;
+            if (Input.GetKey(KeyCode.A)) dir += Vector2.left;
+            if (Input.GetKey(KeyCode.D)) dir += Vector2.right;
+            character.moveDir = dir;
         }
 
         [Command]
@@ -40,6 +43,5 @@ namespace Arkademy2D.Common.Behaviour
         {
             character = identity;
         }
-        
     }
 }
