@@ -50,6 +50,8 @@ MonoBehaviour:
   syncInterval: 0
   characterPrefab: {fileID: 1446587484264886479, guid: 4ae1b5bb2079848ebade3b8d11dd091a, type: 3}
   character: {fileID: 0}
+  playerCameraPrefab: {fileID: 4597002252496345897, guid: 222fe5c2b7af6499f93856d965f24857, type: 3}
+  playerCamera: {fileID: 0}
 --- !u!114 &5309017489029482785
 MonoBehaviour:
   m_ObjectHideFlags: 0

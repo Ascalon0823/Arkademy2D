@@ -8,6 +8,8 @@ namespace Arkademy2D.Common.Behaviour
     {
         public Character characterPrefab;
         public Character character;
+        public Camera playerCameraPrefab;
+        public Camera playerCamera;
 
         public void Start()
         {
@@ -27,6 +29,9 @@ namespace Arkademy2D.Common.Behaviour
             if (Input.GetKey(KeyCode.A)) dir += Vector2.left;
             if (Input.GetKey(KeyCode.D)) dir += Vector2.right;
             character.moveDir = dir;
+
+            if (!playerCamera) return;
+            playerCamera.transform.position = character.transform.position + new Vector3(0, 0, -10);
         }
 
         [Command]
@@ -42,6 +47,10 @@ namespace Arkademy2D.Common.Behaviour
         public void OnCharacterSpawned(Character identity)
         {
             character = identity;
+            if (isOwned)
+            {
+                playerCamera = Instantiate(playerCameraPrefab, transform, true);
+            }
         }
     }
 }
