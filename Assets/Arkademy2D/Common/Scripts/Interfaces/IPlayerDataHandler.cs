@@ -9,6 +9,6 @@ namespace Arkademy2D.Common.Interfaces
     {
         Task<IList<PlayerData>> GetAllPlayerDataAsync(CancellationToken cancellationToken);
         Task<PlayerData> LoadPlayerDataAsync(Guid playerGuid, CancellationToken cancellationToken);
-        Task SavePlayerDataAsync(PlayerData playerData, CancellationToken cancellationToken);
+        Task<PlayerData> SavePlayerDataAsync(PlayerData playerData, CancellationToken cancellationToken);
     }
 }

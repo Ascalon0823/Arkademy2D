@@ -23,7 +23,7 @@ namespace Arkademy2D.Common.Objects
 
         public abstract Task<PlayerData> LoadPlayerDataAsync(Guid playerGuid, CancellationToken cancellationToken);
 
-        public abstract Task
+        public abstract Task<PlayerData>
             SavePlayerDataAsync(PlayerData playerData, CancellationToken cancellationToken);
     }
 }

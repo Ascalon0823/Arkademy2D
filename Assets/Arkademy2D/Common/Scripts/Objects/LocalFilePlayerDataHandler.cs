@@ -13,6 +13,13 @@ namespace Arkademy2D.Common.Objects
     {
         private const string PlayerDataExt = ".player";
 
+        #if UNITY_EDITOR
+        [ContextMenu("Open folder")]
+        private void OpenSaveFolder()
+        {
+            Application.OpenURL(GetFolderPath());
+        }
+        #endif
         private string GetFolderPath()
         {
             return Application.persistentDataPath;
@@ -25,7 +32,7 @@ namespace Arkademy2D.Common.Objects
                 return string.Empty;
             }
 
-            return Path.Combine(GetFolderPath(), playerGuid.ToString(), PlayerDataExt);
+            return Path.Combine(GetFolderPath(), $"{playerGuid.ToString()}{PlayerDataExt}");
         }
 
         private async Task<PlayerData> LoadPlayerDataFromFileAsync(string filePath, CancellationToken cancellationToken)
@@ -57,19 +64,18 @@ namespace Arkademy2D.Common.Objects
             return results;
         }
 
-
         public override async Task<PlayerData> LoadPlayerDataAsync(Guid playerGuid, CancellationToken cancellationToken)
         {
             var filePath = GetSaveFilePath(playerGuid);
             return await LoadPlayerDataFromFileAsync(filePath, cancellationToken);
         }
 
-        public override async Task SavePlayerDataAsync(PlayerData playerData, CancellationToken cancellationToken)
+        public override async Task<PlayerData> SavePlayerDataAsync(PlayerData playerData, CancellationToken cancellationToken)
         {
             if (playerData is null)
             {
                 Debug.Log("Player data is empty");
-                return;
+                return null;
             }
 
             var filePath = GetSaveFilePath(playerData.Guid);
@@ -77,10 +83,12 @@ namespace Arkademy2D.Common.Objects
             {
                 var json = JsonConvert.SerializeObject(playerData);
                 await File.WriteAllTextAsync(filePath, json, cancellationToken);
+                return await LoadPlayerDataFromFileAsync(filePath, cancellationToken);
             }
             catch (Exception e)
             {
                 Debug.LogWarning($"Unable to save player data to {filePath} {e.Message}");
+                return null;
             }
         }
     }
