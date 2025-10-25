@@ -46,7 +46,7 @@ namespace Arkademy2D.Common.Objects
                 Guid = Guid.NewGuid(),
                 CreationTime = DateTime.UtcNow,
                 LastUpdateTime = DateTime.UtcNow,
-                displayName =displayName,
+                DisplayName =displayName,
             };
             
             return await playerDataHandler.SavePlayerDataAsync(newPlayerData, token);

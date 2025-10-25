@@ -33,7 +33,7 @@ namespace Arkademy2D.Title.Behaviour
             var existingPlayerData = await PlayerSession.Curr.GetPlayerDataAsync(CancellationToken.None);
             if (existingPlayerData is not null)
             {
-                Debug.Log($"Player {existingPlayerData.displayName} loaded");
+                Debug.Log($"Player {existingPlayerData.DisplayName} loaded");
                 PopulateCharacterList(existingPlayerData);
                 return;
             }
@@ -43,7 +43,7 @@ namespace Arkademy2D.Title.Behaviour
 
         public void PopulateCharacterList(PlayerData playerData)
         {
-            Debug.Log($"Populate character list for {playerData.displayName}");
+            Debug.Log($"Populate character list for {playerData.DisplayName}");
         }
     }
 }

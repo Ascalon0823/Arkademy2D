@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Arkademy2D.Common
 {
-    [Serializable]
-    public record PlayerData
+    public class PlayerData
     {
         public Guid Guid;
         public DateTime CreationTime;
         public DateTime LastUpdateTime;
-        public string displayName;
+        public string DisplayName;
+        public List<CharacterData> Characters = new List<CharacterData>();
     }
 }

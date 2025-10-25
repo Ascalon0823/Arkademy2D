@@ -37,7 +37,7 @@ namespace Arkademy2D.Title.UI
                 return;
             }
 
-            Debug.Log($"Successfully created player data {createdPlayerData.displayName}");
+            Debug.Log($"Successfully created player data {createdPlayerData.DisplayName}");
             gameObject.SetActive(false);
             OnPlayerDataCreated?.Invoke(createdPlayerData);
         }
