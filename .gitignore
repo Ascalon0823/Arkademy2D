@@ -72,3 +72,5 @@ Assembly-CSharp.csproj.DotSettings
 Assembly-CSharp.Player.csproj.DotSettings
 
 UserSettings/Layouts/default-6000.dwlt
+
+*.DotSettings
