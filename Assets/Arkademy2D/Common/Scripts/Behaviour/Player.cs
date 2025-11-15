@@ -10,7 +10,7 @@ namespace Arkademy2D.Common.Behaviour
         public Character character;
         public Camera playerCameraPrefab;
         public Camera playerCamera;
-
+        
         public void Start()
         {
             if (isLocalPlayer)

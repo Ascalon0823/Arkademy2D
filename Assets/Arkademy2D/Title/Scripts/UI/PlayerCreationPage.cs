@@ -13,7 +13,7 @@ namespace Arkademy2D.Title.UI
     {
         public TMP_InputField playerNameInput;
         public Button confirmButton;
-        public Action<PlayerData> OnPlayerDataCreated;
+        private Action<PlayerData> _onPlayerDataCreated;
 
         private void Awake()
         {
@@ -24,7 +24,7 @@ namespace Arkademy2D.Title.UI
         public void BeginCreatePlayer(Action<PlayerData> onPlayerDataCreated)
         {
             gameObject.SetActive(true);
-            OnPlayerDataCreated = onPlayerDataCreated;
+            _onPlayerDataCreated = onPlayerDataCreated;
         }
 
         public async Task OnConfirm()
@@ -39,7 +39,8 @@ namespace Arkademy2D.Title.UI
 
             Debug.Log($"Successfully created player data {createdPlayerData.DisplayName}");
             gameObject.SetActive(false);
-            OnPlayerDataCreated?.Invoke(createdPlayerData);
+            _onPlayerDataCreated?.Invoke(createdPlayerData);
+            _onPlayerDataCreated = null;
         }
     }
 }

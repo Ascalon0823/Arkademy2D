@@ -20,7 +20,6 @@ namespace Arkademy2D.Common.Behaviour
         {
             if(!isOwned) return;
             body.MovePosition(body.position + 4f * Time.deltaTime * moveDir);
-            
         }
     }
 }

@@ -21,35 +21,41 @@ namespace Arkademy2D.Common.Objects
                     if (!existing) throw new Exception($"Instance {nameof(PlayerSession)} does not exist");
                     _curr = existing;
                 }
+
                 return _curr;
             }
         }
 
         private static PlayerSession _curr;
-        public AbstractPlayerDataHandler playerDataHandler;
-        public PlayerData localPlayerData;
-
-        public async Task<PlayerData> GetPlayerDataAsync(CancellationToken token)
+        [SerializeField] private AbstractPlayerDataHandler playerDataHandler;
+        private PlayerData _localPlayerData;
+        private CharacterData _localCharacterData;
+        public async Task<PlayerData> GetPlayerDataAsync(CancellationToken token = default)
         {
-            if (localPlayerData.Valid()) return localPlayerData;
+            if (_localPlayerData.Valid()) return _localPlayerData;
             var playerList = await playerDataHandler.GetAllPlayerDataAsync(token);
             var first = playerList.FirstOrDefault();
             if (!first.Valid()) return null;
-            localPlayerData = first;
-            return localPlayerData;
+            _localPlayerData = first;
+            return _localPlayerData;
         }
 
-        public async Task<PlayerData> CreatePlayerDataAsync(string displayName, CancellationToken token)
+        public async Task<PlayerData> CreatePlayerDataAsync(string displayName, CancellationToken token = default)
         {
-             var newPlayerData = new PlayerData
+            var newPlayerData = new PlayerData
             {
                 Guid = Guid.NewGuid(),
                 CreationTime = DateTime.UtcNow,
                 LastUpdateTime = DateTime.UtcNow,
-                DisplayName =displayName,
+                DisplayName = displayName,
             };
-            
+
             return await playerDataHandler.SavePlayerDataAsync(newPlayerData, token);
+        }
+
+        public async Task<PlayerData> SavePlayerDataAsync(PlayerData playerData, CancellationToken token = default)
+        {
+            return await playerDataHandler.SavePlayerDataAsync(playerData, token);
         }
     }
 }

@@ -6,5 +6,7 @@ namespace Arkademy2D.Common
     {
         public Guid Guid;
         public string DisplayName;
+        public DateTime CreationTime;
+        public DateTime LastUpdateTime;
     }
 }
