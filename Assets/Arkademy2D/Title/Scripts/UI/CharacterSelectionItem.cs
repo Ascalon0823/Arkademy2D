@@ -11,12 +11,13 @@ namespace Arkademy2D.Title.Scripts.UI
     {
         [SerializeField] private TextMeshProUGUI characterNameText;
         [SerializeField] private Button button;
-        private CharacterData _characterData;
+        public CharacterData characterData { get; private set; }
         private Action<CharacterSelectionItem> _onSelected;
 
-        public void Setup(CharacterData characterData, Action<CharacterSelectionItem> onSelected)
+        public void Setup(CharacterData data, Action<CharacterSelectionItem> onSelected)
         {
-            characterNameText.text = characterData.DisplayName;
+            characterData = data;
+            characterNameText.text = data.DisplayName;
             _onSelected = onSelected;
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(OnClick);

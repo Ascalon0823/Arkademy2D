@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +8,6 @@ using Arkademy2D.Common.Objects;
 using Arkademy2D.Title.Scripts.UI;
 using Arkademy2D.Title.UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Arkademy2D.Title.Behaviour
@@ -25,11 +25,13 @@ namespace Arkademy2D.Title.Behaviour
             new List<CharacterSelectionItem>();
 
         [SerializeField] private CharacterSelectionItem currentSelectedItem;
+        [SerializeField] private Button startButton;
 
         private void Start()
         {
             landingCover.SetActive(true);
             characterSelectionHolder.gameObject.SetActive(false);
+            startButton.gameObject.SetActive(false);
         }
 
         private async void Update()
@@ -63,7 +65,8 @@ namespace Arkademy2D.Title.Behaviour
             {
                 Destroy(item.gameObject);
             }
-            
+
+            startButton.interactable = false;
             _populatedCharacterSelectionItems.Clear();
             foreach (var characterData in playerData.Characters.OrderByDescending(x => x.LastUpdateTime))
             {
@@ -75,14 +78,19 @@ namespace Arkademy2D.Title.Behaviour
                     SelectCharacterItem(item);
                 }
             }
+
             characterSelectionHolder.gameObject.SetActive(true);
+            startButton.gameObject.SetActive(true);
             createCharacterButton.onClick.RemoveAllListeners();
-            createCharacterButton.onClick.AddListener(()=>CreateCharacter(playerData));
+            createCharacterButton.onClick.AddListener(() => CreateCharacter(playerData));
+            startButton.onClick.RemoveAllListeners();
+            startButton.onClick.AddListener(StartWithSelectedCharacter);
         }
 
         public void CreateCharacter(PlayerData playerData)
         {
             characterSelectionHolder.gameObject.SetActive(false);
+            startButton.gameObject.SetActive(false);
             characterCreationPage.BeginCreateCharacter(playerData,
                 newCharacter => { PopulateCharacterList(playerData); });
         }
@@ -93,8 +101,17 @@ namespace Arkademy2D.Title.Behaviour
             {
                 currentSelectedItem.SetSelected(false);
             }
+
             currentSelectedItem = characterSelectionItem;
             currentSelectedItem.SetSelected(true);
+            startButton.interactable = characterSelectionItem;
+        }
+
+        public void StartWithSelectedCharacter()
+        {
+            currentSelectedItem.characterData.LastUpdateTime = DateTime.UtcNow;
+            PlayerSession.Curr.LocalCharacterData = currentSelectedItem.characterData;
+            Debug.Log($"Starting game with {PlayerSession.Curr.LocalCharacterData.DisplayName}");
         }
     }
 }

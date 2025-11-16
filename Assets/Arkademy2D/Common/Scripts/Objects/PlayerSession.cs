@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Arkademy2D.Common.Extensions;
 using Arkademy2D.Common.Interfaces;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Arkademy2D.Common.Objects
 {
@@ -30,6 +31,12 @@ namespace Arkademy2D.Common.Objects
         [SerializeField] private AbstractPlayerDataHandler playerDataHandler;
         private PlayerData _localPlayerData;
         private CharacterData _localCharacterData;
+
+        public CharacterData LocalCharacterData
+        {
+            get => _localCharacterData;
+            set => _localCharacterData = value;
+        }
         public async Task<PlayerData> GetPlayerDataAsync(CancellationToken token = default)
         {
             if (_localPlayerData.Valid()) return _localPlayerData;
@@ -57,5 +64,6 @@ namespace Arkademy2D.Common.Objects
         {
             return await playerDataHandler.SavePlayerDataAsync(playerData, token);
         }
+
     }
 }

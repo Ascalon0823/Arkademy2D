@@ -34,8 +34,8 @@ namespace Arkademy2D.Title.Scripts.UI
             {
                 Guid = Guid.NewGuid(),
                 DisplayName = characterNameInput.text,
-                CreationTime = DateTime.Now,
-                LastUpdateTime = DateTime.Now
+                CreationTime = DateTime.UtcNow,
+                LastUpdateTime = DateTime.UtcNow
             };
             
             _currentPlayerData.Characters.Add(newCharacter);
