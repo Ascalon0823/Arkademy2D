@@ -15,7 +15,7 @@ namespace Arkademy2D.Game.Actors
         private void LateUpdate()
         {
             animator.SetBool("walking", movement.moveDir.sqrMagnitude > float.Epsilon);
-            sprite.flipX = Vector2.Dot(movement.moveDir, Vector2.right) > 0 ? spriteFaceLeft : !spriteFaceLeft;
+            sprite.flipX = Vector2.Dot(movement.faceDir, Vector2.right) > 0 ? spriteFaceLeft : !spriteFaceLeft;
         }
     }
 }
