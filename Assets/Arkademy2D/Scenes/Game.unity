@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 262937038}
   - component: {fileID: 262937040}
   - component: {fileID: 262937039}
+  - component: {fileID: 262937041}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -256,6 +257,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &262937041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262937037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c59e38004422cbbbc684a16ff70ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Interactable
 --- !u!1 &286868375
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +821,7 @@ GameObject:
   - component: {fileID: 774372572}
   - component: {fileID: 774372574}
   - component: {fileID: 774372573}
+  - component: {fileID: 774372575}
   m_Layer: 0
   m_Name: Bed
   m_TagString: Untagged
@@ -934,6 +948,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &774372575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774372571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c59e38004422cbbbc684a16ff70ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Interactable
 --- !u!1 &843639288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,6 +1572,7 @@ GameObject:
   - component: {fileID: 1406970561}
   - component: {fileID: 1406970563}
   - component: {fileID: 1406970564}
+  - component: {fileID: 1406970565}
   m_Layer: 0
   m_Name: BookCase
   m_TagString: Untagged
@@ -1672,6 +1699,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1406970565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406970560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c59e38004422cbbbc684a16ff70ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Interactable
 --- !u!1 &1479657992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,6 +1723,7 @@ GameObject:
   - component: {fileID: 1479657995}
   - component: {fileID: 1479657994}
   - component: {fileID: 1479657996}
+  - component: {fileID: 1479657997}
   m_Layer: 0
   m_Name: Desk
   m_TagString: Untagged
@@ -1823,6 +1863,18 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &1479657997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1479657992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c59e38004422cbbbc684a16ff70ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Interactable
 --- !u!1 &1711739691
 GameObject:
   m_ObjectHideFlags: 0
@@ -1833,6 +1885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711739693}
   - component: {fileID: 1711739692}
+  - component: {fileID: 1711739694}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1866,9 +1919,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1786609897}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1711739694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711739691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb98b288da9e4da3a49070e29df787ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Player.InteractionIndicator
+  playerDetector: {fileID: 1775536859}
+  indicator: {fileID: 1786609896}
 --- !u!1 &1755344962
 GameObject:
   m_ObjectHideFlags: 0
@@ -2022,6 +2090,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775536858}
+    - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1775536859}
   m_SourcePrefab: {fileID: 100100000, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
 --- !u!1 &1775536851 stripped
 GameObject:
@@ -2080,6 +2151,20 @@ MonoBehaviour:
   animator: {fileID: 1775536855}
   movement: {fileID: 1775536853}
   spriteFaceLeft: 1
+--- !u!114 &1775536859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775536851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7900a8c2f974fc0ac82e646b2c372c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Detector
+  candidate: {fileID: 0}
+  radius: 1
 --- !u!1 &1781822152
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,6 +2176,7 @@ GameObject:
   - component: {fileID: 1781822153}
   - component: {fileID: 1781822155}
   - component: {fileID: 1781822154}
+  - component: {fileID: 1781822156}
   m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
@@ -2207,6 +2293,85 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1781822156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781822152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c59e38004422cbbbc684a16ff70ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Interactable
+--- !u!1001 &1786609895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1711739693}
+    m_Modifications:
+    - target: {fileID: 8048476897937718629, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_Name
+      value: SelectionIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+--- !u!1 &1786609896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8048476897937718629, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+  m_PrefabInstance: {fileID: 1786609895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1786609897 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8737750991122855553, guid: aeb839e2113813048b1a3a0b68c4dd0f, type: 3}
+  m_PrefabInstance: {fileID: 1786609895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1872828467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,17 +2509,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4809bca0d1f6649ad7e6fd436c2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ArkademyStudio.PixelPerfect::ArkademyStudio.PixelPerfect.PixelPerfectCamera
-  pixelScale: 3
+  pixelScale: 4
   useReferedScale: 1
-  referenceResolution: {x: 270, y: 480}
+  referenceResolution: {x: 480, y: 270}
   pixelPerUnit: 16
   cam: {fileID: 1940279855}
   camRect:
     serializedVersion: 2
-    x: -20.581
-    y: -10.776
-    width: 40
-    height: 22.5
+    x: -15.581
+    y: -7.9635
+    width: 30
+    height: 16.875
 --- !u!114 &1940279853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2442,7 +2607,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.25
+  orthographic size: 8.4375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -2470,6 +2635,7 @@ GameObject:
   - component: {fileID: 2008626050}
   - component: {fileID: 2008626049}
   - component: {fileID: 2008626051}
+  - component: {fileID: 2008626052}
   m_Layer: 0
   m_Name: Storage
   m_TagString: Untagged
@@ -2609,6 +2775,18 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &2008626052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008626047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c59e38004422cbbbc684a16ff70ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Interaction.Interactable
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
