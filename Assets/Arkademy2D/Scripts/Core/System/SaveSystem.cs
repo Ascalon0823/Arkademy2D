@@ -11,9 +11,10 @@ namespace Arkademy2D.Core.System
         {
             var playerSavePath = Path.Combine(Application.persistentDataPath, "player.json");
             GameSystem.PlayerData.LastUpdateDate = DateTime.UtcNow;
+            GameSystem.CharacterData.LastUpdateDate = DateTime.UtcNow;
             var playerData = JsonConvert.SerializeObject(GameSystem.PlayerData);
             File.WriteAllText(playerSavePath, playerData);
-            Debug.Log($"Player {GameSystem.PlayerData.DisplayName} saved");
+            Debug.Log($"Player {GameSystem.PlayerData.Id} saved");
         }
 
         public static Data.PlayerData LoadPlayer()
@@ -21,7 +22,7 @@ namespace Arkademy2D.Core.System
             var playerSavePath = Path.Combine(Application.persistentDataPath, "player.json");
             if (!File.Exists(playerSavePath)) return null;
             var playerData = JsonConvert.DeserializeObject<Data.PlayerData>(File.ReadAllText(playerSavePath));
-            Debug.Log($"Player {playerData} loaded");
+            Debug.Log($"Player {playerData.Id} loaded");
             return playerData;
         }
     }

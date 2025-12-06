@@ -10,7 +10,7 @@ namespace Arkademy2D.Game.Player
         public Vector2 move;
         public Actors.Movement actorMovement;
         public Interaction.Detector interactionDetector;
-
+        public bool cast;
         private bool OnUI()
         {
             return EventSystem.current.currentSelectedGameObject;
@@ -46,6 +46,11 @@ namespace Arkademy2D.Game.Player
         public void OnMove(InputValue inputValue)
         {
             move = inputValue.Get<Vector2>();
+        }
+
+        public void OnCast(InputValue inputValue)
+        {
+            cast = inputValue.isPressed;
         }
     }
 }
