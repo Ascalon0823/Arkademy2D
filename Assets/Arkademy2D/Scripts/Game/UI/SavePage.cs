@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Arkademy2D.Core.System;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -46,6 +47,12 @@ namespace Arkademy2D.Game.UI
         {
             SaveSystem.SavePlayer();
             SetOpen(false);
+        }
+
+        [ContextMenu("Check save")]
+        public void CheckSave()
+        {
+            Debug.Log(JsonConvert.SerializeObject(SaveSystem.LoadPlayer(), Formatting.Indented));
         }
     }
 }
