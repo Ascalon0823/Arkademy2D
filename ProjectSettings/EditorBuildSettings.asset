@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Arkademy2D/Scenes/Game.unity
+    guid: 1cf08446b743f504381795984a42258c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1e6ea45d6131b0b4c9eb36e6721931e9, type: 3}
   m_UseUCBPForAssetBundles: 0
