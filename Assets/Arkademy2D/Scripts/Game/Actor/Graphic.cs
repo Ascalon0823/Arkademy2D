@@ -19,9 +19,15 @@ namespace Arkademy2D.Game.Actor
         }
         private void LateUpdate()
         {
-            animator.SetBool("dead",health.current==0);
-            animator.SetBool("walking", movement.moveDir.sqrMagnitude > float.Epsilon && health.current >0);
-            sprite.flipX = Vector2.Dot(movement.faceDir, Vector2.right) > 0 ? spriteFaceLeft : !spriteFaceLeft;
+            if (health)
+            {
+                animator.SetBool("dead",health.current==0);
+            }
+            if (movement)
+            {
+                animator.SetBool("walking", movement.moveDir.sqrMagnitude > float.Epsilon && health.current >0);
+                sprite.flipX = Vector2.Dot(movement.faceDir, Vector2.right) > 0 ? spriteFaceLeft : !spriteFaceLeft;
+            }
         }
     }
 }
