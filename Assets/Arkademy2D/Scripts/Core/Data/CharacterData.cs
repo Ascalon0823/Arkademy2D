@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Arkademy2D.Core.Data
 {
+    [Serializable]
     public class CharacterData
     {
         [JsonProperty] public Guid Id { get; private set; } = Guid.NewGuid();
@@ -10,5 +11,6 @@ namespace Arkademy2D.Core.Data
         public DateTime LastUpdateDate { get; set; } = DateTime.UtcNow;
         public string DisplayName { get; set; }
         public AcademicData AcademicData { get; set; } = new AcademicData();
+        public int MaxHealth { get; set; }
     }
 }

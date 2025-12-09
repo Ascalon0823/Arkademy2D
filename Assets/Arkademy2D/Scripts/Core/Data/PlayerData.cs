@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Arkademy2D.Core.Data
 {
+    [Serializable]
     public class PlayerData
     {
         [JsonProperty] public Guid Id { get; private set; } = Guid.NewGuid();
