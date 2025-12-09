@@ -10,9 +10,11 @@ namespace Arkademy2D.Game.Actor
         public Vector2 faceDir;
 
         public float speed;
+        public Health health;
 
         public void FixedUpdate()
         {
+            if (health && health.current <= 0) return;
             var movement = speed * Time.fixedDeltaTime * moveDir;
             body.MovePosition(body.position + movement);
             if (movement.sqrMagnitude > float.Epsilon)

@@ -9,6 +9,7 @@ namespace Arkademy2D.Game.Actor
         public Animator animator;
 
         public Movement movement;
+        public Health health;
 
         public bool spriteFaceLeft;
 
@@ -18,7 +19,8 @@ namespace Arkademy2D.Game.Actor
         }
         private void LateUpdate()
         {
-            animator.SetBool("walking", movement.moveDir.sqrMagnitude > float.Epsilon);
+            animator.SetBool("dead",health.current==0);
+            animator.SetBool("walking", movement.moveDir.sqrMagnitude > float.Epsilon && health.current >0);
             sprite.flipX = Vector2.Dot(movement.faceDir, Vector2.right) > 0 ? spriteFaceLeft : !spriteFaceLeft;
         }
     }

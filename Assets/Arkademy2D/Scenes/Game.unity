@@ -3667,6 +3667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Player.ActorHandler
   actorHealth: {fileID: 1775536861}
+  actorGraphic: {fileID: 0}
 --- !u!1 &1714913091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4008,6 +4009,7 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   faceDir: {x: 0, y: 0}
   speed: 3
+  health: {fileID: 1775536861}
 --- !u!95 &1775536855 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3397873590535862207, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
@@ -4038,6 +4040,7 @@ MonoBehaviour:
   sprite: {fileID: 1775536856}
   animator: {fileID: 1775536855}
   movement: {fileID: 1775536853}
+  health: {fileID: 1775536861}
   spriteFaceLeft: 1
 --- !u!114 &1775536859
 MonoBehaviour:
