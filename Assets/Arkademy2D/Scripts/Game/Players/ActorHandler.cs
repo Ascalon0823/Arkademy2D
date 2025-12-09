@@ -1,6 +1,6 @@
 using System;
 using Arkademy2D.Core.System;
-using Arkademy2D.Game.Actors;
+using Arkademy2D.Game.Actor;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Player

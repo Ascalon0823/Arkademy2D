@@ -8,7 +8,7 @@ namespace Arkademy2D.Game.Player
     public class InputHandler : MonoBehaviour
     {
         public Vector2 move;
-        public Actors.Movement actorMovement;
+        public Actor.Movement actorMovement;
         public Interaction.Detector interactionDetector;
         public bool cast;
         private bool OnUI()

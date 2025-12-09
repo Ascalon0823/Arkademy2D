@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Arkademy2D.Game.Actors
+namespace Arkademy2D.Game.Actor
 {
     public class Movement : MonoBehaviour
     {

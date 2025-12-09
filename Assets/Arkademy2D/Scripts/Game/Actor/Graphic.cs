@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Arkademy2D.Game.Actors
+namespace Arkademy2D.Game.Actor
 {
     public class Graphic : MonoBehaviour
     {
@@ -12,6 +12,10 @@ namespace Arkademy2D.Game.Actors
 
         public bool spriteFaceLeft;
 
+        public void SetAnimationTrigger(string triggerName)
+        {
+            animator.SetTrigger(triggerName);
+        }
         private void LateUpdate()
         {
             animator.SetBool("walking", movement.moveDir.sqrMagnitude > float.Epsilon);

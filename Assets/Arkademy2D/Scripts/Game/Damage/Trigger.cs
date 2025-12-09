@@ -1,5 +1,5 @@
 using System;
-using Arkademy2D.Game.Actors;
+using Arkademy2D.Game.Actor;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Damage
@@ -12,7 +12,7 @@ namespace Arkademy2D.Game.Damage
         {
             var health = other.GetComponent<Health>();
             if (!health || health.faction == faction) return;
-            health.current -=  damage;
+            health.TakeDamage(damage);
         }
     }
 }
