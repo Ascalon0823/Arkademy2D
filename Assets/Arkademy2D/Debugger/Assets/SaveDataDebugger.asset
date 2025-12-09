@@ -12,10 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8be1f161fde14a508c681124ff6ee35, type: 3}
   m_Name: SaveDataDebugger
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Debugger.SaveDataDebugger
-  playerDataJson: "{\n  \"Id\": \"25473aff-08d5-45d3-b239-1604f54231b5\",\n  \"CreationDate\":
-    \"2025-12-08T00:32:20.551323Z\",\n  \"LastUpdateDate\": \"2025-12-09T00:46:20.526421Z\",\n 
-    \"DisplayName\": null,\n  \"Characters\": [\n    {\n      \"Id\": \"3fbd8379-27e2-487d-8666-81813bf3c0fd\",\n     
-    \"CreationDate\": \"2025-12-08T00:32:20.551557Z\",\n      \"LastUpdateDate\":
-    \"2025-12-09T00:46:20.527085Z\",\n      \"DisplayName\": null,\n      \"AcademicData\":
-    {\n        \"ModulePoints\": 0,\n        \"ModuleProgress\": {\n          \"Basic
-    spell\": 80\n        }\n      },\n      \"MaxHealth\": 10000\n    }\n  ]\n}"
+  playerDataJson: 
