@@ -15,7 +15,6 @@ namespace Arkademy2D.Debugger
         public void LoadPlayer()
         {
             playerDataJson = SaveSystem.ReadPlayerDataJson();
-            UnityEditor.EditorUtility.SetDirty(this);
         }
 
         [ContextMenu("Save")]
