@@ -12,6 +12,11 @@ namespace Arkademy2D.Game.Player
         public Interaction.Detector interactionDetector;
         public bool cast;
 
+        private void Awake()
+        {
+            FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
+        }
+
         private void Update()
         {
             MoveActor();
