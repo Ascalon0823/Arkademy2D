@@ -3813,7 +3813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Player.ActorHandler
   actorHealth: {fileID: 1775536861}
-  actorGraphic: {fileID: 0}
+  actorGraphic: {fileID: 1775536858}
 --- !u!1 &1714913091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4219,19 +4219,7 @@ MonoBehaviour:
   current: 0
   onDamage:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1775536858}
-        m_TargetAssemblyTypeName: Arkademy2D.Game.Actor.Graphic, Assembly-CSharp
-        m_MethodName: SetAnimationTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: hit
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1781822152
 GameObject:
   m_ObjectHideFlags: 0

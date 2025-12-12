@@ -20,7 +20,8 @@ namespace Arkademy2D.Core.System
         {
             if (!File.Exists(PlayerSavePath)) return null;
             var playerData = JsonConvert.DeserializeObject<Data.PlayerData>(ReadPlayerDataJson());
-            Debug.Log($"Player {playerData.Id} loaded");
+            if(playerData != null)
+                Debug.Log($"Player {playerData.Id} loaded");
             return playerData;
         }
 
