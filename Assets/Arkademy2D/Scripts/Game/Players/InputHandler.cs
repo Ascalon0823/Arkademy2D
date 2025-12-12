@@ -11,14 +11,9 @@ namespace Arkademy2D.Game.Player
         public Actor.Movement actorMovement;
         public Interaction.Detector interactionDetector;
         public bool cast;
-        private bool OnUI()
-        {
-            return EventSystem.current.currentSelectedGameObject;
-        }
 
         private void Update()
         {
-            //if (OnUI()) return;
             MoveActor();
         }
 
