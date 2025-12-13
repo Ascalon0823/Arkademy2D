@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -8,32 +9,56 @@ namespace Arkademy2D.Core.Store
 {
     public class FileSystemStore : IStore
     {
-        private string GetFolderRoot<T>() where T : IStoreKeyedData
+        public static string RootPath => Application.persistentDataPath;
+        private string GetFolderRootOfType<T>() where T : IStoreKeyedData
         {
-            return Path.Combine(Application.persistentDataPath, typeof(T).Name);
+            return Path.Combine(RootPath, typeof(T).Name);
         }
 
-        public async Task<T> LoadAsync<T>(string key) where T : IStoreKeyedData
+        public Task<T> LoadAsync<T>(string key) where T : IStoreKeyedData
         {
-            var path = Path.Combine(GetFolderRoot<T>(), key);
+            var path = Path.Combine(GetFolderRootOfType<T>(), key);
             try
             {
-                var data = JsonConvert.DeserializeObject<T>(await File.ReadAllTextAsync(path));
-                return data;
+                var data = JsonConvert.DeserializeObject<T>(File.ReadAllText(path));
+                return Task.FromResult(data);
             }
             catch (Exception e)
             {
                 Debug.LogException(e);
-                return default;
+                return Task.FromResult<T>(default);
             }
         }
 
-        public async Task SaveAsync<T>(T item) where T : IStoreKeyedData
+        public Task SaveAsync<T>(T item) where T : IStoreKeyedData
         {
-            var folder = GetFolderRoot<T>();
+            var folder = GetFolderRootOfType<T>();
             Directory.CreateDirectory(folder);
             var path = Path.Combine(folder, item.Key);
-            await File.WriteAllTextAsync(path, JsonConvert.SerializeObject(item));
+            File.WriteAllTextAsync(path, JsonConvert.SerializeObject(item));
+            return Task.CompletedTask;
+        }
+
+        public Task<IList<T>> LoadAllAsync<T>() where T : IStoreKeyedData
+        {
+            var folder = GetFolderRootOfType<T>();
+            Directory.CreateDirectory(folder);
+            var result = new List<T>();
+            foreach (var file in Directory.GetFiles(folder))
+            {
+                try
+                {
+                    var json = File.ReadAllText(file);
+                    var data = JsonConvert.DeserializeObject<T>(json);
+                    result.Add(data);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                }
+            }
+
+            return Task.FromResult<IList<T>>(result);
         }
     }
 }
