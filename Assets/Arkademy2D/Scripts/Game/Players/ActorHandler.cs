@@ -11,10 +11,14 @@ namespace Arkademy2D.Game.Player
         public Graphic actorGraphic;
         private void Start()
         {
+            actorHealth.onDamage.AddListener(() => { actorGraphic.SetAnimationTrigger("hit"); });
+            ReloadCharacterActor();
+        }
+
+        public void ReloadCharacterActor()
+        {
             actorHealth.max = GameSystem.CharacterData.MaxHealth;
             actorHealth.current = actorHealth.max;
-            actorHealth.onDamage.AddListener(() => { actorGraphic.SetAnimationTrigger("hit"); });
         }
-        
     }
 }

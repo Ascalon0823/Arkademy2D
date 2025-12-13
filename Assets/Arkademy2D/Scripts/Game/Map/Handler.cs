@@ -28,6 +28,7 @@ namespace Arkademy2D.Game.Map
                 map.gameObject.SetActive(map.name == mapName);
                 if (map.gameObject.activeInHierarchy)
                 {
+                    map.onPlayerEnter?.Invoke();
                     FindFirstObjectByType<InputHandler>().actorMovement.body.position = map.entry.position;
                 }
             }

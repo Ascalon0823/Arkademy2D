@@ -3310,6 +3310,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Map.Behaviour
   entry: {fileID: 523850477}
+  onPlayerEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1711739696}
+        m_TargetAssemblyTypeName: Arkademy2D.Game.Player.ActorHandler, Assembly-CSharp
+        m_MethodName: ReloadCharacterActor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1002198155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12482,6 +12497,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Map.TileMap
   entry: {fileID: 1812617397}
+  onPlayerEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1839735485 &8689033191717536687
 Tilemap:
   m_ObjectHideFlags: 0
