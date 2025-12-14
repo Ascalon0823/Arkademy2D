@@ -16,7 +16,7 @@ namespace Arkademy2D.Core.System
 
                 return _playerData;
             }
-            set { _playerData = value; }
+            set => _playerData = value;
         }
 
         private static PlayerData _playerData;
@@ -37,9 +37,14 @@ namespace Arkademy2D.Core.System
 
                 return _characterData;
             }
-            set { _characterData = value; }
+            set => _characterData = value;
         }
 
         private static CharacterData _characterData;
+
+        public static void SaveGame()
+        {
+            SaveSystem.SavePlayer(_playerData);
+        }
     }
 }

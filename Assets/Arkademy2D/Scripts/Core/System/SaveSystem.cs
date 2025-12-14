@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Arkademy2D.Core.Data;
+using Arkademy2D.Core.Models;
+using Arkademy2D.Core.Store;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -7,33 +12,36 @@ namespace Arkademy2D.Core.System
 {
     public static class SaveSystem
     {
-        public static string PlayerSavePath => Path.Combine(Application.persistentDataPath, "player.json");
-        public static void SavePlayer()
+        private static IStore _store => new FileSystemStore();
+
+        public static void SavePlayer(PlayerData playerData)
         {
-            GameSystem.PlayerData.LastUpdateDate = DateTime.UtcNow;
-            GameSystem.CharacterData.LastUpdateDate = DateTime.UtcNow;
-            var playerDataJson = JsonConvert.SerializeObject(GameSystem.PlayerData, Formatting.Indented);
-            WritePlayerDataJson(playerDataJson);
+            _store.SaveAsync(playerData?.PlayerModel);
         }
 
-        public static Data.PlayerData LoadPlayer()
+        public static PlayerData LoadPlayer(string key = null)
         {
-            if (!File.Exists(PlayerSavePath)) return null;
-            var playerData = JsonConvert.DeserializeObject<Data.PlayerData>(ReadPlayerDataJson());
-            if(playerData != null)
-                Debug.Log($"Player {playerData.Id} loaded");
-            return playerData;
+            if (string.IsNullOrEmpty(key))
+            {
+                return LoadLastPlayedPlayer();
+            }
+
+            var playerModel = _store.LoadAsync<Player>(key).Result;
+            return playerModel == null ? null : new PlayerData { PlayerModel = playerModel };
         }
 
-        public static void WritePlayerDataJson(string playerDataJson)
+        public static List<PlayerData> LoadAllPlayers()
         {
-            File.WriteAllText(PlayerSavePath, playerDataJson);
-            Debug.Log($"Player {GameSystem.PlayerData.Id} saved");
+            return _store.LoadAllAsync<Player>().Result
+                ?.OrderByDescending(x => x.LastUpdateDate)
+                ?.Select(x => new PlayerData { PlayerModel = x })
+                ?.ToList();
         }
 
-        public static string ReadPlayerDataJson()
+        public static PlayerData LoadLastPlayedPlayer()
         {
-            return File.ReadAllText(PlayerSavePath);
+            var allPlayer = LoadAllPlayers();
+            return allPlayer?.FirstOrDefault();
         }
     }
 }

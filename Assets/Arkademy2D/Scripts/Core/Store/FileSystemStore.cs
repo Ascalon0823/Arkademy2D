@@ -32,6 +32,11 @@ namespace Arkademy2D.Core.Store
 
         public Task SaveAsync<T>(T item) where T : IStoreKeyedData
         {
+            if (!Valide(item))
+            {
+                Debug.LogError($"Unable to save invalid item {item}");
+                return Task.CompletedTask;
+            }
             var folder = GetFolderRootOfType<T>();
             Directory.CreateDirectory(folder);
             var path = Path.Combine(folder, item.Key);
@@ -59,6 +64,11 @@ namespace Arkademy2D.Core.Store
             }
 
             return Task.FromResult<IList<T>>(result);
+        }
+
+        private bool Valide<T>(T item) where T : IStoreKeyedData
+        {
+            return item != null && string.IsNullOrWhiteSpace(item.Key);
         }
     }
 }

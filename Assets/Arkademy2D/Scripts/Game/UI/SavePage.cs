@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Arkademy2D.Core.Data;
 using Arkademy2D.Core.System;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -45,14 +46,8 @@ namespace Arkademy2D.Game.UI
 
         public void OnSaveClicked()
         {
-            SaveSystem.SavePlayer();
+            GameSystem.SaveGame();
             SetOpen(false);
-        }
-
-        [ContextMenu("Check save")]
-        public void CheckSave()
-        {
-            Debug.Log(JsonConvert.SerializeObject(SaveSystem.LoadPlayer(), Formatting.Indented));
         }
     }
 }
