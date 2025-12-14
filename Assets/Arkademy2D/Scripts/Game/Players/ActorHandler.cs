@@ -8,6 +8,7 @@ namespace Arkademy2D.Game.Player
     public class ActorHandler : MonoBehaviour
     {
         public Health actorHealth;
+        public Movement actorMovement;
         public Graphic actorGraphic;
         private void Start()
         {
@@ -17,8 +18,9 @@ namespace Arkademy2D.Game.Player
 
         public void ReloadCharacterActor()
         {
-            actorHealth.max = GameSystem.CharacterData.CharacterModel.MaxHealth;
+            actorHealth.max = GameSystem.Character.CharacterModel.MaxHealth;
             actorHealth.current = actorHealth.max;
+            actorMovement.speed = GameSystem.Character.CharacterModel.MoveSpeed;
         }
     }
 }

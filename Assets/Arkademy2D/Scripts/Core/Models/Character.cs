@@ -13,5 +13,6 @@ namespace Arkademy2D.Core.Models
         public string DisplayName { get; set; }
         public AcademicRecord AcademicRecord { get; set; } = new AcademicRecord();
         public int MaxHealth { get; set; }
+        public float MoveSpeed { get; set; }
     }
 }

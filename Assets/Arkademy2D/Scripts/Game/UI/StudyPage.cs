@@ -42,7 +42,7 @@ namespace Arkademy2D.Game.UI
 
         private void UpdatePage()
         {
-            var academicRecord = GameSystem.CharacterData.CharacterModel.AcademicRecord;
+            var academicRecord = GameSystem.Character.CharacterModel.AcademicRecord;
             var modules = ModuleData.Modules;
             foreach (var module in modules)
             {
