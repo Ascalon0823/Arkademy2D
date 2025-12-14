@@ -5450,6 +5450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Player.ActorHandler
   actorHealth: {fileID: 1775536861}
+  actorMovement: {fileID: 1775536853}
   actorGraphic: {fileID: 1775536858}
 --- !u!1 &1714913091
 GameObject:
