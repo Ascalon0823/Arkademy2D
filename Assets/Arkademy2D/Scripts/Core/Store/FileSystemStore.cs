@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine;
-
+using Arkademy2D.Core.Extensions;
 namespace Arkademy2D.Core.Store
 {
     public class FileSystemStore : IStore
@@ -32,7 +32,7 @@ namespace Arkademy2D.Core.Store
 
         public Task SaveAsync<T>(T item) where T : IStoreKeyedData
         {
-            if (!Valide(item))
+            if (!item.Valid())
             {
                 Debug.LogError($"Unable to save invalid item {item}");
                 return Task.CompletedTask;
@@ -64,11 +64,6 @@ namespace Arkademy2D.Core.Store
             }
 
             return Task.FromResult<IList<T>>(result);
-        }
-
-        private bool Valide<T>(T item) where T : IStoreKeyedData
-        {
-            return item != null && string.IsNullOrWhiteSpace(item.Key);
         }
     }
 }
