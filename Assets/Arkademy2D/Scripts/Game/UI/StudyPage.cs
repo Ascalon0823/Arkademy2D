@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Arkademy2D.Core.Data;
+using Arkademy2D.Core.Models;
 using Arkademy2D.Core.System;
 using TMPro;
 using UnityEngine;
@@ -41,12 +42,12 @@ namespace Arkademy2D.Game.UI
 
         private void UpdatePage()
         {
-            var academicData = GameSystem.CharacterData.AcademicData;
-            var modules = ModuleObject.Modules;
+            var academicRecord = GameSystem.CharacterData.CharacterModel.AcademicRecord;
+            var modules = ModuleData.Modules;
             foreach (var module in modules)
             {
                 var go = moduleObjects.First(x => x.name == module.DisplayName);
-                SetupGO(academicData, module, go);
+                SetupGO(academicRecord, module, go);
             }
         }
         private void OnDisable()
@@ -55,7 +56,7 @@ namespace Arkademy2D.Game.UI
             FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
         }
 
-        private void SetupGO(AcademicData data, ModuleObject module, GameObject go)
+        private void SetupGO(AcademicRecord data, ModuleData module, GameObject go)
         {
             var studied = data.ModuleProgress.TryGetValue(module.DisplayName, out var progress);
             var button = go.GetComponent<Button>();
@@ -89,7 +90,6 @@ namespace Arkademy2D.Game.UI
                 data.ModuleProgress[module.DisplayName] = studied ? progress + 20 : 0;
                 UpdatePage();
             });
-            
         }
     }
 }

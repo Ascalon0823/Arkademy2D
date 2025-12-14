@@ -17,7 +17,7 @@ namespace Arkademy2D.Game.Player
 
         public void ReloadCharacterActor()
         {
-            actorHealth.max = GameSystem.CharacterData.MaxHealth;
+            actorHealth.max = GameSystem.CharacterData.CharacterModel.MaxHealth;
             actorHealth.current = actorHealth.max;
         }
     }

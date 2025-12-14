@@ -18,7 +18,7 @@ namespace Arkademy2D.Core.System
         {
             _store.SaveAsync(playerData?.PlayerModel);
         }
-
+        
         public static PlayerData LoadPlayer(string key = null)
         {
             if (string.IsNullOrEmpty(key))

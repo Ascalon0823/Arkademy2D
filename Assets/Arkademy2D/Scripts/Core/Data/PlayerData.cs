@@ -8,6 +8,5 @@ namespace Arkademy2D.Core.Data
     public class PlayerData
     {
         public Models.Player PlayerModel;
-        [JsonProperty] public List<CharacterData> Characters { get; private set; } = new List<CharacterData>();
     }
 }

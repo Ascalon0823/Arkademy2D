@@ -22,6 +22,16 @@ namespace Arkademy2D.Debugger
             };
             playerDataJson = JsonConvert.SerializeObject(data, Formatting.Indented);
         }
+        
+        [ContextMenu("Load all")]
+        public void LoadAllPlayers()
+        {
+            var players = SaveSystem.LoadAllPlayers();
+            foreach (var player in players)
+            {
+                Debug.Log(player.PlayerModel.Key);
+            }
+        }
 
         [ContextMenu("Load")]
         public void LoadPlayer()

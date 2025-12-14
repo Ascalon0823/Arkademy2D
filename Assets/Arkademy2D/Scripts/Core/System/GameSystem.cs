@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using Arkademy2D.Core.Data;
+using Arkademy2D.Core.Models;
+using UnityEngine;
 
 namespace Arkademy2D.Core.System
 {
@@ -9,42 +11,39 @@ namespace Arkademy2D.Core.System
         {
             get
             {
-                if (_playerData == null)
+                if (Application.isEditor && _playerData == null)
                 {
-                    _playerData = SaveSystem.LoadPlayer() ?? new PlayerData();
+                    _playerData = SaveSystem.LoadLastPlayedPlayer() ?? new PlayerData{PlayerModel = new Player()};
                 }
-
                 return _playerData;
             }
             set => _playerData = value;
         }
-
         private static PlayerData _playerData;
-
-        public static CharacterData CharacterData
-        {
+        public static CharacterData CharacterData {
             get
             {
-                if (_characterData == null)
+                if (Application.isEditor && _characterData == null)
                 {
-                    var characters = PlayerData.Characters;
-                    if (characters.Count == 0)
+                    if (PlayerData.PlayerModel.Characters.Count == 0)
                     {
-                        characters.Add(new CharacterData());
+                        
+                        PlayerData.PlayerModel.Characters.Add(new Character());
                     }
-                    _characterData = characters.OrderByDescending(x => x.LastUpdateDate).First();
+
+                    var lastModel = PlayerData.PlayerModel.Characters
+                        .OrderByDescending(x => x.LastUpdateDate)
+                        .FirstOrDefault();
+                    _characterData = new CharacterData{CharacterModel =  lastModel};
                 }
-
                 return _characterData;
-            }
-            set => _characterData = value;
+            } 
         }
-
         private static CharacterData _characterData;
 
         public static void SaveGame()
         {
-            SaveSystem.SavePlayer(_playerData);
+            SaveSystem.SavePlayer(PlayerData);
         }
     }
 }

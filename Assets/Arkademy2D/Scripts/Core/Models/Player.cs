@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Arkademy2D.Core.Store;
 using Newtonsoft.Json;
 
@@ -11,5 +12,7 @@ namespace Arkademy2D.Core.Models
         public DateTime LastUpdateDate { get; set; }  = DateTime.UtcNow;
         public string DisplayName { get; set; }
         public string Key => Id.ToString();
+        
+        public List<Character> Characters = new List<Character>();
     }
 }
