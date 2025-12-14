@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 16831505}
   - component: {fileID: 16831504}
   m_Layer: 5
-  m_Name: Basic spell
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7231,7 +7231,7 @@ GameObject:
   - component: {fileID: 2098777720}
   - component: {fileID: 2098777719}
   m_Layer: 5
-  m_Name: Intermediate spell
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

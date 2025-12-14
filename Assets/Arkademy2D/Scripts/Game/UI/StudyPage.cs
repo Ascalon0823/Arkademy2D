@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Arkademy2D.Core.Data;
+using Arkademy2D.Core.Data.Static.Academic;
 using Arkademy2D.Core.Models;
 using Arkademy2D.Core.System;
 using TMPro;
@@ -46,7 +47,7 @@ namespace Arkademy2D.Game.UI
             var modules = ModuleData.Modules;
             foreach (var module in modules)
             {
-                var go = moduleObjects.First(x => x.name == module.DisplayName);
+                var go = moduleObjects.First(x => x.name == module.Id);
                 SetupGO(academicRecord, module, go);
             }
         }
@@ -58,7 +59,8 @@ namespace Arkademy2D.Game.UI
 
         private void SetupGO(AcademicRecord data, ModuleData module, GameObject go)
         {
-            var studied = data.ModuleProgress.TryGetValue(module.DisplayName, out var progress);
+            Debug.Log($"Setup go: {go.name} {module}");
+            var studied = data.ModuleProgress.TryGetValue(module.Id, out var progress);
             var button = go.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             var text = go.GetComponentInChildren<TextMeshProUGUI>();
@@ -69,9 +71,9 @@ namespace Arkademy2D.Game.UI
 
             if (studied)
             {
-                text.text = $"{module.DisplayName} {progress}";
+               
             }
-
+            text.text = module.displayName + (studied?$" {progress}" : "");
             button.onClick.AddListener(() =>
             {
                 if (progress == 100)
@@ -81,13 +83,12 @@ namespace Arkademy2D.Game.UI
 
                 if (!studied)
                 {
-                    if (module.Prerequisites.Count > 0 &&
-                        module.Prerequisites.Any(x => !data.ModuleProgress.TryGetValue(x, out var p) || p < 100))
+                    if (!AcademicSystem.ModuleAvailable(module,data))
                     {
                         return;
                     }
                 }
-                data.ModuleProgress[module.DisplayName] = studied ? progress + 20 : 0;
+                data.ModuleProgress[module.Id] = studied ? progress + 20 : 0;
                 UpdatePage();
             });
         }
