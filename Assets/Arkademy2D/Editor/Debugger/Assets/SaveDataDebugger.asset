@@ -11,6 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8be1f161fde14a508c681124ff6ee35, type: 3}
   m_Name: SaveDataDebugger
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Debugger.SaveDataDebugger
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::Arkademy2D.Editor.Debugger.SaveDataDebugger
   playerDataJson: 
   playerDataKey: 
+  selectCharacterKey: 
+  itemBaseToAdd: {fileID: 0}
