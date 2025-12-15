@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Arkademy2D.Core.Models
@@ -12,5 +13,7 @@ namespace Arkademy2D.Core.Models
         public AcademicRecord AcademicRecord { get; set; } = new AcademicRecord();
         public int MaxHealth { get; set; }
         public float MoveSpeed { get; set; }
+        
+        public List<Item> Items { get; set; } = new List<Item>();
     }
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd0f29a463394b02b248c5a596e1cca8, type: 3}
+  m_Name: ItemBase_000001
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Item.ItemBase
+  id: 1
+  displayName: Watermelon (slice)
+  icon: {fileID: -1048484560, guid: aff037da44459934d8265dbcba2fa859, type: 3}
