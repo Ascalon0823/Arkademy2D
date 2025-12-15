@@ -1,9 +1,8 @@
-using System;
-using Arkademy2D.Core.System;
+using Arkademy2D.Game.System;
 using Arkademy2D.Game.Actor;
 using UnityEngine;
 
-namespace Arkademy2D.Game.Player
+namespace Arkademy2D.Game.Players
 {
     public class ActorHandler : MonoBehaviour
     {

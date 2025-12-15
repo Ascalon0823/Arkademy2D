@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using Arkademy2D.Core.Data;
-using Arkademy2D.Core.Data.Runtime;
+using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Core.Models;
 using UnityEngine;
 
-namespace Arkademy2D.Core.System
+namespace Arkademy2D.Game.System
 {
     public static class GameSystem
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using Arkademy2D.Core.Data.Static.Academic;
+using Arkademy2D.Game.Data.Static.Academic;
 using Arkademy2D.Core.Models;
 
-namespace Arkademy2D.Core.System
+namespace Arkademy2D.Game.System
 {
     public static class AcademicSystem
     {

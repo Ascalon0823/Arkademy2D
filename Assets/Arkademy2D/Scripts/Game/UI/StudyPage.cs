@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Arkademy2D.Core.Data;
-using Arkademy2D.Core.Data.Static.Academic;
+using Arkademy2D.Game.Data.Static.Academic;
 using Arkademy2D.Core.Models;
-using Arkademy2D.Core.System;
+using Arkademy2D.Game.System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;

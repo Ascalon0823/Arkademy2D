@@ -1,4 +1,3 @@
-using System;
 using Arkademy2D.Game.Actor;
 using UnityEngine;
 

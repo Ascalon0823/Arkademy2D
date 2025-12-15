@@ -1,9 +1,7 @@
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace Arkademy2D.Game.Player
+namespace Arkademy2D.Game.Players
 {
     public class InputHandler : MonoBehaviour
     {

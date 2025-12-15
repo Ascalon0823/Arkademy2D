@@ -1,6 +1,4 @@
 using System;
-using Arkademy2D.Core.Data;
-using Arkademy2D.Core.Store;
 using Newtonsoft.Json;
 
 namespace Arkademy2D.Core.Models

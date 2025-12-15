@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Arkademy2D.Core.Data;
-using Arkademy2D.Core.Data.Runtime;
-using Arkademy2D.Core.Models;
+using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Core.Store;
+using Arkademy2D.Core.Models;
 
-namespace Arkademy2D.Core.System
+namespace Arkademy2D.Game.System
 {
     public static class SaveSystem
     {
@@ -17,7 +14,7 @@ namespace Arkademy2D.Core.System
         {
             _store.SaveAsync(playerData?.PlayerModel);
         }
-        
+
         public static PlayerData LoadPlayer(string key = null)
         {
             if (string.IsNullOrEmpty(key))

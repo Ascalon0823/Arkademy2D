@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Arkademy2D.Game.Interaction;
-namespace Arkademy2D.Game.Player
+namespace Arkademy2D.Game.Players
 {
     public class InteractionIndicator : MonoBehaviour
     {

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
-using Arkademy2D.Core.Data;
-using Arkademy2D.Core.System;
-using Newtonsoft.Json;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
+using Arkademy2D.Game.System;
 
 namespace Arkademy2D.Game.UI
 {

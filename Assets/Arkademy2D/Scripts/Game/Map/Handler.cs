@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Arkademy2D.Game.Player;
+using Arkademy2D.Game.Players;
 using UnityEngine;
 using UnityEngine.UI;
 
