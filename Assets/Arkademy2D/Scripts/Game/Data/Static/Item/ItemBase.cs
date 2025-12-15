@@ -8,23 +8,27 @@ namespace Arkademy2D.Game.Data.Static.Item
     public class ItemBase : ScriptableObject
     {
         private const string ItemBaseResourcesPath = "Static/ItemBases"; 
-        public static List<ItemBase> Modules
+        public static Dictionary<string, ItemBase> Library
         {
             get
             {
-                if (_modules == null)
+                if (_library == null)
                 {
-                    _modules = LoadAll();
+                    _library = LoadAll();
                 }
-                return _modules;
+                return _library;
             }
         }
-        private static List<ItemBase> _modules;
-        private static List<ItemBase> LoadAll()
+        private static Dictionary<string, ItemBase> _library;
+        private static Dictionary<string, ItemBase> LoadAll()
         {
-            return Resources.LoadAll<ItemBase>(ItemBaseResourcesPath).ToList();
+            var lib = new Dictionary<string, ItemBase>();
+            foreach (var items in Resources.LoadAll<ItemBase>(ItemBaseResourcesPath))
+            {
+                lib.Add(items.Id, items);
+            }
+            return lib;
         }
-
         [SerializeField] private string id;
         public string Id => id;
         public string displayName;
