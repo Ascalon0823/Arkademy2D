@@ -28,7 +28,7 @@ namespace Arkademy2D.Game.Data.Static
         private static Dictionary<int, T> LoadAll()
         {
             var lib = new Dictionary<int, T>();
-            foreach (var item in UnityEngine.Resources.LoadAll<T>(GetResourcePath()))
+            foreach (var item in Resources.LoadAll<T>(GetResourcePath()))
             {
                 lib.Add(item.id, item);
             }
@@ -45,8 +45,13 @@ namespace Arkademy2D.Game.Data.Static
             ReloadAll();
             var item = CreateInstance<T>();
             item.id = Library.Count + 1;
-            item.name = $"{typeof(T).Name}_{item.id:000000}";
+            item.name = GetItemName(item.id);
             return item;
+        }
+
+        public static string GetItemName(int id)
+        {
+            return $"{typeof(T).Name}_{id:000000}";
         }
     }
 }

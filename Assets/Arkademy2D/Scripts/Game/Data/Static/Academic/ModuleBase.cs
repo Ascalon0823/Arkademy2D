@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 namespace Arkademy2D.Game.Data.Static.Academic
 {
