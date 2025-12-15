@@ -4,6 +4,6 @@ namespace Arkademy2D.Core.Models
 {
     public class Item
     {
-        public string ItemBaseId { get; set; }
+        public int ItemBaseId { get; set; }
     }
 }

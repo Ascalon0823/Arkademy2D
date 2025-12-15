@@ -7,11 +7,11 @@ namespace Arkademy2D.Game.System
 {
     public static class AcademicSystem
     {
-        public static bool ModuleAvailable(ModuleData moduleData, AcademicRecord academicRecord)
+        public static bool ModuleAvailable(ModuleBase moduleBase, AcademicRecord academicRecord)
         {
-            if (!moduleData) throw new NullReferenceException();
-            if (moduleData.prerequisites == null || moduleData.prerequisites.Count == 0) return true;
-            return moduleData.prerequisites.All(x =>
+            if (!moduleBase) throw new NullReferenceException();
+            if (moduleBase.prerequisites == null || moduleBase.prerequisites.Count == 0) return true;
+            return moduleBase.prerequisites.All(x =>
                 academicRecord.ModuleProgress.TryGetValue(x.Id, out var progression) && progression >= 100);
         }
     }

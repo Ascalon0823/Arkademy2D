@@ -43,7 +43,7 @@ namespace Arkademy2D.Game.UI
         private void UpdatePage()
         {
             var academicRecord = GameSystem.Character.CharacterModel.AcademicRecord;
-            var modules = ModuleData.Modules;
+            var modules = ModuleBase.Library.Values.ToList();
             foreach (var module in modules)
             {
                 var go = moduleObjects.First(x => x.name == module.Id);
@@ -56,7 +56,7 @@ namespace Arkademy2D.Game.UI
             FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
         }
 
-        private void SetupGO(AcademicRecord data, ModuleData module, GameObject go)
+        private void SetupGO(AcademicRecord data, ModuleBase module, GameObject go)
         {
             Debug.Log($"Setup go: {go.name} {module}");
             var studied = data.ModuleProgress.TryGetValue(module.Id, out var progress);

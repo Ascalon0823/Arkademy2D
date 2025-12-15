@@ -1,6 +1,9 @@
+using System.IO;
 using System.Linq;
 using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Core.Models;
+using Arkademy2D.Game.Data.Static;
+using Arkademy2D.Game.Data.Static.Academic;
 using Arkademy2D.Game.Data.Static.Item;
 using Arkademy2D.Game.System;
 using Newtonsoft.Json;
@@ -81,8 +84,29 @@ namespace Arkademy2D.Editor.Debugger
                 Debug.Log("No item base");
                 return;
             }
-            chara.Items.Add(new Item{ItemBaseId = itemBaseToAdd.Id});
+            chara.Items.Add(new Item{ItemBaseId = int.Parse(itemBaseToAdd.Id)});
             PlayerDataJson =  JsonConvert.SerializeObject(playerData, Formatting.Indented);
+        }
+
+        private static void CreateNewStaticData<T>() where T : StaticData<T>
+        {
+            var newItem = StaticData<T>.Create();
+            var savePath = Path.Combine("Assets","Arkademy2D","Resources", StaticData<T>.GetResourcePath());
+            var assetName = $"{newItem.name}.asset";
+            AssetDatabase.CreateAsset(newItem, Path.Combine(savePath, assetName));
+            AssetDatabase.SaveAssets();
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = newItem; 
+        }
+        [MenuItem("Create/New Item")]
+        public static void CreateNewItem()
+        {
+            CreateNewStaticData<ItemBase>();
+        }
+        [MenuItem("Create/New Module")]
+        public static void CreateNewModule()
+        {
+            CreateNewStaticData<ModuleBase>();
         }
     }
 }
