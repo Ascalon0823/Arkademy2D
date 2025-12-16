@@ -9,6 +9,7 @@ namespace Arkademy2D.Game.Players
         public Health actorHealth;
         public Movement actorMovement;
         public Graphic actorGraphic;
+        
         private void Start()
         {
             actorHealth.onDamage.AddListener(() => { actorGraphic.SetAnimationTrigger("hit"); });

@@ -10,6 +10,9 @@ namespace Arkademy2D.Game.Players
         public Interaction.Detector interactionDetector;
         public bool cast;
 
+        public bool use;
+        public Actor.User actorUser;
+
         private void Awake()
         {
             FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
@@ -17,6 +20,7 @@ namespace Arkademy2D.Game.Players
 
         private void Update()
         {
+            UseActorUsable();
             MoveActor();
         }
 
@@ -24,6 +28,13 @@ namespace Arkademy2D.Game.Players
         {
             if (!actorMovement) return;
             actorMovement.moveDir = move.sqrMagnitude > float.Epsilon ? move.normalized : Vector2.zero;
+        }
+
+        private void UseActorUsable()
+        {
+            if (!use) return;
+            if (!actorUser) return;
+            actorUser.UseItem(0);
         }
 
         private void Interact()
@@ -49,6 +60,11 @@ namespace Arkademy2D.Game.Players
         public void OnCast(InputValue inputValue)
         {
             cast = inputValue.isPressed;
+        }
+
+        public void OnFire(InputValue inputValue)
+        {
+            use = inputValue.isPressed;
         }
     }
 }

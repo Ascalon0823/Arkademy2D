@@ -5088,6 +5088,8 @@ MonoBehaviour:
   actorMovement: {fileID: 1775536853}
   interactionDetector: {fileID: 1775536859}
   cast: 0
+  use: 0
+  actorUser: {fileID: 1775536863}
 --- !u!4 &1711739693
 Transform:
   m_ObjectHideFlags: 0
@@ -5552,6 +5554,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1775536861}
+    - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1775536863}
   m_SourcePrefab: {fileID: 100100000, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
 --- !u!1 &1775536851 stripped
 GameObject:
@@ -5644,6 +5649,19 @@ MonoBehaviour:
   onDamage:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1775536863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775536851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5f6ad8ba8f4296b15e70f0ae04b1fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Actor.User
+  mainUsable: {fileID: 0}
 --- !u!1 &1781822152
 GameObject:
   m_ObjectHideFlags: 0
