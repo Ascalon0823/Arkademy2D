@@ -1,3 +1,5 @@
+using Arkademy2D.Game.Data.Runtime;
+using Arkademy2D.Game.System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,10 +14,11 @@ namespace Arkademy2D.Game.Players
 
         public bool use;
         public Actor.User actorUser;
-
+        public ActorHandler actorHandler;
         private void Awake()
         {
             FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
+            actorHandler.SetupUseCharacterData( GameSystem.Character);
         }
 
         private void Update()
@@ -34,7 +37,11 @@ namespace Arkademy2D.Game.Players
         {
             if (!use) return;
             if (!actorUser) return;
-            actorUser.UseItem(0);
+            actorUser.UseItem(0,new UseContext
+            {
+                characterData = GameSystem.Character,
+                userTransform = actorUser.transform,
+            });
         }
 
         private void Interact()

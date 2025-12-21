@@ -1,5 +1,6 @@
 using Arkademy2D.Game.System;
 using Arkademy2D.Game.Actor;
+using Arkademy2D.Game.Data.Runtime;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Players
@@ -9,18 +10,28 @@ namespace Arkademy2D.Game.Players
         public Health actorHealth;
         public Movement actorMovement;
         public Graphic actorGraphic;
-        
+        public CharacterData characterData;
+
+        public void SetupUseCharacterData(CharacterData newCharacterData)
+        {
+            characterData = newCharacterData;
+            ReloadCharacterActor();
+        }
+
         private void Start()
         {
             actorHealth.onDamage.AddListener(() => { actorGraphic.SetAnimationTrigger("hit"); });
-            ReloadCharacterActor();
+            if (characterData != null)
+            {
+                SetupUseCharacterData(characterData);
+            }
         }
 
         public void ReloadCharacterActor()
         {
-            actorHealth.max = GameSystem.Character.CharacterModel.MaxHealth;
+            actorHealth.max = characterData.CharacterModel.MaxHealth;
             actorHealth.current = actorHealth.max;
-            actorMovement.speed = GameSystem.Character.CharacterModel.MoveSpeed;
+            actorMovement.speed = characterData.CharacterModel.MoveSpeed;
         }
     }
 }

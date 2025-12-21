@@ -1,3 +1,5 @@
+using Arkademy2D.Game.Actor;
+using Arkademy2D.Game.Data.Runtime;
 using UnityEngine;
 namespace Arkademy2D.Game.Data.Static.Usable
 {
@@ -5,9 +7,10 @@ namespace Arkademy2D.Game.Data.Static.Usable
     public class HealUsableDefinition:UsableEffectDefinition
     {
         public int healAmount;
-        public override void UseEffect()
+        public override void UseEffect(UseContext context)
         {
-            Debug.Log($"Heal {healAmount}");
+            Debug.Log($"Heal {healAmount} on {context.userTransform.name}", context.userTransform);
+            context.userTransform.GetComponent<Health>().current += healAmount;
         }
     }
 }

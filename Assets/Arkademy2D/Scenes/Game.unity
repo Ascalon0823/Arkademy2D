@@ -5090,6 +5090,7 @@ MonoBehaviour:
   cast: 0
   use: 0
   actorUser: {fileID: 1775536863}
+  actorHandler: {fileID: 1711739696}
 --- !u!4 &1711739693
 Transform:
   m_ObjectHideFlags: 0
@@ -5661,7 +5662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5f6ad8ba8f4296b15e70f0ae04b1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Actor.User
-  mainUsable: {fileID: 0}
 --- !u!1 &1781822152
 GameObject:
   m_ObjectHideFlags: 0

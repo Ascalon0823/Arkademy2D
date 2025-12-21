@@ -15,3 +15,5 @@ MonoBehaviour:
   id: 1
   displayName: Watermelon (slice)
   icon: {fileID: -1048484560, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+  usableBases:
+  - {fileID: 11400000, guid: 4516432c5388c438292ef072e48edf0f, type: 2}
