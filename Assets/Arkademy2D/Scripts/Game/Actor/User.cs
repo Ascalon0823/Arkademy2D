@@ -9,10 +9,21 @@ namespace Arkademy2D.Game.Actor
         public void UseItem(int itemIdx)
         {
             var items = GameSystem.Character.CharacterModel.Items;
-            var item = items.Count>=itemIdx ? items[itemIdx] : null;
-            if (item != null && ItemBase.Library.TryGetValue(item.ItemBaseId, out var itemBase))
+            var item = items.Count >= itemIdx ? items[itemIdx] : null;
+            if (item == null || !ItemBase.Library.TryGetValue(item.ItemBaseId, out var itemBase) ||
+                !itemBase.IsUsableItem)
             {
-                Debug.Log($"{name} uses {itemBase.displayName}");
+                return;
+            }
+
+            Debug.Log($"{name} uses {itemBase.displayName}");
+            foreach (var usable in itemBase.usableBases)
+            {
+                if (!usable.HasEffect) continue;
+                foreach (var effect in usable.usableEffects)
+                {
+                    effect.UseEffect();
+                }
             }
         }
     }

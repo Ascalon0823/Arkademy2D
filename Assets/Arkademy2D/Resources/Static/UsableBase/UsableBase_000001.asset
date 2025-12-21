@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964f0c9630b845a1a46ef3f274858b92, type: 3}
+  m_Name: UsableBase_000001
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Usable.UsableBase
+  id: 1
+  useTime: 1
+  usableEffects:
+  - {fileID: 11400000, guid: f036d5cc492f144ae9fff7f1843b22e2, type: 2}
