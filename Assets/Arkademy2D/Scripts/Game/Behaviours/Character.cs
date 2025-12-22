@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Arkademy2D.Game.Data.Runtime;
@@ -38,6 +39,14 @@ namespace Arkademy2D.Game.Behaviours
                     usableData = usables.ToList()
                 };
             }).ToList();
+        }
+
+        public void Update()
+        {
+            foreach (var item in items)
+            {
+                item.Update(Time.deltaTime);
+            }
         }
     }
 }

@@ -31,7 +31,9 @@ namespace Arkademy2D.Game.Behaviours
         private void UseActorUsable()
         {
             if (!use) return;
-            player.character.user.UseItem(0,new UseContext
+            if (player.character.items?.Count < 0) return;
+            var usableItem = player.character.items[0];
+            player.character.user.UseItem(usableItem,new UseContext
             {
                 character = player.character,
                 userTransform = player.character.transform,

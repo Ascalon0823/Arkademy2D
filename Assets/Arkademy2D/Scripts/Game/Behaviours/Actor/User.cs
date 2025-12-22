@@ -7,10 +7,8 @@ namespace Arkademy2D.Game.Behaviours.Actor
 {
     public class User : MonoBehaviour
     {
-        public void UseItem(int itemIdx, UseContext context)
+        public void UseItem(ItemData item, UseContext context)
         {
-            var items = context.character.items;
-            var item = items.Count >= itemIdx ? items[itemIdx] : null;
             foreach (var usableData in item.usableData)
             {
                 if (usableData.Use(context))
