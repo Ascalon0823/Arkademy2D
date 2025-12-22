@@ -1,4 +1,3 @@
-using Arkademy2D.Game.Actor;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Damage
@@ -9,7 +8,7 @@ namespace Arkademy2D.Game.Damage
         public int faction;
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var health = other.GetComponent<Health>();
+            var health = other.GetComponent<Behaviours.Actor.Health>();
             if (!health || health.faction == faction) return;
             health.TakeDamage(damage);
         }

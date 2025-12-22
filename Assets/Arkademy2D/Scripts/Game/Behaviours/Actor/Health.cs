@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Arkademy2D.Game.Actor
+namespace Arkademy2D.Game.Behaviours.Actor
 {
     public class Health : MonoBehaviour
     {

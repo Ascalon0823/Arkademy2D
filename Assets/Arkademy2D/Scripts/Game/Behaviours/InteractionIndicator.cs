@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using Arkademy2D.Game.Interaction;
-namespace Arkademy2D.Game.Players
+namespace Arkademy2D.Game.Behaviours
 {
     public class InteractionIndicator : MonoBehaviour
     {
         public Detector playerDetector;
-
         public GameObject indicator;
 
         private void LateUpdate()

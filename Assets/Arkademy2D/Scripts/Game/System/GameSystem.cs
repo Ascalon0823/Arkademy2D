@@ -2,53 +2,52 @@
 using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Core.Models;
 using UnityEngine;
-
 namespace Arkademy2D.Game.System
 {
     public static class GameSystem
     {
-        public static PlayerData Player
+        public static Player PlayerModel
         {
             get
             {
-                if (Application.isEditor && _playerData == null)
+                if (Application.isEditor && _playerModel == null)
                 {
-                    _playerData = SaveSystem.LoadLastPlayedPlayer() ?? new PlayerData { PlayerModel = new Player() };
+                    _playerModel = SaveSystem.LoadLastPlayedPlayer() ?? new Player();
                 }
 
-                return _playerData;
+                return _playerModel;
             }
-            set => _playerData = value;
+            set => _playerModel = value;
         }
 
-        private static PlayerData _playerData;
+        private static Player _playerModel;
 
-        public static CharacterData Character
+        public static Character CharacterModel
         {
             get
             {
                 if (Application.isEditor && _characterData == null)
                 {
-                    if (Player.PlayerModel.Characters.Count == 0)
+                    if (PlayerModel.Characters.Count == 0)
                     {
-                        Player.PlayerModel.Characters.Add(new Character());
+                        PlayerModel.Characters.Add(new Character());
                     }
 
-                    var lastModel = Player.PlayerModel.Characters
+                    var lastModel = PlayerModel.Characters
                         .OrderByDescending(x => x.LastUpdateDate)
                         .FirstOrDefault();
-                    _characterData = new CharacterData { CharacterModel = lastModel };
+                    _characterData = lastModel;
                 }
 
                 return _characterData;
             }
         }
 
-        private static CharacterData _characterData;
+        private static Character _characterData;
 
         public static void SaveGame()
         {
-            SaveSystem.SavePlayer(Player);
+            SaveSystem.SavePlayer(PlayerModel);
         }
     }
 }

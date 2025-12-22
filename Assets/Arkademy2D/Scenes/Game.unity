@@ -3202,7 +3202,7 @@ MonoBehaviour:
   onPlayerEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1711739696}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Arkademy2D.Game.Player.ActorHandler, Assembly-CSharp
         m_MethodName: ReloadCharacterActor
         m_Mode: 1
@@ -5085,12 +5085,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Player.InputHandler
   move: {x: 0, y: 0}
-  actorMovement: {fileID: 1775536853}
-  interactionDetector: {fileID: 1775536859}
   cast: 0
   use: 0
-  actorUser: {fileID: 1775536863}
-  actorHandler: {fileID: 1711739696}
+  playerInput: {fileID: 1711739695}
+  player: {fileID: 1711739696}
 --- !u!4 &1711739693
 Transform:
   m_ObjectHideFlags: 0
@@ -5160,12 +5158,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1711739691}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6620dad9fae44358e65be91a891d514, type: 3}
+  m_Script: {fileID: 11500000, guid: cf381f7726704aa9a1f416067ba22c3b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Player.ActorHandler
-  actorHealth: {fileID: 1775536861}
-  actorMovement: {fileID: 1775536853}
-  actorGraphic: {fileID: 1775536858}
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Player
+  character: {fileID: 1775536865}
 --- !u!1 &1714913091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5545,6 +5541,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1775536865}
+    - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1775536853}
     - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
       insertIndex: -1
@@ -5662,6 +5661,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5f6ad8ba8f4296b15e70f0ae04b1fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Actor.User
+--- !u!114 &1775536865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775536851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fdd98c0bd3a4181a246da1a0a85b71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Character
+  movement: {fileID: 1775536853}
+  graphic: {fileID: 1775536858}
+  health: {fileID: 1775536861}
+  user: {fileID: 1775536863}
+  interactionDetector: {fileID: 1775536859}
+  items: []
 --- !u!1 &1781822152
 GameObject:
   m_ObjectHideFlags: 0

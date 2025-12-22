@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Core.Store;
-using Arkademy2D.Core.Models;
 
 namespace Arkademy2D.Game.System
 {
@@ -10,31 +8,29 @@ namespace Arkademy2D.Game.System
     {
         private static IStore _store => new FileSystemStore();
 
-        public static void SavePlayer(PlayerData playerData)
+        public static void SavePlayer(Core.Models.Player playerModel)
         {
-            _store.SaveAsync(playerData?.PlayerModel);
+            _store.SaveAsync(playerModel);
         }
 
-        public static PlayerData LoadPlayer(string key = null)
+        public static Core.Models.Player LoadPlayer(string key = null)
         {
             if (string.IsNullOrEmpty(key))
             {
                 return LoadLastPlayedPlayer();
             }
 
-            var playerModel = _store.LoadAsync<Player>(key).Result;
-            return playerModel == null ? null : new PlayerData { PlayerModel = playerModel };
+            return _store.LoadAsync<Core.Models.Player>(key).Result;
         }
 
-        public static List<PlayerData> LoadAllPlayers()
+        public static List<Core.Models.Player> LoadAllPlayers()
         {
-            return _store.LoadAllAsync<Player>().Result
+            return _store.LoadAllAsync<Core.Models.Player>().Result
                 ?.OrderByDescending(x => x.LastUpdateDate)
-                ?.Select(x => new PlayerData { PlayerModel = x })
                 ?.ToList();
         }
 
-        public static PlayerData LoadLastPlayedPlayer()
+        public static Core.Models.Player LoadLastPlayedPlayer()
         {
             var allPlayer = LoadAllPlayers();
             return allPlayer?.FirstOrDefault();

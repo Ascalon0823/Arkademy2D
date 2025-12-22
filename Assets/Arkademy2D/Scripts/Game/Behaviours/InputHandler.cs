@@ -3,22 +3,18 @@ using Arkademy2D.Game.System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Arkademy2D.Game.Players
+namespace Arkademy2D.Game.Behaviours
 {
     public class InputHandler : MonoBehaviour
     {
         public Vector2 move;
-        public Actor.Movement actorMovement;
-        public Interaction.Detector interactionDetector;
         public bool cast;
-
         public bool use;
-        public Actor.User actorUser;
-        public ActorHandler actorHandler;
+        public PlayerInput playerInput;
+        public Player player;
         private void Awake()
         {
-            FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
-            actorHandler.SetupUseCharacterData( GameSystem.Character);
+            playerInput.SwitchCurrentActionMap("Player");
         }
 
         private void Update()
@@ -29,26 +25,23 @@ namespace Arkademy2D.Game.Players
 
         private void MoveActor()
         {
-            if (!actorMovement) return;
-            actorMovement.moveDir = move.sqrMagnitude > float.Epsilon ? move.normalized : Vector2.zero;
+            player.character.movement.moveDir = move.sqrMagnitude > float.Epsilon ? move.normalized : Vector2.zero;
         }
 
         private void UseActorUsable()
         {
             if (!use) return;
-            if (!actorUser) return;
-            actorUser.UseItem(0,new UseContext
+            player.character.user.UseItem(0,new UseContext
             {
-                characterData = GameSystem.Character,
-                userTransform = actorUser.transform,
+                character = player.character,
+                userTransform = player.character.transform,
             });
         }
 
         private void Interact()
         {
-            if (!interactionDetector) return;
-            if (!interactionDetector.candidate) return;
-            interactionDetector.candidate.Interact();
+            if (!player.character.interactionDetector.candidate) return;
+            player.character.interactionDetector.candidate.Interact();
         }
 
         public void OnInteract(InputValue inputValue)

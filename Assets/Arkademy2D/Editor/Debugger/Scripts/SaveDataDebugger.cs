@@ -16,18 +16,18 @@ namespace Arkademy2D.Editor.Debugger
     [CreateAssetMenu(fileName = "SaveDataDebugger", menuName = "Debugger/SaveDebugger")]
     public class SaveDataDebugger : ScriptableObject
     {
-        [TextArea(3, 100000)] public string playerDataJson;
+        [TextArea(3, 100000)] public string playerModelJson;
 
-        public string PlayerDataJson
+        public string PlayerModelJson
         {
-            get => playerDataJson;
+            get => playerModelJson;
             set
             {
-                playerDataJson = value;
+                playerModelJson = value;
                 ForceUpdateInspector();
             }
         }
-        public string playerDataKey;
+        public string playerModelKey;
 
         private void ForceUpdateInspector()
         {
@@ -36,11 +36,7 @@ namespace Arkademy2D.Editor.Debugger
         [ContextMenu("New")]
         public void NewPlayer()
         {
-            var data = new PlayerData
-            {
-                PlayerModel = new Player()
-            };
-            PlayerDataJson = JsonConvert.SerializeObject(data, Formatting.Indented);
+            PlayerModelJson = JsonConvert.SerializeObject(new Player(), Formatting.Indented);
         }
         
         [ContextMenu("Load all")]
@@ -49,21 +45,21 @@ namespace Arkademy2D.Editor.Debugger
             var players = SaveSystem.LoadAllPlayers();
             foreach (var player in players)
             {
-                Debug.Log(player.PlayerModel.Key);
+                Debug.Log(player.Key);
             }
         }
 
         [ContextMenu("Load")]
         public void LoadPlayer()
         {
-            PlayerDataJson = JsonConvert.SerializeObject(SaveSystem.LoadPlayer(playerDataKey), Formatting.Indented);
+            PlayerModelJson = JsonConvert.SerializeObject(SaveSystem.LoadPlayer(playerModelKey), Formatting.Indented);
             ForceUpdateInspector();
         }
 
         [ContextMenu("Save")]
         public void SavePlayer()
         {
-            SaveSystem.SavePlayer(JsonConvert.DeserializeObject<PlayerData>(PlayerDataJson));
+            SaveSystem.SavePlayer(JsonConvert.DeserializeObject<Player>(PlayerModelJson));
         }
 
         public string selectCharacterKey;
@@ -72,8 +68,8 @@ namespace Arkademy2D.Editor.Debugger
         [ContextMenu("Add item to character")]
         public void AddItemToCharacter()
         {
-            var playerData = JsonConvert.DeserializeObject<PlayerData>(PlayerDataJson);
-            var chara = playerData.PlayerModel.Characters.FirstOrDefault(x => x.Id.ToString() == selectCharacterKey);
+            var playerModel= JsonConvert.DeserializeObject<Player>(PlayerModelJson);
+            var chara = playerModel.Characters.FirstOrDefault(x => x.Id.ToString() == selectCharacterKey);
             if (chara == null)
             {
                 Debug.Log($"Character {selectCharacterKey} not found");
@@ -86,33 +82,7 @@ namespace Arkademy2D.Editor.Debugger
                 return;
             }
             chara.Items.Add(new Item{ItemBaseId = int.Parse(itemBaseToAdd.Id)});
-            PlayerDataJson =  JsonConvert.SerializeObject(playerData, Formatting.Indented);
-        }
-
-        private static void CreateNewStaticData<T>() where T : StaticData<T>
-        {
-            var newItem = StaticData<T>.Create();
-            var savePath = Path.Combine("Assets","Arkademy2D","Resources", StaticData<T>.GetResourcePath());
-            var assetName = $"{newItem.name}.asset";
-            AssetDatabase.CreateAsset(newItem, Path.Combine(savePath, assetName));
-            AssetDatabase.SaveAssets();
-            EditorUtility.FocusProjectWindow();
-            Selection.activeObject = newItem; 
-        }
-        [MenuItem("Create/New Item")]
-        public static void CreateNewItem()
-        {
-            CreateNewStaticData<ItemBase>();
-        }
-        [MenuItem("Create/New Module")]
-        public static void CreateNewModule()
-        {
-            CreateNewStaticData<ModuleBase>();
-        }
-
-        [MenuItem("Create/New Usable")] public static void CreateNewUsable()
-        {
-            CreateNewStaticData<UsableBase>();
+            PlayerModelJson =  JsonConvert.SerializeObject(playerModel, Formatting.Indented);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Arkademy2D.Game.Actor
+namespace Arkademy2D.Game.Behaviours.Actor
 {
     public class Graphic : MonoBehaviour
     {

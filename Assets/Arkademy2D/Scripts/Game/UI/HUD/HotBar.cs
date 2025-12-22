@@ -11,7 +11,7 @@ namespace Arkademy2D.Game.UI.HUD
         public List<GameObject> itemsHolders = new List<GameObject>();
         private void Start()
         {
-            var items = GameSystem.Character.CharacterModel.Items;
+            var items = GameSystem.CharacterModel.Items;
             for(var i =0;i<items.Count; i++)
             {
                 var item = items[i];

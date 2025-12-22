@@ -1,0 +1,43 @@
+using System.Collections.Generic;
+using System.Linq;
+using Arkademy2D.Game.Data.Runtime;
+using Arkademy2D.Game.Data.Static.Item;
+using UnityEngine;
+namespace Arkademy2D.Game.Behaviours
+
+{
+    public class Character : MonoBehaviour
+    {
+        public Core.Models.Character Model;
+        public Actor.Movement movement;
+        public Actor.Graphic graphic;
+        public Actor.Health health;
+        public Actor.User user;
+        public Interaction.Detector interactionDetector;
+        public List<ItemData> items;
+        
+        public void SetupUseCharacterData(Core.Models.Character model)
+        {
+            Model = model;
+            ReloadCharacterActor();
+        }
+        private void ReloadCharacterActor()
+        {
+            health.onDamage.RemoveAllListeners();
+            health.onDamage.AddListener(() => { graphic.SetAnimationTrigger("hit"); });
+            health.max = Model.MaxHealth;
+            health.current = health.max;
+            movement.speed = Model.MoveSpeed;
+            items = Model.Items.Select(x =>
+            {
+                var baseItem = ItemBase.Library.GetValueOrDefault(x.ItemBaseId);
+                var usables = baseItem.usableBases.Select(y => new UsableData(y));
+                return new ItemData
+                {
+                    itemBase = baseItem,
+                    usableData = usables.ToList()
+                };
+            }).ToList();
+        }
+    }
+}

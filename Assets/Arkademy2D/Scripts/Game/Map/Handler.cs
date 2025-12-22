@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Arkademy2D.Game.Players;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +28,7 @@ namespace Arkademy2D.Game.Map
                 if (map.gameObject.activeInHierarchy)
                 {
                     map.onPlayerEnter?.Invoke();
-                    FindFirstObjectByType<InputHandler>().actorMovement.body.position = map.entry.position;
+                    Behaviours.Player.Local.character.movement.body.position = map.entry.position;
                 }
             }
             while (transition.color.a > 0)
