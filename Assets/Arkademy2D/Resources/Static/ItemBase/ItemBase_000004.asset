@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0f29a463394b02b248c5a596e1cca8, type: 3}
-  m_Name: ItemBase_000002
+  m_Name: ItemBase_000004
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Item.ItemBase
-  id: 2
-  displayName: Spell book
-  icon: {fileID: -1179176124, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+  id: 4
+  displayName: Wood Bow
+  icon: {fileID: -2147040578, guid: aff037da44459934d8265dbcba2fa859, type: 3}
   usableBases: []

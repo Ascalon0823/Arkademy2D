@@ -1,6 +1,7 @@
 using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Game.System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Arkademy2D.Game.Behaviours
@@ -30,9 +31,10 @@ namespace Arkademy2D.Game.Behaviours
 
         private void UseActorUsable()
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
             if (!use) return;
-            if (player.character.items?.Count < 0) return;
-            var usableItem = player.character.items[0];
+            if (player.character.items?.Count < player.selectedHotbarIdx) return;
+            var usableItem = player.character.items[player.selectedHotbarIdx];
             player.character.user.UseItem(usableItem,new UseContext
             {
                 character = player.character,

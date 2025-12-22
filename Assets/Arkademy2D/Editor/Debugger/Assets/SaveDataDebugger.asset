@@ -12,7 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8be1f161fde14a508c681124ff6ee35, type: 3}
   m_Name: SaveDataDebugger
   m_EditorClassIdentifier: Assembly-CSharp-Editor::Arkademy2D.Editor.Debugger.SaveDataDebugger
-  playerDataJson: 
-  playerDataKey: 
-  selectCharacterKey: 
-  itemBaseToAdd: {fileID: 0}
+  playerModelJson: "{\n  \"Characters\": [\n    {\n      \"Id\": \"b74e2bc3-0bf5-4731-98e1-842dfb4f1038\",\n     
+    \"CreationDate\": \"2025-12-14T07:02:40.422927Z\",\n      \"LastUpdateDate\":
+    \"2025-12-14T07:02:40.422928Z\",\n      \"DisplayName\": null,\n      \"AcademicRecord\":
+    {\n        \"ModulePoints\": 0,\n        \"ModuleProgress\": {\n          \"1\":
+    100,\n          \"2\": 40\n        }\n      },\n      \"MaxHealth\": 10000,\n     
+    \"MoveSpeed\": 3.0,\n      \"Items\": [\n        {\n          \"ItemBaseId\":
+    1\n        },\n        {\n          \"ItemBaseId\": 2\n        },\n        {\n         
+    \"ItemBaseId\": 3\n        },\n        {\n          \"ItemBaseId\": 4\n       
+    },\n        {\n          \"ItemBaseId\": 5\n        }\n      ]\n    }\n  ],\n 
+    \"Id\": \"12c3d5df-332c-4b7d-bc99-62cd2b2aace9\",\n  \"CreationDate\": \"2025-12-13T12:02:02.369607Z\",\n 
+    \"LastUpdateDate\": \"2025-12-13T12:02:02.369608Z\",\n  \"DisplayName\": null,\n 
+    \"Key\": \"12c3d5df-332c-4b7d-bc99-62cd2b2aace9\"\n}"
+  playerModelKey: 
+  selectCharacterKey: b74e2bc3-0bf5-4731-98e1-842dfb4f1038
+  itemBaseToAdd: {fileID: 11400000, guid: c27d19ee031664d17b51ed66863ca50c, type: 2}

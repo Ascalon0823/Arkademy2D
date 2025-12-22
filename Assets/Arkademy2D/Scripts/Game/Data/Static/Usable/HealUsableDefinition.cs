@@ -9,7 +9,7 @@ namespace Arkademy2D.Game.Data.Static.Usable
         public override void UseEffect(UseContext context)
         {
             Debug.Log($"Heal {healAmount} on {context.userTransform.name}", context.userTransform);
-            context.userTransform.GetComponent<Behaviours.Actor.Health>().current += healAmount;
+            context.character.health.current += healAmount;
         }
     }
 }

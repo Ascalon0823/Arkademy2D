@@ -9,6 +9,7 @@ namespace Arkademy2D.Game.Behaviours
         public Core.Models.Player Model;
         public Character character;
         public static Player Local;
+        public int selectedHotbarIdx;
         private void Awake()
         {
             Local = this;
