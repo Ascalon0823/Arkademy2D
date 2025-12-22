@@ -9,21 +9,13 @@ namespace Arkademy2D.Game.Actor
     {
         public void UseItem(int itemIdx, UseContext context)
         {
-            var items = GameSystem.Character.CharacterModel.Items;
+            var items = GameSystem.Character.ItemData;
             var item = items.Count >= itemIdx ? items[itemIdx] : null;
-            if (item == null || !ItemBase.Library.TryGetValue(item.ItemBaseId, out var itemBase) ||
-                !itemBase.IsUsableItem)
+            foreach (var usableData in item.usableData)
             {
-                return;
-            }
-
-            Debug.Log($"{name} uses {itemBase.displayName}");
-            foreach (var usable in itemBase.usableBases)
-            {
-                if (!usable.HasEffect) continue;
-                foreach (var effect in usable.usableEffects)
+                if (usableData.Use(context))
                 {
-                    effect.UseEffect(context);
+                    Debug.Log($"{name} uses {item.itemBase.displayName}");
                 }
             }
         }

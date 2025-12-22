@@ -1,3 +1,4 @@
+using System;
 using Arkademy2D.Game.System;
 using Arkademy2D.Game.Actor;
 using Arkademy2D.Game.Data.Runtime;
@@ -32,6 +33,11 @@ namespace Arkademy2D.Game.Players
             actorHealth.max = characterData.CharacterModel.MaxHealth;
             actorHealth.current = actorHealth.max;
             actorMovement.speed = characterData.CharacterModel.MoveSpeed;
+        }
+
+        private void Update()
+        {
+            characterData.Update(Time.deltaTime);
         }
     }
 }
