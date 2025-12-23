@@ -32,7 +32,11 @@ namespace Arkademy2D.Game.Behaviours
             items = Model.Items.Select(x =>
             {
                 var baseItem = ItemBase.Library.GetValueOrDefault(x.ItemBaseId);
-                var usables = baseItem.usableBases.Select(y => new UsableData(y));
+                var usables = baseItem.usableBindings.Select(y => new UsableData
+                {
+                    usableBase = y.usableBase,
+                    usableEffects = y.usableEffects,
+                });
                 return new ItemData
                 {
                     Model = x,

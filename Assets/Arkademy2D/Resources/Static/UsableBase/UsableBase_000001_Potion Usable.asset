@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 964f0c9630b845a1a46ef3f274858b92, type: 3}
-  m_Name: UsableBase_000002
+  m_Name: UsableBase_000001_Potion Usable
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Usable.UsableBase
-  id: 2
-  useTime: 1.2
-  usableEffects: []
+  id: 1
+  displayName: Potion Usable
+  useTime: 1
+  usableEffects:
+  - {fileID: 11400000, guid: f036d5cc492f144ae9fff7f1843b22e2, type: 2}

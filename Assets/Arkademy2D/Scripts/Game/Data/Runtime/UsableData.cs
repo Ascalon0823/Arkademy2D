@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Arkademy2D.Game.Data.Static.Usable;
 using UnityEngine;
 
@@ -8,20 +9,15 @@ namespace Arkademy2D.Game.Data.Runtime
     public class UsableData
     {
         public UsableBase usableBase;
+        public List<UsableEffectDefinition> usableEffects = new List<UsableEffectDefinition>();
         public float remainingUseTime;
         public bool InUse => remainingUseTime > 0;
-
-        public UsableData(UsableBase usableBase)
-        {
-            this.usableBase = usableBase;
-        }
 
         public bool Use(UseContext context)
         {
             if (InUse) return false;
-            if (!usableBase.HasEffect) return false;
             remainingUseTime = usableBase.useTime;
-            foreach (var effect in usableBase.usableEffects)
+            foreach (var effect in usableEffects)
             {
                 effect.UseEffect(context);
             }
