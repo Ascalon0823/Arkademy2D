@@ -8,6 +8,7 @@ namespace Arkademy2D.Game.Data.Runtime
     {
         public Transform userTransform;
         public Character character;
-        public Vector2 direction;
+        public Vector2 point;
+        public MeleeContext? meleeContext;
     }
 }

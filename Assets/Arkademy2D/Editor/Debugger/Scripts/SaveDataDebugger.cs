@@ -81,7 +81,7 @@ namespace Arkademy2D.Editor.Debugger
                 Debug.Log("No item base");
                 return;
             }
-            chara.Items.Add(new Item{ItemBaseId = int.Parse(itemBaseToAdd.Id)});
+            chara.Items.Add(itemBaseToAdd.GetDefaultItemModel());
             PlayerModelJson =  JsonConvert.SerializeObject(playerModel, Formatting.Indented);
         }
     }

@@ -35,6 +35,7 @@ namespace Arkademy2D.Game.Behaviours
                 var usables = baseItem.usableBases.Select(y => new UsableData(y));
                 return new ItemData
                 {
+                    Model = x,
                     itemBase = baseItem,
                     usableData = usables.ToList()
                 };

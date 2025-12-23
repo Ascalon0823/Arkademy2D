@@ -15,4 +15,7 @@ MonoBehaviour:
   id: 3
   displayName: Pickaxe
   icon: {fileID: -504949866, guid: aff037da44459934d8265dbcba2fa859, type: 3}
-  usableBases: []
+  usableBases:
+  - {fileID: 11400000, guid: d9e9409ec9c2c47469fdafd0794707f7, type: 2}
+  ItemExtraProviders:
+  - {fileID: 11400000, guid: 6ba49a7004a88468ba2188a6dab4b79b, type: 2}
