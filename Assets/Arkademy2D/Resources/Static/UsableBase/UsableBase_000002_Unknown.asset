@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 964f0c9630b845a1a46ef3f274858b92, type: 3}
-  m_Name: UsableBase_000003
+  m_Name: UsableBase_000002_Unknown
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Usable.UsableBase
-  id: 3
-  useTime: 1
-  usableEffects:
-  - {fileID: 11400000, guid: 07fad8f0370564c0489af61d2bf4278d, type: 2}
+  id: 2
+  useTime: 1.2
+  usableEffects: []

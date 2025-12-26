@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0f29a463394b02b248c5a596e1cca8, type: 3}
-  m_Name: ItemBase_000001
+  m_Name: ItemBase_000003_Pickaxe
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Item.ItemBase
-  id: 1
-  displayName: Watermelon (slice)
-  icon: {fileID: -1048484560, guid: aff037da44459934d8265dbcba2fa859, type: 3}
-  usableBases:
-  - {fileID: 11400000, guid: 4516432c5388c438292ef072e48edf0f, type: 2}
+  id: 3
+  displayName: Pickaxe
+  icon: {fileID: -504949866, guid: aff037da44459934d8265dbcba2fa859, type: 3}
+  usableBindings:
+  - usableBase: {fileID: 11400000, guid: d9e9409ec9c2c47469fdafd0794707f7, type: 2}
+    usableEffects:
+    - {fileID: 11400000, guid: 07fad8f0370564c0489af61d2bf4278d, type: 2}
+  ItemExtraProviders:
+  - {fileID: 11400000, guid: 6ba49a7004a88468ba2188a6dab4b79b, type: 2}

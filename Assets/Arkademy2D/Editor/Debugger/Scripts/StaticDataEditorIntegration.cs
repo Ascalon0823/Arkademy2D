@@ -20,24 +20,38 @@ namespace Arkademy2D.Editor.Debugger
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = newItem; 
         }
-        
-        [MenuItem("Create/New Item")]
+
+        [MenuItem("Static Data/Rename all")]
+        public static void RenameAll()
+        {
+            var assets = AssetDatabase.FindAssets("t: StaticData");
+            foreach (var asset in assets)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(asset);
+                Debug.Log(path);
+                var data = AssetDatabase.LoadAssetAtPath<StaticData>(path);
+                var assetName = data.GetItemAssetName();
+                Debug.Log(assetName);
+                AssetDatabase.RenameAsset(path, assetName);
+            }
+        }
+        [MenuItem("Static Data/Create/New Item")]
         public static void CreateNewItem()
         {
             CreateNewStaticData<ItemBase>();
         }
-        [MenuItem("Create/New Module")]
+        [MenuItem("Static Data/Create/New Module")]
         public static void CreateNewModule()
         {
             CreateNewStaticData<ModuleBase>();
         }
 
-        [MenuItem("Create/New Usable")] public static void CreateNewUsable()
+        [MenuItem("Static Data/Create/New Usable")] public static void CreateNewUsable()
         {
             CreateNewStaticData<UsableBase>();
         }
         
-        [MenuItem("Create/New Weapon")]
+        [MenuItem("Static Data/Create/New Weapon")]
         public static void CreateNewWeapon()
         {
             CreateNewStaticData<WeaponBase>();

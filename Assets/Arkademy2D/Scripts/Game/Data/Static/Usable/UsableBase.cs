@@ -7,7 +7,5 @@ namespace Arkademy2D.Game.Data.Static.Usable
     {
         public string Id => id.ToString();
         public float useTime;
-        public List<UsableEffectDefinition> usableEffects;
-        public bool HasEffect => usableEffects?.Count > 0;
     }
 }

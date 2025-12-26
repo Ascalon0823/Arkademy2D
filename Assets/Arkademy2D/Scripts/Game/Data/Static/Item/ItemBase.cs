@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Arkademy2D.Core.Models;
 using Arkademy2D.Game.Data.Static.Usable;
@@ -9,13 +10,19 @@ namespace Arkademy2D.Game.Data.Static.Item
     {
         ItemExtra GetDefaultItemExtra();
     }
+
+    [Serializable]
+    public class UsableBindings
+    {
+        public UsableBase usableBase;
+        public List<UsableEffectDefinition> usableEffects;
+    }
     public class ItemBase : StaticData<ItemBase>
     {
         public string Id => id.ToString();
-        public string displayName;
         public Sprite icon;
-        public List<UsableBase> usableBases;
-        public bool IsUsableItem => usableBases?.Count > 0;
+        public List<UsableBindings> usableBindings;
+        public bool IsUsableItem => usableBindings?.Count > 0;
         public List<ItemExtraProviderStaticData> ItemExtraProviders = new List<ItemExtraProviderStaticData>();
 
         public Core.Models.Item GetDefaultItemModel()

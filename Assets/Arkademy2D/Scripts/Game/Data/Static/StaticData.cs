@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Arkademy2D.Game.Data.Static
     public abstract class StaticData : ScriptableObject
     {
         public int id;
+        public string displayName;
+        public abstract string GetItemAssetName();
     }
     public abstract class StaticData<T> : StaticData where T : StaticData
     {
@@ -45,13 +48,14 @@ namespace Arkademy2D.Game.Data.Static
             ReloadAll();
             var item = CreateInstance<T>();
             item.id = Library.Count + 1;
-            item.name = GetItemName(item.id);
+            item.name = item.GetItemAssetName();
             return item;
         }
 
-        public static string GetItemName(int id)
+        public override string GetItemAssetName()
         {
-            return $"{typeof(T).Name}_{id:000000}";
+            var actualDisplayName = string.IsNullOrWhiteSpace(displayName) ? "Unknown" : displayName; 
+            return $"{typeof(T).Name}_{id:000000}_{actualDisplayName}";
         }
     }
 }

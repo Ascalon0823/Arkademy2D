@@ -4,7 +4,6 @@ namespace Arkademy2D.Game.Data.Static.Item
 {
     public class WeaponBase : ItemExtraProviderStaticData<WeaponBase>
     {
-        public string displayName;
         public int damage;
         public float range;
         public override ItemExtra GetDefaultItemExtra()
