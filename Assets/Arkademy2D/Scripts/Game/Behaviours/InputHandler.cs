@@ -10,9 +10,12 @@ namespace Arkademy2D.Game.Behaviours
     {
         public Vector2 move;
         public bool cast;
+        public bool wasCasting;
+        public bool canCast;
         public bool use;
         public PlayerInput playerInput;
         public Player player;
+
         private void Awake()
         {
             playerInput.SwitchCurrentActionMap("Player");
@@ -20,22 +23,64 @@ namespace Arkademy2D.Game.Behaviours
 
         private void Update()
         {
+            TryCast();
             UseActorUsable();
             MoveActor();
         }
 
+        private void TryCast()
+        {
+            var caster = player.character.caster;
+            if (!caster) return;
+            caster.casting = cast;
+            if (!cast)
+            {
+                if (wasCasting)
+                {
+                    caster.EndCast();
+                }
+
+                canCast = false;
+                return;
+            }
+
+            wasCasting = true;
+            var dir = move.normalized;
+            if (dir.magnitude < float.Epsilon)
+            {
+                canCast = true;
+                return;
+            }
+
+            if (!canCast) return;
+            if (Vector2.Dot(dir, Vector2.up) >= 0.5f)
+            {
+                caster.Cast("W");
+            }else if (Vector2.Dot(dir, Vector2.down) >= 0.5f)
+            {
+                caster.Cast("S");
+            }else if (Vector2.Dot(dir, Vector2.left) >= 0.5f)
+            {
+                caster.Cast("A");
+            }else if (Vector2.Dot(dir, Vector2.right) >= 0.5f)
+            {
+                caster.Cast("D");
+            }
+        }
+
         private void MoveActor()
         {
-            player.character.movement.moveDir = move.sqrMagnitude > float.Epsilon ? move.normalized : Vector2.zero;
+            player.character.movement.moveDir =
+                move.sqrMagnitude <= float.Epsilon || cast ? Vector2.zero : move.normalized;
         }
 
         private void UseActorUsable()
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
-            if (!use) return;
+            if (!use || cast) return;
             if (player.character.items?.Count < player.selectedHotbarIdx) return;
             var usableItem = player.character.items[player.selectedHotbarIdx];
-            player.character.user.UseItem(usableItem,new UseContext
+            player.character.user.UseItem(usableItem, new UseContext
             {
                 character = player.character,
                 userTransform = player.character.transform,
@@ -44,6 +89,7 @@ namespace Arkademy2D.Game.Behaviours
 
         private void Interact()
         {
+            if (cast) return;
             if (!player.character.interactionDetector.candidate) return;
             player.character.interactionDetector.candidate.Interact();
         }

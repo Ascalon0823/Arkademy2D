@@ -15,6 +15,7 @@ namespace Arkademy2D.Game.Behaviours
         public Actor.Health health;
         public Actor.User user;
         public Actor.Energy energy;
+        public Actor.Caster caster;
         public Interaction.Detector interactionDetector;
         public List<ItemData> items;
         
