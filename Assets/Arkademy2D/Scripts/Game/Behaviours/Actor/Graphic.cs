@@ -20,7 +20,7 @@ namespace Arkademy2D.Game.Behaviours.Actor
         {
             if (health)
             {
-                animator.SetBool("dead",health.current==0);
+                animator.SetBool("dead",health.current<=0);
             }
             if (movement)
             {
