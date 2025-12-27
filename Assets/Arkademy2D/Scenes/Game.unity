@@ -6760,7 +6760,6 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0}
   faceDir: {x: 0, y: 0}
   speed: 3
-  health: {fileID: 1775536861}
 --- !u!95 &1775536855 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3397873590535862207, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
@@ -6872,7 +6871,7 @@ MonoBehaviour:
   max: 0
   current: 0
   currentFloat: 0
-  regenRate: 0
+  regenRate: 0.1
 --- !u!114 &1775536868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6886,7 +6885,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Actor.Caster
   castKeys: []
+  currSpellUsage: {fileID: 0}
   casting: 0
+  energy: {fileID: 1775536866}
 --- !u!1 &1781822152
 GameObject:
   m_ObjectHideFlags: 0

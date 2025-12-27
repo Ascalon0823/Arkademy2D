@@ -57,6 +57,8 @@ namespace Arkademy2D.Game.Behaviours
             {
                 item.Update(Time.deltaTime);
             }
+
+            movement.enabled = health.current > 0f;
         }
     }
 }
