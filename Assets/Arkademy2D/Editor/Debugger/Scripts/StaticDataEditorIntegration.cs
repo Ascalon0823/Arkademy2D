@@ -56,5 +56,11 @@ namespace Arkademy2D.Editor.Debugger
         {
             CreateNewStaticData<WeaponBase>();
         }
+
+        [MenuItem("Static Data/Create/New Spell")]
+        public static void CreateNewSpell()
+        {
+            CreateNewStaticData<SpellBase>();
+        }
     }
 }

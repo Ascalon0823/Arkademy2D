@@ -14,6 +14,8 @@ namespace Arkademy2D.Game.Behaviours
         public Actor.Graphic graphic;
         public Actor.Health health;
         public Actor.User user;
+        public Actor.Energy energy;
+        public Actor.Caster caster;
         public Interaction.Detector interactionDetector;
         public List<ItemData> items;
         
@@ -28,6 +30,9 @@ namespace Arkademy2D.Game.Behaviours
             health.onDamage.AddListener(() => { graphic.SetAnimationTrigger("hit"); });
             health.max = Model.MaxHealth;
             health.current = health.max;
+            energy.max = Model.MaxEnergy;
+            energy.current = Model.MaxEnergy;
+            energy.currentFloat = Model.MaxEnergy;
             movement.speed = Model.MoveSpeed;
             items = Model.Items.Select(x =>
             {
@@ -52,6 +57,8 @@ namespace Arkademy2D.Game.Behaviours
             {
                 item.Update(Time.deltaTime);
             }
+
+            movement.enabled = health.current > 0f;
         }
     }
 }
