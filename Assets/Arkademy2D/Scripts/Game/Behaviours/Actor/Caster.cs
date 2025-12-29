@@ -31,6 +31,7 @@ namespace Arkademy2D.Game.Behaviours.Actor
             castKeys = null;
             if (energy && energy.current < energy.max) return;
             currSpellUsage = spellBase.UseSpell(this);
+            currSpellUsage.caster = this;
             if (energy) energy.currentFloat = 0f;
         }
     }

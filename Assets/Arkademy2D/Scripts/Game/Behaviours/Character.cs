@@ -16,9 +16,16 @@ namespace Arkademy2D.Game.Behaviours
         public Actor.User user;
         public Actor.Energy energy;
         public Actor.Caster caster;
+        public Collider2D collision;
+        public Damage.Contact contactDamage;
         public Interaction.Detector interactionDetector;
         public List<ItemData> items;
-        
+
+        private void Start()
+        {
+            collision = GetComponent<Collider2D>();
+        }
+
         public void SetupUseCharacterData(Core.Models.Character model)
         {
             Model = model;
@@ -57,8 +64,11 @@ namespace Arkademy2D.Game.Behaviours
             {
                 item.Update(Time.deltaTime);
             }
-
-            movement.enabled = health.current > 0f;
+            if(movement)
+                movement.enabled = health.current > 0f;
+            if(contactDamage)
+                contactDamage.enabled = health.current > 0f;
+            collision.isTrigger = health.current == 0;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Arkademy2D.Game.Damage
 
         private bool ShouldDealDamage(Collider2D other, out Health health)
         {
+            health = null;
+            if (!enabled) return false;
             health = other.gameObject.GetComponent<Health>();
             return health && health.faction != faction;
         }

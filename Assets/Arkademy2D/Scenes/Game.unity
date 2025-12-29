@@ -2341,7 +2341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 3
+  m_ScaleFactor: 2
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -2411,9 +2411,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ArkademyStudio.PixelPerfect::ArkademyStudio.PixelPerfect.UI.PixelPerfectCanvas
   cs: {fileID: 532776008}
   pixelPerUnit: 16
-  pixelScale: 2
+  pixelScale: 0
   useReferedScale: 1
-  referenceResolution: {x: 270, y: 480}
+  referenceResolution: {x: 270, y: 270}
 --- !u!114 &547803428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5468,6 +5468,8 @@ MonoBehaviour:
   user: {fileID: 0}
   energy: {fileID: 0}
   caster: {fileID: 0}
+  collision: {fileID: 0}
+  contactDamage: {fileID: 1321033929}
   interactionDetector: {fileID: 0}
   items: []
 --- !u!114 &1321033924
@@ -5516,8 +5518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Actor.Health
   faction: 1
-  max: 10000
-  current: 10000
+  max: 1
+  current: 1
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -7086,6 +7088,8 @@ MonoBehaviour:
   user: {fileID: 1775536863}
   energy: {fileID: 1775536866}
   caster: {fileID: 1775536868}
+  collision: {fileID: 0}
+  contactDamage: {fileID: 0}
   interactionDetector: {fileID: 1775536859}
   items: []
 --- !u!114 &1775536866
@@ -7897,17 +7901,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4809bca0d1f6649ad7e6fd436c2646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: ArkademyStudio.PixelPerfect::ArkademyStudio.PixelPerfect.PixelPerfectCamera
-  pixelScale: 4
+  pixelScale: 2
   useReferedScale: 1
-  referenceResolution: {x: 480, y: 270}
+  referenceResolution: {x: 270, y: 270}
   pixelPerUnit: 16
   cam: {fileID: 1940279855}
   camRect:
     serializedVersion: 2
-    x: -15.581
-    y: -7.9635
-    width: 30
-    height: 16.875
+    x: -8.5185
+    y: -13.635375
+    width: 15.875
+    height: 28.21875
 --- !u!114 &1940279853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7995,7 +7999,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.4375
+  orthographic size: 14.109375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
