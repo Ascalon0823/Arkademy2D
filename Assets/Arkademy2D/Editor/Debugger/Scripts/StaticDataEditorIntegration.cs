@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Arkademy2D.Game.Data.Static;
 using Arkademy2D.Game.Data.Static.Academic;
 using Arkademy2D.Game.Data.Static.Item;
@@ -10,15 +13,20 @@ namespace Arkademy2D.Editor.Debugger
 {
     public static class StaticDataEditorIntegration
     {
-        private static void CreateNewStaticData<T>() where T : StaticData
+        private static void CreateNewStaticData<T>(Action<T> postCreationAction = null) where T : StaticData
         {
             var newItem = StaticData<T>.Create();
-            var savePath = Path.Combine("Assets","Arkademy2D","Resources", StaticData<T>.GetResourcePath());
+            if (postCreationAction != null)
+            {
+                postCreationAction(newItem);
+            }
+
+            var savePath = Path.Combine("Assets", "Arkademy2D", "Resources", StaticData<T>.GetResourcePath());
             var assetName = $"{newItem.name}.asset";
             AssetDatabase.CreateAsset(newItem, Path.Combine(savePath, assetName));
             AssetDatabase.SaveAssets();
             EditorUtility.FocusProjectWindow();
-            Selection.activeObject = newItem; 
+            Selection.activeObject = newItem;
         }
 
         [MenuItem("Static Data/Rename all")]
@@ -35,38 +43,68 @@ namespace Arkademy2D.Editor.Debugger
                 AssetDatabase.RenameAsset(path, assetName);
             }
         }
-        [MenuItem("Static Data/Create/New Item")]
+
+        [MenuItem("Static Data/Create/Item/Empty")]
         public static void CreateNewItem()
         {
             CreateNewStaticData<ItemBase>();
         }
-        [MenuItem("Static Data/Create/New Module")]
+
+        [MenuItem("Static Data/Create/Module/Empty")]
         public static void CreateNewModule()
         {
             CreateNewStaticData<ModuleBase>();
         }
-
-        [MenuItem("Static Data/Create/New Usable")] public static void CreateNewUsable()
-        {
-            CreateNewStaticData<UsableBase>();
-        }
         
-        [MenuItem("Static Data/Create/New Weapon")]
-        public static void CreateNewWeapon()
-        {
-            CreateNewStaticData<WeaponBase>();
-        }
-
-        [MenuItem("Static Data/Create/New Spell")]
+        [MenuItem("Static Data/Create/Spell/Empty")]
         public static void CreateNewSpell()
         {
             CreateNewStaticData<SpellBase>();
         }
-        
+
         [MenuItem("Static Data/Create/New Attribute")]
         public static void CreateNewAttribute()
         {
-            CreateNewStaticData<Attribute>();
+            CreateNewStaticData<AttributeBase>();
+        }
+
+        [MenuItem("Static Data/Create/Character/Empty")]
+        public static void CreateNewCharacter()
+        {
+            CreateNewStaticData<CharacterBase>(x =>
+            {
+                var last = CharacterBase.Library.LastOrDefault();
+                if (last.Value)
+                {
+                    x.attributeConfigs = last.Value.attributeConfigs.Copy();
+                }
+            });
+        }
+
+        private static List<AttributeConfig> Copy(this List<AttributeConfig> configs)
+        {
+            return configs.Select(x => x.Copy()).ToList();
+        }
+    }
+
+    public class CustomAssetModificationProcessor : AssetModificationProcessor
+    {
+        static string[] OnWillSaveAssets(string[] paths)
+        {
+            Debug.Log("OnWillSaveAssets was called. Assets being saved:");
+            foreach (string path in paths)
+            {
+                Debug.Log("-" + path);
+                var data = AssetDatabase.LoadAssetAtPath<StaticData>(path);
+                if (data)
+                {
+                    var assetName = data.GetItemAssetName();
+                    Debug.Log(assetName);
+                    AssetDatabase.RenameAsset(path, assetName);
+                }
+            }
+
+            return paths;
         }
     }
 }

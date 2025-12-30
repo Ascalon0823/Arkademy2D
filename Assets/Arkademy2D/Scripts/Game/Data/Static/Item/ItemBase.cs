@@ -1,29 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Arkademy2D.Core.Models;
 using Arkademy2D.Game.Data.Static.Usable;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Data.Static.Item
 {
-    public interface IItemExtraProvider
-    {
-        ItemExtra GetDefaultItemExtra();
-    }
-
-    [Serializable]
-    public class UsableBindings
-    {
-        public UsableBase usableBase;
-        public List<UsableEffectDefinition> usableEffects;
-    }
     public class ItemBase : StaticData<ItemBase>
     {
-        public string Id => id.ToString();
         public Sprite icon;
-        public List<UsableBindings> usableBindings;
-        public bool IsUsableItem => usableBindings?.Count > 0;
-        public List<ItemExtraProviderStaticData> ItemExtraProviders = new List<ItemExtraProviderStaticData>();
+        public List<UsableEffectDefinition> usableDefinitions;
+        public List<AttributeConfig> attributesConfigs = new List<AttributeConfig>();
 
         public Core.Models.Item GetDefaultItemModel()
         {
@@ -31,13 +19,25 @@ namespace Arkademy2D.Game.Data.Static.Item
             {
                 ItemBaseId = id
             };
-            foreach (var provider in ItemExtraProviders)
-            {
-                var extra = provider.GetDefaultItemExtra();
-                item.Extras.AddExtra(extra.GetType().Name,provider.GetDefaultItemExtra());
-            }
 
             return item;
+        }
+
+        private void OnValidate()
+        {
+            if (usableDefinitions == null) return;
+            foreach (var def in usableDefinitions)
+            {
+                if (!def) continue;
+                attributesConfigs ??= new List<AttributeConfig>();
+                foreach (var required in def.RequiredAttributes)
+                {
+                    if (!attributesConfigs.Exists(x => x.@base == required))
+                    {
+                        attributesConfigs.Add(new AttributeConfig { @base = required });
+                    }
+                }
+            }
         }
     }
 }

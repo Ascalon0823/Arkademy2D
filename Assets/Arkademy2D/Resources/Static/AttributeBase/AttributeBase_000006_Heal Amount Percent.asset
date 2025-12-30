@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0f9155a10aa413ca8c323cf5d6c0e61, type: 3}
-  m_Name: Attribute_000002_Max EN
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Attribute
-  id: 2
-  displayName: Max EN
-  shortName: EN
+  m_Name: AttributeBase_000006_Heal Amount Percent
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.AttributeBase
+  id: 6
+  displayName: Heal Amount Percent
+  shortName: 

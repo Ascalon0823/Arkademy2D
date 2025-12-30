@@ -79,12 +79,12 @@ namespace Arkademy2D.Game.Behaviours
             if (EventSystem.current.IsPointerOverGameObject()) return;
             if (!use || cast) return;
             if (player.character.items?.Count < player.selectedHotbarIdx) return;
-            var usableItem = player.character.items[player.selectedHotbarIdx];
-            player.character.user.UseItem(usableItem, new UseContext
-            {
-                character = player.character,
-                userTransform = player.character.transform,
-            });
+            // var usableItem = player.character.items[player.selectedHotbarIdx];
+            // player.character.UseItem(usableItem, new UseContext
+            // {
+            //     character = player.character,
+            //     userTransform = player.character.transform,
+            // });
         }
 
         private void Interact()
