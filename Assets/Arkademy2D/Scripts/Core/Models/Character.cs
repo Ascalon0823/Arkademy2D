@@ -15,5 +15,6 @@ namespace Arkademy2D.Core.Models
         public float MoveSpeed { get; set; }
         public int MaxEnergy { get; set; }
         public List<Item> Items { get; set; } = new List<Item>();
+        public Dictionary<int,int> Attributes { get; set; } = new Dictionary<int, int>();
     }
 }

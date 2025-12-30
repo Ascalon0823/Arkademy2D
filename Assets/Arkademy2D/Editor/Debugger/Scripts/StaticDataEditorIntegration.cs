@@ -62,5 +62,11 @@ namespace Arkademy2D.Editor.Debugger
         {
             CreateNewStaticData<SpellBase>();
         }
+        
+        [MenuItem("Static Data/Create/New Attribute")]
+        public static void CreateNewAttribute()
+        {
+            CreateNewStaticData<Attribute>();
+        }
     }
 }

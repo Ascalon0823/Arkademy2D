@@ -4,6 +4,8 @@ using System.Linq;
 using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Game.Data.Static.Item;
 using UnityEngine;
+using Time = UnityEngine.Time;
+
 namespace Arkademy2D.Game.Behaviours
 
 {
@@ -20,6 +22,7 @@ namespace Arkademy2D.Game.Behaviours
         public Damage.Contact contactDamage;
         public Interaction.Detector interactionDetector;
         public List<ItemData> items;
+        public Attributes attributes;
 
         private void Start()
         {
@@ -33,6 +36,11 @@ namespace Arkademy2D.Game.Behaviours
         }
         private void ReloadCharacterActor()
         {
+            attributes = new Attributes();
+            foreach (var attribute in Model.Attributes)
+            {
+                attributes.Add(attribute.Key, attribute.Value);
+            }
             health.onDamage.RemoveAllListeners();
             health.onDamage.AddListener(() => { graphic.SetAnimationTrigger("hit"); });
             health.max = Model.MaxHealth;
