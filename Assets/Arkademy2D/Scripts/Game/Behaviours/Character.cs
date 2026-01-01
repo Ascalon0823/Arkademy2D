@@ -1,25 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Arkademy2D.Game.Behaviours.Actor;
 using Arkademy2D.Game.Data.Runtime;
+using Arkademy2D.Game.Data.Static;
 using Arkademy2D.Game.Data.Static.Item;
 using UnityEngine;
+using Attribute = Arkademy2D.Game.Data.Runtime.Attribute;
+using Time = UnityEngine.Time;
+
 namespace Arkademy2D.Game.Behaviours
 
 {
     public class Character : MonoBehaviour
     {
-        public Core.Models.Character Model;
         public Actor.Movement movement;
         public Actor.Graphic graphic;
         public Actor.Health health;
-        public Actor.User user;
         public Actor.Energy energy;
         public Actor.Caster caster;
         public Collider2D collision;
         public Damage.Contact contactDamage;
         public Interaction.Detector interactionDetector;
         public List<ItemData> items;
+        public List<Attribute> attributes;
+        public List<Usable> usables;
 
         private void Start()
         {
@@ -28,42 +33,51 @@ namespace Arkademy2D.Game.Behaviours
 
         public void SetupUseCharacterData(Core.Models.Character model)
         {
-            Model = model;
-            ReloadCharacterActor();
-        }
-        private void ReloadCharacterActor()
-        {
-            health.onDamage.RemoveAllListeners();
-            health.onDamage.AddListener(() => { graphic.SetAnimationTrigger("hit"); });
-            health.max = Model.MaxHealth;
-            health.current = health.max;
-            energy.max = Model.MaxEnergy;
-            energy.current = Model.MaxEnergy;
-            energy.currentFloat = Model.MaxEnergy;
-            movement.speed = Model.MoveSpeed;
-            items = Model.Items.Select(x =>
+            var characterBase = CharacterBase.Library.GetValueOrDefault(model.CharacterBaseId);
+            if (!characterBase)
+            {
+                Debug.LogError($"CharacterBase {model.CharacterBaseId} does not exist");
+                return;
+            }
+            attributes = new List<Attribute>();
+            foreach (var attribute in characterBase.attributeConfigs)
+            {
+                attributes.Add(new Attribute { config =  attribute });
+            }
+            items = model.Items.Select(x =>
             {
                 var baseItem = ItemBase.Library.GetValueOrDefault(x.ItemBaseId);
-                var usables = baseItem.usableBindings.Select(y => new UsableData
-                {
-                    usableBase = y.usableBase,
-                    usableEffects = y.usableEffects,
-                });
+                
                 return new ItemData
                 {
                     Model = x,
                     itemBase = baseItem,
-                    usableData = usables.ToList()
+                    attributes = baseItem.attributesConfigs.Select(y=>new Attribute{config = y}).ToList()
                 };
+            }).ToList();
+            usables = items.SelectMany(x =>
+            {
+                if (x.itemBase.usableDefinitions != null && x.itemBase.usableDefinitions.Count > 0)
+                {
+                    return x.itemBase.usableDefinitions.Select(y =>
+                    {
+                        var usable = new Usable(y);
+                        usable.attributes = new List<Attribute>();
+                        foreach (var required in y.RequiredAttributes)
+                        {
+                            var attr = x.attributes.FirstOrDefault(z=>z.config.@base == required);
+                            usable.attributes.Add(attr);
+                        }
+                        return usable;
+                    });
+                }
+
+                return new List<Usable>();
             }).ToList();
         }
 
         public void Update()
         {
-            foreach (var item in items)
-            {
-                item.Update(Time.deltaTime);
-            }
             if(movement)
                 movement.enabled = health.current > 0f;
             if(contactDamage)

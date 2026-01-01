@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05df65571fd94f428f9e4d4347a3569d, type: 3}
   m_Name: Heal Usable Effect
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Usable.HealUsableDefinition
+  healAmountAttribute: {fileID: 11400000, guid: 953b13ca4d18543afa8af82193f4c0aa, type: 2}
+  useTimeAttribute: {fileID: 11400000, guid: 02a520303315a40f7a0587fec50f9fc5, type: 2}
   healAmount: 10

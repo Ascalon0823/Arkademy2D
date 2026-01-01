@@ -15,8 +15,10 @@ MonoBehaviour:
   id: 1
   displayName: Watermelon (slice)
   icon: {fileID: -1048484560, guid: aff037da44459934d8265dbcba2fa859, type: 3}
-  usableBindings:
-  - usableBase: {fileID: 11400000, guid: 4516432c5388c438292ef072e48edf0f, type: 2}
-    usableEffects:
-    - {fileID: 11400000, guid: f036d5cc492f144ae9fff7f1843b22e2, type: 2}
-  ItemExtraProviders: []
+  usableDefinitions:
+  - {fileID: 11400000, guid: f036d5cc492f144ae9fff7f1843b22e2, type: 2}
+  attributesConfigs:
+  - base: {fileID: 11400000, guid: 02a520303315a40f7a0587fec50f9fc5, type: 2}
+    defaultValue: 1000
+  - base: {fileID: 11400000, guid: 953b13ca4d18543afa8af82193f4c0aa, type: 2}
+    defaultValue: 500

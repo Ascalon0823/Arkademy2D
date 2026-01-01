@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964f0c9630b845a1a46ef3f274858b92, type: 3}
-  m_Name: UsableBase_000002_Unknown
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.Usable.UsableBase
-  id: 2
-  useTime: 1.2
-  usableEffects: []
+  m_Script: {fileID: 11500000, guid: c0f9155a10aa413ca8c323cf5d6c0e61, type: 3}
+  m_Name: AttributeBase_000005_Heal Amount Flat
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.AttributeBase
+  id: 5
+  displayName: Heal Amount Flat
+  shortName: 

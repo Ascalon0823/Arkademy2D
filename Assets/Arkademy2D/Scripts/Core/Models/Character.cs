@@ -11,9 +11,7 @@ namespace Arkademy2D.Core.Models
         public DateTime LastUpdateDate { get; set; } = DateTime.UtcNow;
         public string DisplayName { get; set; }
         public AcademicRecord AcademicRecord { get; set; } = new AcademicRecord();
-        public int MaxHealth { get; set; }
-        public float MoveSpeed { get; set; }
-        public int MaxEnergy { get; set; }
         public List<Item> Items { get; set; } = new List<Item>();
+        public int CharacterBaseId { get; set; } = 0;
     }
 }

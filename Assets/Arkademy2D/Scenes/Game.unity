@@ -5465,13 +5465,14 @@ MonoBehaviour:
   movement: {fileID: 1321033924}
   graphic: {fileID: 1321033925}
   health: {fileID: 1321033926}
-  user: {fileID: 0}
   energy: {fileID: 0}
   caster: {fileID: 0}
   collision: {fileID: 0}
   contactDamage: {fileID: 1321033929}
   interactionDetector: {fileID: 0}
   items: []
+  attributes: []
+  usables: []
 --- !u!114 &1321033924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6960,9 +6961,6 @@ PrefabInstance:
       addedObject: {fileID: 1775536861}
     - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1775536863}
-    - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1775536866}
     - targetCorrespondingSourceObject: {fileID: 2855369217189429153, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
       insertIndex: -1
@@ -7058,18 +7056,6 @@ MonoBehaviour:
   onDamage:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1775536863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775536851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a5f6ad8ba8f4296b15e70f0ae04b1fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Actor.User
 --- !u!114 &1775536865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7085,13 +7071,14 @@ MonoBehaviour:
   movement: {fileID: 1775536853}
   graphic: {fileID: 1775536858}
   health: {fileID: 1775536861}
-  user: {fileID: 1775536863}
   energy: {fileID: 1775536866}
   caster: {fileID: 1775536868}
   collision: {fileID: 0}
   contactDamage: {fileID: 0}
   interactionDetector: {fileID: 1775536859}
   items: []
+  attributes: []
+  usables: []
 --- !u!114 &1775536866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11530,16 +11517,6 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1
-  - first: {x: -4, y: 2, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 1
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1
   - first: {x: -3, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -13264,15 +13241,15 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 304
     m_Data: {fileID: 11400000, guid: 4788be64fa98a6043b41daff24a7e3af, type: 2}
-  - m_RefCount: 164
+  - m_RefCount: 163
     m_Data: {fileID: 11400000, guid: 7aef9631fb2891c4aa552c4c14b4ed7a, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 304
     m_Data: {fileID: -961679190, guid: 20f92fcab2dc6774689db98d466e3bd0, type: 3}
-  - m_RefCount: 164
+  - m_RefCount: 163
     m_Data: {fileID: 1606860688, guid: 20f92fcab2dc6774689db98d466e3bd0, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 468
+  - m_RefCount: 467
     m_Data:
       e00: 1
       e01: 0
@@ -13291,7 +13268,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 468
+  - m_RefCount: 467
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
