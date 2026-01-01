@@ -1,5 +1,3 @@
-using Arkademy2D.Game.Data.Runtime;
-using Arkademy2D.Game.System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -30,7 +28,7 @@ namespace Arkademy2D.Game.Behaviours
 
         private void TryCast()
         {
-            var caster = player.character.caster;
+            var caster = player.character;
             if (!caster) return;
             caster.casting = cast;
             if (!cast)
@@ -56,13 +54,16 @@ namespace Arkademy2D.Game.Behaviours
             if (Vector2.Dot(dir, Vector2.up) >= 0.5f)
             {
                 caster.Cast("W");
-            }else if (Vector2.Dot(dir, Vector2.down) >= 0.5f)
+            }
+            else if (Vector2.Dot(dir, Vector2.down) >= 0.5f)
             {
                 caster.Cast("S");
-            }else if (Vector2.Dot(dir, Vector2.left) >= 0.5f)
+            }
+            else if (Vector2.Dot(dir, Vector2.left) >= 0.5f)
             {
                 caster.Cast("A");
-            }else if (Vector2.Dot(dir, Vector2.right) >= 0.5f)
+            }
+            else if (Vector2.Dot(dir, Vector2.right) >= 0.5f)
             {
                 caster.Cast("D");
             }
@@ -70,8 +71,9 @@ namespace Arkademy2D.Game.Behaviours
 
         private void MoveActor()
         {
-            player.character.movement.moveDir =
-                move.sqrMagnitude <= float.Epsilon || cast ? Vector2.zero : move.normalized;
+            player.character.moveDir = move.sqrMagnitude <= float.Epsilon || cast
+                ? Vector2.zero
+                : move.normalized;
         }
 
         private void UseActorUsable()
@@ -90,8 +92,8 @@ namespace Arkademy2D.Game.Behaviours
         private void Interact()
         {
             if (cast) return;
-            if (!player.character.interactionDetector.candidate) return;
-            player.character.interactionDetector.candidate.Interact();
+            if (!player.character.interactionCandidate) return;
+            player.character.interactionCandidate.Interact();
         }
 
         public void OnInteract(InputValue inputValue)

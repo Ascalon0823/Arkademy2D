@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Arkademy2D.Game.Behaviours;
 using Arkademy2D.Game.Data.Static.Item;

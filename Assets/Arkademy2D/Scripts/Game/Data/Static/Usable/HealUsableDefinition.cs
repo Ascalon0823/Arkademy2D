@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Arkademy2D.Game.Data.Runtime;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Arkademy2D.Game.Data.Static.Usable
 {

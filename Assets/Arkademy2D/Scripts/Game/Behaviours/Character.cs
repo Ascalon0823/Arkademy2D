@@ -1,88 +1,133 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Arkademy2D.Game.Behaviours.Actor;
 using Arkademy2D.Game.Data.Runtime;
 using Arkademy2D.Game.Data.Static;
-using Arkademy2D.Game.Data.Static.Item;
+using Arkademy2D.Game.Interaction;
 using UnityEngine;
 using Attribute = Arkademy2D.Game.Data.Runtime.Attribute;
-using Time = UnityEngine.Time;
 
 namespace Arkademy2D.Game.Behaviours
-
 {
     public class Character : MonoBehaviour
     {
-        public Actor.Movement movement;
-        public Actor.Graphic graphic;
-        public Actor.Health health;
-        public Actor.Energy energy;
-        public Actor.Caster caster;
-        public Collider2D collision;
-        public Damage.Contact contactDamage;
-        public Interaction.Detector interactionDetector;
-        public List<ItemData> items;
-        public List<Attribute> attributes;
-        public List<Usable> usables;
+        [Header("Data")]
+        public Core.Models.Character model;
+        public CharacterBase @base;
+        [Header("Health")]
+        public Attribute maxHp;
+        public int faction;
+        public int hp;
+        [Header("Energy")]
+        public Attribute maxEnergy;
+        public Attribute energyRegen;
+        [SerializeField] private float energyFloat;
+        public int energy => Mathf.RoundToInt(energyFloat);
+      
+        [Header("Movement")] public Attribute moveSpeed;
+        public Vector2 moveDir;
+        public Vector2 faceDir;
+        [Header("Inventory")] public List<ItemData> items;
+        [Header("Usables")] public List<Usable> usables;
+        [Header("Interaction")] public Interactable interactionCandidate;
+        public float interactableDetectionRange;
+        [Header("Caster")] public List<string> castKeys;
+        public bool showCasting => casting && hp > 0;
+        public bool casting;
+
+        [Header("Components")] [SerializeField]
+        private Rigidbody2D body;
+
+        [SerializeField] private Animator animator;
+        [SerializeField] private Collider2D collision;
 
         private void Start()
         {
-            collision = GetComponent<Collider2D>();
+            Setup();
         }
 
-        public void SetupUseCharacterData(Core.Models.Character model)
+        public void Setup()
         {
-            var characterBase = CharacterBase.Library.GetValueOrDefault(model.CharacterBaseId);
-            if (!characterBase)
+            if (model != null)
             {
-                Debug.LogError($"CharacterBase {model.CharacterBaseId} does not exist");
-                return;
+                @base = CharacterBase.Get(model.CharacterBaseId);
             }
-            attributes = new List<Attribute>();
-            foreach (var attribute in characterBase.attributeConfigs)
-            {
-                attributes.Add(new Attribute { config =  attribute });
-            }
-            items = model.Items.Select(x =>
-            {
-                var baseItem = ItemBase.Library.GetValueOrDefault(x.ItemBaseId);
-                
-                return new ItemData
-                {
-                    Model = x,
-                    itemBase = baseItem,
-                    attributes = baseItem.attributesConfigs.Select(y=>new Attribute{config = y}).ToList()
-                };
-            }).ToList();
-            usables = items.SelectMany(x =>
-            {
-                if (x.itemBase.usableDefinitions != null && x.itemBase.usableDefinitions.Count > 0)
-                {
-                    return x.itemBase.usableDefinitions.Select(y =>
-                    {
-                        var usable = new Usable(y);
-                        usable.attributes = new List<Attribute>();
-                        foreach (var required in y.RequiredAttributes)
-                        {
-                            var attr = x.attributes.FirstOrDefault(z=>z.config.@base == required);
-                            usable.attributes.Add(attr);
-                        }
-                        return usable;
-                    });
-                }
 
-                return new List<Usable>();
-            }).ToList();
+            if (@base)
+            {
+                maxHp.config = @base.attributeConfigs.FirstOrDefault(x => x.@base == maxHp.config.@base);
+                maxEnergy.config = @base.attributeConfigs.FirstOrDefault(x => x.@base == maxEnergy.config.@base);
+                energyRegen.config = @base.attributeConfigs.FirstOrDefault(x => x.@base == energyRegen.config.@base);
+                moveSpeed.config = @base.attributeConfigs.FirstOrDefault(x => x.@base == moveSpeed.config.@base);
+            }
+
+            hp = maxHp.Value;
+            energyFloat = maxEnergy.Value;
+
+            if (!animator) animator = GetComponent<Animator>();
+            if (!collision) collision = GetComponent<Collider2D>();
+            if (!body) body = GetComponent<Rigidbody2D>();
         }
 
-        public void Update()
+        public void Cast(string key)
         {
-            if(movement)
-                movement.enabled = health.current > 0f;
-            if(contactDamage)
-                contactDamage.enabled = health.current > 0f;
-            collision.isTrigger = health.current == 0;
+            if (hp <= 0) return;
+            castKeys ??= new List<string>();
+            if (castKeys.Contains(key)) return;
+            castKeys.Add(key);
+        }
+
+        public void EndCast()
+        {
+            if (hp <= 0) return;
+            if (castKeys == null || castKeys.Count == 0) return;
+            var spellBase = SpellBase.GetSpellByKey(string.Join("", castKeys));
+            castKeys = null;
+            if (energyFloat < maxEnergy.Value) return;
+            if (!spellBase) return;
+            Debug.Log($"Use spell: {spellBase.displayName}", spellBase);
+            energyFloat = 0;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if (hp <= 0) return;
+            hp -= damage;
+            hp = Mathf.Clamp(hp, 0, maxHp.Value);
+            animator.SetTrigger("hit");
+        }
+
+        private void Update()
+        {
+            if (hp <= 0) return;
+            energyFloat += energyRegen.Value * Time.deltaTime;
+            energyFloat = Mathf.Clamp(energyFloat, 0, maxEnergy.Value);
+            if (moveDir.sqrMagnitude > float.Epsilon)
+            {
+                faceDir = moveDir;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            collision.isTrigger = hp <= 0;
+            if (hp <= 0) return;
+            interactionCandidate = Physics2D.OverlapCircleAll(transform.position, interactableDetectionRange)?
+                .Select(x => x.GetComponent<Interactable>())?
+                .Where(x => x)?
+                .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))?
+                .FirstOrDefault();
+            body.MovePosition(body.position + moveDir.normalized * moveSpeed.Value / 100f * Time.fixedDeltaTime);
+        }
+
+        private void LateUpdate()
+        {
+            animator.SetBool("walking", moveDir.sqrMagnitude > float.Epsilon && hp > 0);
+            animator.SetBool("dead", hp <= 0);
+        }
+
+        public void SetPosition(Vector2 pos)
+        {
+            body.position = pos;
         }
     }
 }

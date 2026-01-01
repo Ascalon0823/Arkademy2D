@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using Arkademy2D.Game.Behaviours.Actor;
+using Arkademy2D.Game.Behaviours;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Damage
@@ -11,17 +10,17 @@ namespace Arkademy2D.Game.Damage
         public int faction;
         public float frequency;
         
-        private Dictionary<Health, float> lastDamage = new Dictionary<Health, float>();
+        private Dictionary<Character, float> lastDamage = new Dictionary<Character, float>();
 
-        private bool ShouldDealDamage(Collider2D other, out Health health)
+        private bool ShouldDealDamage(Collider2D other, out Character health)
         {
             health = null;
             if (!enabled) return false;
-            health = other.gameObject.GetComponent<Health>();
+            health = other.gameObject.GetComponent<Character>();
             return health && health.faction != faction;
         }
 
-        private void TryDealDamage(Health health)
+        private void TryDealDamage(Character health)
         {
             if (!lastDamage.TryGetValue(health, out var time) || Time.timeSinceLevelLoad - time > frequency)
             {

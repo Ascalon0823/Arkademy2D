@@ -28,7 +28,7 @@ namespace Arkademy2D.Game.Map
                 if (map.gameObject.activeInHierarchy)
                 {
                     map.onPlayerEnter?.Invoke();
-                    Behaviours.Player.Local.character.movement.body.position = map.entry.position;
+                    Behaviours.Player.Local.character.SetPosition(map.entry.position);
                 }
             }
             while (transition.color.a > 0)
