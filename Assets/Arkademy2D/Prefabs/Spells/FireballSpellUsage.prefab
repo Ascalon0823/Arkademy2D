@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 5831000400673601542}
   - component: {fileID: 9024220156315563227}
   - component: {fileID: 8539370525638142369}
-  - component: {fileID: 8970021098089444561}
-  - component: {fileID: 2492856236454450521}
+  - component: {fileID: 1149614876153081902}
   m_Layer: 0
   m_Name: FireballSpellUsage
   m_TagString: Untagged
@@ -99,7 +98,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8970021098089444561
+--- !u!114 &1149614876153081902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,25 +107,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2523754018240401846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05ffde66665e24c979619fa490bfebd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 24db503a9f074977be5920661a2f283c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Actor.Movement
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Spell.FireBallUsage
+  fromUsable: {fileID: 0}
+  life: 5
   body: {fileID: 8539370525638142369}
-  moveDir: {x: 0, y: 1}
-  faceDir: {x: 0, y: 1}
   speed: 5
---- !u!114 &2492856236454450521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2523754018240401846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3731dfef42594f4ba52b5c34359a7fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.SpellUsage
 --- !u!1 &3634857268369339918
 GameObject:
   m_ObjectHideFlags: 0

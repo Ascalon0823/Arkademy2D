@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using Arkademy2D.Game.Behaviours.Actor;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Behaviours
@@ -9,9 +7,10 @@ namespace Arkademy2D.Game.Behaviours
     {
         public Character character;
         public float targetDetectionRange;
+
         private void Update()
         {
-            if (character.movement && character.health)
+            if (character)
             {
                 MoveTowardsTarget(LookingForTarget());
             }
@@ -25,8 +24,8 @@ namespace Arkademy2D.Game.Behaviours
                 return transform.position;
             }
 
-            var candidate = targets.Select(x => x.GetComponent<Health>())
-                .Where(x => x && x.faction != character.health.faction)
+            var candidate = targets.Select(x => x.GetComponent<Character>())
+                .Where(x => x && x.faction != character.faction && x.hp>0)
                 .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
                 .FirstOrDefault();
             if (!candidate) return transform.position;
@@ -36,10 +35,8 @@ namespace Arkademy2D.Game.Behaviours
         public void MoveTowardsTarget(Vector2 target)
         {
             var distance = Vector2.Distance(transform.position, target);
-            if (distance > float.Epsilon)
-            {
-                character.movement.moveDir = (target - (Vector2)transform.position).normalized;
-            }
+            var moveDir = distance > float.Epsilon ? (target - (Vector2)transform.position).normalized : Vector2.zero;
+            character.moveDir = moveDir;
         }
     }
 }

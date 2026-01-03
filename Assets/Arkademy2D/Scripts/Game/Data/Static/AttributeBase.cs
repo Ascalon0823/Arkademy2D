@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Arkademy2D.Game.Data.Static
 {

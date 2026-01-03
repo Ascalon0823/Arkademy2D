@@ -52,8 +52,8 @@ namespace Arkademy2D.Game.UI
         }
         private void OnDisable()
         {
-            EventSystem.current.SetSelectedGameObject(null);
-            FindFirstObjectByType<PlayerInput>().SwitchCurrentActionMap("Player");
+            EventSystem.current?.SetSelectedGameObject(null);
+            FindFirstObjectByType<PlayerInput>()?.SwitchCurrentActionMap("Player");
         }
 
         private void SetupGO(AcademicRecord data, ModuleBase module, GameObject go)

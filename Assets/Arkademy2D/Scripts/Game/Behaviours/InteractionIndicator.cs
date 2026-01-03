@@ -4,14 +4,14 @@ namespace Arkademy2D.Game.Behaviours
 {
     public class InteractionIndicator : MonoBehaviour
     {
-        public Detector playerDetector;
+        public Character character;
         public GameObject indicator;
 
         private void LateUpdate()
         {
-            indicator.SetActive(playerDetector.candidate);
-            if (!playerDetector.candidate) return;
-            indicator.transform.position = playerDetector.candidate.transform.position;
+            indicator.SetActive(character.interactionCandidate);
+            if (!character.interactionCandidate) return;
+            indicator.transform.position = character.interactionCandidate.transform.position;
         }
     }
 }

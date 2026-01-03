@@ -8,7 +8,7 @@ namespace Arkademy2D.Game.Damage
         public int faction;
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var health = other.GetComponent<Behaviours.Actor.Health>();
+            var health = other.GetComponent<Behaviours.Character>();
             if (!health || health.faction == faction) return;
             health.TakeDamage(damage);
         }

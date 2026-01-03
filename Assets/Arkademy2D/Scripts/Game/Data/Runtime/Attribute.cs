@@ -7,6 +7,7 @@ namespace Arkademy2D.Game.Data.Runtime
     public class Attribute
     {
         public AttributeConfig config;
+        public int rolledValue;
         public int Value => config.defaultValue;
     }
 }

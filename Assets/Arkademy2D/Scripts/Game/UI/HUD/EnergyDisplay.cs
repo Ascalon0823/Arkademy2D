@@ -10,7 +10,7 @@ namespace Arkademy2D.Game.UI.HUD
 
         private void LateUpdate()
         {
-            fill.fillAmount = (Player.Local.character.energy.current * 1f / Player.Local.character.energy.max) * 0.8f +
+            fill.fillAmount = (Player.Local.character.energy * 1f / Player.Local.character.maxEnergy.Value) * 0.8f +
                               0.15f;
         }
     }

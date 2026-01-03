@@ -1,4 +1,4 @@
-using System;
+using Arkademy2D.Game.Data.Static;
 using Arkademy2D.Game.System;
 using UnityEngine;
 
@@ -8,6 +8,7 @@ namespace Arkademy2D.Game.Behaviours
     {
         public Core.Models.Player Model;
         public Character character;
+        public Character characterPrefab;
         public static Player Local;
         public int selectedHotbarIdx;
         private void Awake()
@@ -23,7 +24,12 @@ namespace Arkademy2D.Game.Behaviours
         public void Setup(Core.Models.Player player)
         {
             Model = player;
-            character.SetupUseCharacterData(GameSystem.CharacterModel);
+            if (!character)
+            {
+                character = Instantiate(characterPrefab);
+            }
+            character.model = GameSystem.CharacterModel;
+            character.Setup();
         }
     }
 }

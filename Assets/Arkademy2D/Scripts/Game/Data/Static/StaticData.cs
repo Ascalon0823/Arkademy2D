@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Arkademy2D.Game.Data.Static
@@ -8,6 +8,7 @@ namespace Arkademy2D.Game.Data.Static
     {
         public int id;
         public string displayName;
+        
         public abstract string GetItemAssetName();
     }
     public abstract class StaticData<T> : StaticData where T : StaticData
@@ -15,6 +16,10 @@ namespace Arkademy2D.Game.Data.Static
         public static string GetResourcePath()
         {
             return $"Static/{typeof(T).Name}";
+        }
+        public static T Get(int id)
+        {
+            return Library.TryGetValue(id, out var result) ? result : Library.FirstOrDefault().Value;
         }
         public static Dictionary<int, T> Library
         {

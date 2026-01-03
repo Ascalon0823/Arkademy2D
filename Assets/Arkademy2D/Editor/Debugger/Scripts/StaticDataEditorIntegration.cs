@@ -91,15 +91,12 @@ namespace Arkademy2D.Editor.Debugger
     {
         static string[] OnWillSaveAssets(string[] paths)
         {
-            Debug.Log("OnWillSaveAssets was called. Assets being saved:");
             foreach (string path in paths)
             {
-                Debug.Log("-" + path);
                 var data = AssetDatabase.LoadAssetAtPath<StaticData>(path);
                 if (data)
                 {
                     var assetName = data.GetItemAssetName();
-                    Debug.Log(assetName);
                     AssetDatabase.RenameAsset(path, assetName);
                 }
             }

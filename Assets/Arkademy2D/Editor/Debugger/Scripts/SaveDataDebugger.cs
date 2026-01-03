@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using Arkademy2D.Game.Data.Runtime;
@@ -62,6 +63,18 @@ namespace Arkademy2D.Editor.Debugger
             SaveSystem.SavePlayer(JsonConvert.DeserializeObject<Player>(PlayerModelJson));
         }
 
+        public CharacterBase characterBase;
+        [ContextMenu("Add character")]
+        public void AddCharacter()
+        {
+            var playerModel= JsonConvert.DeserializeObject<Player>(PlayerModelJson);
+            playerModel.Characters.Add(new Character
+            {
+                CharacterBaseId = characterBase.id,
+                LastUpdateDate = DateTime.UtcNow
+            });
+            playerModelJson =  JsonConvert.SerializeObject(playerModel, Formatting.Indented);
+        }
         public string selectCharacterKey;
         public ItemBase itemBaseToAdd;
 
