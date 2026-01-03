@@ -25,7 +25,7 @@ namespace Arkademy2D.Game.Behaviours
             }
 
             var candidate = targets.Select(x => x.GetComponent<Character>())
-                .Where(x => x && x.faction != character.faction)
+                .Where(x => x && x.faction != character.faction && x.hp>0)
                 .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
                 .FirstOrDefault();
             if (!candidate) return transform.position;

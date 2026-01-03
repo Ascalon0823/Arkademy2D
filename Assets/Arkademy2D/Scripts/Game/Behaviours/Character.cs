@@ -76,16 +76,28 @@ namespace Arkademy2D.Game.Behaviours
             castKeys.Add(key);
         }
 
+        public Dictionary<SpellBase, Usable> SpellUsables = new Dictionary<SpellBase, Usable>();
         public void EndCast()
         {
             if (hp <= 0) return;
             if (castKeys == null || castKeys.Count == 0) return;
             var spellBase = SpellBase.GetSpellByKey(string.Join("", castKeys));
-            castKeys = null;
+            if (!SpellUsables.TryGetValue(spellBase, out var spellUsable))
+            {
+                spellUsable = Instantiate(spellBase.spellUsablePrefab, transform);
+                SpellUsables[spellBase] = spellUsable;
+                spellUsable.user = this;
+            }
             if (energyFloat < maxEnergy.Value) return;
-            if (!spellBase) return;
+            if (!spellBase || !spellUsable || !spellUsable.CanUse()) return;
             Debug.Log($"Use spell: {spellBase.displayName}", spellBase);
-            energyFloat = 0;
+            spellUsable.Use();
+        }
+
+        public void ConsumeEnergy(int amount)
+        {
+            energyFloat -= amount;
+            energyFloat = Mathf.Clamp(energyFloat, 0, maxEnergy.Value);
         }
 
         public void TakeDamage(int damage)

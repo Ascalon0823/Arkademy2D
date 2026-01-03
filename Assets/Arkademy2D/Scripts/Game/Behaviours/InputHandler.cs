@@ -36,6 +36,7 @@ namespace Arkademy2D.Game.Behaviours
                 if (wasCasting)
                 {
                     caster.EndCast();
+                    wasCasting = false;
                 }
 
                 canCast = false;
