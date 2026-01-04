@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 1
   displayName: Fire Ball
   spellKey: W
-  spellUsagePrefab: {fileID: 2492856236454450521, guid: 18351bd4571114268b19f6433574a0e4, type: 3}
+  spellUsablePrefab: {fileID: 894647346307020659, guid: ee9d9eb46b865614b825942fbe3ad568, type: 3}
