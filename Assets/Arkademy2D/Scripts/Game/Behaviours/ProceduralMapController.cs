@@ -54,24 +54,19 @@ namespace Arkademy2D.Game.Behaviours
 
             foreach (var room in rooms)
             {
-                var data = new int[roomSize, roomSize];
+                var preData = new float?[roomSize, roomSize];
                 for (var i = 0; i < roomSize; i++)
                 for (var j = 0; j < roomSize; j++)
                 {
                     if (i == 0 || j == 0 || i == roomSize - 1 || j == roomSize - 1)
                     {
-                        data[i, j] = 1;
-                    }
-                    else
-                    {
-                        data[i, j] = Random.Range(0, 1f) > provider.cutoff ? 1 : 0;
+                        preData[i, j] = 1;
                     }
                 }
 
                 var openings = dirs.Where(x => rooms.Contains(x + room)).ToList();
                 foreach (var opening in openings)
                 {
-                    Debug.Log("Do opening");
                     var from = Vector2Int.one * roomSize / 2;
                     var to = from + opening * roomSize / 2;
                     var fromMin = from - Vector2Int.one * 2;
@@ -82,19 +77,16 @@ namespace Arkademy2D.Game.Behaviours
                     for (var j = Mathf.Min(fromMin.y, toMin.y); j < Mathf.Max(fromMax.y, toMax.y); j++)
                     {
                         if (i < 0 || j < 0 || i >= roomSize || j >= roomSize) continue;
-                        data[i, j] = 0;
+                        preData[i, j] = 0;
                     }
                 }
-                for (var i = 0; i < provider.iterations; i++)
-                {
-                    data = provider.Iterate(data);
-                }
+                var data = provider.GetData(roomSize,roomSize,Random.Range(int.MinValue,int.MaxValue),preData);
                 for (var i = 0; i < roomSize; i++)
                 for (var j = 0; j < roomSize; j++)
                 {
-                    var tile = data[i, j] == 0 ? floorTile : wallTile;
-                    var poses = data[i, j] == 0 ? floorPoses : wallPoses;
-                    var tiles = data[i, j] == 0 ? floorTiles : wallTiles;
+                    var tile = data[i, j] == 0f ? floorTile : wallTile;
+                    var poses = data[i, j] == 0f ? floorPoses : wallPoses;
+                    var tiles = data[i, j] == 0f ? floorTiles : wallTiles;
                     tiles.Add(tile);
                     poses.Add(new Vector3Int(i + room.x * roomSize - roomSize / 2, j + room.y * roomSize - roomSize / 2,
                         0));
