@@ -82,6 +82,8 @@ namespace Arkademy2D.Game.Behaviours
             if (hp <= 0) return;
             if (castKeys == null || castKeys.Count == 0) return;
             var spellBase = SpellBase.GetSpellByKey(string.Join("", castKeys));
+            castKeys = null;
+            if (!spellBase) return;
             if (!SpellUsables.TryGetValue(spellBase, out var spellUsable))
             {
                 spellUsable = Instantiate(spellBase.spellUsablePrefab, transform);
