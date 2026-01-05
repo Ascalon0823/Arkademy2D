@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.arkademy.noise": {
+      "version": "https://github.com/Ascalon0823/noise-package.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "7b793c2583d9b64d1153442723eecd736b9d49a8"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.2",
       "depth": 1,
