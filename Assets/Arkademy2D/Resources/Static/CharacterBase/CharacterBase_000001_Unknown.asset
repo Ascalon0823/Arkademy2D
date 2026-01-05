@@ -22,4 +22,4 @@ MonoBehaviour:
   - base: {fileID: 11400000, guid: 803df676b88ff406783f68c5e7de1be1, type: 2}
     defaultValue: 300
   - base: {fileID: 11400000, guid: 84dafc6678b964fdaa2db7105c3e7b37, type: 2}
-    defaultValue: 300
+    defaultValue: 3000

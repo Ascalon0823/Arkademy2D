@@ -68,6 +68,12 @@ namespace Arkademy2D.Editor.Debugger
             CreateNewStaticData<AttributeBase>();
         }
 
+        [MenuItem("Static Data/Create/Map")]
+        public static void CreateNewMap()
+        {
+            CreateNewStaticData<MapBase>();
+        }
+
         [MenuItem("Static Data/Create/Character/Empty")]
         public static void CreateNewCharacter()
         {
