@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.MapBase
   id: 2
   displayName: World
-  mapPrefab: {fileID: 2817825770419259852, guid: 25e53b50e75b941e5a1b1511a3f68879, type: 3}
+  mapPrefab: {fileID: -8722243840445053426, guid: 25e53b50e75b941e5a1b1511a3f68879, type: 3}

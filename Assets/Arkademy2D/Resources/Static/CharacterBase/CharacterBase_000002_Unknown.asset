@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ffba6019bf142429261bb78ae5b961c, type: 3}
-  m_Name: CharacterBase_000001_Unknown
+  m_Name: CharacterBase_000002_Unknown
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.CharacterBase
-  id: 1
+  id: 2
   displayName: 
   attributeConfigs:
   - base: {fileID: 11400000, guid: 42dc2afb7978c4a6ca6fc12b3f5e3dd3, type: 2}
@@ -23,4 +23,4 @@ MonoBehaviour:
     defaultValue: 300
   - base: {fileID: 11400000, guid: 84dafc6678b964fdaa2db7105c3e7b37, type: 2}
     defaultValue: 3000
-  animator: {fileID: 9100000, guid: 735e92e8a27cbac44b31d34e4d6b48f8, type: 2}
+  animator: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
