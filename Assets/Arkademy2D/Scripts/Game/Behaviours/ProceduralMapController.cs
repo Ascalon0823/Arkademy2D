@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Arkademy2D.Game.Data.Static;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -16,6 +18,11 @@ namespace Arkademy2D.Game.Behaviours
 
         [SerializeField] protected Noise.CellularAutomataProvider provider;
         [SerializeField] protected int seed;
+        [SerializeField] protected CharacterBase enemyBase;
+        [SerializeField] protected Character enemyPrefab;
+        [SerializeField] protected int maxPackPerRoom;
+        [SerializeField] protected int maxEnemiesPerPack;
+
         public override void Setup()
         {
             base.Setup();
@@ -73,14 +80,41 @@ namespace Arkademy2D.Game.Behaviours
                     var fromMax = from + Vector2Int.one * 2;
                     var toMin = to - Vector2Int.one * 2;
                     var toMax = to + Vector2Int.one * 2;
-                    for(var i = Mathf.Min(fromMin.x,toMin.x);i<Mathf.Max(fromMax.x,toMax.x);i++)
+                    for (var i = Mathf.Min(fromMin.x, toMin.x); i < Mathf.Max(fromMax.x, toMax.x); i++)
                     for (var j = Mathf.Min(fromMin.y, toMin.y); j < Mathf.Max(fromMax.y, toMax.y); j++)
                     {
                         if (i < 0 || j < 0 || i >= roomSize || j >= roomSize) continue;
                         preData[i, j] = 0;
                     }
                 }
-                var data = provider.GetData(roomSize,roomSize,Random.Range(int.MinValue,int.MaxValue),preData);
+
+                for (var i = 0; i < Random.Range(2, maxPackPerRoom); i++)
+                {
+                    var center = Vector2Int.one * roomSize / 2;
+                    var off = Random.insideUnitCircle * roomSize / 3f;
+                    var offInt = new Vector2Int(Mathf.FloorToInt(off.x), Mathf.FloorToInt(off.y));
+                    var packPos = offInt + center;
+                    for(var j=-2;j<=2;j++)
+                    for (var k = -2; k <= 2; k++)
+                    {
+                        preData[j+packPos.x, k+packPos.y] = 0;
+                    }
+
+                    for (var j = 0; j < Random.Range(3, maxEnemiesPerPack); j++)
+                    {
+                        var enemy = Instantiate(enemyPrefab, transform);
+                        enemy.@base = enemyBase;
+                        enemy.faction = 1;
+                        var worldPos = room * roomSize + off + Random.insideUnitCircle * 2f;
+                        enemy.Setup();
+                        enemy.SetPosition(worldPos);
+                        var control = enemy.AddComponent<AICharacterController>();
+                        control.character = enemy;
+                        control.targetDetectionRange = 5;
+                    }
+                }
+
+                var data = provider.GetData(roomSize, roomSize, Random.Range(int.MinValue, int.MaxValue), preData);
                 for (var i = 0; i < roomSize; i++)
                 for (var j = 0; j < roomSize; j++)
                 {

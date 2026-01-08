@@ -10,19 +10,16 @@ namespace Arkademy2D.Game.Behaviours
 {
     public class Character : MonoBehaviour
     {
-        [Header("Data")]
-        public Core.Models.Character model;
+        [Header("Data")] public Core.Models.Character model;
         public CharacterBase @base;
-        [Header("Health")]
-        public Attribute maxHp;
+        [Header("Health")] public Attribute maxHp;
         public int faction;
         public int hp;
-        [Header("Energy")]
-        public Attribute maxEnergy;
+        [Header("Energy")] public Attribute maxEnergy;
         public Attribute energyRegen;
         [SerializeField] private float energyFloat;
         public int energy => Mathf.RoundToInt(energyFloat);
-      
+
         [Header("Movement")] public Attribute moveSpeed;
         public Vector2 moveDir;
         public Vector2 faceDir;
@@ -39,6 +36,7 @@ namespace Arkademy2D.Game.Behaviours
 
         [SerializeField] private Animator animator;
         [SerializeField] private Collider2D collision;
+        [SerializeField] private SpriteRenderer sprite;
 
         private void Start()
         {
@@ -63,9 +61,19 @@ namespace Arkademy2D.Game.Behaviours
             hp = maxHp.Value;
             energyFloat = maxEnergy.Value;
 
-            if (!animator) animator = GetComponent<Animator>();
+            if (!animator)
+            {
+                animator = GetComponent<Animator>();
+            }
+
+            if (@base?.animator)
+            {
+                animator.runtimeAnimatorController = @base.animator;
+            }
+
             if (!collision) collision = GetComponent<Collider2D>();
             if (!body) body = GetComponent<Rigidbody2D>();
+            if (!sprite) sprite = GetComponent<SpriteRenderer>();
         }
 
         public void Cast(string key)
@@ -77,6 +85,7 @@ namespace Arkademy2D.Game.Behaviours
         }
 
         public Dictionary<SpellBase, Usable> SpellUsables = new Dictionary<SpellBase, Usable>();
+
         public void EndCast()
         {
             if (hp <= 0) return;
@@ -90,6 +99,7 @@ namespace Arkademy2D.Game.Behaviours
                 SpellUsables[spellBase] = spellUsable;
                 spellUsable.user = this;
             }
+
             if (energyFloat < maxEnergy.Value) return;
             if (!spellBase || !spellUsable || !spellUsable.CanUse()) return;
             Debug.Log($"Use spell: {spellBase.displayName}", spellBase);
@@ -107,7 +117,7 @@ namespace Arkademy2D.Game.Behaviours
             if (hp <= 0) return;
             hp -= damage;
             hp = Mathf.Clamp(hp, 0, maxHp.Value);
-            animator.SetTrigger("hit");
+            animator?.SetTrigger("hit");
         }
 
         private void Update()
@@ -123,20 +133,21 @@ namespace Arkademy2D.Game.Behaviours
 
         private void FixedUpdate()
         {
-            collision.isTrigger = hp <= 0;
+            if(collision)collision.isTrigger = hp <= 0;
             if (hp <= 0) return;
             interactionCandidate = Physics2D.OverlapCircleAll(transform.position, interactableDetectionRange)?
                 .Select(x => x.GetComponent<Interactable>())?
                 .Where(x => x)?
                 .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))?
                 .FirstOrDefault();
-            body.MovePosition(body.position + moveDir.normalized * moveSpeed.Value / 100f * Time.fixedDeltaTime);
+            body?.MovePosition(body.position + moveDir.normalized * moveSpeed.Value / 100f * Time.fixedDeltaTime);
         }
 
         private void LateUpdate()
         {
-            animator.SetBool("walking", moveDir.sqrMagnitude > float.Epsilon && hp > 0);
-            animator.SetBool("dead", hp <= 0);
+            animator?.SetBool("walking", moveDir.sqrMagnitude > float.Epsilon && hp > 0);
+            animator?.SetBool("dead", hp <= 0);
+            if(sprite)sprite.flipX = faceDir.x > 0;
         }
 
         public void SetPosition(Vector2 pos)

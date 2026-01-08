@@ -34,6 +34,7 @@ namespace Arkademy2D.Game.Behaviours.Spell
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.isTrigger) return;
             var chara = other.GetComponent<Character>();
             if (chara && chara.faction == fromUsable.user.faction)
             {

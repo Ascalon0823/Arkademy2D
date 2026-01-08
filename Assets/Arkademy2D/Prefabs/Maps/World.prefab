@@ -330,8 +330,9 @@ MonoBehaviour:
   onInteracted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Arkademy2D.Game.Behaviours.MapController, Assembly-CSharp
+      - m_Target: {fileID: -8722243840445053426}
+        m_TargetAssemblyTypeName: Arkademy2D.Game.Behaviours.ProceduralMapController,
+          Assembly-CSharp
         m_MethodName: GoTo
         m_Mode: 2
         m_Arguments:
@@ -579,6 +580,10 @@ MonoBehaviour:
   wallTile: {fileID: 11400000, guid: 29df431fdd9ec7e45b431555a7857221, type: 2}
   provider: {fileID: 11400000, guid: 8d576608a2b5c4b3f9c78e760670ca47, type: 2}
   seed: 0
+  enemyBase: {fileID: 11400000, guid: 1cbf82e7ebb3cf54e870c941b54f30b1, type: 2}
+  enemyPrefab: {fileID: 6364084642424498083, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+  maxPackPerRoom: 5
+  maxEnemiesPerPack: 8
 --- !u!1 &9158739267708201432
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,6 +898,7 @@ MonoBehaviour:
   body: {fileID: 1506118513554561335}
   animator: {fileID: 3634991515056274201}
   collision: {fileID: 9180487027255331809}
+  sprite: {fileID: 0}
 --- !u!4 &4438314147589399373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2363746258201800683, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
@@ -1081,6 +1087,7 @@ MonoBehaviour:
   body: {fileID: 5208593009450098369}
   animator: {fileID: 7988392837637537007}
   collision: {fileID: 2578813536641141783}
+  sprite: {fileID: 0}
 --- !u!95 &7988392837637537007 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3397873590535862207, guid: 415878dc933b44ee38d72f59d62b0d79, type: 3}
