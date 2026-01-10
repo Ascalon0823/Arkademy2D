@@ -18,9 +18,9 @@ MonoBehaviour:
   - base: {fileID: 11400000, guid: 42dc2afb7978c4a6ca6fc12b3f5e3dd3, type: 2}
     defaultValue: 10000
   - base: {fileID: 11400000, guid: 86be4d6e6e7104a5fbef28f19a9929e5, type: 2}
-    defaultValue: 10000
+    defaultValue: 0
   - base: {fileID: 11400000, guid: 803df676b88ff406783f68c5e7de1be1, type: 2}
-    defaultValue: 300
+    defaultValue: 200
   - base: {fileID: 11400000, guid: 84dafc6678b964fdaa2db7105c3e7b37, type: 2}
-    defaultValue: 3000
+    defaultValue: 0
   animator: {fileID: 22100000, guid: 25573e288793d7b4c9964b1e11e261be, type: 2}
