@@ -18,6 +18,7 @@ namespace Arkademy2D.Game.Behaviours
 
         [SerializeField] protected Noise.CellularAutomataProvider provider;
         [SerializeField] protected int seed;
+        [SerializeField] protected bool useRandomSeed;
         [SerializeField] protected CharacterBase enemyBase;
         [SerializeField] protected Character enemyPrefab;
         [SerializeField] protected int maxPackPerRoom;
@@ -29,6 +30,7 @@ namespace Arkademy2D.Game.Behaviours
             var rooms = new List<Vector2Int>();
             floor.ClearAllTiles();
             wall.ClearAllTiles();
+            if (useRandomSeed) seed = Random.Range(int.MinValue, int.MaxValue);
             Random.InitState(seed);
             var floorPoses = new List<Vector3Int>();
             var floorTiles = new List<TileBase>();
@@ -94,10 +96,10 @@ namespace Arkademy2D.Game.Behaviours
                     var off = Random.insideUnitCircle * roomSize / 3f;
                     var offInt = new Vector2Int(Mathf.FloorToInt(off.x), Mathf.FloorToInt(off.y));
                     var packPos = offInt + center;
-                    for(var j=-2;j<=2;j++)
+                    for (var j = -2; j <= 2; j++)
                     for (var k = -2; k <= 2; k++)
                     {
-                        preData[j+packPos.x, k+packPos.y] = 0;
+                        preData[j + packPos.x, k + packPos.y] = 0;
                     }
 
                     for (var j = 0; j < Random.Range(3, maxEnemiesPerPack); j++)

@@ -33,7 +33,7 @@ namespace Arkademy2D.Game.Behaviours
             character.Setup();
             var map = MapController.Load(initialMap.id);
             map.Setup(); 
-            character.SetPosition(map.entry.position);
+            character.SetPosition(map.GetDefaultSpawnPoint());
         }
     }
 }

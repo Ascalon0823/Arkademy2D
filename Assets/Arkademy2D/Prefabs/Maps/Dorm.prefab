@@ -1483,8 +1483,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.MapController
   base: {fileID: 11400000, guid: b550da7fcfda74cedaf3ec7a34df1f06, type: 2}
-  entry: {fileID: 5730589959930560955}
+  defaultSpawnPoint: {fileID: 5730589959930560955}
   setupCompleted: 0
+  connections:
+  - portal: {fileID: 385481470934100441}
+    entry: {fileID: 5730589959930560955}
+    destination: {fileID: 11400000, guid: 2caa71f2c4ed24d72a867421a80ebacf, type: 2}
 --- !u!1 &3945946621763449222
 GameObject:
   m_ObjectHideFlags: 0

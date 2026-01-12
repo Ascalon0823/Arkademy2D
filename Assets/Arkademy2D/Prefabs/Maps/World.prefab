@@ -570,8 +570,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.ProceduralMapController
   base: {fileID: 11400000, guid: 2caa71f2c4ed24d72a867421a80ebacf, type: 2}
-  entry: {fileID: 1322185113780706865}
+  defaultSpawnPoint: {fileID: 0}
   setupCompleted: 0
+  connections:
+  - portal: {fileID: 9057042970064056871}
+    entry: {fileID: 1322185113780706865}
+    destination: {fileID: 11400000, guid: b550da7fcfda74cedaf3ec7a34df1f06, type: 2}
   roomCount: 10
   roomSize: 32
   floor: {fileID: 6948369210215016780}
@@ -580,6 +584,7 @@ MonoBehaviour:
   wallTile: {fileID: 11400000, guid: 29df431fdd9ec7e45b431555a7857221, type: 2}
   provider: {fileID: 11400000, guid: 8d576608a2b5c4b3f9c78e760670ca47, type: 2}
   seed: 0
+  useRandomSeed: 1
   enemyBase: {fileID: 11400000, guid: 1cbf82e7ebb3cf54e870c941b54f30b1, type: 2}
   enemyPrefab: {fileID: 6364084642424498083, guid: 5c09490c9132e854ab200381143d343c, type: 3}
   maxPackPerRoom: 5
