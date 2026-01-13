@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Arkademy2D.Game.Behaviours
 {
@@ -21,11 +22,20 @@ namespace Arkademy2D.Game.Behaviours
         public void Use()
         {
             if (!CanUse()) return;
+            
             activeUsage = Instantiate(usagePrefab, transform.position, Quaternion.identity);
             activeUsage.Init(this);
-            remainingReuseTime = reuseTime;
+            remainingReuseTime = reuseTime + useTime;
             remainingUseTime = useTime;
             user.ConsumeEnergy(energyRequirement);
+        }
+
+        private void Update()
+        {
+            remainingUseTime -= Time.deltaTime;
+            remainingUseTime = Mathf.Max(0, remainingUseTime);
+            remainingReuseTime -= Time.deltaTime;
+            remainingReuseTime = Mathf.Max(0, remainingReuseTime);
         }
     }
 }

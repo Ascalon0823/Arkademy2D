@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5468410068675284573
+--- !u!1 &2319914458042404383
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3335847136210209778}
-  - component: {fileID: 894647346307020659}
+  - component: {fileID: 3550219677545495052}
+  - component: {fileID: 991369227014202206}
   m_Layer: 0
-  m_Name: FireBallUsable
+  m_Name: MeleeUsage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3335847136210209778
+--- !u!4 &3550219677545495052
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5468410068675284573}
+  m_GameObject: {fileID: 2319914458042404383}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,23 +32,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &894647346307020659
+--- !u!114 &991369227014202206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5468410068675284573}
+  m_GameObject: {fileID: 2319914458042404383}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4bc5017161b424b9faea4a82f31d37d, type: 3}
+  m_Script: {fileID: 11500000, guid: 93123372c7de4254aced570ccc459382, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Usable
-  remainingUseTime: 0
-  useTime: 0.5
-  reuseTime: 0
-  remainingReuseTime: 0
-  activeUsage: {fileID: 0}
-  usagePrefab: {fileID: 1149614876153081902, guid: 18351bd4571114268b19f6433574a0e4, type: 3}
-  user: {fileID: 0}
-  energyRequirement: 10000
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Ability.MeleeUsage
+  fromUsable: {fileID: 0}
