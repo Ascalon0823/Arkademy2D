@@ -101,11 +101,18 @@ namespace Arkademy2D.Game.Behaviours
             }
 
             if (energyFloat < maxEnergy.Value) return;
-            if (!spellBase || !spellUsable || !spellUsable.CanUse()) return;
             Debug.Log($"Use spell: {spellBase.displayName}", spellBase);
-            spellUsable.Use();
+            Use(spellUsable);
         }
 
+        public void Use(Usable usable, bool autoUse = false)
+        {
+            if (!usable || !usable || !usable.CanUse(autoUse)) return;
+            usable.Use();
+            var useSpeed = 1f / usable.remainingUseTime;
+            animator?.SetTrigger("attack");
+            animator?.SetFloat("attackSpeed", useSpeed);
+        }
         public void ConsumeEnergy(int amount)
         {
             energyFloat -= amount;
@@ -129,6 +136,11 @@ namespace Arkademy2D.Game.Behaviours
             {
                 faceDir = moveDir;
             }
+
+            foreach (var usable in usables)
+            {
+                Use(usable,true);
+            }
         }
 
         private void FixedUpdate()
@@ -140,7 +152,9 @@ namespace Arkademy2D.Game.Behaviours
                 .Where(x => x)?
                 .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))?
                 .FirstOrDefault();
-            body?.MovePosition(body.position + moveDir.normalized * moveSpeed.Value / 100f * Time.fixedDeltaTime);
+            var actualMoveSpeed = moveSpeed.Value / 100f;
+            animator?.SetFloat("walkSpeed", actualMoveSpeed/4f);
+            body?.MovePosition(body.position + moveDir.normalized * actualMoveSpeed * Time.fixedDeltaTime);
         }
 
         private void LateUpdate()

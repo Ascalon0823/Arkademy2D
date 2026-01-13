@@ -6,7 +6,6 @@ using Arkademy2D.Core.Models;
 using Arkademy2D.Game.Data.Static;
 using Arkademy2D.Game.Data.Static.Academic;
 using Arkademy2D.Game.Data.Static.Item;
-using Arkademy2D.Game.Data.Static.Usable;
 using Arkademy2D.Game.System;
 using Newtonsoft.Json;
 using UnityEditor;

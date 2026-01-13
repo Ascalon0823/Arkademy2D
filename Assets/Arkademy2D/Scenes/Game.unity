@@ -1250,6 +1250,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255191404}
   m_CullTransparentMesh: 1
+--- !u!1 &345910016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 345910017}
+  - component: {fileID: 345910018}
+  m_Layer: 0
+  m_Name: Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &345910017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345910016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1775536875}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345910018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345910016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bc5017161b424b9faea4a82f31d37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Usable
+  remainingUseTime: 0
+  useTime: 0.5
+  reuseTime: 0
+  remainingReuseTime: 0
+  activeUsage: {fileID: 0}
+  usagePrefab: {fileID: 991369227014202206, guid: 56a2355a8c9084ba3b9a1cf3cfe9e8ad, type: 3}
+  user: {fileID: 1775536870}
+  energyRequirement: 0
+  targetingRange: 1
+  targetingFactionDiff: 1
 --- !u!1 &351171998
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 4
+  m_ScaleFactor: 3
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -3623,7 +3677,7 @@ MonoBehaviour:
   character: {fileID: 1775536870}
   characterPrefab: {fileID: 0}
   selectedHotbarIdx: 0
-  initialMap: {fileID: 11400000, guid: b550da7fcfda74cedaf3ec7a34df1f06, type: 2}
+  initialMap: {fileID: 11400000, guid: aac1b8c5f2eb0494e9ff1133c594db58, type: 2}
 --- !u!1 &1714913091
 GameObject:
   m_ObjectHideFlags: 0
@@ -3847,6 +3901,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da65ce3af44409fbc01ccf3bfea029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Behaviours.Character
+--- !u!4 &1775536875 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+  m_PrefabInstance: {fileID: 842032209703219955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1786609895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4541,11 +4600,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.581
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.474
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4579,13 +4638,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3293109583828273989, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+      propertyPath: orthographic size
+      value: 10.989583
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364084642424498083, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+      propertyPath: usables.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364084642424498083, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+      propertyPath: 'usables.Array.data[0]'
+      value: 
+      objectReference: {fileID: 345910018}
     - target: {fileID: 8363969375556053984, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 345910017}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c09490c9132e854ab200381143d343c, type: 3}
 --- !u!95 &1528203365749019838

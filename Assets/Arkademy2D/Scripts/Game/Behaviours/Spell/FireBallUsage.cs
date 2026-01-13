@@ -12,10 +12,7 @@ namespace Arkademy2D.Game.Behaviours.Spell
         public override void Init(Usable usable)
         {
             base.Init(usable);
-            var target = Physics2D.OverlapCircleAll(usable.transform.position, 30)
-                .Select(x => x.gameObject.GetComponent<Character>())
-                .Where(x => x && x.faction != usable.user.faction && x.hp>0)
-                .OrderBy(x => Vector2.Distance(x.transform.position, usable.transform.position))
+            var target = usable.GetTargets()
                 .FirstOrDefault();
             var dir = target? (Vector2)(target.transform.position - usable.transform.position): usable.user.faceDir;
             transform.up = dir;

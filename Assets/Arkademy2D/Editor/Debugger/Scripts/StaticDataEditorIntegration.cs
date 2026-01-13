@@ -5,7 +5,6 @@ using System.Linq;
 using Arkademy2D.Game.Data.Static;
 using Arkademy2D.Game.Data.Static.Academic;
 using Arkademy2D.Game.Data.Static.Item;
-using Arkademy2D.Game.Data.Static.Usable;
 using UnityEditor;
 using UnityEngine;
 
