@@ -105,9 +105,9 @@ namespace Arkademy2D.Game.Behaviours
             Use(spellUsable);
         }
 
-        public void Use(Usable usable)
+        public void Use(Usable usable, bool autoUse = false)
         {
-            if (!usable || !usable || !usable.CanUse()) return;
+            if (!usable || !usable || !usable.CanUse(autoUse)) return;
             usable.Use();
             var useSpeed = 1f / usable.remainingUseTime;
             animator?.SetTrigger("attack");
@@ -139,7 +139,7 @@ namespace Arkademy2D.Game.Behaviours
 
             foreach (var usable in usables)
             {
-                Use(usable);
+                Use(usable,true);
             }
         }
 

@@ -1302,6 +1302,8 @@ MonoBehaviour:
   usagePrefab: {fileID: 991369227014202206, guid: 56a2355a8c9084ba3b9a1cf3cfe9e8ad, type: 3}
   user: {fileID: 1775536870}
   energyRequirement: 0
+  targetingRange: 1
+  targetingFactionDiff: 1
 --- !u!1 &351171998
 GameObject:
   m_ObjectHideFlags: 0

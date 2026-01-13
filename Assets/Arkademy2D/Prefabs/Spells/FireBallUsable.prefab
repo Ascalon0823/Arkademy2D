@@ -52,3 +52,5 @@ MonoBehaviour:
   usagePrefab: {fileID: 1149614876153081902, guid: 18351bd4571114268b19f6433574a0e4, type: 3}
   user: {fileID: 0}
   energyRequirement: 10000
+  targetingRange: 30
+  targetingFactionDiff: 1

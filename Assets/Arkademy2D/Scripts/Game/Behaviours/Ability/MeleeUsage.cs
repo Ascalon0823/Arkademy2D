@@ -9,11 +9,7 @@ namespace Arkademy2D.Game.Behaviours.Ability
         public override void Init(Usable usable)
         {
             base.Init(usable);
-            var candidate = Physics2D.OverlapCircleAll(
-                    transform.position + (Vector3)usable.user.faceDir, 0.5f)
-                .Select(x => x.GetComponent<Character>())
-                .Where(x => x && x.faction != usable.user.faction && x.hp > 0)
-                .OrderBy(x => Vector2.Distance(x.transform.position, transform.position))
+            var candidate = usable.GetTargets()
                 .FirstOrDefault();
             if (candidate)
             {
