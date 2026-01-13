@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe948f3cda0b4920a5b479129a2123e1, type: 3}
+  m_Name: MapBase_000003_Test Ability
+  m_EditorClassIdentifier: Assembly-CSharp::Arkademy2D.Game.Data.Static.MapBase
+  id: 3
+  displayName: Test Ability
+  mapPrefab: {fileID: 4155545921662090682, guid: 19ce2a247fe6645e482e023493aba0e7, type: 3}

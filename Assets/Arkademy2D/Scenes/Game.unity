@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 16
-  m_ScaleFactor: 4
+  m_ScaleFactor: 3
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
@@ -3623,7 +3623,7 @@ MonoBehaviour:
   character: {fileID: 1775536870}
   characterPrefab: {fileID: 0}
   selectedHotbarIdx: 0
-  initialMap: {fileID: 11400000, guid: b550da7fcfda74cedaf3ec7a34df1f06, type: 2}
+  initialMap: {fileID: 11400000, guid: aac1b8c5f2eb0494e9ff1133c594db58, type: 2}
 --- !u!1 &1714913091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4541,11 +4541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.581
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.474
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4578,6 +4578,10 @@ PrefabInstance:
     - target: {fileID: 2885615643370791035, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293109583828273989, guid: 5c09490c9132e854ab200381143d343c, type: 3}
+      propertyPath: orthographic size
+      value: 10.989583
       objectReference: {fileID: 0}
     - target: {fileID: 8363969375556053984, guid: 5c09490c9132e854ab200381143d343c, type: 3}
       propertyPath: m_IsActive
